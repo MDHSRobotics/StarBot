@@ -25,4 +25,8 @@ public class EncoderUtils {
         return rotationTicks;
     }
 
+    public static double translateRPMToNativeVelocity(double rpm, double gearRatio){
+        double
+    }
+
 }

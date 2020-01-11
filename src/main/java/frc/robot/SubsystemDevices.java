@@ -16,6 +16,8 @@ public class SubsystemDevices {
 
     // Motor Controllers
     // TODO: Add the appropriate motor controllers
+    public static WPI_TalonSRX talonSRXShooterTopWheel = new WPI_TalonSRX(0);
+    public static WPI_TalonSRX talonSRXShooterBottomWheel = new WPI_TalonSRX(0);
 
     // Drives
     // TODO: Add the appropriate drives
@@ -25,6 +27,7 @@ public class SubsystemDevices {
         Logger.setup("Initializing SubsystemDevices...");
 
         // TODO: Initialize the devices
+        initShooterDevices();
     }
 
     // Determines if the Talon SRX is connected
@@ -32,6 +35,15 @@ public class SubsystemDevices {
         int firmVer = talon.getFirmwareVersion();
         boolean connected = (firmVer != -1);
         return connected;
+    }
+
+    private static void initShooterDevices() {
+        boolean talonSrxShooterTopIsConnected = isConnected(talonSRXShooterTopWheel);
+
+        if (!talonSrxShooterTopIsConnected) {
+            talonSRXShooterTopWheel = null;
+            Logger.error("Shooter talon is not connected! Disabling...");
+        }
     }
 
 }
