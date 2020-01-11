@@ -4,6 +4,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.conveyor.*;
+import frc.robot.commands.auto.AutoPeriod;
 import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
 import frc.robot.commands.roller.*;
@@ -21,6 +22,7 @@ public class BotCommands {
 
     // Lighter
     public static CycleLights cycleLights;
+	public static AutoPeriod autoPeriod;
 
     // Roller
     public static SpinRoller rollerSpin;
