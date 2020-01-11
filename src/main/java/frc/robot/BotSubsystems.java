@@ -9,12 +9,16 @@ import frc.robot.subsystems.*;
 public class BotSubsystems {
 
     public static Lighter lighter;
+    public static Roller roller;
+    public static PickUpPneumatic pickUpPneumatic;
 
     // Initialize all robot subsystems
     public static void initializeSubsystems() {
         Logger.setup("Initializing BotSubsystems...");
 
         lighter = new Lighter();
+        roller = new Roller();
+        pickUpPneumatic = new PickUpPneumatic();
     }
 
     // Set all the subsystem default commands
