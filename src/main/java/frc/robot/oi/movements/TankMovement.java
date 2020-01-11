@@ -37,7 +37,7 @@ public class TankMovement {
     // Determines the tank movement (left-side straight speed, right-side straight speed)
     // from the current xbox thumbstick positions
     public static TankMovement getTankMovementFromThumbsticks(XboxController xbox, boolean isYflipped) {
-        ThumbStickPosition pos = ThumbStickPosition.getThumbstickPosition(xbox, isYflipped);
+        ThumbStickPosition pos = ThumbStickPosition.getThumbStickPosition(xbox, isYflipped);
         TankMovement move = new TankMovement(pos.leftForwardBackPosition, pos.rightForwardBackPosition);
         //Logger.info("Xbox Tank Movement: " + pos.leftForwardBackPosition + ", " + pos.rightForwardBackPosition);
         return move;

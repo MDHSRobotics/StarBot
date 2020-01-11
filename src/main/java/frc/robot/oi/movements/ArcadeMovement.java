@@ -52,7 +52,7 @@ public class ArcadeMovement {
     // Determines the arcade movement (straight speed, rotation speed, square inputs, strafe speed)
     // from the current xbox thumbstick positions
     public static ArcadeMovement getArcadeMovementFromThumbsticks(XboxController xbox, boolean isYleftFlipped) {
-        ThumbStickPosition pos = ThumbStickPosition.getThumbstickPosition(ControlDevices.driveXbox, isYleftFlipped);
+        ThumbStickPosition pos = ThumbStickPosition.getThumbStickPosition(ControlDevices.driveXbox, isYleftFlipped);
         ArcadeMovement move = new ArcadeMovement(pos.leftForwardBackPosition, pos.leftSideToSidePosition, pos.rightSideToSidePosition);
         // Logger.info("Xbox Arcade Movement: " + pos.leftForwardBackPosition + ", " + pos.leftSideToSidePosition + ", " + pos.rightSideToSidePosition);
         return move;

@@ -60,7 +60,7 @@ public class PolarMovement {
     // Determines the polar movement (angle speed, angle degrees, rotation speed)
     // from the current xbox thumbstick positions
     public static PolarMovement getPolarMovementFromThumbsticks(XboxController xbox, boolean isYleftFlipped) {
-        ThumbStickPosition pos = ThumbStickPosition.getThumbstickPosition(xbox, isYleftFlipped);
+        ThumbStickPosition pos = ThumbStickPosition.getThumbStickPosition(xbox, isYleftFlipped);
         PolarMovement move = new PolarMovement(pos.leftForwardBackPosition, pos.leftSideToSidePosition, pos.rightSideToSidePosition);
         // Logger.info("Xbox Polar Movement: " + pos.leftForwardBackPosition + ", " + pos.leftSideToSidePosition + ", " + pos.rightSideToSidePosition);
         return move;
