@@ -8,7 +8,7 @@ import static frc.robot.Constants.EncoderConstants.*;
 // Helper methods for encoder values.
 public class EncoderUtils {
 
-    // Computes the encoder ticks based on the desired rotation in degrees for a given gearbox ratio
+    // Computes the encoder ticks based on the desired rotation in degrees for a given gearbox ratio (MS : GS)
     public static double translateAngleToTicks(double angle, double gearRatio) {
         double rotationCountGS = angle / 360; // Amount of rotations on the gearbox shaft
         double rotationCountMS = rotationCountGS * gearRatio; // Amount of rotations on the motor shaft
@@ -16,7 +16,7 @@ public class EncoderUtils {
         return rotationTicks;
     }
 
-    // Computes the encoder ticks based on the desired distance in inches for a given winch diameter and gearbox ratio
+    // Computes the encoder ticks based on the desired distance in inches for a given winch diameter and gearbox ratio (MS : GS)
     public static double translateDistanceToTicks(double distance, double spoolDiameter, double gearRatio) {
         double spoolCircumerence = Math.PI * spoolDiameter;
         double rotationCountGS = distance / spoolCircumerence; // Amount of rotations on the gearbox shaft
@@ -25,8 +25,12 @@ public class EncoderUtils {
         return rotationTicks;
     }
 
-    public static double translateRPMToNativeVelocity(double rpm, double gearRatio){
-        double
+    // Computes the encoder native velocity based on the desired rotations per second and the gearbox ratio (MS : GS)
+    public static double translateRPSToTicksPerDecisecond(double rps, double gearRatio){
+        double rotationsPerDecisecondGS = rps / 10; // Amount of rpds on the gearbox shaft
+        double rotationsPerDecisecondMS = rotationsPerDecisecondGS * gearRatio; // Amount of rpds on the motor shaft
+        double ticksPerDecisecond = rotationsPerDecisecondMS * ENCODER_TPR; // Amount of ticks per decisecond to rotate
+        return ticksPerDecisecond;
     }
 
 }

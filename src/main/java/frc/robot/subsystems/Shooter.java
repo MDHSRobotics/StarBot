@@ -150,21 +150,23 @@ public class Shooter extends SubsystemBase {
     // Spin the top Shooter wheel
     public void spinTopWheel() {
         double velocity = ShooterBrain.getTopWheelVelocity();
+        double nativeVelocity = EncoderUtils.translateRPSToTicksPerDecisecond(velocity, GEAR_RATIO);
         Logger.info("Shooter -> TopWheel Velocity to:" + velocity);
 
         if (m_disabled)
             return;
-        SubsystemDevices.talonSRXShooterTopWheel.set(ControlMode.Velocity, velocity);
+        SubsystemDevices.talonSRXShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
     }
 
     // Spin the bottom Shooter wheel
     public void spinBottomWheel() {
         double velocity = ShooterBrain.getBottomWheelVelocity();
+        double nativeVelocity = EncoderUtils.translateRPSToTicksPerDecisecond(velocity, GEAR_RATIO);
         Logger.info("Shooter -> BottomWheel Velocity to:" + velocity);
 
         if (m_disabled)
             return;
-        SubsystemDevices.talonSRXShooterBottomWheel.set(ControlMode.Velocity, velocity);
+        SubsystemDevices.talonSRXShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
     }
 
     // Get the current Shooter TopWheel motor velocity

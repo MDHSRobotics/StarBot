@@ -1,4 +1,3 @@
-
 package frc.robot.commands.lighter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;

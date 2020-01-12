@@ -10,8 +10,8 @@ public class ShooterBrain {
     // Default Values //
     //----------------//
 
-    public static double shootTopWheelVelocityDefault = 50;
-    public static double shootBottomWheelVelocityDefault = 50;
+    public static double shootTopWheelVelocityDefault = 1;
+    public static double shootBottomWheelVelocityDefault = 1;
 
     //---------------------//
     // NetworkTableEntries //
