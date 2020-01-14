@@ -7,7 +7,7 @@ import frc.robot.consoles.Logger;
 import frc.robot.subsystems.PickUpPneumatic;
 import frc.robot.BotCommands;
 
-// Toggles the position of the Hatcher Claw
+// Toggles the state of the Pick Up Pneumatic
 public class TogglePickUp extends InstantCommand {
 
     private PickUpPneumatic m_pickUp;
@@ -26,10 +26,10 @@ public class TogglePickUp extends InstantCommand {
 
         if (m_pickUp.pickUpIsUp) {
             Logger.action("PickUp -> Moving to Up...");
-            BotCommands.retractPickUpPneumatic.schedule();
+            BotCommands.retractPickUp.schedule();
         } else {
-            Logger.action("Hatcher -> Moving to CLOSED...");
-            BotCommands.lowerPickUpPneumatic.schedule();
+            Logger.action("PickUp -> Moving to CLOSED...");
+            BotCommands.lowerPickUp.schedule();
         }
         m_pickUp.togglePickUpPosition();
     }

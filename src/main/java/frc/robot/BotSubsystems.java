@@ -19,12 +19,22 @@ public class BotSubsystems {
         lighter = new Lighter();
         roller = new Roller();
         pickUpPneumatic = new PickUpPneumatic();
+
     }
 
     // Set all the subsystem default commands
     public static void setDefaultCommands() {
+        // Lighter Initial Default Command
         Logger.setup("Lighter DefaultCommand -> CycleLights...");
         lighter.setDefaultCommand(BotCommands.cycleLights);
+
+        // Roller Intitial Default Command
+        Logger.setup("Roller DefaultCommand -> RollerStop...");
+        roller.setDefaultCommand(BotCommands.rollerStop);
+
+        // PickUp Initial Default Command
+        Logger.setup("PickUp DefaultCommand -> StopPickUp...");
+        pickUpPneumatic.setDefaultCommand(BotCommands.stopPickUp);
     }
 
 }

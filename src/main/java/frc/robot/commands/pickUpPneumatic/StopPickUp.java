@@ -7,28 +7,26 @@ import frc.robot.consoles.Logger;
 import frc.robot.subsystems.PickUpPneumatic;
 import frc.robot.subsystems.Roller;
 
-// This command retracts the Pick Up System
-public class RetractPickUp extends CommandBase {
+// This command lower the PickUp Subsystem using a single solenoid pnematic system
+public class StopPickUp extends CommandBase {
 
-    private PickUpPneumatic m_retract;
+    private PickUpPneumatic m_lower;
 
-    public RetractPickUp(PickUpPneumatic pickUpPneumatic) {
-        Logger.setup("Constructing Command: RetractPickUp...");
+    public StopPickUp(PickUpPneumatic pickUpPneumatic) {
+        Logger.setup("Constructing Command: StopPickUp...");
 
         // Add given subsystem requirements
-        m_retract = pickUpPneumatic;
+        m_lower = pickUpPneumatic;
     }
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: RetractPickUp...");
-
-        m_retract.closeSolenoid();
+        Logger.action("Initializing Command: StopPickUp...");
     }
 
     @Override
     public void execute() {
-
+        m_lower.stop();
     }
 
     // This command continues until interrupted
@@ -41,12 +39,12 @@ public class RetractPickUp extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: RetractPickUp...");
+            Logger.ending("Interrupting Command: StopPickUp...");
         } else {
-            Logger.ending("Ending Command: RetractPickUp...");
+            Logger.ending("Ending Command: StopPickUp...");
         }
 
-        m_retract.stop();
+        m_lower.stop();
     }
 
 }

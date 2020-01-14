@@ -9,43 +9,40 @@ import frc.robot.SubsystemDevices;
 import frc.robot.commands.roller.RollerSpin;
 
 // Claw Wheel Subsytem, for sucking in boxes and spitting them out thru the barrier
-public class Roller extends BotSubsystems {
+public class Roller extends SubsystemBase {
 
     private final double WHEEL_POWER = 0.2;
 
-    private boolean m_talonsAreConnected = false;
+    // If not all the talons are initialized, this should be true
+    private boolean m_disabled = false;
 
     public Roller() {
-        Logger.setup("Constructing Subsystem: Roller...");
+         Logger.setup("Constructing Subsystem: Roller...");
 
-        boolean talonRollerConnected = SubsystemDevices.isConnected(SubsystemDevices.talonSrxRoller);
-
-        m_talonsAreConnected = talonRollerConnected;
-
-        if (!m_talonsAreConnected) {
-            Logger.error("Roller talons not all connected! Disabling Roller...");
-        } else {
-            SubsystemDevices.talonSrxRoller.configFactoryDefault();
+        // Determine whether or not to disable the subsystem
+        m_disabled = (SubsystemDevices.talonSrxRoller == null);
+        if (m_disabled) {
+            Logger.error("Roller devices not initialized! Disabling subsystem...");
+            return;
         }
     }
 
-    // Stop the Hatcher claw motor
+    @Override
+    public void periodic() {
+        // This method will be called once per scheduler run
+    }
+
+    // Stop the Roller claw motor
     public void stop() {
-        if (!m_talonsAreConnected)
-            return;
         SubsystemDevices.talonSrxRoller.stopMotor();
         Logger.setup("Roller Motors Disconnected! Shutting down wheels...");
     }
 
     public void ejectBox() {
-        if (!m_talonsAreConnected)
-            return;
         SubsystemDevices.talonSrxRoller.set(WHEEL_POWER);
     }
 
     public void insertBox() {
-        if (!m_talonsAreConnected)
-            return;
         SubsystemDevices.talonSrxRoller.set(-WHEEL_POWER);
     }
 
