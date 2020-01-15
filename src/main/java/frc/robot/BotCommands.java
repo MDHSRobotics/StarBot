@@ -4,39 +4,42 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.lighter.*;
-import frc.robot.commands.pickUpPneumatic.LowerPickUp;
-import frc.robot.commands.pickUpPneumatic.RetractPickUp;
-import frc.robot.commands.pickUpPneumatic.StopPickUp;
-import frc.robot.commands.pickUpPneumatic.TogglePickUp;
 import frc.robot.commands.roller.*;
+import frc.robot.commands.rollerarm.*;
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.PickUpPneumatic;
 
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
 
+    // Lighter
     public static CycleLights cycleLights;
-    public static RollerStop rollerStop;
-    public static RollerSpin rollerSpin;
-    public static StopPickUp stopPickUp;
-    public static RetractPickUp retractPickUp;
-    public static LowerPickUp lowerPickUp;
-    public static TogglePickUp togglePickUp;
 
+    // Roller
+    public static SpinRoller rollerSpin;
+    public static StopRoller rollerStop;
+
+    // RollerArm
+    public static LowerRollerArm lowerRollerArm;
+    public static RaiseRollerArm raiseRollerArm;
+    public static StopRollerArm stopRollerArm;
+    public static ToggleRollerArm toggleRollerArm;
 
     // Initialize all robot commands
     public static void initializeCommands() {
         Logger.setup("Initializing BotCommands...");
 
+        // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);
-        rollerStop = new RollerStop(BotSubsystems.roller);
-        rollerSpin = new RollerSpin(BotSubsystems.roller);
-        retractPickUp = new RetractPickUp(BotSubsystems.pickUpPneumatic);
-        stopPickUp = new StopPickUp(BotSubsystems.pickUpPneumatic);
-        lowerPickUp = new LowerPickUp(BotSubsystems.pickUpPneumatic);
-        togglePickUp = new TogglePickUp(BotSubsystems.pickUpPneumatic);
 
+        // Roller
+        rollerSpin = new SpinRoller(BotSubsystems.roller);
+        rollerStop = new StopRoller(BotSubsystems.roller);
 
+        // RollerArm
+        lowerRollerArm = new LowerRollerArm(BotSubsystems.rollerArm);
+        raiseRollerArm = new RaiseRollerArm(BotSubsystems.rollerArm);
+        stopRollerArm = new StopRollerArm(BotSubsystems.rollerArm);
+        toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
     }
 
     // Return the command to run in autonomous mode

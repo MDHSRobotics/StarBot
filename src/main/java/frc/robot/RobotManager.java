@@ -48,7 +48,6 @@ public class RobotManager {
         botShuffler = new Shuffler();
         botShuffler.preInitialize();
 
-
         // Initialize BotSensors, BotSubsystems, and BotCommands
         BotSensors.initializeSensors();
         BotSubsystems.initializeSubsystems();

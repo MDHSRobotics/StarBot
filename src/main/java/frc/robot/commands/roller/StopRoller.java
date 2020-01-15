@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Roller;
 
-// This command spins the Roller
-public class RollerSpin extends CommandBase {
+// This command stops the Roller
+public class StopRoller extends CommandBase {
 
     private Roller m_roller;
 
-    public RollerSpin(Roller roller) {
-        Logger.setup("Constructing Command: RollerSpin...");
+    public StopRoller(Roller roller) {
+        Logger.setup("Constructing Command: RollerStop...");
 
         // Add given subsystem requirements
         m_roller = roller;
@@ -20,15 +20,12 @@ public class RollerSpin extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: CloseHatchClaw...");
-
-        // Set encoded position
-        m_roller.insertBox();
+        Logger.action("Initializing Command: RollerStop...");
     }
 
     @Override
     public void execute() {
-
+        m_roller.stop();
     }
 
     // This command continues until interrupted
@@ -41,9 +38,9 @@ public class RollerSpin extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: RollerSpin...");
+            Logger.ending("Interrupting Command: RollerStop...");
         } else {
-            Logger.ending("Ending Command: RollerSpin...");
+            Logger.ending("Ending Command: RollerStop...");
         }
 
         m_roller.stop();

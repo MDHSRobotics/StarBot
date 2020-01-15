@@ -1,17 +1,15 @@
+
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Relay;
 
 import frc.robot.consoles.Logger;
-import frc.robot.BotSubsystems;
 import frc.robot.SubsystemDevices;
-import frc.robot.commands.roller.RollerSpin;
 
-// Claw Wheel Subsytem, for sucking in boxes and spitting them out thru the barrier
+// Roller Subsytem, for sucking in balls
 public class Roller extends SubsystemBase {
 
-    private final double WHEEL_POWER = 0.2;
+    private final double POWER = 0.2;
 
     // If not all the talons are initialized, this should be true
     private boolean m_disabled = false;
@@ -25,6 +23,9 @@ public class Roller extends SubsystemBase {
             Logger.error("Roller devices not initialized! Disabling subsystem...");
             return;
         }
+
+        // Configure the subsystem devices
+        SubsystemDevices.talonSrxRoller.configFactoryDefault();
     }
 
     @Override
@@ -32,18 +33,16 @@ public class Roller extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // Stop the Roller claw motor
+    // Stop the roller motor
     public void stop() {
+        if (m_disabled) return;
         SubsystemDevices.talonSrxRoller.stopMotor();
-        Logger.setup("Roller Motors Disconnected! Shutting down wheels...");
     }
 
-    public void ejectBox() {
-        SubsystemDevices.talonSrxRoller.set(WHEEL_POWER);
-    }
-
-    public void insertBox() {
-        SubsystemDevices.talonSrxRoller.set(-WHEEL_POWER);
+    // Spin the roller motor
+    public void spin() {
+        if (m_disabled) return;
+        SubsystemDevices.talonSrxRoller.set(POWER);
     }
 
 }
