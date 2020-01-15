@@ -2,7 +2,9 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Solenoid;
 
 import frc.robot.consoles.Logger;
 
@@ -15,7 +17,13 @@ public class SubsystemDevices {
     public static Relay relayLighter = new Relay(1);
 
     // Motor Controllers
-    // TODO: Add the appropriate motor controllers
+    public static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(1); // 1 motor
+
+    // Compressors
+    public static Compressor compressorRollerArm = new Compressor(0);
+
+    // Solenoids
+    public static Solenoid solenoidRollerArm = new Solenoid(0);
 
     // Drives
     // TODO: Add the appropriate drives
@@ -24,7 +32,28 @@ public class SubsystemDevices {
     public static void initializeDevices() {
         Logger.setup("Initializing SubsystemDevices...");
 
-        // TODO: Initialize the devices
+        initRollerDevices();
+        initRollerArmDevices();
+    }
+
+    // Roller
+    private static void initRollerDevices() {
+        boolean talonSrxRollerIsConnected = isConnected(talonSrxRoller);
+
+        if (!talonSrxRollerIsConnected) {
+            talonSrxRoller = null;
+            Logger.error("Roller talon is not connected! Disabling...");
+        }
+    }
+
+    // Roller Arm
+    private static void initRollerArmDevices() {
+        boolean m_compressorRollerArmIsNotConnected = compressorRollerArm.getCompressorNotConnectedFault();
+
+        if (m_compressorRollerArmIsNotConnected) {
+            compressorRollerArm = null;
+            Logger.error("RollerArm compressor is not connected! Disabling...");
+        }
     }
 
     // Determines if the Talon SRX is connected
