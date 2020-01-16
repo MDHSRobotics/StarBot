@@ -4,6 +4,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.conveyor.*;
+import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
 import frc.robot.commands.roller.*;
 import frc.robot.commands.rollerarm.*;
@@ -11,6 +12,9 @@ import frc.robot.consoles.Logger;
 
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
+    
+    // DiffDriver
+    public static DriveDifferentialTank driveDifferentialTank;
 
     // Conveyor
     public static Convey convey;
@@ -33,6 +37,9 @@ public class BotCommands {
 
         // Conveyor
         convey = new Convey(BotSubsystems.conveyor);
+
+        // DiffDriver
+        driveDifferentialTank = new DriveDifferentialTank(BotSubsystems.diffDriver);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);

@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
 import frc.robot.consoles.Logger;
 
 // This class contains singleton instances of id mapped subsystem components, and utility methods.
@@ -16,24 +18,30 @@ public class SubsystemDevices {
     // Relays
     public static Relay relayLighter = new Relay(1);
 
-    // Motor Controllers
-    public static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
-    public static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15); // 1 motor
-
     // Compressors
     public static Compressor compressorRollerArm = new Compressor(0);
 
     // Solenoids
     public static Solenoid solenoidRollerArm = new Solenoid(0);
 
+    // Motor Controllers
+    public static WPI_TalonSRX talonSrxDiffWheelFrontLeft = new WPI_TalonSRX(6); // 1 motor
+    public static WPI_TalonSRX talonSrxDiffWheelRearLeft = new WPI_TalonSRX(7); // 1 motor
+    public static WPI_TalonSRX talonSrxDiffWheelFrontRight = new WPI_TalonSRX(5); // 1 motor
+    public static WPI_TalonSRX talonSrxDiffWheelRearRight = new WPI_TalonSRX(8); // 1 motor
+
+    public static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
+    public static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15); // 1 motor
+
     // Drives
-    // TODO: Add the appropriate drives
+    public static DifferentialDrive diffDrive;
 
     // Intialize the subsystem devices
     public static void initializeDevices() {
         Logger.setup("Initializing SubsystemDevices...");
 
         initConveyorDevices();
+        initDiffDriverDevices();
         initRollerDevices();
         initRollerArmDevices();
     }
@@ -44,6 +52,42 @@ public class SubsystemDevices {
         if (!talonSrxConveyorIsConnected) {
             talonSrxConveyor = null;
             Logger.error("Conveyor talon is not connected!");
+        }
+    }
+
+    // Differential Drive
+    private static void initDiffDriverDevices() {
+        boolean talonSrxDiffWheelFrontLeftIsConnected = isConnected(talonSrxDiffWheelFrontLeft);
+        boolean talonSrxDiffWheelFrontRightIsConnected = isConnected(talonSrxDiffWheelFrontRight);
+        boolean talonSrxDiffWheelRearLeftIsConnected = isConnected(talonSrxDiffWheelRearLeft);
+        boolean talonSrxDiffWheelRearRightIsConnected = isConnected(talonSrxDiffWheelRearRight);
+
+        boolean talonsAreConnected = true;
+        if (!talonSrxDiffWheelFrontLeftIsConnected) {
+            talonsAreConnected = false;
+            Logger.error("DiffWheelFrontLeft talon is not connected!");
+        }
+        if (!talonSrxDiffWheelFrontRightIsConnected) {
+            talonsAreConnected = false;
+            Logger.error("DiffWheelFrontRight talon is not connected!");
+        }
+        if (!talonSrxDiffWheelRearLeftIsConnected) {
+            talonsAreConnected = false;
+            Logger.error("DiffWheelRearLeft talon is not connected!");
+        }
+        if (!talonSrxDiffWheelRearRightIsConnected) {
+            talonsAreConnected = false;
+            Logger.error("DiffWheelRearRight talon is not connected!");
+        }
+
+        if (!talonsAreConnected) {
+            Logger.error("DiffDriver devices not all connected! Disabling...");
+            talonSrxDiffWheelFrontLeft = null;
+            talonSrxDiffWheelFrontRight = null;
+            talonSrxDiffWheelRearLeft = null;
+            talonSrxDiffWheelRearRight = null;
+        } else {
+            diffDrive = new DifferentialDrive(talonSrxDiffWheelFrontLeft, talonSrxDiffWheelFrontRight);
         }
     }
 
