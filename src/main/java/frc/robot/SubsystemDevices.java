@@ -1,6 +1,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Relay;
@@ -25,10 +26,10 @@ public class SubsystemDevices {
     public static Solenoid solenoidRollerArm = new Solenoid(0);
 
     // Motor Controllers
-    public static WPI_TalonSRX talonSrxDiffWheelFrontLeft = new WPI_TalonSRX(6); // 1 motor
-    public static WPI_TalonSRX talonSrxDiffWheelRearLeft = new WPI_TalonSRX(7); // 1 motor
-    public static WPI_TalonSRX talonSrxDiffWheelFrontRight = new WPI_TalonSRX(5); // 1 motor
-    public static WPI_TalonSRX talonSrxDiffWheelRearRight = new WPI_TalonSRX(8); // 1 motor
+    public static WPI_TalonFX talonFxDiffWheelFrontLeft = new WPI_TalonFX(6); // 1 motor
+    public static WPI_TalonFX talonFxDiffWheelRearLeft = new WPI_TalonFX(7); // 1 motor
+    public static WPI_TalonFX talonFxDiffWheelFrontRight = new WPI_TalonFX(5); // 1 motor
+    public static WPI_TalonFX talonFxDiffWheelRearRight = new WPI_TalonFX(8); // 1 motor
 
     public static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
     public static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15); // 1 motor
@@ -57,37 +58,37 @@ public class SubsystemDevices {
 
     // Differential Drive
     private static void initDiffDriverDevices() {
-        boolean talonSrxDiffWheelFrontLeftIsConnected = isConnected(talonSrxDiffWheelFrontLeft);
-        boolean talonSrxDiffWheelFrontRightIsConnected = isConnected(talonSrxDiffWheelFrontRight);
-        boolean talonSrxDiffWheelRearLeftIsConnected = isConnected(talonSrxDiffWheelRearLeft);
-        boolean talonSrxDiffWheelRearRightIsConnected = isConnected(talonSrxDiffWheelRearRight);
+        boolean talonFxDiffWheelFrontLeftIsConnected = isConnected(talonFxDiffWheelFrontLeft);
+        boolean talonFxDiffWheelFrontRightIsConnected = isConnected(talonFxDiffWheelFrontRight);
+        boolean talonFxDiffWheelRearLeftIsConnected = isConnected(talonFxDiffWheelRearLeft);
+        boolean talonFxDiffWheelRearRightIsConnected = isConnected(talonFxDiffWheelRearRight);
 
         boolean talonsAreConnected = true;
-        if (!talonSrxDiffWheelFrontLeftIsConnected) {
+        if (!talonFxDiffWheelFrontLeftIsConnected) {
             talonsAreConnected = false;
             Logger.error("DiffWheelFrontLeft talon is not connected!");
         }
-        if (!talonSrxDiffWheelFrontRightIsConnected) {
+        if (!talonFxDiffWheelFrontRightIsConnected) {
             talonsAreConnected = false;
             Logger.error("DiffWheelFrontRight talon is not connected!");
         }
-        if (!talonSrxDiffWheelRearLeftIsConnected) {
+        if (!talonFxDiffWheelRearLeftIsConnected) {
             talonsAreConnected = false;
             Logger.error("DiffWheelRearLeft talon is not connected!");
         }
-        if (!talonSrxDiffWheelRearRightIsConnected) {
+        if (!talonFxDiffWheelRearRightIsConnected) {
             talonsAreConnected = false;
             Logger.error("DiffWheelRearRight talon is not connected!");
         }
 
         if (!talonsAreConnected) {
             Logger.error("DiffDriver devices not all connected! Disabling...");
-            talonSrxDiffWheelFrontLeft = null;
-            talonSrxDiffWheelFrontRight = null;
-            talonSrxDiffWheelRearLeft = null;
-            talonSrxDiffWheelRearRight = null;
+            talonFxDiffWheelFrontLeft = null;
+            talonFxDiffWheelFrontRight = null;
+            talonFxDiffWheelRearLeft = null;
+            talonFxDiffWheelRearRight = null;
         } else {
-            diffDrive = new DifferentialDrive(talonSrxDiffWheelFrontLeft, talonSrxDiffWheelFrontRight);
+            diffDrive = new DifferentialDrive(talonFxDiffWheelFrontLeft, talonFxDiffWheelFrontRight);
         }
     }
 
@@ -107,6 +108,13 @@ public class SubsystemDevices {
             compressorRollerArm = null;
             Logger.error("RollerArm compressor is not connected! Disabling...");
         }
+    }
+
+    // Determines if the Talon FX is connected
+    public static boolean isConnected(WPI_TalonFX talon) {
+        int firmVer = talon.getFirmwareVersion();
+        boolean connected = (firmVer != -1);
+        return connected;
     }
 
     // Determines if the Talon SRX is connected

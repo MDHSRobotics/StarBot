@@ -30,18 +30,18 @@ public class DiffDriver extends SubsystemBase {
 
         // Configure the subsystem devices
         // TODO: Investigate why these motor controllers have to be inverted. Are all
-        // TalonSRX Motor Controllers backwards?
-        SubsystemDevices.talonSrxDiffWheelFrontLeft.setInverted(true);
-        SubsystemDevices.talonSrxDiffWheelFrontRight.setInverted(true);
-        SubsystemDevices.talonSrxDiffWheelRearLeft.setInverted(true);
-        SubsystemDevices.talonSrxDiffWheelRearRight.setInverted(true);
-        SubsystemDevices.talonSrxDiffWheelRearLeft.follow(SubsystemDevices.talonSrxDiffWheelFrontLeft);
-        SubsystemDevices.talonSrxDiffWheelRearRight.follow(SubsystemDevices.talonSrxDiffWheelFrontRight);
+        // TalonFx Motor Controllers backwards?
+        SubsystemDevices.talonFxDiffWheelFrontLeft.setInverted(true);
+        SubsystemDevices.talonFxDiffWheelFrontRight.setInverted(true);
+        SubsystemDevices.talonFxDiffWheelRearLeft.setInverted(true);
+        SubsystemDevices.talonFxDiffWheelRearRight.setInverted(true);
+        SubsystemDevices.talonFxDiffWheelRearLeft.follow(SubsystemDevices.talonFxDiffWheelFrontLeft);
+        SubsystemDevices.talonFxDiffWheelRearRight.follow(SubsystemDevices.talonFxDiffWheelFrontRight);
 
-        SubsystemDevices.talonSrxDiffWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-        SubsystemDevices.talonSrxDiffWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-        SubsystemDevices.talonSrxDiffWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-        SubsystemDevices.talonSrxDiffWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+        SubsystemDevices.talonFxDiffWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+        SubsystemDevices.talonFxDiffWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+        SubsystemDevices.talonFxDiffWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+        SubsystemDevices.talonFxDiffWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
     }
 
     @Override
