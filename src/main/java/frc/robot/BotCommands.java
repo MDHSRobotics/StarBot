@@ -28,6 +28,7 @@ public class BotCommands {
     public static StopRollerArm stopRollerArm;
     public static StartRollerArm startRollerArm;
     public static ToggleRollerArm toggleRollerArm;
+    public static GetCurrentCompressor getCurrentCompressor;
 
     // Initialize all robot commands
     public static void initializeCommands() {
@@ -49,6 +50,7 @@ public class BotCommands {
         stopRollerArm = new StopRollerArm(BotSubsystems.rollerArm);
         startRollerArm = new StartRollerArm(BotSubsystems.rollerArm);
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
+        getCurrentCompressor = new GetCurrentCompressor(BotSubsystems.rollerArm);
     }
 
     // Return the command to run in autonomous mode

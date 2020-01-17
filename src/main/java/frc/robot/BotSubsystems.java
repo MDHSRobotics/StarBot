@@ -35,7 +35,7 @@ public class BotSubsystems {
         roller.setDefaultCommand(BotCommands.rollerStop);
 
         Logger.setup("RollerArm DefaultCommand -> StopRollerArm...");
-       // rollerArm.setDefaultCommand(BotCommands.raiseRollerArm);
+        rollerArm.setDefaultCommand(BotCommands.getCurrentCompressor);
     }
 
 }

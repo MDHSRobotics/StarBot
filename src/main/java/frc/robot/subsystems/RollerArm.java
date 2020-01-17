@@ -65,9 +65,7 @@ public class RollerArm extends SubsystemBase {
         SubsystemDevices.solenoidRollerArm.set(false);
     }
 
-    public void getCurrent() {
-        if (m_disabled)
-            return;
-        SubsystemDevices.solenoidRollerArm.get();
+    public double getCurrent() {
+        return (int)SubsystemDevices.compressorRollerArm.getCompressorCurrent();
     }
 }
