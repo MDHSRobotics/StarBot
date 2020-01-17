@@ -22,7 +22,9 @@ public class ButtonBindings {
     public static void configureDriveXBoxButtons() {
         Logger.setup("Configure Buttons -> Drive Xbox Controller...");
 
-        ControlDevices.driveXboxBtnA.whenPressed(BotCommands.cycleLights);
+        //ControlDevices.driveXboxBtnA.whenPressed(BotCommands.cycleLights);
+        ControlDevices.driveXboxBtnA.whenPressed(BotCommands.shoot);
+        ControlDevices.driveXboxBtnB.whenPressed(BotCommands.stopShoot);
     }
 
 }

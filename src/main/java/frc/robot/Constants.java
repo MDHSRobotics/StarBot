@@ -22,7 +22,7 @@ public final class Constants {
         public static final int PID_LOOP_PRIMARY = 0;
 
         // The amount of native ticks per revolution (Tpr) in the Redline Encoder.
-        public static final int ENCODER_TPR = 4096;
+        public static final int ENCODER_TPR = 1024;
     }
 
     public static final class TalonConstants {
