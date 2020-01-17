@@ -25,4 +25,10 @@ public class ButtonBindings {
         ControlDevices.driveXboxBtnA.whenPressed(BotCommands.cycleLights);
     }
 
+    // Configure "climb" xbox buttons
+    public static void configureClimbXboxButtons() {
+        Logger.setup("Configure Buttons -> Climb Xbox Controller...");
+
+        ControlDevices.climbXboxBtnA.whileHeld(BotCommands.standStop);
+    }
 }

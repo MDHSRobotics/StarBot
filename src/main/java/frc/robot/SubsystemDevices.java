@@ -2,6 +2,9 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Relay;
 
 import frc.robot.consoles.Logger;
@@ -16,6 +19,11 @@ public class SubsystemDevices {
 
     // Motor Controllers
     // TODO: Add the appropriate motor controllers
+    public static CANSparkMax sparkMaxClimbArm = new CANSparkMax(1, MotorType.kBrushless);
+    public static CANSparkMax sparkMaxClimbStandOne = new CANSparkMax(2, MotorType.kBrushless);
+    public static CANSparkMax sparkMaxClimbStandTwo = new CANSparkMax(3, MotorType.kBrushless);
+    public static CANSparkMax sparkMaxClimbStandThree = new CANSparkMax(4, MotorType.kBrushless);
+    public static CANSparkMax sparkMaxClimbStandFour = new CANSparkMax(5, MotorType.kBrushless);
 
     // Drives
     // TODO: Add the appropriate drives

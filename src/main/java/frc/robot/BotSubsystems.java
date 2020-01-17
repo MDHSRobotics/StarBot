@@ -9,12 +9,14 @@ import frc.robot.subsystems.*;
 public class BotSubsystems {
 
     public static Lighter lighter;
+    public static Climb climb;
 
     // Initialize all robot subsystems
     public static void initializeSubsystems() {
         Logger.setup("Initializing BotSubsystems...");
 
         lighter = new Lighter();
+        climb = new Climb();
     }
 
     // Set all the subsystem default commands
