@@ -3,8 +3,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
+import frc.robot.commands.auto.*;
 import frc.robot.commands.conveyor.*;
-import frc.robot.commands.auto.AutoPeriod;
 import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
 import frc.robot.commands.roller.*;
@@ -54,11 +54,12 @@ public class BotCommands {
         lowerRollerArm = new LowerRollerArm(BotSubsystems.rollerArm);
         raiseRollerArm = new RaiseRollerArm(BotSubsystems.rollerArm);
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
+        autoPeriod = new AutoPeriod(BotSubsystems.autonomous);
     }
 
     // Return the command to run in autonomous mode
     public static Command getAutonomousCommand() {
-        return cycleLights;
+        return autoPeriod;
     }
 
 }
