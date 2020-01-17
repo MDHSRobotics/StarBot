@@ -10,7 +10,7 @@ import frc.robot.SubsystemDevices;
 public class RollerArm extends SubsystemBase {
 
     // The public property to determine the RollerArm's state
-    public boolean armIsUp = false;
+    public boolean armIsUp = true;
 
     // If not all the Compressors are initialized, this should be true
     private boolean m_disabled = false;
@@ -27,11 +27,19 @@ public class RollerArm extends SubsystemBase {
 
         // Configure the subsystem devices
         SubsystemDevices.compressorRollerArm.setClosedLoopControl(true);
+        SubsystemDevices.solenoidRollerArm.set(false);
     }
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+    }
+
+    // Start the compressor of the roller arm
+    public void startArm() {
+        if (m_disabled)
+            return;
+        SubsystemDevices.compressorRollerArm.start();
     }
 
     // Toggle the position of the roller arm
@@ -57,4 +65,9 @@ public class RollerArm extends SubsystemBase {
         SubsystemDevices.solenoidRollerArm.set(false);
     }
 
+    public void getCurrent() {
+        if (m_disabled)
+            return;
+        SubsystemDevices.solenoidRollerArm.get();
+    }
 }

@@ -16,6 +16,7 @@ public class ToggleRollerArm extends InstantCommand {
         Logger.setup("Constructing InstantCommand: ToggleRollerArm...");
 
         m_rollerArm = rollerArm;
+        addRequirements(m_rollerArm);
     }
 
     @Override
@@ -24,11 +25,11 @@ public class ToggleRollerArm extends InstantCommand {
         Logger.action("Initializing InstantCommand: ToggleRollerArm...");
 
         if (m_rollerArm.armIsUp) {
-            Logger.action("RollerArm -> Raising...");
-            BotCommands.raiseRollerArm.schedule();
-        } else {
             Logger.action("RollerArm -> Lowering...");
             BotCommands.lowerRollerArm.schedule();
+        } else {
+            Logger.action("RollerArm -> Raising...");
+            BotCommands.raiseRollerArm.schedule();
         }
         m_rollerArm.toggleArmPosition();
     }

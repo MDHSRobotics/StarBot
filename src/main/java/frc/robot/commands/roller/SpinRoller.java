@@ -16,6 +16,7 @@ public class SpinRoller extends CommandBase {
 
         // Add given subsystem requirements
         m_roller = roller;
+        addRequirements(m_roller);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class SpinRoller extends CommandBase {
     // This command finishes immediately
     @Override
     public boolean isFinished() {
-        return true;
+        return false;
     }
 
     @Override
@@ -42,9 +43,10 @@ public class SpinRoller extends CommandBase {
         if (interrupted) {
             System.out.println("--");
             Logger.ending("Interrupting Command: RollerSpin...");
-            m_roller.stop();
+
         } else {
             Logger.ending("Ending Command: RollerSpin...");
+            m_roller.stop();
         }
     }
 

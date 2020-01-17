@@ -18,7 +18,7 @@ public class SubsystemDevices {
 
     // Motor Controllers
     public static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
-    public static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(1); // 1 motor
+    public static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15); // 1 motor
 
     // Compressors
     public static Compressor compressorRollerArm = new Compressor(0);

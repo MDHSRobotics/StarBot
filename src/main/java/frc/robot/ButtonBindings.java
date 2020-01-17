@@ -25,6 +25,8 @@ public class ButtonBindings {
         ControlDevices.driveXboxBtnA.whenPressed(BotCommands.cycleLights);
         ControlDevices.driveXboxBtnB.whileHeld(BotCommands.rollerSpin);
         ControlDevices.driveXboxBtnX.whenPressed(BotCommands.toggleRollerArm);
+        ControlDevices.driveXboxBtnY.whenPressed(BotCommands.startRollerArm);
+
     }
 
 }
