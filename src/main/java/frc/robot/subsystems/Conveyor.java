@@ -4,10 +4,10 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.SubsystemDevices;
-import frc.robot.Constants;
-import frc.robot.oi.positions.ThumbStickPosition;
+import frc.robot.oi.positions.ThumbstickPosition;
 import frc.robot.oi.positions.TriggerPosition;
+import frc.robot.Constants.TalonConstants;
+import frc.robot.SubsystemDevices;
 
 // Conveyor subsystem, for delivering the balls to the shoot system
 public class Conveyor extends SubsystemBase {
@@ -28,20 +28,20 @@ public class Conveyor extends SubsystemBase {
         // Configure the subsystem devices
         SubsystemDevices.talonSrxConveyor.configFactoryDefault();
 
-        SubsystemDevices.talonSrxConveyor.configPeakCurrentDuration(Constants.TalonConstants.PEAK_AMPERAGE_DURATION,
-            Constants.TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSrxConveyor.configPeakCurrentLimit(Constants.TalonConstants.PEAK_AMPERAGE,
-            Constants.TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSrxConveyor.configContinuousCurrentLimit(Constants.TalonConstants.CONTINUOUS_AMPERAGE_LIMIT,
-            Constants.TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSrxConveyor.configPeakCurrentDuration(TalonConstants.PEAK_AMPERAGE_DURATION,
+                                                                    TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSrxConveyor.configPeakCurrentLimit(TalonConstants.PEAK_AMPERAGE,
+                                                                 TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSrxConveyor.configContinuousCurrentLimit(TalonConstants.CONTINUOUS_AMPERAGE_LIMIT,
+                                                                    TalonConstants.TIMEOUT_MS);
 
         SubsystemDevices.talonSrxConveyor.configNominalOutputForward(0);
         SubsystemDevices.talonSrxConveyor.configNominalOutputReverse(0);
         SubsystemDevices.talonSrxConveyor.configPeakOutputForward(0.5);
         SubsystemDevices.talonSrxConveyor.configPeakOutputReverse(-0.5);
 
-        SubsystemDevices.talonSrxConveyor.configMotionAcceleration(3000, Constants.TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSrxConveyor.configMotionCruiseVelocity(8000, Constants.TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSrxConveyor.configMotionAcceleration(3000, TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSrxConveyor.configMotionCruiseVelocity(8000, TalonConstants.TIMEOUT_MS);
     }
 
     @Override
@@ -49,8 +49,7 @@ public class Conveyor extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    public void convey(ThumbStickPosition thumbStickPos, TriggerPosition triggerPos) {
-
+    public void convey(ThumbstickPosition thumbStickPos, TriggerPosition triggerPos) {
         if (m_disabled) return;
 
         double conveySpeed = -triggerPos.rightTriggerPosition - thumbStickPos.rightSideToSidePosition;
@@ -58,7 +57,6 @@ public class Conveyor extends SubsystemBase {
     }
 
     public void stop() {
-
         if (m_disabled) return;
         SubsystemDevices.talonSrxConveyor.stopMotor();
     }

@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
-import frc.robot.oi.positions.ThumbStickPosition;
+import frc.robot.oi.positions.ThumbstickPosition;
 import frc.robot.oi.positions.TriggerPosition;
 import frc.robot.oi.ControlDevices;
 
@@ -33,7 +33,7 @@ public class ConveyForward extends CommandBase {
     @Override
     public void execute() {
 
-        m_conveyor.convey(ThumbStickPosition.getThumbStickPosition(ControlDevices.driveXbox, false),
+        m_conveyor.convey(ThumbstickPosition.getThumbstickPosition(ControlDevices.driveXbox, false),
             TriggerPosition.getTriggerPosition(ControlDevices.driveXbox)
         );
     }
