@@ -49,6 +49,9 @@ public class Conveyor extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
+    // TODO: Add comments to describe methods
+
+    // TODO: Subsystem methods shouldn't use OI positions, only movements or direct values
     public void convey(ThumbstickPosition thumbStickPos, TriggerPosition triggerPos) {
         if (m_disabled) return;
 
