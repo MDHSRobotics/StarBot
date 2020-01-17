@@ -18,9 +18,19 @@ public class Climb extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    public void stand() {
+    public void standForward() {
         SubsystemDevices.sparkMaxClimbStandOne.set(0.5);
+        SubsystemDevices.sparkMaxClimbStandTwo.set(0.5);
+        SubsystemDevices.sparkMaxClimbStandThree.set(0.5);
+        SubsystemDevices.sparkMaxClimbStandFour.set(0.5);
         }
+
+    public void standReverse() {
+        SubsystemDevices.sparkMaxClimbStandOne.set(-0.5);
+        SubsystemDevices.sparkMaxClimbStandTwo.set(-0.5);
+        SubsystemDevices.sparkMaxClimbStandThree.set(-0.5);
+        SubsystemDevices.sparkMaxClimbStandFour.set(-0.5);
+    }
 
     public void extendArm() {
         SubsystemDevices.sparkMaxClimbArm.set(0.5);
