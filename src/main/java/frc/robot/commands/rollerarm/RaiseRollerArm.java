@@ -1,8 +1,8 @@
 
 package frc.robot.commands.rollerarm;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.RollerArm;
 
@@ -12,7 +12,7 @@ public class RaiseRollerArm extends InstantCommand {
     private RollerArm m_rollerArm;
 
     public RaiseRollerArm(RollerArm rollerArm) {
-        Logger.setup("Constructing Command: RaiseRollerArm...");
+        Logger.setup("Constructing InstantCommand: RaiseRollerArm...");
 
         // Add given subsystem requirements
         m_rollerArm = rollerArm;
@@ -21,7 +21,7 @@ public class RaiseRollerArm extends InstantCommand {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: RaiseRollerArm...");
+        Logger.action("Initializing InstantCommand: RaiseRollerArm...");
 
         m_rollerArm.raiseArm();
     }

@@ -27,7 +27,6 @@ public class StopRollerArm extends CommandBase {
 
     @Override
     public void execute() {
-
     }
 
     // This command continues until interrupted

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.RollerArm;
 
-// This command stops the roller arm
+// This command starts the roller arm
 public class StartRollerArm extends CommandBase {
 
     private RollerArm m_rollerArm;
@@ -27,7 +27,6 @@ public class StartRollerArm extends CommandBase {
 
     @Override
     public void execute() {
-
     }
 
     // This command continues until interrupted
@@ -44,7 +43,6 @@ public class StartRollerArm extends CommandBase {
         } else {
             Logger.ending("Ending Command: StartRollerArm...");
         }
-
     }
 
 }

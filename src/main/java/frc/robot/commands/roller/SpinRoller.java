@@ -29,10 +29,9 @@ public class SpinRoller extends CommandBase {
 
     @Override
     public void execute() {
-
     }
 
-    // This command finishes immediately
+    // This command continues until interrupted
     @Override
     public boolean isFinished() {
         return false;
