@@ -40,18 +40,6 @@ public class RollerArm extends SubsystemBase {
         return (int)SubsystemDevices.compressorRollerArm.getCompressorCurrent();
     }
 
-    // Stop the compressor of the roller arm
-    public void stopArm() {
-        if (m_disabled) return;
-        SubsystemDevices.compressorRollerArm.stop();
-    }
-
-    // Start the compressor of the roller arm
-    public void startArm() {
-        if (m_disabled) return;
-        SubsystemDevices.compressorRollerArm.start();
-    }
-
     // Lower the roller arm
     public void lowerArm() {
         if (m_disabled) return;

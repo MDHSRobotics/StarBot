@@ -41,10 +41,8 @@ public class SubsystemDevices {
     // Conveyor
     private static void initConveyorDevices() {
         boolean talonSrxConveyorIsConnected = isConnected(talonSrxConveyor);
-
-        boolean talonsAreConnected = true;
         if (!talonSrxConveyorIsConnected) {
-            talonsAreConnected = false;
+            talonSrxConveyor = null;
             Logger.error("Conveyor talon is not connected!");
         }
     }
@@ -52,7 +50,6 @@ public class SubsystemDevices {
     // Roller
     private static void initRollerDevices() {
         boolean talonSrxRollerIsConnected = isConnected(talonSrxRoller);
-
         if (!talonSrxRollerIsConnected) {
             talonSrxRoller = null;
             Logger.error("Roller talon is not connected! Disabling...");
@@ -62,7 +59,6 @@ public class SubsystemDevices {
     // Roller Arm
     private static void initRollerArmDevices() {
         boolean m_compressorRollerArmIsNotConnected = compressorRollerArm.getCompressorNotConnectedFault();
-
         if (m_compressorRollerArmIsNotConnected) {
             compressorRollerArm = null;
             Logger.error("RollerArm compressor is not connected! Disabling...");
