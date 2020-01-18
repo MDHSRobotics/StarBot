@@ -25,7 +25,7 @@ public class BotSubsystems {
 
     // Set all the subsystem default commands
     public static void setDefaultCommands() {
-        Logger.setup("Conveyor DefaultCommand -> convey...");
+        Logger.setup("Conveyor DefaultCommand -> Convey...");
         conveyor.setDefaultCommand(BotCommands.convey);
 
         Logger.setup("Lighter DefaultCommand -> CycleLights...");
