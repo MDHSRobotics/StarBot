@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.RollerArm;
 
-// This command stops the roller arm
-public class GetCurrentCompressor extends CommandBase {
+// This command logs the current being used by the roller arm
+public class LogRollerArmCurrent extends CommandBase {
 
     private RollerArm m_rollerArm;
 
-    public GetCurrentCompressor(RollerArm rollerArm) {
-        Logger.setup("Constructing Command: GetCurrentCompressor...");
+    public LogRollerArmCurrent(RollerArm rollerArm) {
+        Logger.setup("Constructing Command: LogRollerArmCurrentInAmps...");
 
         // Add given subsystem requirements
         m_rollerArm = rollerArm;
@@ -21,12 +21,13 @@ public class GetCurrentCompressor extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: GetCurrentCompressor...");
+        Logger.action("Initializing Command: LogRollerArmCurrentInAmps...");
     }
 
     @Override
     public void execute() {
-        System.out.println("Interrupting GetCurrentCompressor..." + m_rollerArm.getCurrent());;
+        int current = m_rollerArm.getCurrent();
+        Logger.ending("RollerArm compressor current in amps: " + current);
     }
 
     // This command continues until interrupted
@@ -39,11 +40,10 @@ public class GetCurrentCompressor extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting GetCurrentCompressor...");
+            Logger.ending("Interrupting LogRollerArmCurrentInAmps...");
         } else {
-            Logger.ending("Ending Command: GetCurrentCompressor...");
+            Logger.ending("Ending Command: LogRollerArmCurrentInAmps...");
         }
-
     }
 
 }

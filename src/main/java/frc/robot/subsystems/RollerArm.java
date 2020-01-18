@@ -35,22 +35,21 @@ public class RollerArm extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // Start the compressor of the roller arm
-    public void startArm() {
-        if (m_disabled)
-            return;
-        SubsystemDevices.compressorRollerArm.start();
+    // Get the current being used by the roller arm compressor
+    public int getCurrent() {
+        return (int)SubsystemDevices.compressorRollerArm.getCompressorCurrent();
     }
 
-    // Toggle the position of the roller arm
-    public void toggleArmPosition() {
-        armIsUp = !armIsUp;
-    }
-
-    // Stop the roller arm
+    // Stop the compressor of the roller arm
     public void stopArm() {
         if (m_disabled) return;
         SubsystemDevices.compressorRollerArm.stop();
+    }
+
+    // Start the compressor of the roller arm
+    public void startArm() {
+        if (m_disabled) return;
+        SubsystemDevices.compressorRollerArm.start();
     }
 
     // Lower the roller arm
@@ -65,7 +64,9 @@ public class RollerArm extends SubsystemBase {
         SubsystemDevices.solenoidRollerArm.set(false);
     }
 
-    public double getCurrent() {
-        return (int)SubsystemDevices.compressorRollerArm.getCompressorCurrent();
+    // Toggle the position of the roller arm
+    public void toggleArmPosition() {
+        armIsUp = !armIsUp;
     }
+
 }
