@@ -17,6 +17,8 @@ public final class Constants {
         // Only the first two (0,1) are visible in web-based configuration.
         public static final int PID_SLOT_0 = 0;
 
+        public static final int PID_SLOT_1 = 1;
+
         // Talon SRX/ Victor SPX will supported multiple (cascaded) PID loops.
         // For now we just want the primary one.
         public static final int PID_LOOP_PRIMARY = 0;

@@ -22,7 +22,7 @@ public class BotCommands {
         Logger.setup("Initializing BotCommands...");
 
         // Lighter
-        cycleLights = new CycleLights(BotSubsystems.lighter);
+         cycleLights = new CycleLights(BotSubsystems.lighter);
 
         // Shooter
         shoot = new Shoot(BotSubsystems.shooter);

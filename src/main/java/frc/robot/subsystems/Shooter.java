@@ -19,14 +19,14 @@ public class Shooter extends SubsystemBase {
     public boolean clawIsClosed = false;
 
     // Position constants
-    private final double GEAR_RATIO = 16;
+    private final double GEAR_RATIO = 1;
 
     // Encoder constants
     private final boolean SENSOR_PHASE_TOP = false; // So that Talon does not report sensor out of phase
-    private final boolean MOTOR_INVERT_TOP = true; // Which direction you want to be positive; this does not affect motor invert
+    private final boolean MOTOR_INVERT_TOP = false; // Which direction you want to be positive; this does not affect motor invert
 
     private final boolean SENSOR_PHASE_BOTTOM = true; // So that Talon does not report sensor out of phase
-    private final boolean MOTOR_INVERT_BOTTOM = false; // Which direction you want to be positive; this does not affect motor invert
+    private final boolean MOTOR_INVERT_BOTTOM = true; // Which direction you want to be positive; this does not affect motor invert
 
     // If not all the talons are initialized, this should be true
     private boolean m_disabled = false;
@@ -67,9 +67,9 @@ public class Shooter extends SubsystemBase {
         SubsystemDevices.talonSRXShooterTopWheel.configAllowableClosedloopError(0, EncoderConstants.PID_LOOP_PRIMARY,
                 TalonConstants.TIMEOUT_MS);
 
-        SubsystemDevices.talonSRXShooterTopWheel.config_kF(EncoderConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSRXShooterTopWheel.config_kF(EncoderConstants.PID_LOOP_PRIMARY, 0.7, TalonConstants.TIMEOUT_MS);
         SubsystemDevices.talonSRXShooterTopWheel.config_kP(EncoderConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSRXShooterTopWheel.config_kI(EncoderConstants.PID_LOOP_PRIMARY, 0.00025, TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSRXShooterTopWheel.config_kI(EncoderConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
         SubsystemDevices.talonSRXShooterTopWheel.config_kD(EncoderConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
 
         // Initialize current encoder position as zero
@@ -113,11 +113,11 @@ public class Shooter extends SubsystemBase {
         SubsystemDevices.talonSRXShooterBottomWheel.configAllowableClosedloopError(0, EncoderConstants.PID_LOOP_PRIMARY,
                 TalonConstants.TIMEOUT_MS);
 
-        SubsystemDevices.talonSRXShooterBottomWheel.config_kF(EncoderConstants.PID_LOOP_PRIMARY, 0.0,
+        SubsystemDevices.talonSRXShooterBottomWheel.config_kF(EncoderConstants.PID_LOOP_PRIMARY, 0.7,
                 TalonConstants.TIMEOUT_MS);
         SubsystemDevices.talonSRXShooterBottomWheel.config_kP(EncoderConstants.PID_LOOP_PRIMARY, 0.0,
                 TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSRXShooterBottomWheel.config_kI(EncoderConstants.PID_LOOP_PRIMARY, 0.00025,
+        SubsystemDevices.talonSRXShooterBottomWheel.config_kI(EncoderConstants.PID_LOOP_PRIMARY, 0.0,
                 TalonConstants.TIMEOUT_MS);
         SubsystemDevices.talonSRXShooterBottomWheel.config_kD(EncoderConstants.PID_LOOP_PRIMARY, 0.0,
                 TalonConstants.TIMEOUT_MS);
@@ -152,24 +152,24 @@ public class Shooter extends SubsystemBase {
 
     // Spin the top Shooter wheel
     public void spinTopWheel() {
-        double velocity = ShooterBrain.getTopWheelVelocity();
-        double nativeVelocity = EncoderUtils.translateRPSToTicksPerDecisecond(velocity, GEAR_RATIO);
-        Logger.info("Shooter -> TopWheel Velocity to:" + velocity);
+        // double velocity = ShooterBrain.getTopWheelVelocity();
+        // double nativeVelocity = EncoderUtils.translateRPSToTicksPerDecisecond(velocity, GEAR_RATIO);
+        // Logger.info("Shooter -> TopWheel Velocity to:" + velocity);
 
         if (m_disabled)
             return;
-        SubsystemDevices.talonSRXShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
+        SubsystemDevices.talonSRXShooterTopWheel.set(ControlMode.Velocity, 1000);
     }
 
     // Spin the bottom Shooter wheel
     public void spinBottomWheel() {
-        double velocity = ShooterBrain.getBottomWheelVelocity();
-        double nativeVelocity = EncoderUtils.translateRPSToTicksPerDecisecond(velocity, GEAR_RATIO);
-        Logger.info("Shooter -> BottomWheel Velocity to:" + velocity);
+        // double velocity = ShooterBrain.getBottomWheelVelocity();
+        // double nativeVelocity = EncoderUtils.translateRPSToTicksPerDecisecond(velocity, GEAR_RATIO);
+        // Logger.info("Shooter -> BottomWheel Velocity to:" + velocity);
 
         if (m_disabled)
             return;
-        SubsystemDevices.talonSRXShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
+        SubsystemDevices.talonSRXShooterBottomWheel.set(ControlMode.Velocity, 1000);
     }
 
     // Get the current Shooter TopWheel motor velocity
