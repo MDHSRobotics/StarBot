@@ -25,7 +25,6 @@ public class BotCommands {
     // RollerArm
     public static LowerRollerArm lowerRollerArm;
     public static RaiseRollerArm raiseRollerArm;
-    public static StopRollerArm stopRollerArm;
     public static ToggleRollerArm toggleRollerArm;
 
     // Initialize all robot commands
@@ -45,7 +44,6 @@ public class BotCommands {
         // RollerArm
         lowerRollerArm = new LowerRollerArm(BotSubsystems.rollerArm);
         raiseRollerArm = new RaiseRollerArm(BotSubsystems.rollerArm);
-        stopRollerArm = new StopRollerArm(BotSubsystems.rollerArm);
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
     }
 

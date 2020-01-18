@@ -3,13 +3,12 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import frc.robot.brains.RollerBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.SubsystemDevices;
 
 // Roller Subsytem, for sucking in balls
 public class Roller extends SubsystemBase {
-
-    private final double POWER = 0.2;
 
     // If not all the talons are initialized, this should be true
     private boolean m_disabled = false;
@@ -42,7 +41,8 @@ public class Roller extends SubsystemBase {
     // Spin the roller motor
     public void spin() {
         if (m_disabled) return;
-        SubsystemDevices.talonSrxRoller.set(POWER);
+        double power = RollerBrain.getRollerPower();
+        SubsystemDevices.talonSrxRoller.set(power);
     }
 
 }

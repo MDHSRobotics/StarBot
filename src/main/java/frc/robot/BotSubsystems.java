@@ -19,8 +19,8 @@ public class BotSubsystems {
 
         conveyor = new Conveyor();
         lighter = new Lighter();
-        rollerArm = new RollerArm();
         roller = new Roller();
+        rollerArm = new RollerArm();
     }
 
     // Set all the subsystem default commands
@@ -33,9 +33,6 @@ public class BotSubsystems {
 
         Logger.setup("Roller DefaultCommand -> RollerStop...");
         roller.setDefaultCommand(BotCommands.rollerStop);
-
-        Logger.setup("RollerArm DefaultCommand -> StopRollerArm...");
-        rollerArm.setDefaultCommand(BotCommands.stopRollerArm);
     }
 
 }
