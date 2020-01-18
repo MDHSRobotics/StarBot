@@ -37,6 +37,9 @@ public class BotCommands {
     public static void initializeCommands() {
         Logger.setup("Initializing BotCommands...");
 
+        // Autonomous
+        autoPeriod = new AutoPeriod(BotSubsystems.autonomous);
+
         // Conveyor
         convey = new Convey(BotSubsystems.conveyor);
 
@@ -54,7 +57,6 @@ public class BotCommands {
         lowerRollerArm = new LowerRollerArm(BotSubsystems.rollerArm);
         raiseRollerArm = new RaiseRollerArm(BotSubsystems.rollerArm);
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
-        autoPeriod = new AutoPeriod(BotSubsystems.autonomous);
     }
 
     // Return the command to run in autonomous mode
