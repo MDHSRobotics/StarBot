@@ -12,12 +12,12 @@ import frc.robot.consoles.Logger;
 
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
-    
-    // DiffDriver
-    public static DriveDifferentialTank driveDifferentialTank;
 
     // Conveyor
     public static Convey convey;
+
+    // DiffDriver
+    public static DriveDifferentialTank driveDifferentialTank;
 
     // Lighter
     public static CycleLights cycleLights;

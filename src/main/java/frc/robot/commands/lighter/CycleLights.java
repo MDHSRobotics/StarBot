@@ -82,7 +82,7 @@ public class CycleLights extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            // Logger.ending("Interrupting Command: CycleLights...");
+            Logger.ending("Interrupting Command: CycleLights...");
         } else {
             // Logger.ending("Ending Command: CycleLights...");
         }
