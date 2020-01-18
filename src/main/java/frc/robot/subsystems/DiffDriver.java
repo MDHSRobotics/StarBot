@@ -67,6 +67,8 @@ public class DiffDriver extends SubsystemBase {
     // Stop all the drive motors
     public void stop() {
         if (m_disabled) {
+            // TODO: Not only should this not be necessary, but it should also produce
+            //       a runtime error, because diffDrive should be null if the system is disabled.
             SubsystemDevices.diffDrive.feed();
             return;
         }
@@ -77,6 +79,8 @@ public class DiffDriver extends SubsystemBase {
     // Drive using the tank method
     public void driveTank(double leftSpeed, double rightSpeed) {
         if (m_disabled) {
+            // TODO: Not only should this not be necessary, but it should also produce
+            //       a runtime error, because diffDrive should be null if the system is disabled.
             SubsystemDevices.diffDrive.feed();
             return;
         }
