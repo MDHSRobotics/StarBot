@@ -20,8 +20,12 @@ public class ConveyMovement {
 
     //determines speed of conveyor belt from the right thumbstick
     public static double getConveySpeed(XboxController xbox) {
-        double thumbstick = ThumbstickPosition.getThumbstickPosition(xbox, false).rightSideToSidePosition;
-        double trigger = TriggerPosition.getTriggerPosition(xbox).rightTriggerPosition;
+
+        ThumbstickPosition thumbPos = ThumbstickPosition.getThumbstickPosition(xbox, false);
+        double thumbstick = thumbPos.rightSideToSidePosition;
+
+        TriggerPosition triggerPos = TriggerPosition.getTriggerPosition(xbox);
+        double trigger = triggerPos.rightTriggerPosition;
 
         return thumbstick - trigger;
     }
