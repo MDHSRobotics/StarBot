@@ -20,10 +20,8 @@ public class SubsystemDevices {
     // Relays
     public static Relay relayLighter = new Relay(1);
 
-    // Compressors
+    // Pneumatics
     public static Compressor compressorRollerArm = new Compressor(0);
-
-    // Solenoids
     public static Solenoid solenoidRollerArm = new Solenoid(0);
 
     // Motor Controllers
@@ -104,12 +102,23 @@ public class SubsystemDevices {
 
     // Roller Arm
     private static void initRollerArmDevices() {
-        boolean m_compressorRollerArmIsConnected = DeviceUtils.isConnected(compressorRollerArm);
+        boolean compressorRollerArmIsConnected = DeviceUtils.isConnected(compressorRollerArm);
+        boolean solenoidRollerArmIsConnected = DeviceUtils.isConnected(solenoidRollerArm);
 
-        //TODO: find a way to check if the PCM is connected
-        if (!m_compressorRollerArmIsConnected) {
+        boolean pneumaticsAreConnected = true;
+        if (!compressorRollerArmIsConnected) {
+            pneumaticsAreConnected = false;
+            Logger.error("RollerArm compressor is not connected!");
+        }
+        if (!solenoidRollerArmIsConnected) {
+            pneumaticsAreConnected = false;
+            Logger.error("RollerArm solenoid is not connected!");
+        }
+
+        if (!pneumaticsAreConnected) {
             compressorRollerArm = null;
-            Logger.error("RollerArm compressor is not connected! Disabling...");
+            solenoidRollerArm = null;
+            Logger.error("RollerArm pnuematics are not connected! Disabling...");
         }
     }
 

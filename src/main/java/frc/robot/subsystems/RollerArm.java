@@ -19,7 +19,8 @@ public class RollerArm extends SubsystemBase {
         Logger.setup("Constructing Subsystem: RollerArm...");
 
         // Determine whether or not to disable the subsystem
-        m_disabled = (SubsystemDevices.compressorRollerArm == null);
+        m_disabled = (SubsystemDevices.compressorRollerArm == null ||
+                      SubsystemDevices.solenoidRollerArm == null);
         if (m_disabled) {
             Logger.error("RollerArm devices not initialized! Disabling subsystem...");
             return;
@@ -37,6 +38,7 @@ public class RollerArm extends SubsystemBase {
 
     // Get the current being used by the roller arm compressor
     public int getCurrent() {
+        if (m_disabled) return 0;
         return (int)SubsystemDevices.compressorRollerArm.getCompressorCurrent();
     }
 
