@@ -29,8 +29,8 @@ public class DiffDriver extends SubsystemBase {
         }
 
         // Configure the subsystem devices
-        // TODO: Investigate why these motor controllers have to be inverted. Are all
-        // TalonFx Motor Controllers backwards?
+        // TODO: Investigate why these motor controllers have to be inverted.
+        //       Are all TalonFx Motor Controllers backwards?
         SubsystemDevices.talonFxDiffWheelFrontLeft.setInverted(true);
         SubsystemDevices.talonFxDiffWheelFrontRight.setInverted(true);
         SubsystemDevices.talonFxDiffWheelRearLeft.setInverted(true);
@@ -49,8 +49,7 @@ public class DiffDriver extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // Flip the control direction of the joystick in Y (or Y Left for Xbox
-    // thumbsticks)
+    // Flip the control direction of the joystick in Y (or Y Left for Xbox thumbsticks)
     public Boolean flipControlStickDirection() {
         Logger.action("Toggling DiffDriver control stick direction...");
 

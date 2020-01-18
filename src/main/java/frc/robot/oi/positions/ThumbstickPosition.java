@@ -4,8 +4,8 @@ package frc.robot.oi.positions;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 
-import frc.robot.consoles.Logger;
 import frc.robot.brains.XboxBrain;
+import frc.robot.consoles.Logger;
 
 // The position values obtained from Xbox Thumbsticks
 public class ThumbstickPosition {
