@@ -5,18 +5,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
-import frc.robot.oi.positions.ThumbstickPosition;
-import frc.robot.oi.positions.TriggerPosition;
 import frc.robot.oi.ControlDevices;
+import frc.robot.oi.movements.ConveyMovement;
 
 
 // This command moves the conveyor belt forward
-public class ConveyForward extends CommandBase {
+public class Convey extends CommandBase {
 
     private Conveyor m_conveyor;
 
 
-    public ConveyForward(Conveyor conveyor) {
+    public Convey(Conveyor conveyor) {
         Logger.setup("Constructing Command: Conveyor...");
 
         // Add given subsystem requirements
@@ -32,10 +31,7 @@ public class ConveyForward extends CommandBase {
 
     @Override
     public void execute() {
-
-        m_conveyor.convey(ThumbstickPosition.getThumbstickPosition(ControlDevices.driveXbox, false),
-            TriggerPosition.getTriggerPosition(ControlDevices.driveXbox)
-        );
+        m_conveyor.convey(ConveyMovement.getConveySpeed(ControlDevices.driveXbox));
     }
 
 

@@ -13,7 +13,7 @@ import frc.robot.consoles.Logger;
 public class BotCommands {
 
     // Conveyor
-    public static ConveyForward conveyForward;
+    public static Convey convey;
 
     // Lighter
     public static CycleLights cycleLights;
@@ -33,7 +33,7 @@ public class BotCommands {
         Logger.setup("Initializing BotCommands...");
 
         // Conveyor
-        conveyForward = new ConveyForward(BotSubsystems.conveyor);
+        convey = new Convey(BotSubsystems.conveyor);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);

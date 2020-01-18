@@ -16,6 +16,7 @@ public class StopRollerArm extends CommandBase {
 
         // Add given subsystem requirements
         m_rollerArm = rollerArm;
+        addRequirements(m_rollerArm);
     }
 
     @Override

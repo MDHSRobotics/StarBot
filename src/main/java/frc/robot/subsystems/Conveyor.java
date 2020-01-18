@@ -4,8 +4,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.oi.positions.ThumbstickPosition;
-import frc.robot.oi.positions.TriggerPosition;
 import frc.robot.Constants.TalonConstants;
 import frc.robot.SubsystemDevices;
 
@@ -49,16 +47,15 @@ public class Conveyor extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // TODO: Add comments to describe methods
-
-    // TODO: Subsystem methods shouldn't use OI positions, only movements or direct values
-    public void convey(ThumbstickPosition thumbStickPos, TriggerPosition triggerPos) {
+    // moves the conveyor forward and back depending on the trigger
+    // and the right thumbstick
+    public void convey(double speed) {
         if (m_disabled) return;
 
-        double conveySpeed = -triggerPos.rightTriggerPosition - thumbStickPos.rightSideToSidePosition;
-        SubsystemDevices.talonSrxConveyor.set(conveySpeed);
+        SubsystemDevices.talonSrxConveyor.set(speed);
     }
 
+    //stop the conveyor motor
     public void stop() {
         if (m_disabled) return;
         SubsystemDevices.talonSrxConveyor.stopMotor();
