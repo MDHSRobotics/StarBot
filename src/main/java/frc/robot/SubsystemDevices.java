@@ -50,7 +50,7 @@ public class SubsystemDevices {
 
     // Conveyor
     private static void initConveyorDevices() {
-        boolean talonSrxConveyorIsConnected = isConnected(talonSrxConveyor);
+        boolean talonSrxConveyorIsConnected = DeviceUtils.isConnected(talonSrxConveyor);
         if (!talonSrxConveyorIsConnected) {
             talonSrxConveyor = null;
             Logger.error("Conveyor talon is not connected!");
