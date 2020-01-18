@@ -16,6 +16,7 @@ public class StopRoller extends CommandBase {
 
         // Add given subsystem requirements
         m_roller = roller;
+        addRequirements(m_roller);
     }
 
     @Override

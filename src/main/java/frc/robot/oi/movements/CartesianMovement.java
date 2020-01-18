@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.brains.ControlStickBrain;
 import frc.robot.oi.positions.JoystickPosition;
-import frc.robot.oi.positions.ThumbStickPosition;
+import frc.robot.oi.positions.ThumbstickPosition;
 import frc.robot.oi.ControlDevices;
 import frc.robot.oi.ControlDevices.ControlStick;
 
@@ -52,7 +52,7 @@ public class CartesianMovement {
     // Determines the cartesian movement (straight speed, strafe speed, rotation speed)
     // from the current xbox thumbstick positions
     public static CartesianMovement getCartesianMovementFromThumbsticks(XboxController xbox, boolean isYleftFlipped) {
-        ThumbStickPosition pos = ThumbStickPosition.getThumbstickPosition(xbox, isYleftFlipped);
+        ThumbstickPosition pos = ThumbstickPosition.getThumbstickPosition(xbox, isYleftFlipped);
         CartesianMovement move = new CartesianMovement(pos.leftSideToSidePosition, pos.leftForwardBackPosition, pos.rightSideToSidePosition);
         // Logger.info("Xbox Cartesian Movement: " + pos.leftSideToSidePosition + ", " + pos.leftForwardBackPosition + ", " + pos.rightSideToSidePosition);
         return move;

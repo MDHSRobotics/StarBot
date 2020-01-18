@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.brains.ControlStickBrain;
 import frc.robot.oi.positions.JoystickPosition;
-import frc.robot.oi.positions.ThumbStickPosition;
+import frc.robot.oi.positions.ThumbstickPosition;
 import frc.robot.oi.ControlDevices;
 import frc.robot.oi.ControlDevices.ControlStick;
 
@@ -52,7 +52,7 @@ public class ArcadeMovement {
     // Determines the arcade movement (straight speed, rotation speed, square inputs, strafe speed)
     // from the current xbox thumbstick positions
     public static ArcadeMovement getArcadeMovementFromThumbsticks(XboxController xbox, boolean isYleftFlipped) {
-        ThumbStickPosition pos = ThumbStickPosition.getThumbstickPosition(ControlDevices.driveXbox, isYleftFlipped);
+        ThumbstickPosition pos = ThumbstickPosition.getThumbstickPosition(ControlDevices.driveXbox, isYleftFlipped);
         ArcadeMovement move = new ArcadeMovement(pos.leftForwardBackPosition, pos.leftSideToSidePosition, pos.rightSideToSidePosition);
         // Logger.info("Xbox Arcade Movement: " + pos.leftForwardBackPosition + ", " + pos.leftSideToSidePosition + ", " + pos.rightSideToSidePosition);
         return move;

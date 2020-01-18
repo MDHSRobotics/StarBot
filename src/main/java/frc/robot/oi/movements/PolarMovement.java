@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.brains.ControlStickBrain;
 import frc.robot.oi.positions.JoystickPosition;
-import frc.robot.oi.positions.ThumbStickPosition;
+import frc.robot.oi.positions.ThumbstickPosition;
 import frc.robot.oi.ControlDevices;
 import frc.robot.oi.ControlDevices.ControlStick;
 
@@ -60,7 +60,7 @@ public class PolarMovement {
     // Determines the polar movement (angle speed, angle degrees, rotation speed)
     // from the current xbox thumbstick positions
     public static PolarMovement getPolarMovementFromThumbsticks(XboxController xbox, boolean isYleftFlipped) {
-        ThumbStickPosition pos = ThumbStickPosition.getThumbstickPosition(xbox, isYleftFlipped);
+        ThumbstickPosition pos = ThumbstickPosition.getThumbstickPosition(xbox, isYleftFlipped);
         PolarMovement move = new PolarMovement(pos.leftForwardBackPosition, pos.leftSideToSidePosition, pos.rightSideToSidePosition);
         // Logger.info("Xbox Polar Movement: " + pos.leftForwardBackPosition + ", " + pos.leftSideToSidePosition + ", " + pos.rightSideToSidePosition);
         return move;

@@ -3,6 +3,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
+import frc.robot.commands.conveyor.*;
 import frc.robot.commands.lighter.*;
 import frc.robot.commands.roller.*;
 import frc.robot.commands.rollerarm.*;
@@ -10,6 +11,9 @@ import frc.robot.consoles.Logger;
 
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
+
+    // Conveyor
+    public static Convey convey;
 
     // Lighter
     public static CycleLights cycleLights;
@@ -27,6 +31,9 @@ public class BotCommands {
     // Initialize all robot commands
     public static void initializeCommands() {
         Logger.setup("Initializing BotCommands...");
+
+        // Conveyor
+        convey = new Convey(BotSubsystems.conveyor);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);

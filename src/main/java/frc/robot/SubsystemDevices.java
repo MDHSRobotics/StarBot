@@ -17,6 +17,7 @@ public class SubsystemDevices {
     public static Relay relayLighter = new Relay(1);
 
     // Motor Controllers
+    public static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
     public static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(1); // 1 motor
 
     // Compressors
@@ -32,8 +33,20 @@ public class SubsystemDevices {
     public static void initializeDevices() {
         Logger.setup("Initializing SubsystemDevices...");
 
+        initConveyorDevices();
         initRollerDevices();
         initRollerArmDevices();
+    }
+
+    // Conveyor
+    private static void initConveyorDevices() {
+        boolean talonSrxConveyorIsConnected = isConnected(talonSrxConveyor);
+
+        boolean talonsAreConnected = true;
+        if (!talonSrxConveyorIsConnected) {
+            talonsAreConnected = false;
+            Logger.error("Conveyor talon is not connected!");
+        }
     }
 
     // Roller
