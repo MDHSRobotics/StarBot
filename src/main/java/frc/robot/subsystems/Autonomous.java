@@ -10,12 +10,11 @@ public class Autonomous extends SubsystemBase {
     public Autonomous() {
         Logger.setup("Constructing Subsystem: Autonomous...");
     }
-    
+
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
     }
 
-   
-}
 
+}
