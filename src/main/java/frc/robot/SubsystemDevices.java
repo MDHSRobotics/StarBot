@@ -3,17 +3,18 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
 import frc.robot.consoles.Logger;
 
-// This class contains singleton instances of id mapped subsystem components, and utility methods.
-// IMPORTANT: It is imperative that ONLY subsystems control any interactive device.
+// This class contains singleton instances of id mapped subsystem components.
+// IMPORTANT:
+// It is imperative that ONLY subsystems control any interactive device.
 // Also, only ONE subsystem should control any given device.
+// If a device is not connected at initialization, it should be set to null.
 public class SubsystemDevices {
 
     // Relays
@@ -58,10 +59,10 @@ public class SubsystemDevices {
 
     // Differential Drive
     private static void initDiffDriverDevices() {
-        boolean talonFxDiffWheelFrontLeftIsConnected = isConnected(talonFxDiffWheelFrontLeft);
-        boolean talonFxDiffWheelFrontRightIsConnected = isConnected(talonFxDiffWheelFrontRight);
-        boolean talonFxDiffWheelRearLeftIsConnected = isConnected(talonFxDiffWheelRearLeft);
-        boolean talonFxDiffWheelRearRightIsConnected = isConnected(talonFxDiffWheelRearRight);
+        boolean talonFxDiffWheelFrontLeftIsConnected = DeviceUtils.isConnected(talonFxDiffWheelFrontLeft);
+        boolean talonFxDiffWheelFrontRightIsConnected = DeviceUtils.isConnected(talonFxDiffWheelFrontRight);
+        boolean talonFxDiffWheelRearLeftIsConnected = DeviceUtils.isConnected(talonFxDiffWheelRearLeft);
+        boolean talonFxDiffWheelRearRightIsConnected = DeviceUtils.isConnected(talonFxDiffWheelRearRight);
 
         boolean talonsAreConnected = true;
         if (!talonFxDiffWheelFrontLeftIsConnected) {
@@ -94,7 +95,7 @@ public class SubsystemDevices {
 
     // Roller
     private static void initRollerDevices() {
-        boolean talonSrxRollerIsConnected = isConnected(talonSrxRoller);
+        boolean talonSrxRollerIsConnected = DeviceUtils.isConnected(talonSrxRoller);
         if (!talonSrxRollerIsConnected) {
             talonSrxRoller = null;
             Logger.error("Roller talon is not connected! Disabling...");
@@ -103,25 +104,11 @@ public class SubsystemDevices {
 
     // Roller Arm
     private static void initRollerArmDevices() {
-        boolean m_compressorRollerArmIsNotConnected = compressorRollerArm.getCompressorNotConnectedFault();
-        if (m_compressorRollerArmIsNotConnected) {
+        boolean m_compressorRollerArmIsConnected = DeviceUtils.isConnected(compressorRollerArm);
+        if (!m_compressorRollerArmIsConnected) {
             compressorRollerArm = null;
             Logger.error("RollerArm compressor is not connected! Disabling...");
         }
-    }
-
-    // Determines if the Talon FX is connected
-    public static boolean isConnected(WPI_TalonFX talon) {
-        int firmVer = talon.getFirmwareVersion();
-        boolean connected = (firmVer != -1);
-        return connected;
-    }
-
-    // Determines if the Talon SRX is connected
-    public static boolean isConnected(WPI_TalonSRX talon) {
-        int firmVer = talon.getFirmwareVersion();
-        boolean connected = (firmVer != -1);
-        return connected;
     }
 
 }
