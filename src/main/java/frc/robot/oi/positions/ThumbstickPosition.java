@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.brains.XboxBrain;
+import frc.robot.consoles.Logger;
 
 // The position values obtained from Xbox Thumbsticks
 public class ThumbstickPosition {
@@ -20,7 +21,7 @@ public class ThumbstickPosition {
     public ThumbstickPosition(double leftForwardBack, double leftSideToSide, double rightForwardBack, double rightSideToSide) {
         leftForwardBackPosition = leftForwardBack;
         leftSideToSidePosition = leftSideToSide;
-        rightSideToSidePosition = rightForwardBack;
+        rightForwardBackPosition = rightForwardBack;
         rightSideToSidePosition = rightSideToSide;
     }
 
@@ -85,6 +86,7 @@ public class ThumbstickPosition {
         xRight = xRight * xRightSensitivity;
 
         ThumbstickPosition pos = new ThumbstickPosition(yLeft, xLeft, yRight, xRight);
+        Logger.info("yLeft: " + pos.leftForwardBackPosition + "; yRight: " + pos.rightForwardBackPosition);
         return pos;
     }
 

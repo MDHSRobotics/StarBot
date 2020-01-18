@@ -9,6 +9,7 @@ import frc.robot.subsystems.*;
 public class BotSubsystems {
 
     public static Conveyor conveyor;
+    public static DiffDriver diffDriver;
     public static Lighter lighter;
     public static Roller roller;
     public static RollerArm rollerArm;
@@ -18,6 +19,7 @@ public class BotSubsystems {
         Logger.setup("Initializing BotSubsystems...");
 
         conveyor = new Conveyor();
+        diffDriver = new DiffDriver();
         lighter = new Lighter();
         roller = new Roller();
         rollerArm = new RollerArm();
@@ -28,6 +30,9 @@ public class BotSubsystems {
         Logger.setup("Conveyor DefaultCommand -> Convey...");
         conveyor.setDefaultCommand(BotCommands.convey);
 
+        Logger.setup("DiffDriver DefaultCommand -> DriveDifferentialTank...");
+        diffDriver.setDefaultCommand(BotCommands.driveDifferentialTank);
+        
         Logger.setup("Lighter DefaultCommand -> CycleLights...");
         lighter.setDefaultCommand(BotCommands.cycleLights);
 
