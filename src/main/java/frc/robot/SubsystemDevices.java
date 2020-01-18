@@ -27,10 +27,10 @@ public class SubsystemDevices {
     public static Solenoid solenoidRollerArm = new Solenoid(0);
 
     // Motor Controllers
-    public static WPI_TalonFX talonFxDiffWheelFrontLeft = new WPI_TalonFX(6); // 1 motor
-    public static WPI_TalonFX talonFxDiffWheelRearLeft = new WPI_TalonFX(7); // 1 motor
-    public static WPI_TalonFX talonFxDiffWheelFrontRight = new WPI_TalonFX(5); // 1 motor
-    public static WPI_TalonFX talonFxDiffWheelRearRight = new WPI_TalonFX(8); // 1 motor
+    public static WPI_TalonFX talonFxDiffWheelFrontLeft = new WPI_TalonFX(12); // 1 motor
+    public static WPI_TalonFX talonFxDiffWheelRearLeft = new WPI_TalonFX(4); // 1 motor
+    public static WPI_TalonFX talonFxDiffWheelFrontRight = new WPI_TalonFX(14); // 1 motor
+    public static WPI_TalonFX talonFxDiffWheelRearRight = new WPI_TalonFX(13); // 1 motor
 
     public static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
     public static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15); // 1 motor
