@@ -105,6 +105,8 @@ public class SubsystemDevices {
     // Roller Arm
     private static void initRollerArmDevices() {
         boolean m_compressorRollerArmIsConnected = DeviceUtils.isConnected(compressorRollerArm);
+
+        //TODO: find a way to check if the PCM is connected
         if (!m_compressorRollerArmIsConnected) {
             compressorRollerArm = null;
             Logger.error("RollerArm compressor is not connected! Disabling...");
