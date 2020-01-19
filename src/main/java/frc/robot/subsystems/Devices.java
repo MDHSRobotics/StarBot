@@ -17,24 +17,36 @@ import frc.robot.DeviceUtils;
 // Device instances are package-private (neither private nor public) so they can only be used by subsystems.
 public class Devices {
 
-    // Relays
-    static Relay relayLighter = new Relay(1);
+    //////////////////////
+    // Device Instances //
+    //////////////////////
 
     // Pneumatics
     static Compressor compressorRollerArm = new Compressor(0);
     static Solenoid solenoidRollerArm = new Solenoid(0);
 
-    // Motor Controllers
-    static WPI_TalonFX talonFxDiffWheelFrontLeft = new WPI_TalonFX(12); // 1 motor
-    static WPI_TalonFX talonFxDiffWheelRearLeft = new WPI_TalonFX(4); // 1 motor
-    static WPI_TalonFX talonFxDiffWheelFrontRight = new WPI_TalonFX(14); // 1 motor
-    static WPI_TalonFX talonFxDiffWheelRearRight = new WPI_TalonFX(13); // 1 motor
+    // Relays
+    static Relay relayLighter = new Relay(1);
 
+    // TalonFX
+    static WPI_TalonFX talonFxDiffWheelFrontLeft = new WPI_TalonFX(12);
+    static WPI_TalonFX talonFxDiffWheelRearLeft = new WPI_TalonFX(4);
+    static WPI_TalonFX talonFxDiffWheelFrontRight = new WPI_TalonFX(14);
+    static WPI_TalonFX talonFxDiffWheelRearRight = new WPI_TalonFX(13);
+
+    // TalonSRX
     static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
-    static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15); // 1 motor
+    static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15);
 
-    // Drives
+    ////////////////////////
+    // Drive Declarations //
+    ////////////////////////
+
     static DifferentialDrive diffDrive;
+
+    /////////////////////
+    // Initializations //
+    /////////////////////
 
     // Intialize the subsystem devices
     public static void initializeDevices() {
