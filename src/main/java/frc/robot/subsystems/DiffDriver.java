@@ -4,7 +4,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.SubsystemDevices;
 
 // Differential driver subsystem
 public class DiffDriver extends SubsystemBase {
@@ -23,7 +22,7 @@ public class DiffDriver extends SubsystemBase {
         Logger.setup("Constructing Subsystem: DiffDriver...");
 
         // Determine whether or not to disable the subsystem
-        m_disabled = (SubsystemDevices.diffDrive == null);
+        m_disabled = (Devices.diffDrive == null);
         if (m_disabled) {
             Logger.error("DiffDriver devices not initialized! Disabling subsystem...");
             return;
@@ -32,17 +31,17 @@ public class DiffDriver extends SubsystemBase {
         // Configure the subsystem devices
         // TODO: Investigate why these motor controllers have to be inverted.
         //       Are all TalonFx Motor Controllers backwards?
-        SubsystemDevices.talonFxDiffWheelFrontLeft.setInverted(true);
-        SubsystemDevices.talonFxDiffWheelFrontRight.setInverted(true);
-        SubsystemDevices.talonFxDiffWheelRearLeft.setInverted(true);
-        SubsystemDevices.talonFxDiffWheelRearRight.setInverted(true);
-        SubsystemDevices.talonFxDiffWheelRearLeft.follow(SubsystemDevices.talonFxDiffWheelFrontLeft);
-        SubsystemDevices.talonFxDiffWheelRearRight.follow(SubsystemDevices.talonFxDiffWheelFrontRight);
+        Devices.talonFxDiffWheelFrontLeft.setInverted(true);
+        Devices.talonFxDiffWheelFrontRight.setInverted(true);
+        Devices.talonFxDiffWheelRearLeft.setInverted(true);
+        Devices.talonFxDiffWheelRearRight.setInverted(true);
+        Devices.talonFxDiffWheelRearLeft.follow(Devices.talonFxDiffWheelFrontLeft);
+        Devices.talonFxDiffWheelRearRight.follow(Devices.talonFxDiffWheelFrontRight);
 
-        SubsystemDevices.talonFxDiffWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-        SubsystemDevices.talonFxDiffWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-        SubsystemDevices.talonFxDiffWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-        SubsystemDevices.talonFxDiffWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+        Devices.talonFxDiffWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+        Devices.talonFxDiffWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+        Devices.talonFxDiffWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+        Devices.talonFxDiffWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
     }
 
     @Override
@@ -69,7 +68,7 @@ public class DiffDriver extends SubsystemBase {
     public void stop() {
         if (m_disabled) return;
 
-        SubsystemDevices.diffDrive.stopMotor();
+        Devices.diffDrive.stopMotor();
     }
 
     // Drive using the tank method
@@ -77,7 +76,7 @@ public class DiffDriver extends SubsystemBase {
         if (m_disabled) return;
 
         // Logger.info("Leftspeed = " + leftSpeed + "; Rightspeed = " + rightSpeed);
-        SubsystemDevices.diffDrive.tankDrive(leftSpeed, rightSpeed);
+        Devices.diffDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
 }

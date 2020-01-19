@@ -4,7 +4,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.SubsystemDevices;
 
 // Arm subsystem for the Roller, for raising and lowering the Roller
 public class RollerArm extends SubsystemBase {
@@ -19,16 +18,16 @@ public class RollerArm extends SubsystemBase {
         Logger.setup("Constructing Subsystem: RollerArm...");
 
         // Determine whether or not to disable the subsystem
-        m_disabled = (SubsystemDevices.compressorRollerArm == null ||
-                      SubsystemDevices.solenoidRollerArm == null);
+        m_disabled = (Devices.compressorRollerArm == null ||
+                      Devices.solenoidRollerArm == null);
         if (m_disabled) {
             Logger.error("RollerArm devices not initialized! Disabling subsystem...");
             return;
         }
 
         // Configure the subsystem devices
-        SubsystemDevices.compressorRollerArm.setClosedLoopControl(true);
-        SubsystemDevices.solenoidRollerArm.set(false);
+        Devices.compressorRollerArm.setClosedLoopControl(true);
+        Devices.solenoidRollerArm.set(false);
     }
 
     @Override
@@ -39,19 +38,19 @@ public class RollerArm extends SubsystemBase {
     // Get the current being used by the roller arm compressor
     public int getCurrent() {
         if (m_disabled) return 0;
-        return (int)SubsystemDevices.compressorRollerArm.getCompressorCurrent();
+        return (int)Devices.compressorRollerArm.getCompressorCurrent();
     }
 
     // Lower the roller arm
     public void lowerArm() {
         if (m_disabled) return;
-        SubsystemDevices.solenoidRollerArm.set(true);
+        Devices.solenoidRollerArm.set(true);
     }
 
     // Raise the roller arm
     public void raiseArm() {
         if (m_disabled) return;
-        SubsystemDevices.solenoidRollerArm.set(false);
+        Devices.solenoidRollerArm.set(false);
     }
 
     // Toggle the position of the roller arm

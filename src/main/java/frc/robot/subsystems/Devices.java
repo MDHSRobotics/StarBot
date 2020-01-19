@@ -1,5 +1,5 @@
 
-package frc.robot;
+package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -9,32 +9,32 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 
 import frc.robot.consoles.Logger;
+import frc.robot.DeviceUtils;
 
-// This class contains singleton instances of id mapped subsystem components.
-// IMPORTANT:
-// It is imperative that ONLY subsystems control any interactive device.
-// Also, only ONE subsystem should control any given device.
+// This class contains singleton (static) instances of id mapped subsystem components.
 // If a device is not connected at initialization, it should be set to null.
-public class SubsystemDevices {
+// IMPORTANT: Only ONE subsystem should control any given device.
+// Device instances are package-private (neither private nor public) so they can only be used by subsystems.
+public class Devices {
 
     // Relays
-    public static Relay relayLighter = new Relay(1);
+    static Relay relayLighter = new Relay(1);
 
     // Pneumatics
-    public static Compressor compressorRollerArm = new Compressor(0);
-    public static Solenoid solenoidRollerArm = new Solenoid(0);
+    static Compressor compressorRollerArm = new Compressor(0);
+    static Solenoid solenoidRollerArm = new Solenoid(0);
 
     // Motor Controllers
-    public static WPI_TalonFX talonFxDiffWheelFrontLeft = new WPI_TalonFX(12); // 1 motor
-    public static WPI_TalonFX talonFxDiffWheelRearLeft = new WPI_TalonFX(4); // 1 motor
-    public static WPI_TalonFX talonFxDiffWheelFrontRight = new WPI_TalonFX(14); // 1 motor
-    public static WPI_TalonFX talonFxDiffWheelRearRight = new WPI_TalonFX(13); // 1 motor
+    static WPI_TalonFX talonFxDiffWheelFrontLeft = new WPI_TalonFX(12); // 1 motor
+    static WPI_TalonFX talonFxDiffWheelRearLeft = new WPI_TalonFX(4); // 1 motor
+    static WPI_TalonFX talonFxDiffWheelFrontRight = new WPI_TalonFX(14); // 1 motor
+    static WPI_TalonFX talonFxDiffWheelRearRight = new WPI_TalonFX(13); // 1 motor
 
-    public static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
-    public static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15); // 1 motor
+    static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
+    static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15); // 1 motor
 
     // Drives
-    public static DifferentialDrive diffDrive;
+    static DifferentialDrive diffDrive;
 
     // Intialize the subsystem devices
     public static void initializeDevices() {
