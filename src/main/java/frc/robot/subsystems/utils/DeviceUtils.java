@@ -1,5 +1,5 @@
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.utils;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
