@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 
 import frc.robot.consoles.Logger;
-import frc.robot.DeviceUtils;
 
 // This class contains singleton (static) instances of id mapped subsystem components.
 // If a device is not connected at initialization, it should be set to null.
@@ -42,7 +41,7 @@ public class Devices {
     // Drive Declarations //
     ////////////////////////
 
-    static DifferentialDrive diffDrive;
+    public static DifferentialDrive diffDrive;
 
     /////////////////////
     // Initializations //
