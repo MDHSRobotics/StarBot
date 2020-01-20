@@ -4,7 +4,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.Constants.TalonConstants;
+import frc.robot.subsystems.constants.TalonConstants;
 
 // Conveyor subsystem, for delivering the balls to the shoot system
 public class Conveyor extends SubsystemBase {

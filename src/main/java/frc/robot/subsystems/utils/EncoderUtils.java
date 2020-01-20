@@ -1,11 +1,11 @@
 
 package frc.robot.subsystems.utils;
 
+import static frc.robot.subsystems.constants.EncoderConstants.*;
+
 import java.lang.Math;
 
-import static frc.robot.Constants.EncoderConstants.*;
-
-// Helper methods for encoder values.
+// Utility methods for encoder values.
 public class EncoderUtils {
 
     // Computes the encoder ticks based on the desired rotation in degrees for a given gearbox ratio
