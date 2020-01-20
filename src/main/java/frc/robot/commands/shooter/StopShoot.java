@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Shooter;
 
-// This command cycles through all the "lighter" states
+// This command deactivates the shoot mechanism
 public class StopShoot extends CommandBase {
 
     private Shooter m_shooter;

@@ -50,6 +50,10 @@ public class Shooter extends SubsystemBase {
                 TalonConstants.TIMEOUT_MS);
         SubsystemDevices.talonSRXShooterTopWheel.configContinuousCurrentLimit(TalonConstants.CONTINUOUS_AMPERAGE_LIMIT,
                 TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSRXShooterTopWheel.enableCurrentLimit(true);
+
+        SubsystemDevices.talonSRXShooterTopWheel.configVoltageCompSaturation(12);
+        SubsystemDevices.talonSRXShooterTopWheel.enableVoltageCompensation(true);
 
         SubsystemDevices.talonSRXShooterTopWheel.configNominalOutputForward(0);
         SubsystemDevices.talonSRXShooterTopWheel.configNominalOutputReverse(0);
@@ -86,6 +90,7 @@ public class Shooter extends SubsystemBase {
         SubsystemDevices.talonSRXShooterTopWheel.setSelectedSensorPosition(absolutePosition, EncoderConstants.PID_LOOP_PRIMARY,
                 TalonConstants.TIMEOUT_MS);
 
+        //-------------------------------------//
 
         // Configure TalonSRX BottomWheel device
         SubsystemDevices.talonSRXShooterBottomWheel.configFactoryDefault();
@@ -96,6 +101,10 @@ public class Shooter extends SubsystemBase {
                 TalonConstants.TIMEOUT_MS);
         SubsystemDevices.talonSRXShooterBottomWheel
                 .configContinuousCurrentLimit(TalonConstants.CONTINUOUS_AMPERAGE_LIMIT, TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSRXShooterBottomWheel.enableCurrentLimit(true);
+
+        SubsystemDevices.talonSRXShooterBottomWheel.configVoltageCompSaturation(12);
+        SubsystemDevices.talonSRXShooterBottomWheel.enableVoltageCompensation(true);
 
         SubsystemDevices.talonSRXShooterBottomWheel.configNominalOutputForward(0);
         SubsystemDevices.talonSRXShooterBottomWheel.configNominalOutputReverse(0);

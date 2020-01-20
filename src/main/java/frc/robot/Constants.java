@@ -29,7 +29,7 @@ public final class Constants {
 
     public static final class TalonConstants {
         // Number of miliseconds that the talon can stay at peak current.
-        public static final int PEAK_AMPERAGE_DURATION = 40;
+        public static final int PEAK_AMPERAGE_DURATION = 100;
 
         // Max amps that the talon can supply at peak.
         public static final int PEAK_AMPERAGE = 11;
