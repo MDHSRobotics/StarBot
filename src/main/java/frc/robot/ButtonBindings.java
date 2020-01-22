@@ -1,6 +1,8 @@
 
 package frc.robot;
 
+import java.util.ResourceBundle.Control;
+
 import frc.robot.consoles.Logger;
 import frc.robot.oi.ControlDevices;
 
@@ -22,13 +24,13 @@ public class ButtonBindings {
     public static void configureDriveXBoxButtons() {
         Logger.setup("Configure Buttons -> Drive Xbox Controller...");
 
-        ControlDevices.driveXboxBtnA.whenPressed(BotCommands.cycleLights);
-    }
+        ControlDevices.driveXboxBtnX.whenPressed(BotCommands.cycleLights);
 
-    // Configure "climb" xbox buttons
-    public static void configureClimbXboxButtons() {
-        Logger.setup("Configure Buttons -> Climb Xbox Controller...");
+        ControlDevices.driveXboxBtnA.whenPressed(BotCommands.toggleHook);
+        ControlDevices.driveXboxBtnB.whenPressed(BotCommands.toggleLegs);
+        ControlDevices.driveXboxBtnX.whileHeld(BotCommands.rollerForward);
+        ControlDevices.driveXboxBtnY.whileHeld(BotCommands.rollerReverse);
 
-        ControlDevices.climbXboxBtnA.whileHeld(BotCommands.standStop);
+
     }
 }

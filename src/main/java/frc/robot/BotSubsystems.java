@@ -23,6 +23,9 @@ public class BotSubsystems {
     public static void setDefaultCommands() {
         Logger.setup("Lighter DefaultCommand -> CycleLights...");
         lighter.setDefaultCommand(BotCommands.cycleLights);
+
+        Logger.setup("Lighter DefaultCommand -> CycleLights...");
+        climb.setDefaultCommand(BotCommands.standStop);
     }
 
 }

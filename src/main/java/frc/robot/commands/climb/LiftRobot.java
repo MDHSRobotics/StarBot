@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Climb;
 
-// This command starts the Climb motors
-public class StandForward extends CommandBase {
+// This command stops the Climb motors
+public class LiftRobot extends CommandBase {
 
     private Climb m_climb;
 
-    public StandForward(Climb climb) {
-        Logger.setup("Constructing Command: StandForward...");
+    public LiftRobot(Climb climb) {
+        Logger.setup("Constructing Command: LiftRobot...");
 
         // Add given subsystem requirements
         m_climb = climb;
@@ -21,12 +21,14 @@ public class StandForward extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: StandForward...");
+        Logger.action("Initializing Command: LiftRobot...");
+
+        m_climb.liftRobot();
     }
 
     @Override
     public void execute() {
-        m_climb.standForward();
+
     }
 
     // This command continues until interrupted
@@ -39,9 +41,9 @@ public class StandForward extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: StandForward...");
+            Logger.ending("Interrupting Command: LiftRobot...");
         } else {
-            Logger.ending("Ending Command: StandForward...");
+            Logger.ending("Ending Command: LiftRobot...");
         }
 
         m_climb.stop();

@@ -56,10 +56,6 @@ public class ControlDevices {
     public static final DPadButton driveXboxBtnDpadDownLeft = new DPadButton(driveXbox, Direction.DOWN_LEFT);
     public static final DPadButton driveXboxBtnDpadDownRight = new DPadButton(driveXbox, Direction.DOWN_RIGHT);
 
-    // Xbox Controller - Climb
-    public static final XboxController climbXbox = new XboxController(CLIMB_XBOX_STICK_NUM);
-    public static final JoystickButton climbXboxBtnA = new JoystickButton(climbXbox, 1);
-
 
     // Determine if a given stick is connected
     public static boolean isStickConnected(int stickNumber) {
@@ -71,5 +67,9 @@ public class ControlDevices {
     public static boolean isDriveXboxConnected() {
         return isStickConnected(DRIVE_XBOX_STICK_NUM);
     }
+
+	public static boolean isCLimbXboxConnected() {
+		return isStickConnected(CLIMB_XBOX_STICK_NUM);
+	}
 
 }

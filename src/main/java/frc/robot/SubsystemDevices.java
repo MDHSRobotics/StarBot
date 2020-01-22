@@ -20,10 +20,11 @@ public class SubsystemDevices {
     // Motor Controllers
     // TODO: Add the appropriate motor controllers
     public static CANSparkMax sparkMaxClimbArm = new CANSparkMax(1, MotorType.kBrushless);
-    public static CANSparkMax sparkMaxClimbStandOne = new CANSparkMax(2, MotorType.kBrushless);
+    public static CANSparkMax sparkMaxClimbRoller = new CANSparkMax(2, MotorType.kBrushless);
     public static CANSparkMax sparkMaxClimbStandTwo = new CANSparkMax(3, MotorType.kBrushless);
     public static CANSparkMax sparkMaxClimbStandThree = new CANSparkMax(4, MotorType.kBrushless);
     public static CANSparkMax sparkMaxClimbStandFour = new CANSparkMax(5, MotorType.kBrushless);
+    public static CANSparkMax sparkMaxClimbHook = new CANSparkMax(6, MotorType.kBrushless);
 
     // Drives
     // TODO: Add the appropriate drives
