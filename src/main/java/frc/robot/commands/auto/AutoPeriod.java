@@ -4,12 +4,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 
 import frc.robot.consoles.Logger;
+import frc.robot.sensors.Gyro;
 import frc.robot.subsystems.Autonomous;
+import frc.robot.subsystems.DiffDriver;
 
 public class AutoPeriod extends CommandBase {
 
     private Autonomous m_autonomous;
     // private DiffDriver m_autoDiffDriver;
+
+    private DiffDriver m_diffDriver; // robot drive system
+    private Gyro gyro;
 
     private Timer m_timer = new Timer();
     private double m_timeLastPrinted = 0.0;
@@ -52,6 +57,12 @@ public class AutoPeriod extends CommandBase {
         // TankMovement move = TankMovement.getTankMovement(m_autoDiffDriver.controlStickDirectionFlipped);
         // m_autoDiffDriver.driveTank(move.leftSpeed, move.rightSpeed);
 
+//         while (isAutonomous() && isEnabled()) {
+//              double angle = gyro.get();
+//              myDrive.arcadeDrive(-1.0, -angle * Kp);
+//              Timer.delay(0.01);
+//          }
+
     }
 
     // This command continues until it MAX_DRIVE_SECONDS is reached
@@ -79,43 +90,3 @@ public class AutoPeriod extends CommandBase {
     }
 }
 
-/*
-private DiffDriver m_diffDriver;
-
-    public DriveDifferentialTank(DiffDriver diffDriver) {
-        Logger.setup("Constructing Command: DriveDifferentialTank...");
-
-        // Add given subsystem requirements
-        m_diffDriver = diffDriver;
-        addRequirements(m_diffDriver);
-    }
-
-    @Override
-    public void initialize() {
-        Logger.action("Initializing Command: DriveDifferentialTank...");
-    }
-
-    @Override
-    public void execute() {
-        TankMovement move = TankMovement.getTankMovement(m_diffDriver.controlStickDirectionFlipped);
-        m_diffDriver.driveTank(move.leftSpeed, move.rightSpeed);
-    }
-
-    // This command continues until interrupted.
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        if (interrupted) {
-            System.out.println("--");
-            Logger.ending("Interrupting Command: DriveDifferentialTank...");
-        } else {
-            Logger.ending("Ending Command: DriveDifferentialTank...");
-        }
-    }
-
-}
-*/

@@ -84,4 +84,15 @@ public class DiffDriver extends SubsystemBase {
         diffDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
+    // Test drive: move forward
+    public void moveForwardAuto() {
+//    while (isAutonomous()) {
+//      double angle = gyro.get(); // get current heading
+//      myRobot.drive(-1.0, -angle*Kp); // drive towards heading 0
+//      Timer.delay(0.004);
+//    }
+//
+//   myRobot.drive(0.0, 0.0);
+//
+    }
 }
