@@ -22,11 +22,11 @@ public class Shooter extends SubsystemBase {
     private final double GEAR_RATIO = 1;
 
     // Encoder constants
-    private final boolean SENSOR_PHASE_TOP = false; // So that Talon does not report sensor out of phase
-    private final boolean MOTOR_INVERT_TOP = false; // Which direction you want to be positive; this does not affect motor invert
+    private final boolean SENSOR_PHASE_TOP = true; // So that Talon does not report sensor out of phase
+    private final boolean MOTOR_INVERT_TOP = true; // Which direction you want to be positive; this does not affect motor invert
 
-    private final boolean SENSOR_PHASE_BOTTOM = true; // So that Talon does not report sensor out of phase
-    private final boolean MOTOR_INVERT_BOTTOM = true; // Which direction you want to be positive; this does not affect motor invert
+    private final boolean SENSOR_PHASE_BOTTOM = false; // So that Talon does not report sensor out of phase
+    private final boolean MOTOR_INVERT_BOTTOM = false; // Which direction you want to be positive; this does not affect motor invert
 
     // If not all the talons are initialized, this should be true
     private boolean m_disabled = false;
@@ -68,13 +68,13 @@ public class Shooter extends SubsystemBase {
                 EncoderConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
         SubsystemDevices.talonSRXShooterTopWheel.setSensorPhase(SENSOR_PHASE_TOP);
         SubsystemDevices.talonSRXShooterTopWheel.setInverted(MOTOR_INVERT_TOP);
-        SubsystemDevices.talonSRXShooterTopWheel.configAllowableClosedloopError(0, EncoderConstants.PID_LOOP_PRIMARY,
+        SubsystemDevices.talonSRXShooterTopWheel.configAllowableClosedloopError(0, EncoderConstants.PID_SLOT_0,
                 TalonConstants.TIMEOUT_MS);
 
-        SubsystemDevices.talonSRXShooterTopWheel.config_kF(EncoderConstants.PID_LOOP_PRIMARY, 0.7, TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSRXShooterTopWheel.config_kP(EncoderConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSRXShooterTopWheel.config_kI(EncoderConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSRXShooterTopWheel.config_kD(EncoderConstants.PID_LOOP_PRIMARY, 0.0, TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSRXShooterTopWheel.config_kF(EncoderConstants.PID_SLOT_0, 0.7, TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSRXShooterTopWheel.config_kP(EncoderConstants.PID_SLOT_0, 0.0, TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSRXShooterTopWheel.config_kI(EncoderConstants.PID_SLOT_0, 0.0, TalonConstants.TIMEOUT_MS);
+        SubsystemDevices.talonSRXShooterTopWheel.config_kD(EncoderConstants.PID_SLOT_0, 0.0, TalonConstants.TIMEOUT_MS);
 
         // Initialize current encoder position as zero
         SubsystemDevices.talonSRXShooterTopWheel.setSelectedSensorPosition(0, EncoderConstants.PID_LOOP_PRIMARY,
@@ -119,16 +119,16 @@ public class Shooter extends SubsystemBase {
                 EncoderConstants.PID_LOOP_PRIMARY, TalonConstants.TIMEOUT_MS);
         SubsystemDevices.talonSRXShooterBottomWheel.setSensorPhase(SENSOR_PHASE_BOTTOM);
         SubsystemDevices.talonSRXShooterBottomWheel.setInverted(MOTOR_INVERT_BOTTOM);
-        SubsystemDevices.talonSRXShooterBottomWheel.configAllowableClosedloopError(0, EncoderConstants.PID_LOOP_PRIMARY,
+        SubsystemDevices.talonSRXShooterBottomWheel.configAllowableClosedloopError(0, EncoderConstants.PID_SLOT_0,
                 TalonConstants.TIMEOUT_MS);
 
-        SubsystemDevices.talonSRXShooterBottomWheel.config_kF(EncoderConstants.PID_LOOP_PRIMARY, 0.7,
+        SubsystemDevices.talonSRXShooterBottomWheel.config_kF(EncoderConstants.PID_SLOT_0, 0.7,
                 TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSRXShooterBottomWheel.config_kP(EncoderConstants.PID_LOOP_PRIMARY, 0.0,
+        SubsystemDevices.talonSRXShooterBottomWheel.config_kP(EncoderConstants.PID_SLOT_0, 0.0,
                 TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSRXShooterBottomWheel.config_kI(EncoderConstants.PID_LOOP_PRIMARY, 0.0,
+        SubsystemDevices.talonSRXShooterBottomWheel.config_kI(EncoderConstants.PID_SLOT_0, 0.0,
                 TalonConstants.TIMEOUT_MS);
-        SubsystemDevices.talonSRXShooterBottomWheel.config_kD(EncoderConstants.PID_LOOP_PRIMARY, 0.0,
+        SubsystemDevices.talonSRXShooterBottomWheel.config_kD(EncoderConstants.PID_SLOT_0, 0.0,
                 TalonConstants.TIMEOUT_MS);
 
         // Initialize current encoder position as zero
@@ -167,7 +167,9 @@ public class Shooter extends SubsystemBase {
 
         if (m_disabled)
             return;
-        SubsystemDevices.talonSRXShooterTopWheel.set(ControlMode.Velocity, 1000);
+        SubsystemDevices.talonSRXShooterTopWheel.set(ControlMode.Velocity, 1500);
+
+        Logger.info("------SPINTOPWHEEL IS BEING CALLED");
     }
 
     // Spin the bottom Shooter wheel
@@ -178,7 +180,9 @@ public class Shooter extends SubsystemBase {
 
         if (m_disabled)
             return;
-        SubsystemDevices.talonSRXShooterBottomWheel.set(ControlMode.Velocity, 1000);
+        SubsystemDevices.talonSRXShooterBottomWheel.set(ControlMode.Velocity, 1500);
+
+        Logger.info("------SPINBOTTOMWHEEL IS BEING CALLED");
     }
 
     // Get the current Shooter TopWheel motor velocity
@@ -202,8 +206,8 @@ public class Shooter extends SubsystemBase {
     public void testMotor() {
         if (m_disabled)
             return;
-        SubsystemDevices.talonSRXShooterTopWheel.set(0.2);
-        SubsystemDevices.talonSRXShooterBottomWheel.set(0.2);
+        SubsystemDevices.talonSRXShooterTopWheel.set(-0.2);
+        SubsystemDevices.talonSRXShooterBottomWheel.set(-0.2);
 
     }
 

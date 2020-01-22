@@ -17,7 +17,7 @@ public class SubsystemDevices {
     // Motor Controllers
     // TODO: Add the appropriate motor controllers
     public static WPI_TalonSRX talonSRXShooterTopWheel = new WPI_TalonSRX(15);
-    public static WPI_TalonSRX talonSRXShooterBottomWheel = new WPI_TalonSRX(15);
+    public static WPI_TalonSRX talonSRXShooterBottomWheel = new WPI_TalonSRX(11);
 
     // Drives
     // TODO: Add the appropriate drives
