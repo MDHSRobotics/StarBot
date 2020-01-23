@@ -50,7 +50,7 @@ public class Devices {
 
     // Intialize the subsystem devices
     public static void initializeDevices() {
-        Logger.setup("Initializing SubsystemDevices...");
+        Logger.setup("Initializing subsystem Devices...");
 
         initConveyorDevices();
         initDiffDriverDevices();

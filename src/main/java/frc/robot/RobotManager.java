@@ -40,7 +40,7 @@ public class RobotManager {
 
     // It is important that the robot be initialized in exactly this order.
     public static void initialize() {
-        Logger.setup("Initializing BotManager...");
+        Logger.setup("Initializing RobotManager...");
 
         // Initialize subsystem Devices
         Devices.initializeDevices();
