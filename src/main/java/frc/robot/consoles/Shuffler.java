@@ -17,6 +17,7 @@ public class Shuffler {
     private InputsTab m_inputsTab;
     private DriveTab m_driveTab;
     private RollerArmTab m_rollerArmTab;
+    LimelightTab m_limelightTab;
     private RollerTab m_rollerTab;
     private ShooterTab m_shooterTab;
     private ClimbHookTab m_climbHookTab;
@@ -31,6 +32,7 @@ public class Shuffler {
         m_inputsTab = new InputsTab();
         m_driveTab = new DriveTab();
         m_rollerArmTab = new RollerArmTab();
+        m_limelightTab = new LimelightTab();
         m_rollerTab = new RollerTab();
         m_shooterTab = new ShooterTab();
         m_climbHookTab = new ClimbHookTab();

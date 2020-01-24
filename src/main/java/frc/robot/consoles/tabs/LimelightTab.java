@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 
 import frc.robot.brains.LimelightBrain;
 import frc.robot.consoles.ShuffleLogger;
-import frc.robot.BotSubsystems;
 
 // The Shuffleboard RollerArm Tab
 public class LimelightTab {
@@ -14,7 +13,9 @@ public class LimelightTab {
     private ShuffleboardTab m_tab;
 
     // Properties
-    private SimpleWidget m_limelightWidget;
+    private SimpleWidget m_limelightWidgetX;
+    private SimpleWidget m_limelightWidgetY;
+    private SimpleWidget m_limelightWidgetArea;
 
     // Constructor
     public LimelightTab() {
@@ -25,12 +26,9 @@ public class LimelightTab {
 
     // Create Brain Widgets
     public void preInitialize() {
-        m_limelightWidget = m_tab.add("Limelight X", LimelightBrain.x);
-        m_limelightWidget = m_tab.add("Limelight Y", LimelightBrain.y);
-        m_limelightWidget = m_tab.add("Limelight Area", LimelightBrain.area);
-        LimelightBrain.tx = m_limelightWidget.getEntry();
-        LimelightBrain.ty = m_limelightWidget.getEntry();
-        LimelightBrain.ta = m_limelightWidget.getEntry();
+        m_limelightWidgetX = m_tab.add("tx", LimelightBrain.x);
+        m_limelightWidgetY = m_tab.add("ty", LimelightBrain.y);
+        m_limelightWidgetArea = m_tab.add("ta", LimelightBrain.area);
     }
 
     // Create all other Widgets
@@ -39,7 +37,9 @@ public class LimelightTab {
 
     // Configure all Widgets
     public void configure() {
-        m_limelightWidget.withPosition(0, 1);
+        m_limelightWidgetX.withPosition(1, 0);
+        m_limelightWidgetY.withPosition(2, 0);
+        m_limelightWidgetArea.withPosition(3, 0);
     }
 
     // This will be called in the robotPeriodic
@@ -47,6 +47,7 @@ public class LimelightTab {
         LimelightBrain.setXOffset();
         LimelightBrain.setYOffset();
         LimelightBrain.setArea();
+
     }
 
 }
