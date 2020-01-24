@@ -27,6 +27,7 @@ public class AutoPeriod extends CommandBase {
     public void initialize() {
         Logger.action("Initializing Command: AutoPeriod...");
 
+        Timer.delay(0.004); // to avoid robots from starting at the same time
         m_timer.reset();
         m_timer.start();
     }

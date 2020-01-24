@@ -89,6 +89,5 @@ public class DiffDriver extends SubsystemBase {
     // Test drive: move forward
     public void moveForwardAuto() {
         diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
-        Timer.delay(0.004);
     }
 }
