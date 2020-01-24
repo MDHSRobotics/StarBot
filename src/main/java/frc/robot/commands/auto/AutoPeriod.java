@@ -4,38 +4,31 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.Autonomous;
 import frc.robot.subsystems.DiffDriver;
 
 public class AutoPeriod extends CommandBase {
 
-    private DiffDriver m_autoDiffDriver;
-    private Autonomous m_autonomous;
+    private DiffDriver m_diffDriver;
 
     private Timer m_timer = new Timer();
     private double m_timeLastPrinted = 0.0;
 
     private static final double MAX_DRIVE_SECONDS = 5.0;
 
-    public AutoPeriod(Autonomous autonomous) {
+    public AutoPeriod(DiffDriver diffDriver) {
         Logger.setup("Constructing Command: AutoPeriod...");
 
         // Add given subsystem requirements
-        m_autonomous = autonomous;
-        addRequirements(m_autonomous);
-
-        // DiffDriver();
-        // DriveDifferentialTank(m_autoDiffDriver.getDiffDriver);
+        m_diffDriver = diffDriver;
+        addRequirements(m_diffDriver);
     }
 
     @Override
     public void initialize() {
         Logger.action("Initializing Command: AutoPeriod...");
-        // Logger.action("Initializing Command: DriveDifferentialTank...");
 
         m_timer.reset();
         m_timer.start();
-
     }
 
     @Override
@@ -47,7 +40,7 @@ public class AutoPeriod extends CommandBase {
             Logger.action("AutoPeriod: -> Moved Forward for " + currentTime);
             m_timeLastPrinted = currentTime;
         }
-        m_autoDiffDriver.moveForwardAuto();
+        m_diffDriver.moveForwardAuto();
     }
 
     // This command continues until it MAX_DRIVE_SECONDS is reached
@@ -66,12 +59,12 @@ public class AutoPeriod extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        // if (interrupted) {
-        //     System.out.println("--");
-        //     Logger.ending("Interrupting Command: DriveDifferentialTank...");
-        // } else {
-        //     Logger.ending("Ending Command: DriveDifferentialTank...");
-        // }
+        if (interrupted) {
+            System.out.println("--");
+            Logger.ending("Interrupting Command: AutoPeriod...");
+        } else {
+            Logger.ending("Ending Command: AutoPeriod...");
+        }
     }
 }
 

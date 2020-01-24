@@ -13,7 +13,6 @@ public class BotSubsystems {
     public static Lighter lighter;
     public static Roller roller;
     public static RollerArm rollerArm;
-    public static Autonomous autonomous; 
 
     // Initialize all robot subsystems
     public static void initializeSubsystems() {
@@ -24,7 +23,6 @@ public class BotSubsystems {
         lighter = new Lighter();
         roller = new Roller();
         rollerArm = new RollerArm();
-        autonomous = new Autonomous(); 
     }
 
     // Set all the subsystem default commands
@@ -34,15 +32,12 @@ public class BotSubsystems {
 
         Logger.setup("DiffDriver DefaultCommand -> DriveDifferentialTank...");
         diffDriver.setDefaultCommand(BotCommands.driveDifferentialTank);
-        
+
         Logger.setup("Lighter DefaultCommand -> CycleLights...");
         lighter.setDefaultCommand(BotCommands.cycleLights);
 
         Logger.setup("Roller DefaultCommand -> RollerStop...");
         roller.setDefaultCommand(BotCommands.rollerStop);
-
-        Logger.setup("Autonomous DefaultCammand -> AutoPeriod...");
-        autonomous.setDefaultCommand(BotCommands.autoPeriod); 
     }
 
 }
