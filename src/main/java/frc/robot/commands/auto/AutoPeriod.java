@@ -4,17 +4,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 
 import frc.robot.consoles.Logger;
-import frc.robot.sensors.Gyro;
 import frc.robot.subsystems.Autonomous;
 import frc.robot.subsystems.DiffDriver;
 
 public class AutoPeriod extends CommandBase {
 
+    private DiffDriver m_autoDiffDriver;
     private Autonomous m_autonomous;
-    // private DiffDriver m_autoDiffDriver;
-
-    private DiffDriver m_diffDriver; // robot drive system
-    private Gyro gyro;
 
     private Timer m_timer = new Timer();
     private double m_timeLastPrinted = 0.0;
@@ -51,18 +47,7 @@ public class AutoPeriod extends CommandBase {
             Logger.action("AutoPeriod: -> Moved Forward for " + currentTime);
             m_timeLastPrinted = currentTime;
         }
-
-       // m_autonomous.moveForwardAuto(); // drive forwards
-
-        // TankMovement move = TankMovement.getTankMovement(m_autoDiffDriver.controlStickDirectionFlipped);
-        // m_autoDiffDriver.driveTank(move.leftSpeed, move.rightSpeed);
-
-//         while (isAutonomous() && isEnabled()) {
-//              double angle = gyro.get();
-//              myDrive.arcadeDrive(-1.0, -angle * Kp);
-//              Timer.delay(0.01);
-//          }
-
+        m_autoDiffDriver.moveForwardAuto();
     }
 
     // This command continues until it MAX_DRIVE_SECONDS is reached

@@ -7,9 +7,11 @@ import frc.robot.consoles.Logger;
 // Lighter subsystem, for turning lights on and off.
 public class Autonomous extends SubsystemBase {
 
-    //private boolean m_autoDriveDisabled;
+    // private boolean m_autoDriveDisabled;
 
-    public Autonomous() {
+    public static final String DiffDriver = null;
+
+	public Autonomous() {
         Logger.setup("Constructing Subsystem: Autonomous...");
     }
 
@@ -18,12 +20,12 @@ public class Autonomous extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // public void stopDrive() {
+    public void stopDrive() {
     //     if (m_autoDriveDisabled.getDiffDriver) {
     //         SubsystemDevices.diffDrive.feed();
     //         return;
     //     }
 
     //     SubsystemDevices.diffDrive.stopMotor();
-    // }
+    }
 }

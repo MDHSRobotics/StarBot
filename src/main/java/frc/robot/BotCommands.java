@@ -14,6 +14,9 @@ import frc.robot.consoles.Logger;
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
 
+    // Autonomous
+    public static AutoPeriod autoPeriod;
+
     // Conveyor
     public static Convey convey;
 
@@ -22,7 +25,6 @@ public class BotCommands {
 
     // Lighter
     public static CycleLights cycleLights;
-	public static AutoPeriod autoPeriod;
 
     // Roller
     public static SpinRoller rollerSpin;

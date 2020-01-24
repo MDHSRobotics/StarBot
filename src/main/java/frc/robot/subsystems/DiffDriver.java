@@ -2,6 +2,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.Timer;
 
 import frc.robot.consoles.Logger;
 import static frc.robot.subsystems.Devices.diffDrive;
@@ -19,6 +20,7 @@ public class DiffDriver extends SubsystemBase {
     // Motor constants
     private final double SECONDS_FROM_NEUTRAL_TO_FULL = 0;
     private final int TIMEOUT_MS = 10;
+    private final double AUTO_PERIOD_SPEED = 0.5;
 
     // If any of the devices are null, this should be true
     private boolean m_disabled = false;
@@ -86,13 +88,7 @@ public class DiffDriver extends SubsystemBase {
 
     // Test drive: move forward
     public void moveForwardAuto() {
-//    while (isAutonomous()) {
-//      double angle = gyro.get(); // get current heading
-//      myRobot.drive(-1.0, -angle*Kp); // drive towards heading 0
-//      Timer.delay(0.004);
-//    }
-//
-//   myRobot.drive(0.0, 0.0);
-//
+        diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
+        Timer.delay(0.004);
     }
 }
