@@ -2,7 +2,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.Timer;
 
 import frc.robot.consoles.Logger;
 import static frc.robot.subsystems.Devices.diffDrive;
