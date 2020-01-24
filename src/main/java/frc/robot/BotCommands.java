@@ -22,6 +22,7 @@ public class BotCommands {
 
     // DiffDriver
     public static DriveDifferentialTank driveDifferentialTank;
+    public static AlignDiffDriveToGyro alignDiffDriveToGyro;
 
     // Lighter
     public static CycleLights cycleLights;
@@ -47,6 +48,8 @@ public class BotCommands {
 
         // DiffDriver
         driveDifferentialTank = new DriveDifferentialTank(BotSubsystems.diffDriver);
+        alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver);
+
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);
