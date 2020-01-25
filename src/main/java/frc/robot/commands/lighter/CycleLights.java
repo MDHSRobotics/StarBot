@@ -20,7 +20,7 @@ public class CycleLights extends CommandBase {
     private Timer m_timer = new Timer();
 
     public CycleLights(Lighter lighter) {
-        // Logger.setup("Constructing Command: CycleLights...");
+        Logger.setup("Constructing Command: CycleLights...");
 
         // Add given subsystem requirements
         m_lighter = lighter;
@@ -81,7 +81,7 @@ public class CycleLights extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            // Logger.ending("Interrupting Command: CycleLights...");
+            Logger.ending("Interrupting Command: CycleLights...");
         } else {
             // Logger.ending("Ending Command: CycleLights...");
         }

@@ -1,9 +1,9 @@
 
-package frc.robot;
+package frc.robot.subsystems.utils;
+
+import static frc.robot.subsystems.constants.EncoderConstants.*;
 
 import java.lang.Math;
-
-import static frc.robot.Constants.EncoderConstants.*;
 
 // Helper methods for encoder values.
 public class EncoderUtils {
