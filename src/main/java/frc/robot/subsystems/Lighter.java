@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
+
 import static frc.robot.subsystems.Devices.relayLighter;
 
 // Lighter subsystem, for turning lights on and off.

@@ -8,14 +8,14 @@ import frc.robot.oi.ControlDevices;
 import frc.robot.oi.DPadButton;
 import frc.robot.subsystems.DiffDriver;
 
-// Automatically control the diffDrive to align the Robot with the gyro, and the line seen by the vision system
+// Automatically control the DiffDrive to align the Robot with the gyro.
 public class AlignDiffDriveToGyro extends CommandBase {
 
     private DiffDriver m_diffDriver;
     private int m_targetAngle = -1;
 
     public AlignDiffDriveToGyro(DiffDriver diffDriver) {
-        Logger.setup("Constructing Command: AligndiffDriveToGyro...");
+        Logger.setup("Constructing Command: AlignDiffDriveToGyro...");
 
         // Add given subsystem requirements
         m_diffDriver = diffDriver;
@@ -25,7 +25,7 @@ public class AlignDiffDriveToGyro extends CommandBase {
     @Override
     public void initialize() {
         System.out.println("--");
-        Logger.action("Initializing Command: AligndiffDriveToGyro...");
+        Logger.action("Initializing Command: AlignDiffDriveToGyro...");
 
         m_targetAngle = DPadButton.getDpadAngleForGyro(ControlDevices.driveXbox);
     }
@@ -47,9 +47,9 @@ public class AlignDiffDriveToGyro extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: AligndiffDriveToGyro...");
+            Logger.ending("Interrupting Command: AlignDiffDriveToGyro...");
         } else {
-            Logger.ending("Ending Command: AligndiffDriveToGyro...");
+            Logger.ending("Ending Command: AlignDiffDriveToGyro...");
         }
     }
 

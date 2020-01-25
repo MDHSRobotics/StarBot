@@ -25,11 +25,10 @@ public class Shuffler {
 
         m_mainTab = new MainTab();
         m_inputsTab = new InputsTab();
-        m_debugTab = new DebugTab();
+        m_driveTab = new DriveTab();
         m_rollerTab = new RollerTab();
         m_rollerArmTab = new RollerArmTab();
-        m_driveTab = new DriveTab();
-
+        m_debugTab = new DebugTab();
     }
 
     public void preInitialize() {
@@ -37,11 +36,10 @@ public class Shuffler {
 
         m_mainTab.preInitialize();
         m_inputsTab.preInitialize();
-        m_debugTab.preInitialize();
+        m_driveTab.preInitialize();
         m_rollerTab.preInitialize();
         m_rollerArmTab.preInitialize();
-        m_driveTab.preInitialize();
-
+        m_debugTab.preInitialize();
     }
 
     public void initialize() {
@@ -49,10 +47,10 @@ public class Shuffler {
 
         m_mainTab.initialize();
         m_inputsTab.initialize();
-        m_debugTab.initialize();
+        m_driveTab.initialize();
         m_rollerTab.initialize();
         m_rollerArmTab.initialize();
-        m_driveTab.initialize();
+        m_debugTab.initialize();
     }
 
     public void configure() {
@@ -60,10 +58,10 @@ public class Shuffler {
 
         m_mainTab.configure();
         m_inputsTab.configure();
-        m_debugTab.configure();
+        m_driveTab.configure();
         m_rollerTab.configure();
         m_rollerArmTab.configure();
-        m_driveTab.configure();
+        m_debugTab.configure();
 
         setupSmartdashboard();
     }
@@ -71,18 +69,16 @@ public class Shuffler {
     public void update() {
         m_mainTab.update();
         m_inputsTab.update();
-        m_debugTab.update();
+        m_driveTab.update();
         m_rollerTab.update();
         m_rollerArmTab.update();
-        m_driveTab.update();
+        m_debugTab.update();
     }
 
-    // This is for stuff that can't be displayed easily in custom Shuffleboard tabs
-    // Will end up on the SmartDashboard tab
+    // This is for stuff that can't be displayed easily in custom Shuffleboard tabs.
+    // It will end up on the SmartDashboard tab.
     private void setupSmartdashboard() {
-
         // SmartDashboard.putData("Command Scheduler",Scheduler.getInstance());
-
     }
 
 }

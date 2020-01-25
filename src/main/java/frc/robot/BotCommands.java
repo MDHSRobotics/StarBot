@@ -21,8 +21,8 @@ public class BotCommands {
     public static Convey convey;
 
     // DiffDriver
-    public static DriveDifferentialTank driveDifferentialTank;
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
+    public static DriveDifferentialTank driveDifferentialTank;
 
     // Lighter
     public static CycleLights cycleLights;
@@ -47,9 +47,8 @@ public class BotCommands {
         convey = new Convey(BotSubsystems.conveyor);
 
         // DiffDriver
-        driveDifferentialTank = new DriveDifferentialTank(BotSubsystems.diffDriver);
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver);
-
+        driveDifferentialTank = new DriveDifferentialTank(BotSubsystems.diffDriver);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);
