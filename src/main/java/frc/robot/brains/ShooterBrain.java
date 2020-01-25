@@ -1,3 +1,4 @@
+
 package frc.robot.brains;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -10,15 +11,15 @@ public class ShooterBrain {
     // Default Values //
     //----------------//
 
-    public static double shootTopWheelVelocityDefault = 1;
     public static double shootBottomWheelVelocityDefault = 1;
+    public static double shootTopWheelVelocityDefault = 1;
 
     //---------------------//
     // NetworkTableEntries //
     //---------------------//
 
-    public static NetworkTableEntry shootTopWheelVelocityEntry;
     public static NetworkTableEntry shootBottomWheelVelocityEntry;
+    public static NetworkTableEntry shootTopWheelVelocityEntry;
 
     //---------//
     // Setters //
@@ -28,12 +29,12 @@ public class ShooterBrain {
     // Getters //
     //---------//
 
-    public static double getTopWheelVelocity() {
-        return shootTopWheelVelocityEntry.getDouble(shootTopWheelVelocityDefault);
-    }
-
     public static double getBottomWheelVelocity() {
         return shootBottomWheelVelocityEntry.getDouble(shootBottomWheelVelocityDefault);
+    }
+
+    public static double getTopWheelVelocity() {
+        return shootTopWheelVelocityEntry.getDouble(shootTopWheelVelocityDefault);
     }
 
 }
