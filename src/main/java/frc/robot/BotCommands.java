@@ -28,6 +28,15 @@ public class BotCommands {
     // Lighter
     public static CycleLights cycleLights;
 
+    // Roller
+    public static SpinRoller rollerSpin;
+    public static StopRoller rollerStop;
+
+    // RollerArm
+    public static LowerRollerArm lowerRollerArm;
+    public static RaiseRollerArm raiseRollerArm;
+    public static ToggleRollerArm toggleRollerArm;
+
     // Shooter
     public static Shoot shoot;
     public static StopShoot stopShoot;

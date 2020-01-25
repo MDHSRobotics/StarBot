@@ -138,7 +138,10 @@ public class Devices {
         }
     }
 
+    // Shooter
     private static void initShooterDevices() {
+        // TODO: Check both talons and log individually if each is not connected.
+        //       If either talon is not connected, make both talon instances null, to prevent the need to feed them.
         boolean talonSrxShooterTopIsConnected = DeviceUtils.isConnected(talonSRXShooterTopWheel);
         boolean talonSRXShooterBottomIsConnect = DeviceUtils.isConnected(talonSRXShooterBottomWheel);
 
