@@ -13,6 +13,7 @@ public class Conveyor extends SubsystemBase {
 
     // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
+    private double m_power = 0.2;
 
     public Conveyor() {
         Logger.setup("Constructing Subsystem: Conveyor...");
@@ -46,9 +47,9 @@ public class Conveyor extends SubsystemBase {
     }
 
     // Moves the conveyor forward and back depending on the trigger and the right thumbstick
-    public void convey(double speed) {
+    public void spin() {
         if (m_disabled) return;
-        talonSrxConveyor.set(speed);
+        talonSrxConveyor.set(m_power);
     }
 
     // Stop the conveyor motor

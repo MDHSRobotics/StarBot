@@ -35,7 +35,7 @@ public class BotSubsystems {
         climb.setDefaultCommand(BotCommands.standStop);
 
         Logger.setup("Conveyor DefaultCommand -> Convey...");
-        conveyor.setDefaultCommand(BotCommands.convey);
+        conveyor.setDefaultCommand(BotCommands.stopConveyor);
 
         Logger.setup("DiffDriver DefaultCommand -> DriveDifferentialTank...");
         diffDriver.setDefaultCommand(BotCommands.driveDifferentialTank);

@@ -38,7 +38,8 @@ public class BotCommands {
     public static RollerReverse rollerReverse;
 
     // Conveyor
-    public static Convey convey;
+    public static SpinConveyor spinConveyor;
+    public static StopConveyor stopConveyor;
 
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
@@ -48,7 +49,7 @@ public class BotCommands {
     public static CycleLights cycleLights;
 
     // Roller
-    public static SpinRoller rollerSpin;
+    public static SpinRoller spinRoller;
     public static StopRoller rollerStop;
 
     // RollerArm
@@ -86,7 +87,8 @@ public class BotCommands {
         rollerReverse = new RollerReverse(BotSubsystems.climb);
 
         // Conveyor
-        convey = new Convey(BotSubsystems.conveyor);
+        spinConveyor = new SpinConveyor(BotSubsystems.conveyor);
+        stopConveyor =  new StopConveyor(BotSubsystems.conveyor);
 
         // DiffDriver
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver);
@@ -96,7 +98,7 @@ public class BotCommands {
         cycleLights = new CycleLights(BotSubsystems.lighter);
 
         // Roller
-        rollerSpin = new SpinRoller(BotSubsystems.roller);
+        spinRoller = new SpinRoller(BotSubsystems.roller, BotSubsystems.conveyor);
         rollerStop = new StopRoller(BotSubsystems.roller);
 
         // RollerArm
