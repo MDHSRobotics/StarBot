@@ -110,6 +110,7 @@ public class Shooter extends SubsystemBase {
         double velocity = ShooterBrain.getBottomWheelVelocity();
         double nativeVelocity = EncoderUtils.translateDistanceToTicks(velocity, 4, GEAR_RATIO) * 10;
         Logger.info("Shooter -> BottomWheel Velocity to:" + velocity);
+        Logger.info("Shooter -> BottomWheel Ticks to:" + nativeVelocity);
 
         if (m_disabled) return;
         talonSRXShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
@@ -122,6 +123,7 @@ public class Shooter extends SubsystemBase {
         double velocity = ShooterBrain.getTopWheelVelocity();
         double nativeVelocity = EncoderUtils.translateDistanceToTicks(velocity, 4, GEAR_RATIO) * 10;
         Logger.info("Shooter -> TopWheel Velocity to:" + velocity);
+        Logger.info("Shooter -> TopWheel Ticks to:" + nativeVelocity);
 
         if (m_disabled) return;
         talonSRXShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
