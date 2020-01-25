@@ -2,7 +2,7 @@
 package frc.robot.subsystems.constants;
 
 /**
- * The Constants class provides a convenient place for teams to hold subsystem-wide numerical or boolean
+ * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
  * declared globally (i.e. public static).  Do not put anything functional in this class.
  *
@@ -11,7 +11,7 @@ package frc.robot.subsystems.constants;
  */
 public final class TalonConstants {
     // Number of miliseconds that the talon can stay at peak current.
-    public static final int PEAK_AMPERAGE_DURATION = 40;
+    public static final int PEAK_AMPERAGE_DURATION = 100;
 
     // Max amps that the talon can supply at peak.
     public static final int PEAK_AMPERAGE = 11;

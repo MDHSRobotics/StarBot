@@ -19,6 +19,7 @@ public class Shuffler {
     private RollerTab m_rollerTab;
     private RollerArmTab m_rollerArmTab;
     private DriveTab m_driveTab;
+    private ShooterTab m_shooterTab;
 
     public Shuffler() {
         ShuffleLogger.logTrivial("Constructing Shuffler...");
@@ -29,6 +30,7 @@ public class Shuffler {
         m_rollerTab = new RollerTab();
         m_rollerArmTab = new RollerArmTab();
         m_debugTab = new DebugTab();
+        m_shooterTab = new ShooterTab();
     }
 
     public void preInitialize() {
@@ -40,6 +42,7 @@ public class Shuffler {
         m_rollerTab.preInitialize();
         m_rollerArmTab.preInitialize();
         m_debugTab.preInitialize();
+        m_shooterTab.preInitialize();
     }
 
     public void initialize() {
@@ -51,6 +54,7 @@ public class Shuffler {
         m_rollerTab.initialize();
         m_rollerArmTab.initialize();
         m_debugTab.initialize();
+        m_shooterTab.initialize();
     }
 
     public void configure() {
@@ -62,6 +66,7 @@ public class Shuffler {
         m_rollerTab.configure();
         m_rollerArmTab.configure();
         m_debugTab.configure();
+        m_shooterTab.configure();
 
         setupSmartdashboard();
     }
@@ -73,6 +78,7 @@ public class Shuffler {
         m_rollerTab.update();
         m_rollerArmTab.update();
         m_debugTab.update();
+        m_shooterTab.update();
     }
 
     // This is for stuff that can't be displayed easily in custom Shuffleboard tabs.

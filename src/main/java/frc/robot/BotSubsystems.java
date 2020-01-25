@@ -13,6 +13,7 @@ public class BotSubsystems {
     public static Lighter lighter;
     public static Roller roller;
     public static RollerArm rollerArm;
+    public static Shooter shooter;
 
     // Initialize all robot subsystems
     public static void initializeSubsystems() {
@@ -23,6 +24,7 @@ public class BotSubsystems {
         lighter = new Lighter();
         roller = new Roller();
         rollerArm = new RollerArm();
+        shooter = new Shooter();
     }
 
     // Set all the subsystem default commands
@@ -38,6 +40,9 @@ public class BotSubsystems {
 
         Logger.setup("Roller DefaultCommand -> RollerStop...");
         roller.setDefaultCommand(BotCommands.rollerStop);
+
+        Logger.setup("Shooter DefaultCommand -> StopShoot");
+        shooter.setDefaultCommand(BotCommands.stopShoot);
     }
 
 }

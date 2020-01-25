@@ -38,6 +38,9 @@ public class Devices {
     static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
     static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15);
 
+    static WPI_TalonSRX talonSRXShooterTopWheel = new WPI_TalonSRX(15);
+    static WPI_TalonSRX talonSRXShooterBottomWheel = new WPI_TalonSRX(11);
+
     ////////////////////////
     // Drive Declarations //
     ////////////////////////
@@ -56,6 +59,7 @@ public class Devices {
         initDiffDriverDevices();
         initRollerDevices();
         initRollerArmDevices();
+        initShooterDevices();
     }
 
     // Conveyor
@@ -131,6 +135,16 @@ public class Devices {
             compressorRollerArm = null;
             solenoidRollerArm = null;
             Logger.error("RollerArm pnuematics are not connected! Disabling...");
+        }
+    }
+
+    private static void initShooterDevices() {
+        boolean talonSrxShooterTopIsConnected = DeviceUtils.isConnected(talonSRXShooterTopWheel);
+        boolean talonSRXShooterBottomIsConnect = DeviceUtils.isConnected(talonSRXShooterBottomWheel);
+
+        if (!(talonSrxShooterTopIsConnected && talonSRXShooterBottomIsConnect)) {
+            talonSRXShooterTopWheel = null;
+            Logger.error("Shooter talon is not connected! Disabling...");
         }
     }
 
