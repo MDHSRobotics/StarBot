@@ -33,6 +33,8 @@ public class ButtonBindings {
         ControlDevices.driveXboxBtnB.whenPressed(BotCommands.toggleLegs);
         ControlDevices.driveXboxBtnX.whileHeld(BotCommands.rollerForward);
         ControlDevices.driveXboxBtnY.whileHeld(BotCommands.rollerReverse);
+        
+        ControlDevices.shootXboxBtnBumperLeft.whileHeld(BotCommands.reverseConveyor);
     }
 
 }
