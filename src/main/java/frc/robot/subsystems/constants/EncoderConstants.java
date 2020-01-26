@@ -10,6 +10,7 @@ package frc.robot.subsystems.constants;
  * constants are needed, to reduce verbosity.
  */
 public final class EncoderConstants {
+
     // Which PID slot to pull gains from.
     // Starting 2018, you can choose from 0, 1, 2 or 3.
     // Only the first two (0,1) are visible in web-based configuration.

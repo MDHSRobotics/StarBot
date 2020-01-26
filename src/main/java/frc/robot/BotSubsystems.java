@@ -8,6 +8,7 @@ import frc.robot.subsystems.*;
 // IMPORTANT: When you make a new subsystem, you need to also set a default command.
 public class BotSubsystems {
 
+    public static Climb climb;
     public static Conveyor conveyor;
     public static DiffDriver diffDriver;
     public static Lighter lighter;
@@ -19,6 +20,7 @@ public class BotSubsystems {
     public static void initializeSubsystems() {
         Logger.setup("Initializing BotSubsystems...");
 
+        climb = new Climb();
         conveyor = new Conveyor();
         diffDriver = new DiffDriver();
         lighter = new Lighter();
@@ -29,6 +31,9 @@ public class BotSubsystems {
 
     // Set all the subsystem default commands
     public static void setDefaultCommands() {
+        Logger.setup("Climb DefaultCommand -> StandStop...");
+        climb.setDefaultCommand(BotCommands.standStop);
+
         Logger.setup("Conveyor DefaultCommand -> Convey...");
         conveyor.setDefaultCommand(BotCommands.convey);
 

@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Relay;
@@ -20,6 +22,14 @@ public class Devices {
     //////////////////////
     // Device Instances //
     //////////////////////
+
+    // CANSparkMax
+    static CANSparkMax sparkMaxClimbArm = new CANSparkMax(1, MotorType.kBrushless);
+    static CANSparkMax sparkMaxClimbRoller = new CANSparkMax(2, MotorType.kBrushless);
+    static CANSparkMax sparkMaxClimbStandTwo = new CANSparkMax(3, MotorType.kBrushless);
+    static CANSparkMax sparkMaxClimbStandThree = new CANSparkMax(4, MotorType.kBrushless);
+    static CANSparkMax sparkMaxClimbStandFour = new CANSparkMax(5, MotorType.kBrushless);
+    static CANSparkMax sparkMaxClimbHook = new CANSparkMax(6, MotorType.kBrushless);
 
     // Pneumatics
     static Compressor compressorRollerArm = new Compressor(0);

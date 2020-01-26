@@ -4,6 +4,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.auto.*;
+import frc.robot.commands.climb.*;
 import frc.robot.commands.conveyor.*;
 import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
@@ -18,6 +19,23 @@ public class BotCommands {
     // Autonomous
     public static AutoDriveForward autoDriveForward;
     public static AutoDriveForwardShoot autoDriveForwardShoot;
+
+    // Climb
+    public static StandStop standStop;
+
+    // Climb Hook
+    public static HookForward hookForward;
+    public static HookReverse hookReverse;
+    public static ToggleHook toggleHook;
+
+    // Climb Legs
+    public static LiftRobot liftRobot;
+    public static LowerRobot lowerRobot;
+    public static ToggleLegs toggleLegs;
+
+    // Climb Roller
+    public static RollerForward rollerForward;
+    public static RollerReverse rollerReverse;
 
     // Conveyor
     public static Convey convey;
@@ -49,6 +67,23 @@ public class BotCommands {
         // Autonomous
         autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
         autoDriveForwardShoot = new AutoDriveForwardShoot(BotSubsystems.diffDriver);
+
+        // Climb
+        standStop = new StandStop(BotSubsystems.climb);
+
+        // Climb Hook
+        hookForward = new HookForward(BotSubsystems.climb);
+        hookReverse = new HookReverse(BotSubsystems.climb);
+        toggleHook = new ToggleHook(BotSubsystems.climb);
+
+        // Climb Legs
+        liftRobot = new LiftRobot(BotSubsystems.climb);
+        lowerRobot = new LowerRobot(BotSubsystems.climb);
+        toggleLegs = new ToggleLegs(BotSubsystems.climb);
+
+        // Climb Roller
+        rollerForward = new RollerForward(BotSubsystems.climb);
+        rollerReverse = new RollerReverse(BotSubsystems.climb);
 
         // Conveyor
         convey = new Convey(BotSubsystems.conveyor);

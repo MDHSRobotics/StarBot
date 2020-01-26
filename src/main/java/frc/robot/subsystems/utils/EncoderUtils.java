@@ -5,7 +5,7 @@ import static frc.robot.subsystems.constants.EncoderConstants.*;
 
 import java.lang.Math;
 
-// Helper methods for encoder values.
+// Utility methods for encoder values.
 public class EncoderUtils {
 
     // Computes the encoder ticks based on the desired rotation in degrees for a given gearbox ratio (MS : GS)
@@ -26,7 +26,7 @@ public class EncoderUtils {
     }
 
     // Computes the encoder native velocity based on the desired rotations per second and the gearbox ratio (MS : GS)
-    public static double translateRPSToTicksPerDecisecond(double rps, double gearRatio){
+    public static double translateRPSToTicksPerDecisecond(double rps, double gearRatio) {
         double rotationsPerDecisecondGS = rps / 10; // Amount of rpds on the gearbox shaft
         double rotationsPerDecisecondMS = rotationsPerDecisecondGS * gearRatio; // Amount of rpds on the motor shaft
         double ticksPerDecisecond = rotationsPerDecisecondMS * ENCODER_TPR; // Amount of ticks per decisecond to rotate

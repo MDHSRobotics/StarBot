@@ -23,10 +23,17 @@ public class ButtonBindings {
         Logger.setup("Configure Buttons -> Drive Xbox Controller...");
 
         ControlDevices.driveXboxBtnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
+
         ControlDevices.driveXboxBtnA.whileHeld(BotCommands.rollerSpin);
         ControlDevices.driveXboxBtnX.whenPressed(BotCommands.toggleRollerArm);
+        
         ControlDevices.driveXboxBtnBumperRight.whenPressed(BotCommands.shoot);
         ControlDevices.driveXboxBtnBumperLeft.whenPressed(BotCommands.stopShoot);
+        
+        ControlDevices.driveXboxBtnA.whenPressed(BotCommands.toggleHook);
+        ControlDevices.driveXboxBtnB.whenPressed(BotCommands.toggleLegs);
+        ControlDevices.driveXboxBtnX.whileHeld(BotCommands.rollerForward);
+        ControlDevices.driveXboxBtnY.whileHeld(BotCommands.rollerReverse);
     }
 
 }
