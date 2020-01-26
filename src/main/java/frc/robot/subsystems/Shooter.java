@@ -14,8 +14,8 @@ import frc.robot.subsystems.utils.EncoderUtils;
 
 import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.constants.TalonConstants.*;
-import static frc.robot.subsystems.Devices.talonSRXShooterBottomWheel;
-import static frc.robot.subsystems.Devices.talonSRXShooterTopWheel;
+import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
+import static frc.robot.subsystems.Devices.talonSrxShooterTopWheel;
 
 // Shooter subsystem, for grabbing and releasing hatches
 public class Shooter extends SubsystemBase {
@@ -40,15 +40,15 @@ public class Shooter extends SubsystemBase {
         Logger.setup("Constructing Subsystem: Shooter...");
 
         // Determine whether or not to disable the subsystem
-        m_disabled = (talonSRXShooterBottomWheel == null || talonSRXShooterTopWheel == null);
+        m_disabled = (talonSrxShooterBottomWheel == null || talonSrxShooterTopWheel == null);
         if (m_disabled) {
             Logger.error("Shooter devices not initialized! Disabling subsystem...");
             return;
         }
 
         // Configure devices
-        configureTalon(talonSRXShooterBottomWheel, SENSOR_PHASE_BOTTOM, MOTOR_INVERT_BOTTOM);
-        configureTalon(talonSRXShooterTopWheel, SENSOR_PHASE_TOP, MOTOR_INVERT_TOP);
+        configureTalon(talonSrxShooterBottomWheel, SENSOR_PHASE_BOTTOM, MOTOR_INVERT_BOTTOM);
+        configureTalon(talonSrxShooterTopWheel, SENSOR_PHASE_TOP, MOTOR_INVERT_TOP);
     }
 
     // Configure the TalonSRX for this subsystem
@@ -101,8 +101,8 @@ public class Shooter extends SubsystemBase {
     // Stop the Shooter motors
     public void stop() {
         if (m_disabled) return;
-        talonSRXShooterBottomWheel.stopMotor();
-        talonSRXShooterTopWheel.stopMotor();
+        talonSrxShooterBottomWheel.stopMotor();
+        talonSrxShooterTopWheel.stopMotor();
     }
 
     // Spin the bottom Shooter wheel
@@ -113,7 +113,7 @@ public class Shooter extends SubsystemBase {
         Logger.info("Shooter -> BottomWheel Ticks to:" + nativeVelocity);
 
         if (m_disabled) return;
-        talonSRXShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
+        talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
 
         Logger.info("------spinBottomWheel IS BEING CALLED");
     }
@@ -126,7 +126,7 @@ public class Shooter extends SubsystemBase {
         Logger.info("Shooter -> TopWheel Ticks to:" + nativeVelocity);
 
         if (m_disabled) return;
-        talonSRXShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
+        talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
 
         Logger.info("------spinTopWheel IS BEING CALLED");
     }
@@ -134,14 +134,14 @@ public class Shooter extends SubsystemBase {
     // Get the current Shooter BottomWheel motor velocity
     public int getBottomWheelVelocity() {
         if (m_disabled) return 0;
-        int velocity = talonSRXShooterBottomWheel.getSelectedSensorVelocity();
+        int velocity = talonSrxShooterBottomWheel.getSelectedSensorVelocity();
         return velocity;
     }
 
     // Get the current Shooter TopWheel motor velocity
     public int getTopWheelVelocity() {
         if (m_disabled) return 0;
-        int velocity = talonSRXShooterTopWheel.getSelectedSensorVelocity();
+        int velocity = talonSrxShooterTopWheel.getSelectedSensorVelocity();
         return velocity;
     }
 
@@ -151,8 +151,8 @@ public class Shooter extends SubsystemBase {
 
     public void testMotor() {
         if (m_disabled) return;
-        talonSRXShooterBottomWheel.set(-0.2);
-        talonSRXShooterTopWheel.set(-0.2);
+        talonSrxShooterBottomWheel.set(-0.2);
+        talonSrxShooterTopWheel.set(-0.2);
     }
 
 }

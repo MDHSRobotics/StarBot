@@ -48,8 +48,8 @@ public class Devices {
     static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
     static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15);
 
-    static WPI_TalonSRX talonSRXShooterTopWheel = new WPI_TalonSRX(9);
-    static WPI_TalonSRX talonSRXShooterBottomWheel = new WPI_TalonSRX(3);
+    static WPI_TalonSRX talonSrxShooterTopWheel = new WPI_TalonSRX(9);
+    static WPI_TalonSRX talonSrxShooterBottomWheel = new WPI_TalonSRX(3);
 
     ////////////////////////
     // Drive Declarations //
@@ -152,11 +152,11 @@ public class Devices {
     private static void initShooterDevices() {
         // TODO: Check both talons and log individually if each is not connected.
         //       If either talon is not connected, make both talon instances null, to prevent the need to feed them.
-        boolean talonSrxShooterTopIsConnected = DeviceUtils.isConnected(talonSRXShooterTopWheel);
-        boolean talonSRXShooterBottomIsConnect = DeviceUtils.isConnected(talonSRXShooterBottomWheel);
+        boolean talonSrxShooterTopIsConnected = DeviceUtils.isConnected(talonSrxShooterTopWheel);
+        boolean talonSRXShooterBottomIsConnect = DeviceUtils.isConnected(talonSrxShooterBottomWheel);
 
         if (!(talonSrxShooterTopIsConnected && talonSRXShooterBottomIsConnect)) {
-            talonSRXShooterTopWheel = null;
+            talonSrxShooterTopWheel = null;
             Logger.error("Shooter talon is not connected! Disabling...");
         }
     }
