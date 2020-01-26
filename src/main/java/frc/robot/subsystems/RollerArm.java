@@ -14,7 +14,7 @@ public class RollerArm extends SubsystemBase {
     // The public property to determine the RollerArm's state
     public boolean armIsUp = true;
 
-    // If any of the devices are null, this should be true
+    // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
 
     public RollerArm() {

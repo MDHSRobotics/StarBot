@@ -11,7 +11,7 @@ import static frc.robot.subsystems.constants.TalonConstants.*;
 // Conveyor subsystem, for delivering the balls to the shoot system
 public class Conveyor extends SubsystemBase {
 
-    // If any of the devices are null, this should be true
+    // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
 
     public Conveyor() {

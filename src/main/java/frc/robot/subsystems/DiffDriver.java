@@ -26,7 +26,7 @@ public class DiffDriver extends SubsystemBase {
     private final int TIMEOUT_MS = 10;
     private final double AUTO_PERIOD_SPEED = 0.5;
 
-    // If any of the devices are null, this should be true
+    // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
 
     public DiffDriver() {

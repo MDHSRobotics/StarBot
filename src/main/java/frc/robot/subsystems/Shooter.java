@@ -33,7 +33,7 @@ public class Shooter extends SubsystemBase {
     private static final boolean SENSOR_PHASE_BOTTOM = false;
     private static final boolean MOTOR_INVERT_BOTTOM = false;
 
-    // If not all the devices are initialized, this should be true
+    // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
 
     public Shooter() {
