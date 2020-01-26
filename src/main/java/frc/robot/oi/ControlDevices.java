@@ -16,8 +16,8 @@ public class ControlDevices {
     }
 
     private static final int DRIVE_XBOX_STICK_NUM = 0;
-    private static final int JSTICK_STICK_NUM = 1;
-    private static final int CLIMB_XBOX_STICK_NUM = 2;
+    private static final int CLIMB_XBOX_STICK_NUM = 1;
+    private static final int JSTICK_STICK_NUM = 2;
 
     // Joysticks
     public static final Joystick jstick = new Joystick(JSTICK_STICK_NUM);
@@ -56,6 +56,7 @@ public class ControlDevices {
     public static final DPadButton driveXboxBtnDpadDownLeft = new DPadButton(driveXbox, Direction.DOWN_LEFT);
     public static final DPadButton driveXboxBtnDpadDownRight = new DPadButton(driveXbox, Direction.DOWN_RIGHT);
 
+    // TODO: Need to add a climbXbox controller
 
     // Determine if a given stick is connected
     public static boolean isStickConnected(int stickNumber) {
@@ -68,7 +69,8 @@ public class ControlDevices {
         return isStickConnected(DRIVE_XBOX_STICK_NUM);
     }
 
-	public static boolean isCLimbXboxConnected() {
+    // Determine if the Climb XBox controller is connected
+	public static boolean isClimbXboxConnected() {
 		return isStickConnected(CLIMB_XBOX_STICK_NUM);
 	}
 

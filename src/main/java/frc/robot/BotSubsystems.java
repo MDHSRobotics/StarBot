@@ -8,24 +8,24 @@ import frc.robot.subsystems.*;
 // IMPORTANT: When you make a new subsystem, you need to also set a default command.
 public class BotSubsystems {
 
-    public static Lighter lighter;
     public static Climb climb;
+    public static Lighter lighter;
 
     // Initialize all robot subsystems
     public static void initializeSubsystems() {
         Logger.setup("Initializing BotSubsystems...");
 
-        lighter = new Lighter();
         climb = new Climb();
+        lighter = new Lighter();
     }
 
     // Set all the subsystem default commands
     public static void setDefaultCommands() {
-        Logger.setup("Lighter DefaultCommand -> CycleLights...");
-        lighter.setDefaultCommand(BotCommands.cycleLights);
+        Logger.setup("Climb DefaultCommand -> StandStop...");
+        climb.setDefaultCommand(BotCommands.standStop);
 
         Logger.setup("Lighter DefaultCommand -> CycleLights...");
-        climb.setDefaultCommand(BotCommands.standStop);
+        lighter.setDefaultCommand(BotCommands.cycleLights);
     }
 
 }

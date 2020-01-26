@@ -14,17 +14,16 @@ import frc.robot.consoles.Logger;
 // Also, only ONE subsystem should control any given device.
 public class SubsystemDevices {
 
-    // Relays
-    public static Relay relayLighter = new Relay(1);
-
-    // Motor Controllers
-    // TODO: Add the appropriate motor controllers
+    // CANSparkMax
     public static CANSparkMax sparkMaxClimbArm = new CANSparkMax(1, MotorType.kBrushless);
     public static CANSparkMax sparkMaxClimbRoller = new CANSparkMax(2, MotorType.kBrushless);
     public static CANSparkMax sparkMaxClimbStandTwo = new CANSparkMax(3, MotorType.kBrushless);
     public static CANSparkMax sparkMaxClimbStandThree = new CANSparkMax(4, MotorType.kBrushless);
     public static CANSparkMax sparkMaxClimbStandFour = new CANSparkMax(5, MotorType.kBrushless);
     public static CANSparkMax sparkMaxClimbHook = new CANSparkMax(6, MotorType.kBrushless);
+
+    // Relays
+    public static Relay relayLighter = new Relay(1);
 
     // Drives
     // TODO: Add the appropriate drives

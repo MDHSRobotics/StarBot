@@ -120,6 +120,7 @@ public class Robot extends TimedRobot {
                 m_driveXBoxConnected = true;
             }
         }
+        // TODO: Check to see if the climbXbox controller is connected
     }
 
     @Override

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Climb;
 
-// This command starts the Climb motors
+// This command rolls the climbing robot forwards?
 public class RollerForward extends InstantCommand {
 
     private Climb m_climb;

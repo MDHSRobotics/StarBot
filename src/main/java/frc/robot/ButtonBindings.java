@@ -1,8 +1,6 @@
 
 package frc.robot;
 
-import java.util.ResourceBundle.Control;
-
 import frc.robot.consoles.Logger;
 import frc.robot.oi.ControlDevices;
 
@@ -30,7 +28,6 @@ public class ButtonBindings {
         ControlDevices.driveXboxBtnB.whenPressed(BotCommands.toggleLegs);
         ControlDevices.driveXboxBtnX.whileHeld(BotCommands.rollerForward);
         ControlDevices.driveXboxBtnY.whileHeld(BotCommands.rollerReverse);
-
-
     }
+
 }

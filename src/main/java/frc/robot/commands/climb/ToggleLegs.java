@@ -7,7 +7,7 @@ import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Climb;
 import frc.robot.BotCommands;
 
-// Toggles the position of the Hatcher Claw
+// Toggles the position of the climb legs
 public class ToggleLegs extends InstantCommand {
 
     private Climb m_climb;
@@ -24,10 +24,10 @@ public class ToggleLegs extends InstantCommand {
         Logger.action("Initializing InstantCommand: ToggleLegs...");
 
         if (m_climb.legsAreUp) {
-            Logger.action("Legs -> Moving to Up...");
+            Logger.action("ToggleLegs -> LOWERING the climbing robot legs...");
             BotCommands.lowerRobot.schedule();
         } else {
-            Logger.action("Legs -> Moving to Down...");
+            Logger.action("ToggleLegs -> LIFTING the climbing robot legs...");
             BotCommands.liftRobot.schedule();
         }
         m_climb.toggleLegsPosition();

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Climb;
 
-// This command starts the Climb motors
+// This command rolls the climbing robot backwards?
 public class RollerReverse extends InstantCommand {
 
     private Climb m_climb;
@@ -24,4 +24,5 @@ public class RollerReverse extends InstantCommand {
         Logger.action("Initializing Command: StandReverse...");
         m_climb.rollerReverse();
     }
+
 }

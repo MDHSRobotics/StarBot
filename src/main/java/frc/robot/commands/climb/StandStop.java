@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Climb;
 
-// This command stops the Climb motors
+// This command stops all the climb devices
 public class StandStop extends CommandBase {
 
     private Climb m_climb;

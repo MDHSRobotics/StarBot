@@ -7,7 +7,7 @@ import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Climb;
 import frc.robot.BotCommands;
 
-// Toggles the position of the Hatcher Claw
+// Toggles the position of the climb hook
 public class ToggleHook extends InstantCommand {
 
     private Climb m_climb;
@@ -21,13 +21,13 @@ public class ToggleHook extends InstantCommand {
     @Override
     public void initialize() {
         System.out.println("--");
-        Logger.action("Initializing InstantCommand: ToggleHatchClawPosition...");
+        Logger.action("Initializing InstantCommand: ToggleHook...");
 
         if (m_climb.hookIsOut) {
-            Logger.action("Hatcher -> Moving to OPEN...");
+            Logger.action("ToggleHook -> Moving the climb hook BACK...");
             BotCommands.hookReverse.schedule();
         } else {
-            Logger.action("Hatcher -> Moving to CLOSED...");
+            Logger.action("ToggleHook -> Moving the climb hook FORWARD...");
             BotCommands.hookForward.schedule();
         }
         m_climb.toggleHookPosition();
