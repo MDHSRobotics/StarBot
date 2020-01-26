@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.DiffDriver;
 
+// This command auto drives the DiffDriver forward for a short time
 public class AutoDriveForward extends CommandBase {
 
     private DiffDriver m_diffDriver;
@@ -17,7 +18,7 @@ public class AutoDriveForward extends CommandBase {
     private static final double DELAY_DRIVE_SECONDS = 2.0;
 
     public AutoDriveForward(DiffDriver diffDriver) {
-        Logger.setup("Constructing Command: AutoPeriod...");
+        Logger.setup("Constructing Command: AutoDriveForward...");
 
         // Add given subsystem requirements
         m_diffDriver = diffDriver;
@@ -26,7 +27,7 @@ public class AutoDriveForward extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: AutoPeriod...");
+        Logger.action("Initializing Command: AutoDriveForward...");
 
         Timer.delay(DELAY_DRIVE_SECONDS); // to avoid robots from starting at the same time
         m_timer.reset();
@@ -39,7 +40,7 @@ public class AutoDriveForward extends CommandBase {
         double timeElapsedSincePrint = currentTime - m_timeLastPrinted;
 
         if (timeElapsedSincePrint > 1.0) {
-            Logger.action("AutoPeriod: -> Moved Forward for " + currentTime);
+            Logger.action("AutoDriveForward: -> Moved Forward for " + currentTime);
             m_timeLastPrinted = currentTime;
         }
         m_diffDriver.moveForwardAuto();
@@ -50,11 +51,10 @@ public class AutoDriveForward extends CommandBase {
     public boolean isFinished() {
         double currentTime = m_timer.get();
 
-        if (currentTime < MAX_DRIVE_SECONDS)
+        if (currentTime < MAX_DRIVE_SECONDS) {
             return false;
-
-        else {
-            Logger.action("AutoPeriod: -> Stopped");
+        } else {
+            Logger.action("AutoDriveForward: -> Stopped");
             return true;
         }
     }
@@ -63,11 +63,10 @@ public class AutoDriveForward extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: AutoPeriod...");
+            Logger.ending("Interrupting Command: AutoDriveForward...");
         } else {
-            Logger.ending("Ending Command: AutoPeriod...");
+            Logger.ending("Ending Command: AutoDriveForward...");
         }
     }
 
 }
-
