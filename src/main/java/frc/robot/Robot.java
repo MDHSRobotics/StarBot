@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
         System.out.println("--");
         Logger.setup("Initializing Robot...");
 
-        // Initialize our BotManager, which initializes and perists the state of the robot,
+        // Initialize our RobotManager, which initializes and perists the state of the robot,
         // including flags, sensors, devices, subsystems, commands, button bindings, shuffleboard,
         // and puts our autonomous chooser on the dashboard.
         RobotManager.initialize();

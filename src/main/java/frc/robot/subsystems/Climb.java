@@ -7,7 +7,13 @@ import com.revrobotics.ControlType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.SubsystemDevices;
+
+import static frc.robot.subsystems.Devices.sparkMaxClimbArm;
+import static frc.robot.subsystems.Devices.sparkMaxClimbHook;
+import static frc.robot.subsystems.Devices.sparkMaxClimbRoller;
+import static frc.robot.subsystems.Devices.sparkMaxClimbStandFour;
+import static frc.robot.subsystems.Devices.sparkMaxClimbStandThree;
+import static frc.robot.subsystems.Devices.sparkMaxClimbStandTwo;
 
 // Climb subsystem, for lifting the robot, hooking onto the level,
 // retracting the legs, and rolling on the level
@@ -39,20 +45,20 @@ public class Climb extends SubsystemBase {
 
     public Climb() {
         Logger.setup("Constructing Subsystem: Climb...");
-        m_disabled = (SubsystemDevices.sparkMaxClimbArm == null);
+        m_disabled = (sparkMaxClimbArm == null);
         if (m_disabled) {
             Logger.error("Shooter devices not initialized! Disabling subsystem...");
             return;
         }
 
         // Configure devices
-        SubsystemDevices.sparkMaxClimbArm.restoreFactoryDefaults();
+        sparkMaxClimbArm.restoreFactoryDefaults();
 
         // Encoder object created to display position values
-        m_encoder = SubsystemDevices.sparkMaxClimbArm.getEncoder();
+        m_encoder = sparkMaxClimbArm.getEncoder();
 
         // Get the PID contoller from the CANSparkMax device
-        m_pidController = SubsystemDevices.sparkMaxClimbArm.getPIDController();
+        m_pidController = sparkMaxClimbArm.getPIDController();
 
         // Set PID coefficients
         m_pidController.setP(kP);
@@ -71,18 +77,18 @@ public class Climb extends SubsystemBase {
     // Stop everything
     public void stop() {
         // Hook
-        SubsystemDevices.sparkMaxClimbHook.stopMotor();
+        sparkMaxClimbHook.stopMotor();
 
         // Hook Arm
-        SubsystemDevices.sparkMaxClimbArm.stopMotor();
+        sparkMaxClimbArm.stopMotor();
 
         // Legs
-        SubsystemDevices.sparkMaxClimbStandTwo.stopMotor();
-        SubsystemDevices.sparkMaxClimbStandThree.stopMotor();
-        SubsystemDevices.sparkMaxClimbStandFour.stopMotor();
+        sparkMaxClimbStandTwo.stopMotor();
+        sparkMaxClimbStandThree.stopMotor();
+        sparkMaxClimbStandFour.stopMotor();
 
         // Roller
-        SubsystemDevices.sparkMaxClimbRoller.stopMotor();
+        sparkMaxClimbRoller.stopMotor();
     }
 
     ////////////////
@@ -90,11 +96,11 @@ public class Climb extends SubsystemBase {
     ////////////////
 
     public void hookForward() {
-        SubsystemDevices.sparkMaxClimbHook.set(POWER);
+        sparkMaxClimbHook.set(POWER);
     }
 
     public void hookReverse() {
-        SubsystemDevices.sparkMaxClimbHook.set(-POWER);
+        sparkMaxClimbHook.set(-POWER);
     }
 
     public void toggleHookPosition() {
@@ -106,11 +112,11 @@ public class Climb extends SubsystemBase {
     ////////////////////
 
     public void extendArm() {
-        SubsystemDevices.sparkMaxClimbArm.set(0.5);
+        sparkMaxClimbArm.set(0.5);
     }
 
     public void retractArm() {
-        SubsystemDevices.sparkMaxClimbArm.set(-0.5);
+        sparkMaxClimbArm.set(-0.5);
     }
 
     ////////////////
@@ -134,11 +140,11 @@ public class Climb extends SubsystemBase {
     //////////////////
 
     public void rollerForward() {
-        SubsystemDevices.sparkMaxClimbRoller.set(POWER);
+        sparkMaxClimbRoller.set(POWER);
     }
 
     public void rollerReverse() {
-        SubsystemDevices.sparkMaxClimbRoller.set(-POWER);
+        sparkMaxClimbRoller.set(-POWER);
     }
 
 }
