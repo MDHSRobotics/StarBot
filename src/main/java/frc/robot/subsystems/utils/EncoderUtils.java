@@ -25,6 +25,15 @@ public class EncoderUtils {
         return rotationTicks;
     }
 
+    // Computes the encoder native velocity based on the desired velocity in feet per second for a given wheel diameter and gearbox ratio (MS : GS)
+    public static double translateFPSToTicksPerDecisecond(double distance, double spoolDiameter, double gearRatio) {
+        double spoolCircumerence = Math.PI * spoolDiameter;
+        double rotationCountGS = distance / spoolCircumerence; // Amount of rotations on the gearbox shaft
+        double rotationCountMS = rotationCountGS * gearRatio; // Amount of rotations on the motor shaft
+        double rotationTicks = rotationCountMS * ENCODER_TPR / 10; // Amount of ticks to rotate
+        return rotationTicks;
+    }
+
     // Computes the encoder native velocity based on the desired rotations per second and the gearbox ratio (MS : GS)
     public static double translateRPSToTicksPerDecisecond(double rps, double gearRatio) {
         double rotationsPerDecisecondGS = rps / 10; // Amount of rpds on the gearbox shaft

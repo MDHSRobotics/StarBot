@@ -21,6 +21,7 @@ public class Shooter extends SubsystemBase {
 
     // Position constants
     private final double GEAR_RATIO = 1;
+    private final double WHEEL_DIAMETER = 4;
 
     // Encoder constants
     private static final boolean SENSOR_PHASE_TOP = true;
@@ -61,8 +62,8 @@ public class Shooter extends SubsystemBase {
 
         talon.configNominalOutputForward(0);
         talon.configNominalOutputReverse(0);
-        talon.configPeakOutputForward(0.5);
-        talon.configPeakOutputReverse(-0.5);
+        talon.configPeakOutputForward(1);
+        talon.configPeakOutputReverse(-1);
 
         talon.configMotionAcceleration(3000, TIMEOUT_MS);
         talon.configMotionCruiseVelocity(8000, TIMEOUT_MS);
@@ -71,22 +72,22 @@ public class Shooter extends SubsystemBase {
         talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_LOOP_PRIMARY, TIMEOUT_MS);
         talon.setSensorPhase(sensorPhase);
         talon.setInverted(motorInvert);
-        talon.configAllowableClosedloopError(0, PID_SLOT_0, TIMEOUT_MS);
+        talon.configAllowableClosedloopError(PID_SLOT_0, 0, TIMEOUT_MS);
 
-        talon.config_kF(PID_SLOT_0, 0.7, TIMEOUT_MS);
+        talon.config_kF(PID_SLOT_0, 0.1, TIMEOUT_MS);
         talon.config_kP(PID_SLOT_0, 0.0, TIMEOUT_MS);
         talon.config_kI(PID_SLOT_0, 0.0, TIMEOUT_MS);
         talon.config_kD(PID_SLOT_0, 0.0, TIMEOUT_MS);
 
         // Initialize current encoder position as zero
         talon.setSelectedSensorPosition(0, PID_LOOP_PRIMARY, TIMEOUT_MS);
-        SensorCollection sensorCol2 = talon.getSensorCollection();
-        int absolutePosition2 = sensorCol2.getPulseWidthPosition();
-        absolutePosition2 &= 0xFFF;
-        if (sensorPhase) absolutePosition2 *= -1;
-        if (motorInvert) absolutePosition2 *= -1;
+        SensorCollection sensorCol = talon.getSensorCollection();
+        int absolutePosition = sensorCol.getPulseWidthPosition();
+        absolutePosition &= 0xFFF;
+        if (sensorPhase) absolutePosition *= -1;
+        if (motorInvert) absolutePosition *= -1;
         // Set the quadrature (relative) sensor to match absolute
-        talon.setSelectedSensorPosition(absolutePosition2, PID_LOOP_PRIMARY, TIMEOUT_MS);
+        talon.setSelectedSensorPosition(absolutePosition, PID_LOOP_PRIMARY, TIMEOUT_MS);
     }
 
     @Override
@@ -104,9 +105,9 @@ public class Shooter extends SubsystemBase {
     // Spin the bottom shooter wheel
     public void spinBottomWheel() {
         double velocity = ShooterBrain.getBottomWheelVelocity();
-        double nativeVelocity = EncoderUtils.translateDistanceToTicks(velocity, 4, GEAR_RATIO) * 10;
-        Logger.info("Shooter -> BottomWheel Velocity to:" + velocity);
-        Logger.info("Shooter -> BottomWheel Ticks to:" + nativeVelocity);
+        double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocity, WHEEL_DIAMETER, GEAR_RATIO);
+        Logger.info("Shooter -> BottomWheel Velocity to:" + velocity + " FPS");
+        Logger.info("Shooter -> BottomWheel Native Velocity to:" + nativeVelocity + " TPDS");
 
         if (m_disabled) return;
         Logger.action("Shooter -> Setting bottom wheel velocity...");
@@ -116,9 +117,9 @@ public class Shooter extends SubsystemBase {
     // Spin the top shooter wheel
     public void spinTopWheel() {
         double velocity = ShooterBrain.getTopWheelVelocity();
-        double nativeVelocity = EncoderUtils.translateDistanceToTicks(velocity, 4, GEAR_RATIO) * 10;
-        Logger.info("Shooter -> TopWheel Velocity to:" + velocity);
-        Logger.info("Shooter -> TopWheel Ticks to:" + nativeVelocity);
+        double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocity, WHEEL_DIAMETER, GEAR_RATIO);
+        Logger.info("Shooter -> TopWheel Velocity to:" + velocity + " FPS");
+        Logger.info("Shooter -> TopWheel Native Velocity to:" + nativeVelocity + " TPDS");
 
         if (m_disabled) return;
         Logger.action("Shooter -> Setting top wheel velocity...");
@@ -145,8 +146,8 @@ public class Shooter extends SubsystemBase {
 
     public void testMotor() {
         if (m_disabled) return;
-        talonSrxShooterBottomWheel.set(-0.2);
-        talonSrxShooterTopWheel.set(-0.2);
+        talonSrxShooterBottomWheel.set(0.2);
+        talonSrxShooterTopWheel.set(0.2);
     }
 
 }
