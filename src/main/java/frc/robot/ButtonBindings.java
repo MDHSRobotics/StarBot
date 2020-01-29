@@ -34,7 +34,12 @@ public class ButtonBindings {
         ControlDevices.driveXboxBtnX.whileHeld(BotCommands.rollerForward);
         ControlDevices.driveXboxBtnY.whileHeld(BotCommands.rollerReverse);
         
+        ControlDevices.driveXboxBtnBumperRight.whenPressed(BotCommands.csCommandGroup);
+        ControlDevices.driveXboxBtnBumperLeft.whenPressed(BotCommands.stopCSCommandGroup);
+
+        // Climb/Shoot Controller
         ControlDevices.shootXboxBtnBumperLeft.whileHeld(BotCommands.reverseConveyor);
+        ControlDevices.driveXboxBtnY.whenPressed(BotCommands.csCommandGroup);
     }
 
 }

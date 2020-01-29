@@ -40,7 +40,7 @@ public class BotCommands {
     // Conveyor
     public static ForwardConveyor forwardConveyor;
     public static StopConveyor stopConveyor;
-    public static Command reverseConveyor;
+    public static ReverseConveyor reverseConveyor;
 
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
@@ -61,6 +61,8 @@ public class BotCommands {
     // Shooter
     public static Shoot shoot;
     public static StopShoot stopShoot;
+    public static CSCommandGroup csCommandGroup;
+    public static StopCSCommandGroup stopCSCommandGroup;
 
 
     // Initialize all robot commands
@@ -101,7 +103,7 @@ public class BotCommands {
         cycleLights = new CycleLights(BotSubsystems.lighter);
 
         // Roller
-        spinRoller = new SpinRoller(BotSubsystems.roller);
+        spinRoller = new SpinRoller(BotSubsystems.roller, BotSubsystems.conveyor);
         rollerStop = new StopRoller(BotSubsystems.roller);
 
         // RollerArm
@@ -110,8 +112,10 @@ public class BotCommands {
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
 
         // Shooter
-        shoot = new Shoot(BotSubsystems.shooter);
+        shoot = new Shoot(BotSubsystems.shooter, BotSubsystems.conveyor);
         stopShoot = new StopShoot(BotSubsystems.shooter);
+        csCommandGroup = new CSCommandGroup(BotSubsystems.shooter, BotSubsystems.conveyor);
+        stopCSCommandGroup = new StopCSCommandGroup(BotSubsystems.shooter, BotSubsystems.conveyor);
     }
 
     // Return the command to run in autonomous mode

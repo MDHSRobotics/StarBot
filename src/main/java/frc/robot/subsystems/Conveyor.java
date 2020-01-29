@@ -13,7 +13,7 @@ public class Conveyor extends SubsystemBase {
 
     // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
-    private final double POWER = 0.2;
+    private final double POWER = 0.1;
 
     public Conveyor() {
         Logger.setup("Constructing Subsystem: Conveyor...");
