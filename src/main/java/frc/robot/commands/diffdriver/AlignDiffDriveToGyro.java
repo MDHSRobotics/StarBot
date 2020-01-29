@@ -3,7 +3,7 @@ package frc.robot.commands.diffdriver;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
+import frc.robot.brains.LimelightBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.oi.controllers.DPadButton;
 import frc.robot.subsystems.DiffDriver;
@@ -13,7 +13,7 @@ public class AlignDiffDriveToGyro extends CommandBase {
 
     public GenericHID controller;
     private DiffDriver m_diffDriver;
-    private int m_targetAngle = -1;
+    private static double m_targetAngle = -1;
 
     public AlignDiffDriveToGyro(DiffDriver diffDriver, GenericHID controller) {
         Logger.setup("Constructing Command: AlignDiffDriveToGyro...");
@@ -26,14 +26,18 @@ public class AlignDiffDriveToGyro extends CommandBase {
 
     @Override
     public void initialize() {
-        m_targetAngle = DPadButton.getGyroAngleFromDpadAngle(controller);
+        System.out.println("--");
+        Logger.action("Initializing Command: AlignDiffDriveToGyro...");
+
+        // m_targetAngle = DPadButton.getDpadAngleForGyro(ControlDevices.driveXbox);
+        m_targetAngle = LimelightBrain.getXOffset();
     }
 
     @Override
     public void execute() {
-        if (m_targetAngle != -1) {
-            m_diffDriver.driveAlign(m_targetAngle);
-        }
+        // if (m_targetAngle != -1) {
+        //     m_diffDriver.driveAlign(m_targetAngle);
+        // }
     }
 
     // This finishes immediately, but is intended to be continually restarted while a button is held

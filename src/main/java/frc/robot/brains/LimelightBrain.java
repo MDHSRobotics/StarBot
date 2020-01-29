@@ -1,7 +1,6 @@
 
 package frc.robot.brains;
 
-import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -24,10 +23,11 @@ public class LimelightBrain {
     // ---------------------//
     // NetworkTableEntries //
     // ---------------------//
+    public static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
-    public static NetworkTableEntry tx;
-    public static NetworkTableEntry ty;
-    public static NetworkTableEntry ta;
+    public static NetworkTableEntry tx = table.getEntry("tx");
+    public static NetworkTableEntry ty = table.getEntry("ty");
+    public static NetworkTableEntry ta = table.getEntry("ta");
 
     // ---------//
     // Setters //
@@ -52,15 +52,15 @@ public class LimelightBrain {
     // Getters //
     // ---------//
 
-    public double getXOffset() {
+    public static double getXOffset() {
         return x;
     }
 
-    public double getYOffset() {
+    public static double getYOffset() {
         return y;
     }
 
-    public double getArea() {
+    public static double getArea() {
         return area;
     }
 

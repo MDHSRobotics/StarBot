@@ -3,10 +3,11 @@ package frc.robot.consoles.tabs;
 
 import edu.wpi.first.wpilibj.shuffleboard.*;
 
+import frc.robot.consoles.Logger;
 import frc.robot.brains.LimelightBrain;
 import frc.robot.consoles.ShuffleLogger;
 
-// The Shuffleboard RollerArm Tab
+// The Shuffleboard Limelight Tab
 public class LimelightTab {
 
     // Tab, layout, and widget objects
@@ -26,9 +27,9 @@ public class LimelightTab {
 
     // Create Brain Widgets
     public void preInitialize() {
-        m_limelightWidgetX = m_tab.add("tx", LimelightBrain.x);
-        m_limelightWidgetY = m_tab.add("ty", LimelightBrain.y);
-        m_limelightWidgetArea = m_tab.add("ta", LimelightBrain.area);
+        m_limelightWidgetX = m_tab.add("LimelightX", LimelightBrain.x);
+        m_limelightWidgetY = m_tab.add("LimelightY", LimelightBrain.y);
+        m_limelightWidgetArea = m_tab.add("LimelightArea", LimelightBrain.area);
     }
 
     // Create all other Widgets
@@ -44,6 +45,7 @@ public class LimelightTab {
 
     // This will be called in the robotPeriodic
     public void update() {
+        Logger.info("X Offset: " + LimelightBrain.getXOffset());
         LimelightBrain.setXOffset();
         LimelightBrain.setYOffset();
         LimelightBrain.setArea();
