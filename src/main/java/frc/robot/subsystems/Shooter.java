@@ -21,7 +21,7 @@ public class Shooter extends SubsystemBase {
 
     // Position constants
     private final double GEAR_RATIO = 1;
-    private final double WHEEL_DIAMETER = 4;
+    private final double WHEEL_DIAMETER = 4.0 / 12.0;
 
     // Encoder constants
     private static final boolean SENSOR_PHASE_TOP = true;
