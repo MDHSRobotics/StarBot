@@ -2,6 +2,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -16,8 +17,16 @@ import frc.robot.oi.ControlDevices;
  */
 public class Robot extends TimedRobot {
 
+    // Autonomous variables
     private Command m_autonomousCommand;
-    private boolean m_driveXBoxConnected = false;
+
+    // Teleop variables
+    public boolean driveXBoxConnected = false;
+
+    // Test variables
+    private final double TEST_SECONDS = 5.0;
+    private int m_currentTest = 0;
+    private Timer m_testTimer = new Timer();
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -32,9 +41,6 @@ public class Robot extends TimedRobot {
         // including flags, sensors, devices, subsystems, commands, button bindings, shuffleboard,
         // and puts our autonomous chooser on the dashboard.
         RobotManager.initialize();
-
-        // Check which controllers are plugged in
-        m_driveXBoxConnected = ControlDevices.isDriveXboxConnected();
     }
 
     /**
@@ -104,6 +110,9 @@ public class Robot extends TimedRobot {
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
+
+        // Check which controllers are plugged in
+        driveXBoxConnected = ControlDevices.isDriveXboxConnected();
     }
 
     /**
@@ -112,12 +121,12 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         // Detect whether a controller has been plugged in after start-up
-        if (!m_driveXBoxConnected) {
+        if (!driveXBoxConnected) {
             if (ControlDevices.isDriveXboxConnected()) {
                 // Drive XBox was not previously plugged in but now it is so configure buttons
                 ButtonBindings.configureDriveXBoxButtons();
                 Logger.setup("Drive XBox controller detected and configured");
-                m_driveXBoxConnected = true;
+                driveXBoxConnected = true;
             }
         }
         // TODO: Check to see if the climbXbox controller is connected
@@ -130,6 +139,10 @@ public class Robot extends TimedRobot {
 
         // Cancels all running commands at the start of test mode.
         CommandScheduler.getInstance().cancelAll();
+
+        m_currentTest = 1;
+        m_testTimer.stop();
+        m_testTimer.reset();
     }
 
     /**
@@ -137,6 +150,36 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
+        double currentTime = m_testTimer.get();
+        if (currentTime > 5.0) {
+            m_currentTest++;
+            m_testTimer.stop();
+            m_testTimer.reset();
+            currentTime = 0;
+        }
+
+        switch (m_currentTest) {
+            case 1:
+                if (currentTime == 0) {
+                    Logger.action("Starting CycleLights Test for " + TEST_SECONDS + " seconds...");
+                    m_testTimer.start();
+                    BotCommands.cycleLights.schedule();
+                }
+                return;
+            case 2:
+                if (currentTime == 0) {
+                    Logger.action("Starting AlignDiffDriveToGyro Test for " + TEST_SECONDS + " seconds...");
+                    m_testTimer.start();
+                    BotCommands.alignDiffDriveToGyro.schedule();
+                }
+                return;
+            default:
+                Logger.action("All tests complete.");
+                m_currentTest = 1;
+                m_testTimer.stop();
+                m_testTimer.reset();
+                return;
+        }
     }
 
 }
