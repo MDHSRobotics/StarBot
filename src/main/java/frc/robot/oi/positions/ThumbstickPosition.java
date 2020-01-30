@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import frc.robot.brains.XboxBrain;
 import frc.robot.consoles.Logger;
+import frc.robot.oi.ControlDevices;
 
 // The position values obtained from Xbox Thumbsticks
 public class ThumbstickPosition {
@@ -27,6 +28,12 @@ public class ThumbstickPosition {
 
     // Gets the xbox thumbstick positions and applies user-determined orientation, deadzones, and sensitivity
     public static ThumbstickPosition getThumbstickPosition(XboxController xbox, boolean isYleftFlipped) {
+        int port = xbox.getPort();
+        boolean xboxIsConnected = ControlDevices.isStickConnected(port);
+        if (!xboxIsConnected) {
+            return new ThumbstickPosition();
+        }
+
         double yLeft = xbox.getY(Hand.kLeft); // Forward & backward, flipped
         double xLeft = xbox.getX(Hand.kLeft); // Strafe
         double yRight = xbox.getY(Hand.kRight); // Forward & backward, flipped
@@ -86,7 +93,7 @@ public class ThumbstickPosition {
         xRight = xRight * xRightSensitivity;
 
         ThumbstickPosition pos = new ThumbstickPosition(yLeft, xLeft, yRight, xRight);
-        // Logger.info("ThumbstickPosition -> leftForwardBack: " + pos.leftForwardBackPosition + "; rightForwardBack: " + pos.rightForwardBackPosition);
+        // Logger.info("Xbox ThumbstickPosition -> leftForwardBack: " + pos.leftForwardBackPosition + "; rightForwardBack: " + pos.rightForwardBackPosition);
         return pos;
     }
 

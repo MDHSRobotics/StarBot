@@ -22,6 +22,8 @@ public class ButtonBindings {
     public static void configureDriveXBoxButtons() {
         Logger.setup("Configure Buttons -> Drive Xbox Controller...");
 
+        // TODO: There are conflicts with buttons after merge. Resolve.
+
         // Climb
         ControlDevices.driveXboxBtnA.whenPressed(BotCommands.toggleHook);
         ControlDevices.driveXboxBtnB.whenPressed(BotCommands.toggleLegs);
@@ -41,6 +43,7 @@ public class ButtonBindings {
         ControlDevices.driveXboxBtnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
         ControlDevices.driveXboxBtnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
 
+        // TODO: This is configuring buttons for the shoot xbox controller in a method called configureDriveXboxButtons()
         // Climb/Shoot Controller
         ControlDevices.shootXboxBtnBumperLeft.whileHeld(BotCommands.reverseConveyor);
     }
