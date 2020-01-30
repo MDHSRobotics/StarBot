@@ -1,3 +1,4 @@
+
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -6,12 +7,12 @@ import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Shooter;
 
 // This command deactivates the shoot mechanism
-public class StopShoot extends CommandBase {
+public class StopShooter extends CommandBase {
 
     private Shooter m_shooter;
 
-    public StopShoot(Shooter shooter) {
-        Logger.setup("Constructing Command: StopShoot...");
+    public StopShooter(Shooter shooter) {
+        Logger.setup("Constructing Command: StopShooter...");
 
         // Add given subsystem requirements
         m_shooter = shooter;
@@ -20,7 +21,7 @@ public class StopShoot extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: StopShoot...");
+        Logger.action("Initializing Command: StopShooter...");
     }
 
     @Override
@@ -38,9 +39,9 @@ public class StopShoot extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: StopShoot...");
+            Logger.ending("Interrupting Command: StopShooter...");
         } else {
-            Logger.ending("Ending Command: StopShoot...");
+            Logger.ending("Ending Command: StopShooter...");
         }
     }
 

@@ -1,41 +1,34 @@
 
-package frc.robot.commands.roller;
+package frc.robot.commands.conveyor;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
-import frc.robot.subsystems.Roller;
 
-// This command stops the Roller
-public class SpinRoller extends CommandBase {
+// This command moves the conveyor belt forward
+public class ForwardConveyor extends CommandBase {
 
     private Conveyor m_conveyor;
-    private Roller m_roller;
 
-    public SpinRoller(Roller roller, Conveyor conveyor) {
-        Logger.setup("Constructing Command: SpinRoller...");
+    public ForwardConveyor(Conveyor conveyor) {
+        Logger.setup("Constructing Command: ForwardConveyor...");
 
         // Add given subsystem requirements
-        m_roller = roller;
-        addRequirements(m_roller);
-
         m_conveyor = conveyor;
         addRequirements(m_conveyor);
     }
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: SpinRoller...");
+        Logger.action("Initializing Command: ForwardConveyor...");
     }
 
     @Override
     public void execute() {
-        m_roller.spin();
         m_conveyor.forward();
     }
 
-    // This command continues until interrupted
     @Override
     public boolean isFinished() {
         return false;
@@ -45,10 +38,12 @@ public class SpinRoller extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: SpinRoller...");
+            Logger.ending("Interrupting Command: ForwardConveyor...");
         } else {
-            Logger.ending("Ending Command: SpinRoller...");
+            Logger.ending("Ending Command: ForwardConveyor...");
         }
+
+        m_conveyor.stop();
     }
 
 }

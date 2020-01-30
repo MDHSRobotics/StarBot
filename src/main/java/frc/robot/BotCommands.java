@@ -38,18 +38,20 @@ public class BotCommands {
     public static RollerReverse rollerReverse;
 
     // Conveyor
-    public static Convey convey;
+    public static ForwardConveyor forwardConveyor;
+    public static ReverseConveyor reverseConveyor;
+    public static StopConveyor stopConveyor;
 
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
-    public static DriveDifferentialTank driveDifferentialTank;
+    public static DriveDiffTank driveDiffTank;
 
     // Lighter
     public static CycleLights cycleLights;
 
     // Roller
-    public static SpinRoller rollerSpin;
-    public static StopRoller rollerStop;
+    public static SpinRoller spinRoller;
+    public static StopRoller stopRoller;
 
     // RollerArm
     public static LowerRollerArm lowerRollerArm;
@@ -58,7 +60,9 @@ public class BotCommands {
 
     // Shooter
     public static Shoot shoot;
-    public static StopShoot stopShoot;
+    public static StopShooter stopShooter;
+    public static ReverseConveyorAndShoot reverseConveyorAndShoot;
+    public static StopConveyorAndShooter stopConveyorAndShooter;
 
     // Initialize all robot commands
     public static void initializeCommands() {
@@ -86,18 +90,20 @@ public class BotCommands {
         rollerReverse = new RollerReverse(BotSubsystems.climb);
 
         // Conveyor
-        convey = new Convey(BotSubsystems.conveyor);
+        forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
+        reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
+        stopConveyor = new StopConveyor(BotSubsystems.conveyor);
 
         // DiffDriver
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver);
-        driveDifferentialTank = new DriveDifferentialTank(BotSubsystems.diffDriver);
+        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);
 
         // Roller
-        rollerSpin = new SpinRoller(BotSubsystems.roller);
-        rollerStop = new StopRoller(BotSubsystems.roller);
+        spinRoller = new SpinRoller(BotSubsystems.roller, BotSubsystems.conveyor);
+        stopRoller = new StopRoller(BotSubsystems.roller);
 
         // RollerArm
         lowerRollerArm = new LowerRollerArm(BotSubsystems.rollerArm);
@@ -105,8 +111,10 @@ public class BotCommands {
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
 
         // Shooter
-        shoot = new Shoot(BotSubsystems.shooter);
-        stopShoot = new StopShoot(BotSubsystems.shooter);
+        shoot = new Shoot(BotSubsystems.shooter, BotSubsystems.conveyor);
+        stopShooter = new StopShooter(BotSubsystems.shooter);
+        reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
+        stopConveyorAndShooter = new StopConveyorAndShooter(BotSubsystems.conveyor, BotSubsystems.shooter);
     }
 
     // Return the command to run in autonomous mode

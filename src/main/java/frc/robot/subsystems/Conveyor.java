@@ -5,11 +5,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
 
-import static frc.robot.subsystems.Devices.talonSrxConveyor;
 import static frc.robot.subsystems.constants.TalonConstants.*;
+import static frc.robot.subsystems.Devices.talonSrxConveyor;
 
 // Conveyor subsystem, for delivering the balls to the shoot system
 public class Conveyor extends SubsystemBase {
+
+    // Motor constants
+    private final double POWER = 0.1;
 
     // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
@@ -45,10 +48,16 @@ public class Conveyor extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // Moves the conveyor forward and back depending on the trigger and the right thumbstick
-    public void convey(double speed) {
+    // Moves the conveyor forward at a pre-defined speed
+    public void forward() {
         if (m_disabled) return;
-        talonSrxConveyor.set(speed);
+        talonSrxConveyor.set(POWER);
+    }
+
+    // Moves the conveyor back at a pre-defined speed
+    public void reverse() {
+        if (m_disabled) return;
+        talonSrxConveyor.set(-POWER);
     }
 
     // Stop the conveyor motor

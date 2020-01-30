@@ -45,7 +45,7 @@ public class Devices {
     static WPI_TalonFX talonFxDiffWheelRearRight = new WPI_TalonFX(13);
 
     // TalonSRX
-    static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(12);
+    static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(11);
     static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(15);
 
     static WPI_TalonSRX talonSrxShooterTopWheel = new WPI_TalonSRX(9);
