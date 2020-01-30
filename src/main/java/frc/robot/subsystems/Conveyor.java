@@ -5,15 +5,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
 
-import static frc.robot.subsystems.Devices.talonSrxConveyor;
 import static frc.robot.subsystems.constants.TalonConstants.*;
+import static frc.robot.subsystems.Devices.talonSrxConveyor;
 
 // Conveyor subsystem, for delivering the balls to the shoot system
 public class Conveyor extends SubsystemBase {
 
+    // Motor constants
+    private final double POWER = 0.1;
+
     // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
-    private final double POWER = 0.1;
 
     public Conveyor() {
         Logger.setup("Constructing Subsystem: Conveyor...");

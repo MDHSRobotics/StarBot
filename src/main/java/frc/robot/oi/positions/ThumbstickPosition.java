@@ -86,7 +86,7 @@ public class ThumbstickPosition {
         xRight = xRight * xRightSensitivity;
 
         ThumbstickPosition pos = new ThumbstickPosition(yLeft, xLeft, yRight, xRight);
-       // Logger.info("yLeft: " + pos.leftForwardBackPosition + "; yRight: " + pos.rightForwardBackPosition);
+        // Logger.info("ThumbstickPosition -> leftForwardBack: " + pos.leftForwardBackPosition + "; rightForwardBack: " + pos.rightForwardBackPosition);
         return pos;
     }
 

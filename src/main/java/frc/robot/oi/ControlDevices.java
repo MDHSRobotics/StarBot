@@ -58,10 +58,11 @@ public class ControlDevices {
     public static final DPadButton driveXboxBtnDpadDownRight = new DPadButton(driveXbox, Direction.DOWN_RIGHT);
 
     // Xbox Controller - Shoot
+    // TODO: Complete this control device.
     public static final XboxController shootXbox = new XboxController(SHOOT_XBOX_STICK_NUM);
     public static final JoystickButton shootXboxBtnBumperLeft = new JoystickButton(driveXbox, 5);
 
-    // TODO: Need to add a climbXbox controller
+    // TODO: Need to add a climbXbox controller?
 
     // Determine if a given stick is connected
     public static boolean isStickConnected(int stickNumber) {

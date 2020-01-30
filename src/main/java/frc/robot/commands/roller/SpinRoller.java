@@ -2,16 +2,16 @@
 package frc.robot.commands.roller;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.Roller;
 import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Roller;
 
 // This command stops the Roller
 public class SpinRoller extends CommandBase {
 
-    private Roller m_roller;
     private Conveyor m_conveyor;
-
+    private Roller m_roller;
 
     public SpinRoller(Roller roller, Conveyor conveyor) {
         Logger.setup("Constructing Command: SpinRoller...");
@@ -49,8 +49,6 @@ public class SpinRoller extends CommandBase {
         } else {
             Logger.ending("Ending Command: SpinRoller...");
         }
-
-        // m_roller.stop();
     }
 
 }

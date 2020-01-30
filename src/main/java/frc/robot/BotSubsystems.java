@@ -5,7 +5,6 @@ import frc.robot.consoles.Logger;
 import frc.robot.subsystems.*;
 
 // Contains singleton instances of all the subsystems on the robot.
-// IMPORTANT: When you make a new subsystem, you need to also set a default command.
 public class BotSubsystems {
 
     public static Climb climb;
@@ -34,20 +33,17 @@ public class BotSubsystems {
         Logger.setup("Climb DefaultCommand -> StandStop...");
         climb.setDefaultCommand(BotCommands.standStop);
 
-        Logger.setup("Conveyor DefaultCommand -> Convey...");
+        Logger.setup("Conveyor DefaultCommand -> StopConveyor...");
         conveyor.setDefaultCommand(BotCommands.stopConveyor);
 
-        Logger.setup("DiffDriver DefaultCommand -> DriveDifferentialTank...");
-        diffDriver.setDefaultCommand(BotCommands.driveDifferentialTank);
+        Logger.setup("DiffDriver DefaultCommand -> DriveDiffTank...");
+        diffDriver.setDefaultCommand(BotCommands.driveDiffTank);
 
-        Logger.setup("Lighter DefaultCommand -> CycleLights...");
-        lighter.setDefaultCommand(BotCommands.cycleLights);
+        Logger.setup("Roller DefaultCommand -> StopRoller...");
+        roller.setDefaultCommand(BotCommands.stopRoller);
 
-        Logger.setup("Roller DefaultCommand -> RollerStop...");
-        roller.setDefaultCommand(BotCommands.rollerStop);
-
-        Logger.setup("Shooter DefaultCommand -> StopShoot");
-        shooter.setDefaultCommand(BotCommands.stopShoot);
+        Logger.setup("Shooter DefaultCommand -> StopShooter");
+        shooter.setDefaultCommand(BotCommands.stopShooter);
     }
 
 }

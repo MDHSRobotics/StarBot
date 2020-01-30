@@ -8,12 +8,12 @@ import frc.robot.oi.movements.TankMovement;
 import frc.robot.subsystems.DiffDriver;
 
 // This command uses the xbox input to differential drive using the tank method
-public class DriveDifferentialTank extends CommandBase {
+public class DriveDiffTank extends CommandBase {
 
     private DiffDriver m_diffDriver;
 
-    public DriveDifferentialTank(DiffDriver diffDriver) {
-        Logger.setup("Constructing Command: DriveDifferentialTank...");
+    public DriveDiffTank(DiffDriver diffDriver) {
+        Logger.setup("Constructing Command: DriveDiffTank...");
 
         // Add given subsystem requirements
         m_diffDriver = diffDriver;
@@ -22,7 +22,7 @@ public class DriveDifferentialTank extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: DriveDifferentialTank...");
+        Logger.action("Initializing Command: DriveDiffTank...");
     }
 
     @Override
@@ -41,9 +41,9 @@ public class DriveDifferentialTank extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: DriveDifferentialTank...");
+            Logger.ending("Interrupting Command: DriveDiffTank...");
         } else {
-            Logger.ending("Ending Command: DriveDifferentialTank...");
+            Logger.ending("Ending Command: DriveDiffTank...");
         }
     }
 

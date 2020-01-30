@@ -22,24 +22,27 @@ public class ButtonBindings {
     public static void configureDriveXBoxButtons() {
         Logger.setup("Configure Buttons -> Drive Xbox Controller...");
 
-        ControlDevices.driveXboxBtnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
-        ControlDevices.driveXboxBtnB.whileHeld(BotCommands.spinRoller);
-        ControlDevices.driveXboxBtnX.whenPressed(BotCommands.toggleRollerArm);
-        
-        ControlDevices.driveXboxBtnBumperRight.whenPressed(BotCommands.shoot);
-        ControlDevices.driveXboxBtnBumperLeft.whenPressed(BotCommands.stopShoot);
-        
+        // Climb
         ControlDevices.driveXboxBtnA.whenPressed(BotCommands.toggleHook);
         ControlDevices.driveXboxBtnB.whenPressed(BotCommands.toggleLegs);
         ControlDevices.driveXboxBtnX.whileHeld(BotCommands.rollerForward);
         ControlDevices.driveXboxBtnY.whileHeld(BotCommands.rollerReverse);
-        
-        ControlDevices.driveXboxBtnBumperRight.whenPressed(BotCommands.csCommandGroup);
-        ControlDevices.driveXboxBtnBumperLeft.whenPressed(BotCommands.stopCSCommandGroup);
+
+        // DiffDriver
+        ControlDevices.driveXboxBtnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
+
+        // Roller
+        ControlDevices.driveXboxBtnB.whileHeld(BotCommands.spinRoller);
+
+        // RollerArm
+        ControlDevices.driveXboxBtnX.whenPressed(BotCommands.toggleRollerArm);
+
+        // Shooter?
+        ControlDevices.driveXboxBtnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
+        ControlDevices.driveXboxBtnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
 
         // Climb/Shoot Controller
         ControlDevices.shootXboxBtnBumperLeft.whileHeld(BotCommands.reverseConveyor);
-        ControlDevices.driveXboxBtnY.whenPressed(BotCommands.csCommandGroup);
     }
 
 }

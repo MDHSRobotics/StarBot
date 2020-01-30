@@ -1,13 +1,13 @@
 
 package frc.robot.commands.conveyor;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
-import edu.wpi.first.wpilibj.Timer;
 
-// This command moves the conveyor belt forward
+// This command moves the conveyor belt backward
 public class ReverseConveyor extends CommandBase {
 
     private Conveyor m_conveyor;
@@ -37,9 +37,8 @@ public class ReverseConveyor extends CommandBase {
     public boolean isFinished() {
         double currentTime = m_timer.get();
         if (currentTime > 0.5) {
-        return true;
+            return true;
         }
-
         return false;
     }
 

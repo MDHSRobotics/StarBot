@@ -1,32 +1,38 @@
 
-package frc.robot.commands.conveyor;
+package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Shooter;
 
-// This command stops the Conveyor
-public class StopConveyor extends CommandBase {
+// This command stops the conveyor and shooter
+public class StopConveyorAndShooter extends CommandBase {
 
     private Conveyor m_conveyor;
+    private Shooter m_shooter;
 
-    public StopConveyor(Conveyor conveyor) {
-        Logger.setup("Constructing Command: StopConveyor...");
+    public StopConveyorAndShooter(Conveyor conveyor, Shooter shooter) {
+        Logger.setup("Constructing Command: StopConveyorAndShooter...");
 
         // Add given subsystem requirements
         m_conveyor = conveyor;
         addRequirements(m_conveyor);
+
+        m_shooter = shooter;
+        addRequirements(m_shooter);
     }
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: StopConveyor...");
+        Logger.action("Initializing Command: StopConveyorAndShooter...");
     }
 
     @Override
     public void execute() {
         m_conveyor.stop();
+        m_shooter.stop();
     }
 
     // This command continues until interrupted
@@ -39,12 +45,10 @@ public class StopConveyor extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: StopConveyor...");
+            Logger.ending("Interrupting Command: StopConveyorAndShooter...");
         } else {
-            Logger.ending("Ending Command: StopConveyor...");
+            Logger.ending("Ending Command: StopConveyorAndShooter...");
         }
-
-        m_conveyor.stop();
     }
 
 }
