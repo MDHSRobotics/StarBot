@@ -159,26 +159,26 @@ public class Robot extends TimedRobot {
         }
 
         switch (m_currentTest) {
-            case 1:
-                if (currentTime == 0) {
-                    Logger.action("Starting CycleLights Test for " + TEST_SECONDS + " seconds...");
-                    m_testTimer.start();
-                    BotCommands.cycleLights.schedule();
-                }
-                return;
-            case 2:
-                if (currentTime == 0) {
-                    Logger.action("Starting AlignDiffDriveToGyro Test for " + TEST_SECONDS + " seconds...");
-                    m_testTimer.start();
-                    BotCommands.alignDiffDriveToGyro.schedule();
-                }
-                return;
-            default:
-                Logger.action("All tests complete.");
-                m_currentTest = 1;
-                m_testTimer.stop();
-                m_testTimer.reset();
-                return;
+        case 1:
+            if (currentTime == 0) {
+                Logger.action("Starting CycleLights Test for " + TEST_SECONDS + " seconds...");
+                m_testTimer.start();
+                BotCommands.cycleLights.schedule();
+            }
+            return;
+        case 2:
+            if (currentTime == 0) {
+                Logger.action("Starting AlignDiffDriveToGyro Test for " + TEST_SECONDS + " seconds...");
+                m_testTimer.start();
+                BotCommands.alignDiffDriveToGyro.schedule();
+            }
+            return;
+        default:
+            Logger.action("All tests complete.");
+            m_currentTest = 1;
+            m_testTimer.stop();
+            m_testTimer.reset();
+            return;
         }
     }
 

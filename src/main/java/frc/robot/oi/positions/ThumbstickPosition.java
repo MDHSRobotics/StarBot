@@ -47,31 +47,19 @@ public class ThumbstickPosition {
         double yRightDeadZone = XboxBrain.getYrightDeadZone();
         double xRightDeadZone = XboxBrain.getXrightDeadZone();
 
-        if (Math.abs(yLeft) <= yLeftDeadZone)
-            yLeft = 0;
-        if (Math.abs(xLeft) <= xLeftDeadZone)
-            xLeft = 0;
-        if (Math.abs(yRight) <= yRightDeadZone)
-            yRight = 0;
-        if (Math.abs(xRight) <= xRightDeadZone)
-            xRight = 0;
+        if (Math.abs(yLeft) <= yLeftDeadZone) yLeft = 0;
+        if (Math.abs(xLeft) <= xLeftDeadZone) xLeft = 0;
+        if (Math.abs(yRight) <= yRightDeadZone) yRight = 0;
+        if (Math.abs(xRight) <= xRightDeadZone) xRight = 0;
 
-        if (yLeft > 0)
-            yLeft = yLeft - yLeftDeadZone;
-        if (yLeft < 0)
-            yLeft = yLeft + yLeftDeadZone;
-        if (xLeft > 0)
-            xLeft = xLeft - xLeftDeadZone;
-        if (xLeft < 0)
-            xLeft = xLeft + xLeftDeadZone;
-        if (yRight > 0)
-            yRight = yRight - yRightDeadZone;
-        if (yRight < 0)
-            yRight = yRight + yRightDeadZone;
-        if (xRight > 0)
-            xRight = xRight - xRightDeadZone;
-        if (xRight < 0)
-            xRight = xRight + xRightDeadZone;
+        if (yLeft > 0) yLeft = yLeft - yLeftDeadZone;
+        if (yLeft < 0) yLeft = yLeft + yLeftDeadZone;
+        if (xLeft > 0) xLeft = xLeft - xLeftDeadZone;
+        if (xLeft < 0) xLeft = xLeft + xLeftDeadZone;
+        if (yRight > 0) yRight = yRight - yRightDeadZone;
+        if (yRight < 0) yRight = yRight + yRightDeadZone;
+        if (xRight > 0) xRight = xRight - xRightDeadZone;
+        if (xRight < 0) xRight = xRight + xRightDeadZone;
 
         // Sensitivity
         double yLeftSensitivity = XboxBrain.getYleftSensitivity();
