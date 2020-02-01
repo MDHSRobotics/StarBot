@@ -1,14 +1,10 @@
 
 package frc.robot.oi.positions;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.XboxController;
-
 import frc.robot.brains.XboxBrain;
-import frc.robot.consoles.Logger;
-import frc.robot.oi.ControlDevices;
+import frc.robot.oi.controllers.XboxControllerContainer;
 
-// The position values obtained from Xbox Thumbsticks
+// The position values obtained from xbox thumbsticks
 public class ThumbstickPosition {
 
     public double leftForwardBackPosition = 0; // y left Forward & Backward
@@ -27,17 +23,13 @@ public class ThumbstickPosition {
     }
 
     // Gets the xbox thumbstick positions and applies user-determined orientation, deadzones, and sensitivity
-    public static ThumbstickPosition getThumbstickPosition(XboxController xbox, boolean isYleftFlipped) {
-        int port = xbox.getPort();
-        boolean xboxIsConnected = ControlDevices.isStickConnected(port);
-        if (!xboxIsConnected) {
-            return new ThumbstickPosition();
-        }
+    public static ThumbstickPosition getPositions(XboxControllerContainer controller, boolean isYleftFlipped) {
+        ThumbstickPosition pos = controller.getThumbstickPositions(isYleftFlipped);
 
-        double yLeft = xbox.getY(Hand.kLeft); // Forward & backward, flipped
-        double xLeft = xbox.getX(Hand.kLeft); // Strafe
-        double yRight = xbox.getY(Hand.kRight); // Forward & backward, flipped
-        double xRight = xbox.getX(Hand.kRight); // Rotate
+        double yLeft = pos.leftForwardBackPosition; // Left forward & backward, flipped
+        double xLeft = pos.leftSideToSidePosition; // Left side to side
+        double yRight = pos.rightForwardBackPosition; // Right forward & backward, flipped
+        double xRight = pos.rightSideToSidePosition; // Right side to side
 
         // Forward/backward direction is reversed from what is intuitive, so flip it
         yLeft = -yLeft;
@@ -87,13 +79,11 @@ public class ThumbstickPosition {
         double yRightSensitivity = XboxBrain.getYrightSensitivity();
         double xRightSensitivity = XboxBrain.getXrightSensitivity();
 
-        yLeft = yLeft * yLeftSensitivity;
-        xLeft = xLeft * xLeftSensitivity;
-        yRight = yRight * yRightSensitivity;
-        xRight = xRight * xRightSensitivity;
+        pos.leftForwardBackPosition = yLeft * yLeftSensitivity;
+        pos.leftSideToSidePosition = xLeft * xLeftSensitivity;
+        pos.rightForwardBackPosition = yRight * yRightSensitivity;
+        pos.rightSideToSidePosition = xRight * xRightSensitivity;
 
-        ThumbstickPosition pos = new ThumbstickPosition(yLeft, xLeft, yRight, xRight);
-        // Logger.info("Xbox ThumbstickPosition -> leftForwardBack: " + pos.leftForwardBackPosition + "; rightForwardBack: " + pos.rightForwardBackPosition);
         return pos;
     }
 

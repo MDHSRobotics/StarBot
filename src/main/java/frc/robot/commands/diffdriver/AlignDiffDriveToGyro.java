@@ -4,9 +4,9 @@ package frc.robot.commands.diffdriver;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.oi.ControlDevices;
-import frc.robot.oi.DPadButton;
+import frc.robot.oi.controllers.DPadButton;
 import frc.robot.subsystems.DiffDriver;
+import frc.robot.BotControllers;
 
 // Automatically control the DiffDrive to align the Robot with the gyro.
 public class AlignDiffDriveToGyro extends CommandBase {
@@ -27,7 +27,7 @@ public class AlignDiffDriveToGyro extends CommandBase {
         System.out.println("--");
         Logger.action("Initializing Command: AlignDiffDriveToGyro...");
 
-        m_targetAngle = DPadButton.getDpadAngleForGyro(ControlDevices.driveXbox);
+        m_targetAngle = DPadButton.getDpadAngleForGyro(BotControllers.drive.xbox);
     }
 
     @Override
