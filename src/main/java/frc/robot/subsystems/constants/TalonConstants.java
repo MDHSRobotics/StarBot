@@ -26,6 +26,9 @@ public final class TalonConstants {
     // Minimum speed the talon can move backwards.
     public static final int NOMINAL_OUTPUT_REVERSE = 0;
 
+    // Output deadband percentage of the motor
+    public final static double NEUTRAL_DEADBAND = 0.001;
+
     // Set to zero to skip waiting for confirmation,
     // set to nonzero to wait and report to DS if action fails.
     public static final int TIMEOUT_MS = 20;
