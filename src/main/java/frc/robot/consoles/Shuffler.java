@@ -69,6 +69,7 @@ public class Shuffler {
         m_climbLegsSparkTab.initialize();
         m_climbBalancerTab.initialize();
         m_debugTab.initialize();
+        m_limelightTab.initialize();
     }
 
     public void configure() {
@@ -85,6 +86,7 @@ public class Shuffler {
         m_climbLegsSparkTab.configure();
         m_climbBalancerTab.configure();
         m_debugTab.configure();
+        m_limelightTab.configure();
 
         setupSmartdashboard();
     }

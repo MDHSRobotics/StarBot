@@ -34,6 +34,7 @@ public class LimelightTab {
 
     // Create all other Widgets
     public void initialize() {
+        LimelightBrain.printKeys();
     }
 
     // Configure all Widgets
@@ -45,7 +46,7 @@ public class LimelightTab {
 
     // This will be called in the robotPeriodic
     public void update() {
-        Logger.info("X Offset: " + LimelightBrain.getXOffset());
+        // Logger.info("X Offset: " + LimelightBrain.getXOffset());
         LimelightBrain.setXOffset();
         LimelightBrain.setYOffset();
         LimelightBrain.setArea();

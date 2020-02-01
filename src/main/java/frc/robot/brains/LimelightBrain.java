@@ -6,6 +6,10 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
+import java.util.Set;
+import frc.robot.consoles.Logger;
+import frc.robot.consoles.ShuffleLogger;
+
 // This class contains all the shared NetworkTableEntries for the Limelight,
 // its default values, and methods for retrieving its current values
 public class LimelightBrain {
@@ -23,7 +27,7 @@ public class LimelightBrain {
     // ---------------------//
     // NetworkTableEntries //
     // ---------------------//
-    public static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    public static NetworkTable table = NetworkTableInstance.getDefault().getTable("/limelight");
 
     public static NetworkTableEntry tx = table.getEntry("tx");
     public static NetworkTableEntry ty = table.getEntry("ty");
@@ -62,6 +66,12 @@ public class LimelightBrain {
 
     public static double getArea() {
         return area;
+    }
+
+    public static void printKeys() {
+        Set<String> keys = table.getKeys();
+        int numOfKeys = keys.size();
+        Logger.info("Number of keys: " + numOfKeys);
     }
 
 }
