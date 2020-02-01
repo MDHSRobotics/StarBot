@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.consoles.Logger;
-import frc.robot.oi.ControlDevices;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -21,7 +20,7 @@ public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
 
     // Teleop variables
-    public boolean driveXBoxConnected = false;
+    public boolean driveControllerConnected = false;
 
     // Test variables
     private final double TEST_SECONDS = 5.0;
@@ -112,7 +111,7 @@ public class Robot extends TimedRobot {
         }
 
         // Check which controllers are plugged in
-        driveXBoxConnected = ControlDevices.isDriveXboxConnected();
+        driveControllerConnected = BotControllers.drive.isConnected();
     }
 
     /**
@@ -121,15 +120,16 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         // Detect whether a controller has been plugged in after start-up
-        if (!driveXBoxConnected) {
-            if (ControlDevices.isDriveXboxConnected()) {
-                // Drive XBox was not previously plugged in but now it is so configure buttons
-                ButtonBindings.configureDriveXBoxButtons();
-                Logger.setup("Drive XBox controller detected and configured");
-                driveXBoxConnected = true;
+        if (!driveControllerConnected) {
+            if (BotControllers.drive.isConnected()) {
+                // Drive controller was not previously plugged in but now it is so configure buttons
+                ButtonBindings.configureDriveButtons();
+                Logger.setup("Drive controller detected and configured");
+                driveControllerConnected = true;
             }
         }
-        // TODO: Check to see if the climbXbox controller is connected
+        // TODO: Check to see if the shoot controller is connected
+        // TODO: Check to see if the climb controller is connected
     }
 
     @Override
@@ -159,26 +159,26 @@ public class Robot extends TimedRobot {
         }
 
         switch (m_currentTest) {
-            case 1:
-                if (currentTime == 0) {
-                    Logger.action("Starting CycleLights Test for " + TEST_SECONDS + " seconds...");
-                    m_testTimer.start();
-                    BotCommands.cycleLights.schedule();
-                }
-                return;
-            case 2:
-                if (currentTime == 0) {
-                    Logger.action("Starting AlignDiffDriveToGyro Test for " + TEST_SECONDS + " seconds...");
-                    m_testTimer.start();
-                    BotCommands.alignDiffDriveToGyro.schedule();
-                }
-                return;
-            default:
-                Logger.action("All tests complete.");
-                m_currentTest = 1;
-                m_testTimer.stop();
-                m_testTimer.reset();
-                return;
+        case 1:
+            if (currentTime == 0) {
+                Logger.action("Starting CycleLights Test for " + TEST_SECONDS + " seconds...");
+                m_testTimer.start();
+                BotCommands.cycleLights.schedule();
+            }
+            return;
+        case 2:
+            if (currentTime == 0) {
+                Logger.action("Starting AlignDiffDriveToGyro Test for " + TEST_SECONDS + " seconds...");
+                m_testTimer.start();
+                BotCommands.alignDiffDriveToGyro.schedule();
+            }
+            return;
+        default:
+            Logger.action("All tests complete.");
+            m_currentTest = 1;
+            m_testTimer.stop();
+            m_testTimer.reset();
+            return;
         }
     }
 
