@@ -2,6 +2,7 @@
 package frc.robot.consoles;
 
 import frc.robot.consoles.tabs.*;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 
 // Class that wraps all of the interaction with the Shuffleboard
 
