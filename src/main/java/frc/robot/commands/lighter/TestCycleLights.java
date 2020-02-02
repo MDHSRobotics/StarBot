@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Lighter;
 
-// This command cycles through all the "lighter" states
-public class CycleLights extends CommandBase {
+// This command tests the Lighter by cycling through all its states
+public class TestCycleLights extends CommandBase {
 
     private Lighter m_lighter;
 
@@ -20,8 +20,8 @@ public class CycleLights extends CommandBase {
     private int m_lightSequence = 0;
     private Timer m_timer = new Timer();
 
-    public CycleLights(Lighter lighter) {
-        Logger.setup("Constructing Command: CycleLights...");
+    public TestCycleLights(Lighter lighter) {
+        Logger.setup("Constructing Command: TestCycleLights...");
 
         // Add given subsystem requirements
         m_lighter = lighter;
@@ -30,14 +30,14 @@ public class CycleLights extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: CycleLights...");
+        Logger.action("Initializing Command: TestCycleLights...");
 
         m_timer.reset();
         m_timer.start();
 
         // Start off with lights off
         m_lighter.turnOffBoth();
-        Logger.action("CycleLights -> Turning off both lights; Cycle #" + m_cycleNum);
+        Logger.action("TestCycleLights -> Turning off both lights; Cycle #" + m_cycleNum);
     }
 
     @Override
@@ -48,15 +48,15 @@ public class CycleLights extends CommandBase {
             switch (m_lightSequence) {
             case 1:
                 m_lighter.turnOnWhiteOnly();
-                Logger.action("CycleLights -> Turning on white light; Cycle #" + m_cycleNum);
+                Logger.action("TestCycleLights -> Turning on white light; Cycle #" + m_cycleNum);
                 break;
             case 2:
                 m_lighter.turnOnRedOnly();
-                Logger.action("CycleLights -> Turning on red light; Cycle #" + m_cycleNum);
+                Logger.action("TestCycleLights -> Turning on red light; Cycle #" + m_cycleNum);
                 break;
             case 3:
                 m_lighter.turnOnBoth();
-                Logger.action("CycleLights -> Turning on both lights; Cycle #" + m_cycleNum);
+                Logger.action("TestCycleLights -> Turning on both lights; Cycle #" + m_cycleNum);
                 break;
             default:
                 ++m_cycleNum;
@@ -64,7 +64,7 @@ public class CycleLights extends CommandBase {
                 if (m_cycleNum <= NUM_CYCLES) {
                     // If we're not done with all cycles, start a new cycle with both lights off
                     m_lighter.turnOffBoth();
-                    Logger.action("CycleLights -> Turning off both lights; Cycle #" + m_cycleNum);
+                    Logger.action("TestCycleLights -> Turning off both lights; Cycle #" + m_cycleNum);
                 }
             }
             m_timer.reset();
@@ -82,12 +82,12 @@ public class CycleLights extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: CycleLights...");
+            Logger.ending("Interrupting Command: TestCycleLights...");
         } else {
-            Logger.ending("Ending Command: CycleLights...");
+            Logger.ending("Ending Command: TestCycleLights...");
         }
 
-        Logger.action("CycleLights -> Turning off both lights; Cycle #" + m_cycleNum);
+        Logger.action("TestCycleLights -> Turning off both lights; Cycle #" + m_cycleNum);
         m_lighter.turnOffBoth();
     }
 

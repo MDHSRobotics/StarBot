@@ -47,7 +47,7 @@ public class BotCommands {
     public static DriveDiffTank driveDiffTank;
 
     // Lighter
-    public static CycleLights cycleLights;
+    public static TestCycleLights testCycleLights;
 
     // Roller
     public static SpinRoller spinRoller;
@@ -99,7 +99,7 @@ public class BotCommands {
         driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver);
 
         // Lighter
-        cycleLights = new CycleLights(BotSubsystems.lighter);
+        testCycleLights = new TestCycleLights(BotSubsystems.lighter);
 
         // Roller
         spinRoller = new SpinRoller(BotSubsystems.roller, BotSubsystems.conveyor);

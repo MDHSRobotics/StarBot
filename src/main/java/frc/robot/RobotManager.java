@@ -70,8 +70,8 @@ public class RobotManager {
     private static void setupSmartDashboard() {
         Logger.setup("Adding AutoModes to SmartDashboard...");
         autoCommandChooser = new SendableChooser<>();
-        autoCommandChooser.setDefaultOption("Lighter - CycleLights", BotCommands.cycleLights);
-        // TODO: Add additional options here
+        autoCommandChooser.setDefaultOption("Lighter - TestCycleLights", BotCommands.testCycleLights);
+        // TODO: Add additional commands for autonomous here
         SmartDashboard.putData("AutoMode", autoCommandChooser);
     }
 
