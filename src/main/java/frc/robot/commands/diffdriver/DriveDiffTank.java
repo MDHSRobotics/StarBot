@@ -28,7 +28,7 @@ public class DriveDiffTank extends CommandBase {
 
     @Override
     public void execute() {
-        TankMovement move = TankMovement.getMovement(BotControllers.drive, m_diffDriver.controlStickDirectionFlipped);
+        TankMovement move = TankMovement.getMovement(BotControllers.primary, m_diffDriver.controlStickDirectionFlipped);
         m_diffDriver.driveTank(move.leftSpeed, move.rightSpeed);
     }
 

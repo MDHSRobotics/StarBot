@@ -20,7 +20,8 @@ public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
 
     // Teleop variables
-    public boolean driveControllerConnected = false;
+    public boolean primaryControllerConnected = false;
+    public boolean secondaryControllerConnected = false;
 
     // Test variables
     private final double TEST_SECONDS = 5.0;
@@ -111,7 +112,8 @@ public class Robot extends TimedRobot {
         }
 
         // Check which controllers are plugged in
-        driveControllerConnected = BotControllers.drive.isConnected();
+        primaryControllerConnected = BotControllers.primary.isConnected();
+        secondaryControllerConnected = BotControllers.secondary.isConnected();
     }
 
     /**
@@ -119,17 +121,25 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        // Detect whether a controller has been plugged in after start-up
-        if (!driveControllerConnected) {
-            if (BotControllers.drive.isConnected()) {
-                // Drive controller was not previously plugged in but now it is so configure buttons
-                ButtonBindings.configureDriveButtons();
-                Logger.setup("Drive controller detected and configured");
-                driveControllerConnected = true;
+        // Detect whether the primary controller has been plugged in after start-up
+        if (!primaryControllerConnected) {
+            if (BotControllers.primary.isConnected()) {
+                // Primary controller was not previously plugged in but now it is so configure buttons
+                ButtonBindings.configurePrimaryButtons();
+                Logger.setup("Primary controller detected and configured");
+                primaryControllerConnected = true;
             }
         }
-        // TODO: Check to see if the shoot controller is connected
-        // TODO: Check to see if the climb controller is connected
+
+        // Detect whether the secondary controller has been plugged in after start-up
+        if (!secondaryControllerConnected) {
+            if (BotControllers.secondary.isConnected()) {
+                // Secondary controller was not previously plugged in but now it is so configure buttons
+                ButtonBindings.configureSecondaryButtons();
+                Logger.setup("Secondary controller detected and configured");
+                secondaryControllerConnected = true;
+            }
+        }
     }
 
     @Override

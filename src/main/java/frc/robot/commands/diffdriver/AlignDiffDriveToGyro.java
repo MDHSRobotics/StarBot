@@ -27,7 +27,7 @@ public class AlignDiffDriveToGyro extends CommandBase {
         System.out.println("--");
         Logger.action("Initializing Command: AlignDiffDriveToGyro...");
 
-        m_targetAngle = DPadButton.getDpadAngleForGyro(BotControllers.drive.xbox);
+        m_targetAngle = DPadButton.getDpadAngleForGyro(BotControllers.primary.xbox);
     }
 
     @Override

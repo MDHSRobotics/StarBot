@@ -10,41 +10,53 @@ public class ButtonBindings {
     public static void configure() {
         Logger.setup("Configuring ButtonBindings...");
 
-        if (!BotControllers.drive.isConnected()) {
-            Logger.error("Drive controller not plugged in!");
+        // Primary Controller
+        if (!BotControllers.primary.isConnected()) {
+            Logger.error("Primary controller not plugged in!");
         } else {
-            configureDriveButtons();
+            configurePrimaryButtons();
+        }
+
+        // Secondary Controller
+        if (!BotControllers.secondary.isConnected()) {
+            Logger.error("Secondary controller not plugged in!");
+        } else {
+            configureSecondaryButtons();
         }
     }
 
-    // Configure "drive" xbox buttons
-    public static void configureDriveButtons() {
-        Logger.setup("Configure Buttons -> Drive Controller...");
+    // Configure "primary" xbox buttons
+    public static void configurePrimaryButtons() {
+        Logger.setup("Configure Buttons -> Primary Controller...");
 
         // TODO: There are conflicts with buttons after merge. Resolve.
 
         // Climb
-        BotControllers.drive.btnA.whenPressed(BotCommands.toggleHook);
-        BotControllers.drive.btnB.whenPressed(BotCommands.toggleLegs);
-        BotControllers.drive.btnX.whileHeld(BotCommands.rollerForward);
-        BotControllers.drive.btnY.whileHeld(BotCommands.rollerReverse);
+        BotControllers.primary.btnA.whenPressed(BotCommands.toggleHook);
+        BotControllers.primary.btnB.whenPressed(BotCommands.toggleLegs);
+        BotControllers.primary.btnX.whileHeld(BotCommands.rollerForward);
+        BotControllers.primary.btnY.whileHeld(BotCommands.rollerReverse);
 
         // DiffDriver
-        BotControllers.drive.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
+        BotControllers.primary.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
 
         // Roller
-        BotControllers.drive.btnB.whileHeld(BotCommands.spinRoller);
+        BotControllers.primary.btnB.whileHeld(BotCommands.spinRoller);
 
         // RollerArm
-        BotControllers.drive.btnX.whenPressed(BotCommands.toggleRollerArm);
+        BotControllers.primary.btnX.whenPressed(BotCommands.toggleRollerArm);
 
         // Shooter?
-        BotControllers.drive.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
-        BotControllers.drive.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
+        BotControllers.primary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
+        BotControllers.primary.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
+    }
 
-        // TODO: This is configuring buttons for the shoot xbox controller in a method called configureDriveXboxButtons()
-        // Climb/Shoot Controller
-        BotControllers.shoot.btnBumperLeft.whileHeld(BotCommands.reverseConveyor);
+    // Configure "secondary" xbox buttons
+    public static void configureSecondaryButtons() {
+        Logger.setup("Configure Buttons -> Secondary Controller...");
+
+        // Conveyor
+        BotControllers.secondary.btnBumperLeft.whileHeld(BotCommands.reverseConveyor);
     }
 
 }
