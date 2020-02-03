@@ -2,27 +2,25 @@
 package frc.robot.oi.controllers;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.oi.controllers.DPadButton.Direction;
 import frc.robot.oi.positions.ThumbstickPosition;
 import frc.robot.oi.positions.TriggerAxisPosition;
 
-// This class contains an xbox controller and properties for all its buttons.
-public class XboxControllerContainer extends ControllerContainer implements XboxPositionAccessible {
+// This class contains a virtual xbox controller and properties for all its virtual buttons.
+public class VirtualXboxControllerContainer implements XboxPositionAccessible {
 
-    public XboxController xbox;
-    public JoystickButton btnA;
-    public JoystickButton btnB;
-    public JoystickButton btnX;
-    public JoystickButton btnY;
-    public JoystickButton btnBumperLeft;
-    public JoystickButton btnBumperRight;
-    public JoystickButton btnBack;
-    public JoystickButton btnStart;
-    public JoystickButton btnStickLeft;
-    public JoystickButton btnStickRight;
+    public VirtualXboxController xbox;
+    public VirtualButton btnA;
+    public VirtualButton btnB;
+    public VirtualButton btnX;
+    public VirtualButton btnY;
+    public VirtualButton btnBumperLeft;
+    public VirtualButton btnBumperRight;
+    public VirtualButton btnBack;
+    public VirtualButton btnStart;
+    public VirtualButton btnStickLeft;
+    public VirtualButton btnStickRight;
     public DPad btnDpad;
     public DPadButton btnDpadUp;
     public DPadButton btnDpadDown;
@@ -33,19 +31,18 @@ public class XboxControllerContainer extends ControllerContainer implements Xbox
     public DPadButton btnDpadDownLeft;
     public DPadButton btnDpadDownRight;
 
-    public XboxControllerContainer(int port) {
-        super(port);
-        xbox = new XboxController(port);
-        btnA = new JoystickButton(xbox, 1);
-        btnB = new JoystickButton(xbox, 2);
-        btnX = new JoystickButton(xbox, 3);
-        btnY = new JoystickButton(xbox, 4);
-        btnBumperLeft = new JoystickButton(xbox, 5);
-        btnBumperRight = new JoystickButton(xbox, 6);
-        btnBack = new JoystickButton(xbox, 7);
-        btnStart = new JoystickButton(xbox, 8);
-        btnStickLeft = new JoystickButton(xbox, 9);
-        btnStickRight = new JoystickButton(xbox, 10);
+    public VirtualXboxControllerContainer() {
+        xbox = new VirtualXboxController();
+        btnA = new VirtualButton();
+        btnB = new VirtualButton();
+        btnX = new VirtualButton();
+        btnY = new VirtualButton();
+        btnBumperLeft = new VirtualButton();
+        btnBumperRight = new VirtualButton();
+        btnBack = new VirtualButton();
+        btnStart = new VirtualButton();
+        btnStickLeft = new VirtualButton();
+        btnStickRight = new VirtualButton();
         btnDpad = new DPad(xbox);
         btnDpadUp = new DPadButton(xbox, Direction.UP);
         btnDpadDown = new DPadButton(xbox, Direction.DOWN);
@@ -57,10 +54,22 @@ public class XboxControllerContainer extends ControllerContainer implements Xbox
         btnDpadDownRight = new DPadButton(xbox, Direction.DOWN_RIGHT);
     }
 
-    // Gets the raw xbox thumbstick positions
-    public ThumbstickPosition getThumbstickPositions(boolean isYleftFlipped) {
-        if (!isConnected()) return new ThumbstickPosition();
+    public void reset() {
+        xbox.resetInputs();
+        btnA.active = false;
+        btnB.active = false;
+        btnX.active = false;
+        btnY.active = false;
+        btnBumperLeft.active = false;
+        btnBumperRight.active = false;
+        btnBack.active = false;
+        btnStart.active = false;
+        btnStickLeft.active = false;
+        btnStickRight.active = false;
+    }
 
+    // Gets the raw virtual xbox thumbstick positions
+    public ThumbstickPosition getThumbstickPositions(boolean isYleftFlipped) {
         double yLeft = xbox.getY(Hand.kLeft); // Forward & backward, flipped
         double xLeft = xbox.getX(Hand.kLeft); // Strafe
         double yRight = xbox.getY(Hand.kRight); // Forward & backward, flipped
@@ -70,10 +79,8 @@ public class XboxControllerContainer extends ControllerContainer implements Xbox
         return pos;
     }
 
-    // Gets the raw xbox trigger positions
+    // Gets the raw virtual xbox trigger positions
     public TriggerAxisPosition getTriggerAxisPositions() {
-        if (!isConnected()) return new TriggerAxisPosition();
-
         double leftTriggerAxis = xbox.getTriggerAxis(Hand.kLeft);
         double rightTriggerAxis = xbox.getTriggerAxis(Hand.kRight);
 

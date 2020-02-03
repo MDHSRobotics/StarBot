@@ -1,7 +1,7 @@
 
 package frc.robot.oi.movements;
 
-import frc.robot.oi.controllers.XboxControllerContainer;
+import frc.robot.oi.controllers.XboxPositionAccessible;
 import frc.robot.oi.positions.ThumbstickPosition;
 
 // The values needed to drive using arcade mode
@@ -22,7 +22,7 @@ public class ArcadeMovement {
 
     // Determines the arcade movement (forward/backward speed, rotation speed, square inputs)
     // from the given xbox thumbstick position(s)
-    public static ArcadeMovement getMovement(XboxControllerContainer controller, boolean isYleftFlipped) {
+    public static ArcadeMovement getMovement(XboxPositionAccessible controller, boolean isYleftFlipped) {
         ThumbstickPosition pos = ThumbstickPosition.getPositions(controller, isYleftFlipped);
         ArcadeMovement move = new ArcadeMovement(pos.leftForwardBackPosition, pos.leftSideToSidePosition, pos.rightSideToSidePosition);
         return move;

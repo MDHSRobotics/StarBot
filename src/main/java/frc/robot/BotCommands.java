@@ -95,8 +95,8 @@ public class BotCommands {
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
 
         // DiffDriver
-        alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver);
-        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver);
+        alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
+        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.primary);
 
         // Lighter
         testCycleLights = new TestCycleLights(BotSubsystems.lighter);

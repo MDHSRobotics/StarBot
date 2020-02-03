@@ -32,7 +32,7 @@ public class DPadButton extends Button {
     }
 
     // Converts the Dpad Angle (0 to 360, clockwise) into a Gyro Angle (0 to 180, clockwise, 0 to -180 counter-clockwise)
-    public static int getDpadAngleForGyro(GenericHID humanInterfaceDevice) {
+    public static int getGyroAngleFromDpadAngle(GenericHID humanInterfaceDevice) {
         int angle = humanInterfaceDevice.getPOV(0);
         if (angle > 180) angle = angle - 360;
         return angle;

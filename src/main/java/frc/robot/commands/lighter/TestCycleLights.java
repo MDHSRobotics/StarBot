@@ -16,8 +16,8 @@ public class TestCycleLights extends CommandBase {
     private static final int NUM_CYCLES = 3;
     private static final int NUM_SECONDS_PER_LIGHT = 1;
 
-    private int m_cycleNum = 1;
-    private int m_lightSequence = 0;
+    private int m_cycleNum;
+    private int m_lightSequence;
     private Timer m_timer = new Timer();
 
     public TestCycleLights(Lighter lighter) {
@@ -32,12 +32,16 @@ public class TestCycleLights extends CommandBase {
     public void initialize() {
         Logger.action("Initializing Command: TestCycleLights...");
 
+        m_cycleNum = 1;
+        m_lightSequence = 0;
+
+        m_timer.stop();
         m_timer.reset();
         m_timer.start();
 
         // Start off with lights off
-        m_lighter.turnOffBoth();
         Logger.action("TestCycleLights -> Turning off both lights; Cycle #" + m_cycleNum);
+        m_lighter.turnOffBoth();
     }
 
     @Override
@@ -47,26 +51,27 @@ public class TestCycleLights extends CommandBase {
             ++m_lightSequence;
             switch (m_lightSequence) {
             case 1:
-                m_lighter.turnOnWhiteOnly();
                 Logger.action("TestCycleLights -> Turning on white light; Cycle #" + m_cycleNum);
+                m_lighter.turnOnWhiteOnly();
                 break;
             case 2:
-                m_lighter.turnOnRedOnly();
                 Logger.action("TestCycleLights -> Turning on red light; Cycle #" + m_cycleNum);
+                m_lighter.turnOnRedOnly();
                 break;
             case 3:
-                m_lighter.turnOnBoth();
                 Logger.action("TestCycleLights -> Turning on both lights; Cycle #" + m_cycleNum);
+                m_lighter.turnOnBoth();
                 break;
             default:
                 ++m_cycleNum;
                 m_lightSequence = 0;
                 if (m_cycleNum <= NUM_CYCLES) {
                     // If we're not done with all cycles, start a new cycle with both lights off
-                    m_lighter.turnOffBoth();
                     Logger.action("TestCycleLights -> Turning off both lights; Cycle #" + m_cycleNum);
+                    m_lighter.turnOffBoth();
                 }
             }
+            m_timer.stop();
             m_timer.reset();
             m_timer.start();
         }
@@ -89,6 +94,8 @@ public class TestCycleLights extends CommandBase {
 
         Logger.action("TestCycleLights -> Turning off both lights; Cycle #" + m_cycleNum);
         m_lighter.turnOffBoth();
+        m_timer.stop();
+        m_timer.reset();
     }
 
 }

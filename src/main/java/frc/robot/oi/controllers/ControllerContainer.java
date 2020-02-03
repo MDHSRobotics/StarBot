@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 public class ControllerContainer {
 
     public int port;
+    public boolean configured = false;
 
     public ControllerContainer(int port) {
         this.port = port;

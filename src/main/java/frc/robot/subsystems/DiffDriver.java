@@ -88,13 +88,12 @@ public class DiffDriver extends SubsystemBase {
 
     // Drive forward at a set speed
     public void moveForwardAuto() {
+        if (m_disabled) return;
         diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
     }
 
     // Drive to align the robot to a detected line at the given yaw
     public void driveAlign(double targetYaw) {
-        Logger.setup("##");
-
         // Get the correction yaw needed to align the Robot with the target yaw
         double yaw = BotSensors.gyro.getYaw();
         double correction = targetYaw - yaw;
@@ -114,15 +113,12 @@ public class DiffDriver extends SubsystemBase {
         Logger.action("DiffDriver -> Drive Tank: " + zRotation);
         if (m_disabled) return;
         diffDrive.arcadeDrive(0, zRotation);
-
-        Logger.ending("^^");
     }
 
     // TODO: Use this to indicate to the driver that the robot is aligned with the target (lights? Shuffleboard?)
     public static boolean isAligned(double targetAngle) {
         boolean straight = Gyro.isYawAligned(targetAngle);
-        if (!straight)
-            return false;
+        if (!straight) return false;
 
         Logger.info("DiffDriver -> Robot is fully aligned!");
         return true;

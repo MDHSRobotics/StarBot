@@ -2,7 +2,7 @@
 package frc.robot.oi.positions;
 
 import frc.robot.brains.XboxBrain;
-import frc.robot.oi.controllers.XboxControllerContainer;
+import frc.robot.oi.controllers.XboxPositionAccessible;
 
 // The position values obtained from xbox thumbsticks
 public class ThumbstickPosition {
@@ -23,7 +23,7 @@ public class ThumbstickPosition {
     }
 
     // Gets the xbox thumbstick positions and applies user-determined orientation, deadzones, and sensitivity
-    public static ThumbstickPosition getPositions(XboxControllerContainer controller, boolean isYleftFlipped) {
+    public static ThumbstickPosition getPositions(XboxPositionAccessible controller, boolean isYleftFlipped) {
         ThumbstickPosition pos = controller.getThumbstickPositions(isYleftFlipped);
 
         double yLeft = pos.leftForwardBackPosition; // Left forward & backward, flipped

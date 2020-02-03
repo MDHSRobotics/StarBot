@@ -28,22 +28,28 @@ public class BotSubsystems {
         shooter = new Shooter();
     }
 
-    // Set all the subsystem default commands
-    public static void setDefaultCommands() {
-        Logger.setup("Climb DefaultCommand -> StandStop...");
+    // Set all the subsystem "teleop" default commands
+    public static void setTeleopDefaultCommands() {
+        Logger.setup("Climb Default Command -> StandStop...");
         climb.setDefaultCommand(BotCommands.standStop);
 
-        Logger.setup("Conveyor DefaultCommand -> StopConveyor...");
+        Logger.setup("Conveyor Default Command -> StopConveyor...");
         conveyor.setDefaultCommand(BotCommands.stopConveyor);
 
-        Logger.setup("DiffDriver DefaultCommand -> DriveDiffTank...");
+        Logger.setup("DiffDriver Teleop Default Command -> DriveDiffTank...");
         diffDriver.setDefaultCommand(BotCommands.driveDiffTank);
 
-        Logger.setup("Roller DefaultCommand -> StopRoller...");
+        Logger.setup("Roller Default Command -> StopRoller...");
         roller.setDefaultCommand(BotCommands.stopRoller);
 
-        Logger.setup("Shooter DefaultCommand -> StopShooter");
+        Logger.setup("Shooter Default Command -> StopShooter");
         shooter.setDefaultCommand(BotCommands.stopShooter);
+    }
+
+    // Set all the subsystem "test" default commands
+    public static void setTestDefaultCommands() {
+        Logger.setup("DiffDriver Test Default Command -> DriveDiffTank...");
+        diffDriver.setDefaultCommand(TestCommands.driveDiffTank);
     }
 
 }
