@@ -12,6 +12,8 @@ public class BotSensors {
     // Gyros
     public static AHRS gyro;
 
+    // Distance Sensor
+
     public static void initializeSensors() {
         Logger.setup("Initializing BotSensors...");
 
@@ -19,5 +21,5 @@ public class BotSensors {
         if (!gyro.isConnected())
             Logger.error("Gyro not connected!");
     }
-
+    
 }
