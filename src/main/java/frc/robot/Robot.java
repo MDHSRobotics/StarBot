@@ -2,12 +2,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.consoles.Logger;
-import frc.robot.oi.controllers.DPadButton.Direction;
+import frc.robot.tests.TestRunnable;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -21,9 +20,9 @@ public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
 
     // Test variables
-    private final double TEST_SECONDS = 8.0;
-    private int m_currentTest = 0;
-    private Timer m_testTimer = new Timer();
+    private int m_numberOfTests;
+    private int m_currentTestNumber;
+    private int m_testIteration;
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -67,7 +66,7 @@ public class Robot extends TimedRobot {
         System.out.println("--");
         Logger.ending("Disabling Robot...");
 
-        // Cancel all running commands
+        // Reset virtual controllers and cancel all scheduled commands
         VirtualControllers.reset();
         CommandScheduler.getInstance().cancelAll();
     }
@@ -84,7 +83,7 @@ public class Robot extends TimedRobot {
         System.out.println("--");
         Logger.setup("Initializing Autonomous Mode...");
 
-        // Cancel all running commands
+        // Reset virtual controllers and cancel all scheduled commands
         VirtualControllers.reset();
         CommandScheduler.getInstance().cancelAll();
 
@@ -110,7 +109,7 @@ public class Robot extends TimedRobot {
         // Set subsystem "teleop" default commands
         BotSubsystems.setTeleopDefaultCommands();
 
-        // Cancel all running commands
+        // Reset virtual controllers and cancel all scheduled commands
         VirtualControllers.reset();
         CommandScheduler.getInstance().cancelAll();
     }
@@ -132,18 +131,20 @@ public class Robot extends TimedRobot {
         // Set subsystem "test" default commands
         BotSubsystems.setTestDefaultCommands();
 
-        // Cancel all running commands
+        // Reset virtual controllers and cancel all scheduled commands
         VirtualControllers.reset();
         CommandScheduler.getInstance().cancelAll();
         // Re-enable the scheduler
         CommandScheduler.getInstance().enable();
 
-        m_currentTest = 1;
-        m_testTimer.stop();
-        m_testTimer.reset();
-
         // Configure virtual controllers
         VirtualControllers.configure();
+
+        // Reset the test variables
+        m_numberOfTests = TestSupplier.getNumberOfTests();
+        Logger.info("Number of tests registered: " + m_numberOfTests);
+        m_currentTestNumber = 0;
+        m_testIteration = 0;
     }
 
     /**
@@ -151,64 +152,22 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
-        double currentTime = m_testTimer.get();
-        if (currentTime > TEST_SECONDS) {
+        if (m_testIteration == 0) {
             VirtualControllers.reset();
             CommandScheduler.getInstance().cancelAll();
-            m_currentTest++;
-            m_testTimer.stop();
-            m_testTimer.reset();
-            currentTime = 0;
+            m_currentTestNumber++;
         }
 
-        switch (m_currentTest) {
-        case 1:
-            if (currentTime == 0) {
-                Logger.action("Starting TestCycleLights for " + TEST_SECONDS + " seconds...");
-                m_testTimer.start();
-                BotCommands.testCycleLights.schedule();
-            }
-            return;
-        case 2:
-            if (currentTime == 0) {
-                Logger.action("Starting AlignDiffDriveToGyro test for " + TEST_SECONDS + " seconds...");
-                m_testTimer.start();
-                VirtualControllers.primary.xbox.dpadActive = true;
-                VirtualControllers.primary.xbox.dpadDirection = Direction.UP;
-            }
-            else if (currentTime < 1) {
-                VirtualControllers.primary.xbox.dpadDirection = Direction.RIGHT;
-            }
-            else if (currentTime < 2) {
-                VirtualControllers.primary.xbox.dpadDirection = Direction.LEFT;
-            }
-            else if (currentTime < 3) {
-                VirtualControllers.primary.xbox.dpadDirection = Direction.DOWN_RIGHT;
-            }
-            else if (currentTime < 4) {
-                VirtualControllers.primary.xbox.dpadDirection = Direction.DOWN;
-            }
-            else if (currentTime < 5) {
-                VirtualControllers.primary.xbox.dpadDirection = Direction.DOWN_LEFT;
-            }
-            else if (currentTime < 6) {
-                VirtualControllers.primary.xbox.dpadDirection = Direction.UP_RIGHT;
-            }
-            else if (currentTime < 7) {
-                VirtualControllers.primary.xbox.dpadDirection = Direction.UP_LEFT;
-            }
-            else if (currentTime < 8) {
-                VirtualControllers.primary.xbox.dpadDirection = Direction.UP;
-            }
-            return;
-        default:
-            Logger.action("All tests complete.");
+        if (m_currentTestNumber <= m_numberOfTests) {
+            TestRunnable currentTest = TestSupplier.getTest(m_currentTestNumber);
+            m_testIteration = currentTest.run(m_testIteration);
+        }
+        else {
+            Logger.ending("All tests complete.");
             VirtualControllers.reset();
             CommandScheduler.getInstance().cancelAll();
-            m_currentTest = 1;
-            m_testTimer.stop();
-            m_testTimer.reset();
-            return;
+            m_currentTestNumber = 0;
+            m_testIteration = 0;
         }
     }
 
