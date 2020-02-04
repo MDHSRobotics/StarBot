@@ -10,8 +10,6 @@ public class ButtonBindings {
     public static void configurePrimary() {
         Logger.setup("Configure Buttons -> Primary Controller...");
 
-        // TODO: There are conflicts with buttons after merge. Resolve.
-
         // Climb
         BotControllers.primary.btnA.whenPressed(BotCommands.toggleHook);
         BotControllers.primary.btnB.whenPressed(BotCommands.toggleLegs);
@@ -21,13 +19,7 @@ public class ButtonBindings {
         // DiffDriver
         BotControllers.primary.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
 
-        // Roller
-        BotControllers.primary.btnB.whileHeld(BotCommands.spinRoller);
-
-        // RollerArm
-        BotControllers.primary.btnX.whenPressed(BotCommands.toggleRollerArm);
-
-        // Shooter?
+        // Shooter
         BotControllers.primary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
         BotControllers.primary.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
     }
@@ -38,6 +30,12 @@ public class ButtonBindings {
 
         // Conveyor
         BotControllers.secondary.btnBumperLeft.whileHeld(BotCommands.reverseConveyor);
+
+        // Roller
+        BotControllers.primary.btnB.whileHeld(BotCommands.spinRoller);
+
+        // RollerArm
+        BotControllers.primary.btnX.whenPressed(BotCommands.toggleRollerArm);
     }
 
 }
