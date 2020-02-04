@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.DiffDriverBrain;
 import frc.robot.consoles.Logger;
+import frc.robot.sensors.DistanceSensor;
 import frc.robot.sensors.Gyro;
+import frc.robot.brains.*;
 import frc.robot.BotSensors;
 
 import static frc.robot.subsystems.Devices.diffDrive;
@@ -128,4 +130,20 @@ public class DiffDriver extends SubsystemBase {
         return true;
     }
 
+    //
+    public void centerOnTarget() {
+        double distance = DistanceSensor.getDistance();
+        double targetMaximum = 500;
+        double targetMinimum = 100;
+        if(distance > targetMinimum && distance < targetMaximum){
+            diffDrive.stopMotor();
+        }
+        else if(distance > targetMaximum){
+            diffDrive.arcadeDrive(-0.2, 0);
+        }
+        else if(distance < targetMinimum){
+            diffDrive.arcadeDrive(0.2, 0);
+        }
+    }
 }
+

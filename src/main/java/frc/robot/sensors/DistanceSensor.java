@@ -1,16 +1,28 @@
-
 package frc.robot.sensors;
 
-import frc.robot.brains.DistanceBrain;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DistanceSensor {
 
-    private static final double TARGET_DISTANCE = 3;
+    // (pins 3, 6 and 7 from sensor to analog input 0)
+    private static final AnalogInput mb1013 = new AnalogInput(0);
 
-    public static boolean distanceReached() {
-        double distance = DistanceBrain.getDistance();
-        boolean isDistancedReached = (distance == TARGET_DISTANCE);
-        return isDistancedReached;
+    // Converts voltage to mm
+    private static final double mV_PER_5MM = 4.88;
+
+    // Returns the voltage output from the sensor
+    public static double getVoltage() {
+        return mb1013.getVoltage();
     }
 
+    // uses the voltage conversion value to get the distance in mm
+    public static double getDistance() {
+        return getVoltage() / mV_PER_5MM * 5;
+    }
+
+    public static void updateDashboard() {
+        SmartDashboard.putNumber("Distance (volts)", getVoltage());
+        SmartDashboard.putNumber("Distance (real)", getDistance());
+    }
 }

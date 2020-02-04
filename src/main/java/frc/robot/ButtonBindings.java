@@ -31,6 +31,7 @@ public class ButtonBindings {
 
         // DiffDriver
         BotControllers.drive.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
+        BotControllers.drive.btnBumperRight.whileHeld(BotCommands.centerDiffDriveOnTarget);
 
         // Roller
         BotControllers.drive.btnB.whileHeld(BotCommands.spinRoller);
