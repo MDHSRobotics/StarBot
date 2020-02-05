@@ -1,6 +1,7 @@
 package frc.robot.sensors;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.consoles.Logger;
 
 /**
@@ -10,31 +11,30 @@ import frc.robot.consoles.Logger;
 
 public class DistanceSensor {
 
-  // distance in inches the robot wants to stay from an object
-  private static final double kHoldDistance = 12.0;
+    // (pins 3, 6 and 7 from sensor to analog input 0)
+    private static final AnalogInput mb1013 = new AnalogInput(0);
 
-  // factor to convert sensor values to a distance in inches
-  private static final double kValueToInches = 0.125;
+    // Converts voltage to mm
+    private static final double mV_PER_5MM = 4.88;
 
-  // proportional speed constant
-  private static final double kP = 0.05;
+    // Returns the voltage output from the sensor
+    public static double getVoltage() {
+        return mb1013.getVoltage();
 
-  private static final int kUltrasonicPort = 0;
+    }
 
-  private static final AnalogInput m_ultrasonic = new AnalogInput(kUltrasonicPort);
+    // uses the voltage conversion value to get the distance in mm
+    public static double getDistance() {
+        double voltage = getVoltage();
+        Logger.info("voltage: " + voltage);
+        double voltageToDistance = voltage / mV_PER_5MM * 5;
+        Logger.info("Meters away from the target " + voltageToDistance);
+        return voltageToDistance;
 
-  /**
-   * Tells the robot to drive to a set distance (in inches) from an object
-   * using proportional control.
-   */
+    }
 
-  public static void getDistance() {
-    // sensor returns a value from 0-4095 that is scaled to inches
-    double currentDistance = m_ultrasonic.getValue() * kValueToInches;
-    Logger.info("Current distance: " + currentDistance);
-  }
-
-// convert distance error to a motor speed
-// double currentSpeed = (kHoldDistance - currentDistance) * kP;
-
+    public static void updateDashboard() {
+        SmartDashboard.putNumber("Distance (volts)", getVoltage());
+        SmartDashboard.putNumber("Distance (real)", getDistance());
+    }
 }

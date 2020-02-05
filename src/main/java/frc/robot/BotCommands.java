@@ -45,6 +45,7 @@ public class BotCommands {
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
     public static DriveDiffTank driveDiffTank;
+    public static CenterDiffDriveOnTarget centerDiffDriveOnTarget;
 
     // Lighter
     public static CycleLights cycleLights;
@@ -95,8 +96,7 @@ public class BotCommands {
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
 
         // DiffDriver
-        alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
-        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.primary);
+        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);

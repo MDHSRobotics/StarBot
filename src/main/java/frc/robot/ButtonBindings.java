@@ -19,7 +19,8 @@ public class ButtonBindings {
         BotControllers.primary.btnY.whileHeld(BotCommands.rollerReverse);
 
         // DiffDriver
-        BotControllers.primary.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
+        BotControllers.drive.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
+        BotControllers.drive.btnBumperRight.whileHeld(BotCommands.centerDiffDriveOnTarget);
 
         // Roller
         BotControllers.primary.btnB.whileHeld(BotCommands.spinRoller);
@@ -28,9 +29,8 @@ public class ButtonBindings {
         BotControllers.primary.btnX.whenPressed(BotCommands.toggleRollerArm);
 
         // Shooter?
-        BotControllers.primary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
-        BotControllers.primary.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
-    }
+       // BotControllers.drive.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
+       // BotControllers.drive.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
 
     // Configure "secondary" xbox buttons
     public static void configureSecondary() {
