@@ -2,6 +2,7 @@ package frc.robot.sensors;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.consoles.Logger;
 
 public class DistanceSensor {
 
@@ -14,11 +15,17 @@ public class DistanceSensor {
     // Returns the voltage output from the sensor
     public static double getVoltage() {
         return mb1013.getVoltage();
+
     }
 
     // uses the voltage conversion value to get the distance in mm
     public static double getDistance() {
-        return getVoltage() / mV_PER_5MM * 5;
+        double voltage = getVoltage();
+        Logger.info("voltage: " + voltage);
+        double voltageToDistance = voltage / mV_PER_5MM * 5;
+        Logger.info("Meters away from the target " + voltageToDistance);
+        return voltageToDistance;
+
     }
 
     public static void updateDashboard() {

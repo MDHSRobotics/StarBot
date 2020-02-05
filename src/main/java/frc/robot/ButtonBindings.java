@@ -40,8 +40,8 @@ public class ButtonBindings {
         BotControllers.drive.btnX.whenPressed(BotCommands.toggleRollerArm);
 
         // Shooter?
-        BotControllers.drive.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
-        BotControllers.drive.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
+       // BotControllers.drive.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
+       // BotControllers.drive.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
 
         // TODO: This is configuring buttons for the shoot xbox controller in a method called configureDriveXboxButtons()
         // Climb/Shoot Controller
