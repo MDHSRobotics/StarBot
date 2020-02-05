@@ -133,16 +133,19 @@ public class DiffDriver extends SubsystemBase {
     //
     public void centerOnTarget() {
         double distance = DistanceSensor.getDistance();
-        double targetMaximum = 500;
-        double targetMinimum = 100;
+        double targetMaximum = 3;
+        double targetMinimum = 2;
         if(distance > targetMinimum && distance < targetMaximum){
             diffDrive.stopMotor();
+            Logger.info("Target Reached!");
         }
         else if(distance > targetMaximum){
-            diffDrive.arcadeDrive(-0.2, 0);
+            diffDrive.arcadeDrive(.4, 0);
+            Logger.info("Too far from the target!");
         }
         else if(distance < targetMinimum){
-            diffDrive.arcadeDrive(0.2, 0);
+            diffDrive.arcadeDrive(.4, 0);
+            Logger.info("Too close to the target!");
         }
     }
 }
