@@ -25,7 +25,7 @@ public final class EncoderConstants {
     public static final int PID_LOOP_AUXILIARY = 1;
 
     // The amount of native ticks per revolution (Tpr) in the Redline Encoder.
-    public static final int ENCODER_TPR = 1024;
+    public static final int ENCODER_TPR = 4096;
 
     // The amount of time spent per PID frame
     public static final int CLOSED_LOOP_TIME_MS = 1;

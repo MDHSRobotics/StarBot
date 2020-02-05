@@ -31,11 +31,11 @@ public class Shooter extends SubsystemBase {
     private final double WHEEL_DIAMETER = 4.0;
 
     // Encoder constants
-    private static final boolean SENSOR_PHASE_TOP = false;
-    private static final boolean MOTOR_INVERT_TOP = false;
+    private static final boolean SENSOR_PHASE_TOP = true;
+    private static final boolean MOTOR_INVERT_TOP = true;
 
-    private static final boolean SENSOR_PHASE_BOTTOM = true;
-    private static final boolean MOTOR_INVERT_BOTTOM = true;
+    private static final boolean SENSOR_PHASE_BOTTOM = false;
+    private static final boolean MOTOR_INVERT_BOTTOM = false;
 
     // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
@@ -173,12 +173,12 @@ public class Shooter extends SubsystemBase {
         talon.setInverted(MOTOR_INVERT);
         talon.configAllowableClosedloopError(PID_SLOT_0, 0, TIMEOUT_MS);
 
-        talon.config_kF(PID_SLOT_0, 0.4, TIMEOUT_MS);
+        talon.config_kF(PID_SLOT_0, 0.1, TIMEOUT_MS);
         talon.config_kP(PID_SLOT_0, 0.0, TIMEOUT_MS);
         talon.config_kI(PID_SLOT_0, 0.0, TIMEOUT_MS);
         talon.config_kD(PID_SLOT_0, 0.0, TIMEOUT_MS);
 
-        talon.configNeutralDeadband(NEUTRAL_DEADBAND, TIMEOUT_MS);
+        //talon.configNeutralDeadband(NEUTRAL_DEADBAND, TIMEOUT_MS);
 
         talon.configMotionAcceleration(3000, TIMEOUT_MS);
         talon.configMotionCruiseVelocity(8000, TIMEOUT_MS);
@@ -187,20 +187,20 @@ public class Shooter extends SubsystemBase {
     }
 
     private static void zeroOutEncoder(WPI_TalonSRX talon){
-        // // Initialize current encoder position as zero
-        // talon.setSelectedSensorPosition(0, PID_LOOP_PRIMARY, TIMEOUT_MS);
-        // SensorCollection sensorCol = talon.getSensorCollection();
-        // int absolutePosition = sensorCol.getPulseWidthPosition();
-        // absolutePosition &= 0xFFF;
-        // if (SENSOR_PHASE_TOP)
-        //     absolutePosition *= -1;
-        // if (MOTOR_INVERT_TOP)
-        //     absolutePosition *= -1;
-        // // Set the quadrature (relative) sensor to match absolute
-        // talon.setSelectedSensorPosition(absolutePosition, PID_LOOP_PRIMARY, TIMEOUT_MS);
-
+        // Initialize current encoder position as zero
+        talon.setSelectedSensorPosition(0, PID_LOOP_PRIMARY, TIMEOUT_MS);
         SensorCollection sensorCol = talon.getSensorCollection();
-        sensorCol.setQuadraturePosition(0, TIMEOUT_MS);
+        int absolutePosition = sensorCol.getPulseWidthPosition();
+        absolutePosition &= 0xFFF;
+        if (SENSOR_PHASE_TOP)
+            absolutePosition *= -1;
+        if (MOTOR_INVERT_TOP)
+            absolutePosition *= -1;
+        // Set the quadrature (relative) sensor to match absolute
+        talon.setSelectedSensorPosition(absolutePosition, PID_LOOP_PRIMARY, TIMEOUT_MS);
+
+        // SensorCollection sensorCol = talon.getSensorCollection();
+        // sensorCol.setQuadraturePosition(0, TIMEOUT_MS);
     }
 
     @Override
@@ -283,8 +283,8 @@ public class Shooter extends SubsystemBase {
 
     public void testMotor() {
         if (m_disabled) return;
-        talonSrxShooterBottomWheel.set(1.0);
-        talonSrxShooterTopWheel.set(1.0);
+        talonSrxShooterBottomWheel.set(0.3);
+        talonSrxShooterTopWheel.set(0.3);
     }
 
 }
