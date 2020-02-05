@@ -1,7 +1,11 @@
-
-
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.DiffDriverBrain;
@@ -26,6 +30,9 @@ public class DiffDriver extends SubsystemBase {
     private final double SECONDS_FROM_NEUTRAL_TO_FULL = 0;
     private final int TIMEOUT_MS = 10;
     private final double AUTO_PERIOD_SPEED = 0.5;
+
+    //Odometry class for tracking robot pose (PathWeaver)
+    private final DifferentialDriveOdometry m_odometry;
 
     // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
@@ -54,6 +61,8 @@ public class DiffDriver extends SubsystemBase {
         talonFxDiffWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
         talonFxDiffWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
         talonFxDiffWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+
+        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
     }
 
     @Override
@@ -135,12 +144,39 @@ public class DiffDriver extends SubsystemBase {
     }
 
     // TODO: Use this to indicate to the driver that the robot is aligned with the target (lights? Shuffleboard?)
-    public static boolean isAligned(double targetAngle) {
+    public boolean isAligned(double targetAngle) {
         boolean straight = Gyro.isYawAligned(targetAngle);
         if (!straight) return false;
 
         Logger.info("DiffDriver -> Robot is fully aligned!");
         return true;
+    }
+
+    //---PathWeaver methods---//
+
+    // returns the heading of the robot
+    public double getHeading() {
+        return Math.IEEEremainder(BotSensors.gyro.getAngle(), 360) * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+    }
+
+    // returns the turn rate of the robot
+    public Pose2d getPose() {
+        return m_odometry.getPoseMeters();
+    }
+
+    public void driveAlongTrajectory(Trajectory trajectory) {
+        Logger.info("Driving along trajectory.");
+
+        RamseteCommand ramseteCommand = new RamseteCommand(trajectory, m_robotDrive::getPose,
+            new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
+            new SimpleMotorFeedforward(DriveConstants.ksVolts,
+                    DriveConstants.kvVoltSecondsPerMeter,
+                    DriveConstants.kaVoltSecondsSquaredPerMeter),
+            DriveConstants.kDriveKinematics, m_robotDrive::getWheelSpeeds,
+            new PIDController(DriveConstants.kPDriveVel, 0, 0), new PIDController(DriveConstants.kPDriveVel, 0, 0),
+            // RamseteCommand passes volts to the callback
+            m_robotDrive::tankDriveVolts, m_robotDrive);
+
     }
 
 }

@@ -23,6 +23,7 @@ public class BotCommands {
     // Autonomous
     public static AutoDriveForward autoDriveForward;
     public static AutoDriveForwardShoot autoDriveForwardShoot;
+    public static AutoDrivePath autoDrivePath;
 
     // Climb Balancer
     public static BalanceLeft balanceLeft;
@@ -81,6 +82,7 @@ public class BotCommands {
         // Autonomous
         autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
         autoDriveForwardShoot = new AutoDriveForwardShoot(BotSubsystems.diffDriver);
+        autoDrivePath = new AutoDrivePath(BotSubsystems.diffDriver);
 
         // Climb Balancer
         balanceRight = new BalanceRight(BotSubsystems.climbBalancer);
@@ -134,8 +136,8 @@ public class BotCommands {
 
     // Return the command to run in autonomous mode
     public static Command getAutonomousCommand() {
-        return autoDriveForward;
-        //return autoDriveForwardShoot;
+        return autoDrivePath;
+
     }
 
 }
