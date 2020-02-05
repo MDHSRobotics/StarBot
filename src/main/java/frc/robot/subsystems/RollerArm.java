@@ -24,7 +24,7 @@ public class RollerArm extends SubsystemBase {
         m_disabled = (compressorRollerArm == null ||
                       solenoidRollerArm == null);
         if (m_disabled) {
-            Logger.error("RollerArm devices not initialized! Disabling subsystem...");
+            Logger.problem("RollerArm devices not initialized! Disabling subsystem...");
             return;
         }
 

@@ -47,7 +47,7 @@ public class Climb extends SubsystemBase {
         Logger.setup("Constructing Subsystem: Climb...");
         m_disabled = (sparkMaxClimbArm == null);
         if (m_disabled) {
-            Logger.error("Shooter devices not initialized! Disabling subsystem...");
+            Logger.problem("Shooter devices not initialized! Disabling subsystem...");
             return;
         }
 

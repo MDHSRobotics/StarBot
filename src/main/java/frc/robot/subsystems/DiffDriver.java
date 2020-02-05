@@ -8,7 +8,6 @@ import frc.robot.brains.DiffDriverBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.sensors.DistanceSensor;
 import frc.robot.sensors.Gyro;
-import frc.robot.brains.*;
 import frc.robot.BotSensors;
 
 import static frc.robot.subsystems.Devices.diffDrive;
@@ -37,7 +36,7 @@ public class DiffDriver extends SubsystemBase {
         // Determine whether or not to disable the subsystem
         m_disabled = (diffDrive == null);
         if (m_disabled) {
-            Logger.error("DiffDriver devices not initialized! Disabling subsystem...");
+            Logger.problem("DiffDriver devices not initialized! Disabling subsystem...");
             return;
         }
 
@@ -84,7 +83,7 @@ public class DiffDriver extends SubsystemBase {
     // Drive using the tank method
     public void driveTank(double leftSpeed, double rightSpeed) {
         if (m_disabled) return;
-        // Logger.info("Leftspeed = " + leftSpeed + "; Rightspeed = " + rightSpeed);
+        // Logger.info("Left Speed: " + leftSpeed + "; Right Speed: " + rightSpeed);
         diffDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
@@ -92,6 +91,24 @@ public class DiffDriver extends SubsystemBase {
     public void moveForwardAuto() {
         if (m_disabled) return;
         diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
+    }
+
+    // Drive to center the robot perpendicular to the shoot target
+    // based on the detected distance to the near side arena wall
+    public void centerOnTarget() {
+        double distance = DistanceSensor.getDistanceInMeters();
+        double targetMaximum = 3;
+        double targetMinimum = 2;
+        if (distance > targetMinimum && distance < targetMaximum) {
+            diffDrive.stopMotor();
+            Logger.info("DiffDriver -> CenterOnTarget -> Distance: " + distance + " Target Reached!");
+        } else if (distance > targetMaximum) {
+            diffDrive.arcadeDrive(.4, 0);
+            Logger.info("DiffDriver -> CenterOnTarget -> Distance: " + distance + " Too far from the target!");
+        } else if (distance < targetMinimum) {
+            diffDrive.arcadeDrive(.4, 0);
+            Logger.info("DiffDriver -> CenterOnTarget -> Distance: " + distance + " Too close to the target!");
+        }
     }
 
     // Drive to align the robot to a detected line at the given yaw
@@ -126,23 +143,5 @@ public class DiffDriver extends SubsystemBase {
         return true;
     }
 
-    //
-    public void centerOnTarget() {
-        double distance = DistanceSensor.getDistance();
-        double targetMaximum = 3;
-        double targetMinimum = 2;
-        if(distance > targetMinimum && distance < targetMaximum){
-            diffDrive.stopMotor();
-            Logger.info("Target Reached!");
-        }
-        else if(distance > targetMaximum){
-            diffDrive.arcadeDrive(.4, 0);
-            Logger.info("Too far from the target!");
-        }
-        else if(distance < targetMinimum){
-            diffDrive.arcadeDrive(.4, 0);
-            Logger.info("Too close to the target!");
-        }
-    }
 }
 

@@ -42,7 +42,7 @@ public class Shooter extends SubsystemBase {
         // Determine whether or not to disable the subsystem
         m_disabled = (talonSrxShooterBottomWheel == null || talonSrxShooterTopWheel == null);
         if (m_disabled) {
-            Logger.error("Shooter devices not initialized! Disabling subsystem...");
+            Logger.problem("Shooter devices not initialized! Disabling subsystem...");
             return;
         }
 

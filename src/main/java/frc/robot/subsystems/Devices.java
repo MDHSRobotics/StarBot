@@ -77,7 +77,7 @@ public class Devices {
         boolean talonSrxConveyorIsConnected = DeviceUtils.isConnected(talonSrxConveyor);
         if (!talonSrxConveyorIsConnected) {
             talonSrxConveyor = null;
-            Logger.error("Conveyor talon is not connected!");
+            Logger.problem("Conveyor talon is not connected!");
         }
     }
 
@@ -91,23 +91,23 @@ public class Devices {
         boolean talonsAreConnected = true;
         if (!talonFxDiffWheelFrontLeftIsConnected) {
             talonsAreConnected = false;
-            Logger.error("DiffWheelFrontLeft talon is not connected!");
+            Logger.problem("DiffWheelFrontLeft talon is not connected!");
         }
         if (!talonFxDiffWheelFrontRightIsConnected) {
             talonsAreConnected = false;
-            Logger.error("DiffWheelFrontRight talon is not connected!");
+            Logger.problem("DiffWheelFrontRight talon is not connected!");
         }
         if (!talonFxDiffWheelRearLeftIsConnected) {
             talonsAreConnected = false;
-            Logger.error("DiffWheelRearLeft talon is not connected!");
+            Logger.problem("DiffWheelRearLeft talon is not connected!");
         }
         if (!talonFxDiffWheelRearRightIsConnected) {
             talonsAreConnected = false;
-            Logger.error("DiffWheelRearRight talon is not connected!");
+            Logger.problem("DiffWheelRearRight talon is not connected!");
         }
 
         if (!talonsAreConnected) {
-            Logger.error("DiffDriver devices not all connected! Disabling...");
+            Logger.problem("DiffDriver devices not all connected! Disabling...");
             talonFxDiffWheelFrontLeft = null;
             talonFxDiffWheelFrontRight = null;
             talonFxDiffWheelRearLeft = null;
@@ -122,7 +122,7 @@ public class Devices {
         boolean talonSrxRollerIsConnected = DeviceUtils.isConnected(talonSrxRoller);
         if (!talonSrxRollerIsConnected) {
             talonSrxRoller = null;
-            Logger.error("Roller talon is not connected! Disabling...");
+            Logger.problem("Roller talon is not connected! Disabling...");
         }
     }
 
@@ -134,17 +134,17 @@ public class Devices {
         boolean pneumaticsAreConnected = true;
         if (!compressorRollerArmIsConnected) {
             pneumaticsAreConnected = false;
-            Logger.error("RollerArm compressor is not connected!");
+            Logger.problem("RollerArm compressor is not connected!");
         }
         if (!solenoidRollerArmIsConnected) {
             pneumaticsAreConnected = false;
-            Logger.error("RollerArm solenoid is not connected!");
+            Logger.problem("RollerArm solenoid is not connected!");
         }
 
         if (!pneumaticsAreConnected) {
             compressorRollerArm = null;
             solenoidRollerArm = null;
-            Logger.error("RollerArm pnuematics are not connected! Disabling...");
+            Logger.problem("RollerArm pnuematics are not connected! Disabling...");
         }
     }
 
@@ -157,7 +157,7 @@ public class Devices {
 
         if (!(talonSrxShooterTopIsConnected && talonSRXShooterBottomIsConnect)) {
             talonSrxShooterTopWheel = null;
-            Logger.error("Shooter talon is not connected! Disabling...");
+            Logger.problem("Shooter talon is not connected! Disabling...");
         }
     }
 

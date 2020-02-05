@@ -1,40 +1,40 @@
+
 package frc.robot.sensors;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.consoles.Logger;
+import frc.robot.BotSensors;
 
-/**
- * This is a sample program demonstrating how to use an ultrasonic sensor and
- * proportional control to maintain a set distance from an object.
- */
-
+// This class contains methods for obtaining useful distance sensor readings
 public class DistanceSensor {
 
-    // (pins 3, 6 and 7 from sensor to analog input 0)
-    private static final AnalogInput mb1013 = new AnalogInput(0);
-
-    // Converts voltage to mm
+    // Used to convert distance sensor voltage to meters
     private static final double mV_PER_5MM = 4.88;
 
-    // Returns the voltage output from the sensor
+    // Returns the voltage output from the distance sensor
     public static double getVoltage() {
-        return mb1013.getVoltage();
-
+        return BotSensors.distanceSensor.getVoltage();
     }
 
-    // uses the voltage conversion value to get the distance in mm
-    public static double getDistance() {
+    // Converts distance sensor voltage to the distance in meters
+    public static double getDistanceInMeters() {
         double voltage = getVoltage();
-        Logger.info("voltage: " + voltage);
-        double voltageToDistance = voltage / mV_PER_5MM * 5;
-        Logger.info("Meters away from the target " + voltageToDistance);
-        return voltageToDistance;
-
+        double meters = getDistanceInMeters(voltage);
+        return meters;
     }
 
+    // Converts the given voltage to distance in meters
+    public static double getDistanceInMeters(double voltage) {
+        double meters = voltage / mV_PER_5MM * 5;
+        // Logger.info("DistanceSensor -> Meters away from object: " + meters);
+        return meters;
+    }
+
+    // TODO: This doesn't get called anywhere. Instead, add a Shuffleboard tab
     public static void updateDashboard() {
         SmartDashboard.putNumber("Distance (volts)", getVoltage());
-        SmartDashboard.putNumber("Distance (real)", getDistance());
+        SmartDashboard.putNumber("Distance (real)", getDistanceInMeters());
     }
+
 }

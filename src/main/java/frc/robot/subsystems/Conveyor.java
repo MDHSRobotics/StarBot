@@ -23,7 +23,7 @@ public class Conveyor extends SubsystemBase {
         // Determine whether or not to disable the subsystem
         m_disabled = (talonSrxConveyor == null);
         if (m_disabled) {
-            Logger.error("Conveyor devices not initialized! Disabling subsystem...");
+            Logger.problem("Conveyor devices not initialized! Disabling subsystem...");
             return;
         }
 

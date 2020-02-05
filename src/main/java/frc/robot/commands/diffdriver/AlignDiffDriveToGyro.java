@@ -8,7 +8,7 @@ import frc.robot.consoles.Logger;
 import frc.robot.oi.controllers.DPadButton;
 import frc.robot.subsystems.DiffDriver;
 
-// Assited control of the DiffDrive to align the robot with the gyro.
+// Assisted control of the DiffDrive to align the robot with the gyro.
 public class AlignDiffDriveToGyro extends CommandBase {
 
     public GenericHID controller;

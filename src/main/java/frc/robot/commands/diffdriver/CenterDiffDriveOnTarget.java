@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.DiffDriver;
 
-// Automatically control the DiffDrive to align the Robot with the gyro.
+// Assisted control the DiffDrive to center the robot on the shoot target.
 public class CenterDiffDriveOnTarget extends CommandBase {
 
     private DiffDriver m_diffDriver;
@@ -20,8 +20,6 @@ public class CenterDiffDriveOnTarget extends CommandBase {
 
     @Override
     public void initialize() {
-        System.out.println("--");
-        Logger.action("Initializing Command: CenterDiffDriveOnTarget...");
     }
 
     @Override
@@ -40,8 +38,6 @@ public class CenterDiffDriveOnTarget extends CommandBase {
         if (interrupted) {
             System.out.println("--");
             Logger.ending("Interrupting Command: CenterDiffDriveOnTarget...");
-        } else {
-            Logger.ending("Ending Command: CenterDiffDriveOnTarget...");
         }
     }
 

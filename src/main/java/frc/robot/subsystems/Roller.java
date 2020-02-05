@@ -20,7 +20,7 @@ public class Roller extends SubsystemBase {
         // Determine whether or not to disable the subsystem
         m_disabled = (talonSrxRoller == null);
         if (m_disabled) {
-            Logger.error("Roller devices not initialized! Disabling subsystem...");
+            Logger.problem("Roller devices not initialized! Disabling subsystem...");
             return;
         }
 

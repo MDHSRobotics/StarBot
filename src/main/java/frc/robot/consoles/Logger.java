@@ -53,9 +53,9 @@ public class Logger {
         DriverStation.reportWarning("WARNING --> " + message.toString(), false);
     }
 
-    // Red text for warnings
-    public static void error(Object message) {
-        DriverStation.reportError("ERROR --> " + message.toString(), false);
+    // Red text for problems
+    public static void problem(Object message) {
+        DriverStation.reportError("PROBLEM --> " + message.toString(), false);
     }
 
 }
