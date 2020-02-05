@@ -14,6 +14,8 @@ public class BotSubsystems {
     public static Roller roller;
     public static RollerArm rollerArm;
     public static Shooter shooter;
+    public static ClimbArm climbArm;
+    public static ClimbRoller climbRoller;
 
     // Initialize all robot subsystems
     public static void initializeSubsystems() {
@@ -26,12 +28,20 @@ public class BotSubsystems {
         roller = new Roller();
         rollerArm = new RollerArm();
         shooter = new Shooter();
+        climbArm = new ClimbArm();
+        climbRoller = new ClimbRoller();
     }
 
     // Set all the subsystem "teleop" default commands
     public static void setTeleopDefaultCommands() {
         Logger.setup("Climb Default Command -> StandStop...");
         climb.setDefaultCommand(BotCommands.standStop);
+
+        Logger.setup("Climb Default Command -> StopClimbArm...");
+        //climbArm.setDefaultCommand(BotCommands.stopClimbArm);
+
+        Logger.setup("Conveyor Default Command -> StopClimbRoller...");
+        climbRoller.setDefaultCommand(BotCommands.stopClimbRoller);
 
         Logger.setup("Conveyor Default Command -> StopConveyor...");
         conveyor.setDefaultCommand(BotCommands.stopConveyor);

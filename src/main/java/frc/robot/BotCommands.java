@@ -5,6 +5,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.auto.*;
 import frc.robot.commands.climb.*;
+import frc.robot.commands.climbarm.*;
+import frc.robot.commands.climbroller.RollerForward;
+import frc.robot.commands.climbroller.RollerReverse;
+import frc.robot.commands.climbroller.StopClimbRoller;
 import frc.robot.commands.conveyor.*;
 import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
@@ -23,10 +27,11 @@ public class BotCommands {
     // Climb
     public static StandStop standStop;
 
-    // Climb Hook
-    public static HookForward hookForward;
-    public static HookReverse hookReverse;
-    public static ToggleHook toggleHook;
+    // Climb Arm
+    public static TurnArm turnArm;
+    public static RetractArm retractArm;
+    public static ToggleClimbArm toggleClimbArm;
+    public static StopClimbArm stopClimbArm;
 
     // Climb Legs
     public static LiftRobot liftRobot;
@@ -36,6 +41,7 @@ public class BotCommands {
     // Climb Roller
     public static RollerForward rollerForward;
     public static RollerReverse rollerReverse;
+    public static StopClimbRoller stopClimbRoller;
 
     // Conveyor
     public static ForwardConveyor forwardConveyor;
@@ -76,10 +82,11 @@ public class BotCommands {
         // Climb
         standStop = new StandStop(BotSubsystems.climb);
 
-        // Climb Hook
-        hookForward = new HookForward(BotSubsystems.climb);
-        hookReverse = new HookReverse(BotSubsystems.climb);
-        toggleHook = new ToggleHook(BotSubsystems.climb);
+        // Climb Arm
+        turnArm = new TurnArm(BotSubsystems.climbArm);
+        retractArm = new RetractArm(BotSubsystems.climbArm);
+        toggleClimbArm = new ToggleClimbArm(BotSubsystems.climbArm);
+        stopClimbArm = new StopClimbArm(BotSubsystems.climbArm);
 
         // Climb Legs
         liftRobot = new LiftRobot(BotSubsystems.climb);
@@ -87,8 +94,9 @@ public class BotCommands {
         toggleLegs = new ToggleLegs(BotSubsystems.climb);
 
         // Climb Roller
-        rollerForward = new RollerForward(BotSubsystems.climb);
-        rollerReverse = new RollerReverse(BotSubsystems.climb);
+        rollerForward = new RollerForward(BotSubsystems.climbRoller);
+        rollerReverse = new RollerReverse(BotSubsystems.climbRoller);
+        stopClimbRoller = new StopClimbRoller(BotSubsystems.climbRoller);
 
         // Conveyor
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);

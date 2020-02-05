@@ -26,7 +26,7 @@ public class ButtonBindings {
         Logger.setup("Configure Buttons -> Secondary Controller...");
 
         // Climb
-        BotControllers.secondary.btnA.whenPressed(BotCommands.toggleHook);
+        BotControllers.secondary.btnA.whenPressed(BotCommands.toggleClimbArm);
         BotControllers.secondary.btnB.whenPressed(BotCommands.toggleLegs);
         BotControllers.secondary.btnX.whileHeld(BotCommands.rollerForward);
         BotControllers.secondary.btnY.whileHeld(BotCommands.rollerReverse);
