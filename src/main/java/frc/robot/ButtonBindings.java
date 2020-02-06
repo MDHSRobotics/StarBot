@@ -10,8 +10,6 @@ public class ButtonBindings {
     public static void configurePrimary() {
         Logger.setup("Configure Buttons -> Primary Controller...");
 
-        // TODO: There are conflicts with buttons after merge. Resolve.
-
         // DiffDriver
         BotControllers.primary.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
         BotControllers.primary.btnBumperRight.whileHeld(BotCommands.centerDiffDriveOnTarget);

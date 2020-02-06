@@ -13,8 +13,7 @@ public class Gyro {
     public static boolean isYawAligned(double targetAngle) {
         double angle = BotSensors.gyro.getYaw();
         double difference = Math.abs(targetAngle - angle);
-        if (difference > 180)
-            difference = 360 - difference;
+        if (difference > 180) difference = 360 - difference;
         boolean aligned = (difference <= YAW_TOLERANCE);
         Logger.info("Gyro -> Target Angle: " + targetAngle + "; Gyro Yaw: " + angle + "; Difference: " + difference);
         return aligned;
