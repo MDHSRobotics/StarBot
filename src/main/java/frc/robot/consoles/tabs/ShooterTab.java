@@ -2,13 +2,11 @@
 package frc.robot.consoles.tabs;
 
 import edu.wpi.first.wpilibj.shuffleboard.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import java.util.Map;
 
 import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.ShuffleLogger;
-import frc.robot.subsystems.Shooter;
 import frc.robot.BotSubsystems;
 
 // The Shuffleboard Shooter tab.

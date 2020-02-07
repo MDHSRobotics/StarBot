@@ -188,17 +188,6 @@ public class Shooter extends SubsystemBase {
 
     private static void zeroOutEncoder(WPI_TalonSRX talon){
         // Initialize current encoder position as zero
-        // talon.setSelectedSensorPosition(0, PID_LOOP_PRIMARY, TIMEOUT_MS);
-        // SensorCollection sensorCol = talon.getSensorCollection();
-        // int absolutePosition = sensorCol.getPulseWidthPosition();
-        // absolutePosition &= 0xFFF;
-        // if (SENSOR_PHASE_TOP)
-        //     absolutePosition *= -1;
-        // if (MOTOR_INVERT_TOP)
-        //     absolutePosition *= -1;
-        // // Set the quadrature (relative) sensor to match absolute
-        // talon.setSelectedSensorPosition(absolutePosition, PID_LOOP_PRIMARY, TIMEOUT_MS);
-
         SensorCollection sensorCol = talon.getSensorCollection();
         sensorCol.setQuadraturePosition(0, TIMEOUT_MS);
     }
