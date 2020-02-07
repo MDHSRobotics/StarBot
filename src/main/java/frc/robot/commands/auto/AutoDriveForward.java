@@ -15,7 +15,6 @@ public class AutoDriveForward extends CommandBase {
     private double m_timeLastPrinted = 0.0;
 
     private static final double MAX_DRIVE_SECONDS = 5.0;
-    private static final double DELAY_DRIVE_SECONDS = 2.0;
 
     public AutoDriveForward(DiffDriver diffDriver) {
         Logger.setup("Constructing Command: AutoDriveForward...");
@@ -29,7 +28,6 @@ public class AutoDriveForward extends CommandBase {
     public void initialize() {
         Logger.action("Initializing Command: AutoDriveForward...");
 
-        Timer.delay(DELAY_DRIVE_SECONDS); // to avoid robots from starting at the same time
         m_timer.reset();
         m_timer.start();
     }
