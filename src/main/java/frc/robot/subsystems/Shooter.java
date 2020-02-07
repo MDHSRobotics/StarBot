@@ -32,9 +32,9 @@ public class Shooter extends SubsystemBase {
 
     // Encoder constants
     private static final boolean SENSOR_PHASE_TOP = true;
-    private static final boolean MOTOR_INVERT_TOP = true;
+    private static final boolean MOTOR_INVERT_TOP = false;
 
-    private static final boolean SENSOR_PHASE_BOTTOM = false;
+    private static final boolean SENSOR_PHASE_BOTTOM = true;
     private static final boolean MOTOR_INVERT_BOTTOM = false;
 
     // If any of the motor controllers are null, this should be true
@@ -188,19 +188,19 @@ public class Shooter extends SubsystemBase {
 
     private static void zeroOutEncoder(WPI_TalonSRX talon){
         // Initialize current encoder position as zero
-        talon.setSelectedSensorPosition(0, PID_LOOP_PRIMARY, TIMEOUT_MS);
-        SensorCollection sensorCol = talon.getSensorCollection();
-        int absolutePosition = sensorCol.getPulseWidthPosition();
-        absolutePosition &= 0xFFF;
-        if (SENSOR_PHASE_TOP)
-            absolutePosition *= -1;
-        if (MOTOR_INVERT_TOP)
-            absolutePosition *= -1;
-        // Set the quadrature (relative) sensor to match absolute
-        talon.setSelectedSensorPosition(absolutePosition, PID_LOOP_PRIMARY, TIMEOUT_MS);
-
+        // talon.setSelectedSensorPosition(0, PID_LOOP_PRIMARY, TIMEOUT_MS);
         // SensorCollection sensorCol = talon.getSensorCollection();
-        // sensorCol.setQuadraturePosition(0, TIMEOUT_MS);
+        // int absolutePosition = sensorCol.getPulseWidthPosition();
+        // absolutePosition &= 0xFFF;
+        // if (SENSOR_PHASE_TOP)
+        //     absolutePosition *= -1;
+        // if (MOTOR_INVERT_TOP)
+        //     absolutePosition *= -1;
+        // // Set the quadrature (relative) sensor to match absolute
+        // talon.setSelectedSensorPosition(absolutePosition, PID_LOOP_PRIMARY, TIMEOUT_MS);
+
+        SensorCollection sensorCol = talon.getSensorCollection();
+        sensorCol.setQuadraturePosition(0, TIMEOUT_MS);
     }
 
     @Override
