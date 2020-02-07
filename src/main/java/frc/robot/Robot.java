@@ -24,6 +24,19 @@ public class Robot extends TimedRobot {
     private int m_currentTestNumber;
     private int m_testIteration;
 
+    // When connected to the RoboRio, use this constructor because it will use the
+    // proper period duration
+    public Robot() {
+        super();
+    }
+
+    // When running in Simulation mode (not connected to the RoboRio), use this
+    // constructor because it can specify a longer period duration which avoids
+    // watchdog overruns that can occur since the Simulator uses the VSCode debugger
+    public Robot(double period) {
+        super(period);
+    }
+
     /**
      * This function is run when the robot is first started up and should be used for any
      * initialization code.
