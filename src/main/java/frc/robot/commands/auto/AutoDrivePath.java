@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
+import frc.robot.BotSubsystems;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.DiffDriver;
 
@@ -16,6 +16,10 @@ import java.nio.file.Path;
 public class AutoDrivePath extends CommandBase {
 
     private DiffDriver m_diffDriver;
+    private Path m_trajectoryPath;
+    private Trajectory m_trajectory;
+
+    private boolean m_ableToOpenTrajectory = false;
 
     public AutoDrivePath(DiffDriver diffDriver) {
         Logger.setup("Constructing Command: AutoDrivePath...");
@@ -32,8 +36,9 @@ public class AutoDrivePath extends CommandBase {
         String trajectoryJSON = "paths/testScenario.wpilib.json";
 
         try {
-            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-            Trajectory trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+            m_trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+            m_trajectory = TrajectoryUtil.fromPathweaverJson(m_trajectoryPath);
+            m_ableToOpenTrajectory = true;
 
             Logger.info("Trajectory created.");
         }
@@ -45,7 +50,9 @@ public class AutoDrivePath extends CommandBase {
 
     @Override
     public void execute() {
-
+        if (m_ableToOpenTrajectory) {
+            BotSubsystems.diffDriver.driveAlongTrajectory(m_trajectory);
+        }
     }
 
     // This command continues until

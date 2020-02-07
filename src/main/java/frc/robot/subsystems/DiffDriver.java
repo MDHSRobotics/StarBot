@@ -13,6 +13,9 @@ import frc.robot.consoles.Logger;
 import frc.robot.sensors.DistanceSensor;
 import frc.robot.sensors.Gyro;
 import frc.robot.BotSensors;
+import frc.robot.BotSubsystems;
+
+import frc.robot.subsystems.constants.PathConstants;
 
 import static frc.robot.subsystems.Devices.diffDrive;
 import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontLeft;
@@ -20,7 +23,11 @@ import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontRight;
 import static frc.robot.subsystems.Devices.talonFxDiffWheelRearLeft;
 import static frc.robot.subsystems.Devices.talonFxDiffWheelRearRight;
 
-// Differential driver subsystem.
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.RamseteController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+
+// Differential driver subsystem
 public class DiffDriver extends SubsystemBase {
 
     // The direction of forward/backward via the controller
@@ -32,7 +39,7 @@ public class DiffDriver extends SubsystemBase {
     private final double AUTO_PERIOD_SPEED = 0.5;
 
     //Odometry class for tracking robot pose (PathWeaver)
-    private final DifferentialDriveOdometry m_odometry;
+    private DifferentialDriveOdometry m_odometry;
 
     // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
@@ -63,11 +70,17 @@ public class DiffDriver extends SubsystemBase {
         talonFxDiffWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
 
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+
+        // TODO: set up talon fx encoders for drive
     }
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+
+        // Update the odometry in the periodic block
+        m_odometry.update(Rotation2d.fromDegrees(getHeading()), talonFxDiffWheelFrontLeft.getSelectedSensorPosition(),
+                talonFxDiffWheelFrontRight.getSelectedSensorPosition());
     }
 
     // Flip the control direction of the joystick in Y (or Y Left for Xbox thumbsticks)
@@ -156,7 +169,7 @@ public class DiffDriver extends SubsystemBase {
 
     // returns the heading of the robot
     public double getHeading() {
-        return Math.IEEEremainder(BotSensors.gyro.getAngle(), 360) * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+        return Math.IEEEremainder(BotSensors.gyro.getAngle(), 360) * (PathConstants.kGyroReversed ? -1.0 : 1.0);
     }
 
     // returns the turn rate of the robot
@@ -164,19 +177,63 @@ public class DiffDriver extends SubsystemBase {
         return m_odometry.getPoseMeters();
     }
 
+    // Resets the drive encoders to currently read a position of 0
+    public void resetEncoders() {
+        talonFxDiffWheelFrontLeft.reset();
+        talonFxDiffWheelFrontLeft.reset();
+    }
+
+    // Resets the odometry to the specified pose.
+    public void resetOdometry(Pose2d pose) {
+        resetEncoders();
+        m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
+    }
+
+    /**
+     * Controls the left and right sides of the drive directly with voltages. Uses
+     * setVoltage() rather than set(), as this will automatically compensate
+     * for battery “voltage sag” during operation.
+     */
+    public void tankDriveVolts(double leftVolts, double rightVolts) {
+        talonFxDiffWheelFrontLeft.setVoltage(leftVolts);
+        talonFxDiffWheelFrontRight.setVoltage(-rightVolts);
+        BotSubsystems.diffDriver.feed();
+    }
+
     public void driveAlongTrajectory(Trajectory trajectory) {
         Logger.info("Driving along trajectory.");
 
-        RamseteCommand ramseteCommand = new RamseteCommand(trajectory, m_robotDrive::getPose,
-            new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
-            new SimpleMotorFeedforward(DriveConstants.ksVolts,
-                    DriveConstants.kvVoltSecondsPerMeter,
-                    DriveConstants.kaVoltSecondsSquaredPerMeter),
-            DriveConstants.kDriveKinematics, m_robotDrive::getWheelSpeeds,
-            new PIDController(DriveConstants.kPDriveVel, 0, 0), new PIDController(DriveConstants.kPDriveVel, 0, 0),
-            // RamseteCommand passes volts to the callback
-            m_robotDrive::tankDriveVolts, m_robotDrive);
+        RamseteController ramseteController;
+        ramseteController = new RamseteController(PathConstants.AutoConstants.kRamseteB,
+                    PathConstants.AutoConstants.kRamseteZeta);
 
+        SimpleMotorFeedforward simpleMotorFeedforward;
+        simpleMotorFeedforward = new SimpleMotorFeedforward(PathConstants.ksVolts,
+                    PathConstants.kvVoltSecondsPerMeter,
+                    PathConstants.kaVoltSecondsSquaredPerMeter);
+
+        PIDController leftPIDController;
+        leftPIDController = new PIDController(PathConstants.kPDriveVel, 0, 0);
+
+        PIDController rightPIDController;
+        rightPIDController = new PIDController(PathConstants.kPDriveVel, 0, 0);
+
+
+        RamseteCommand ramseteCommand = new RamseteCommand(
+            trajectory,
+            this::getPose,
+            ramseteController,
+            simpleMotorFeedforward,
+            PathConstants.kDriveKinematics,
+            this::getWheelSpeeds,
+            leftPIDController,
+            new PIDController(PathConstants.kPDriveVel, 0, 0),
+            // RamseteCommand passes volts to the callback
+            this::tankDriveVolts,
+            this
+        );
+
+        ramseteCommand.andThen(() -> this.tankDriveVolts(0, 0));
     }
 
 }
