@@ -16,6 +16,19 @@ import frc.robot.commands.roller.*;
 import frc.robot.commands.rollerarm.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
+import frc.robot.subsystems.constants.PathConstants;
+
+import java.nio.file.Path;
+import java.io.IOException;
+
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.RamseteController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
@@ -23,7 +36,6 @@ public class BotCommands {
     // Autonomous
     public static AutoDriveForward autoDriveForward;
     public static AutoDriveForwardShoot autoDriveForwardShoot;
-    public static AutoDrivePath autoDrivePath;
 
     // Climb Balancer
     public static BalanceLeft balanceLeft;
@@ -75,6 +87,10 @@ public class BotCommands {
     public static StopConveyorAndShooter stopConveyorAndShooter;
     public static StopShooter stopShooter;
 
+    //PathWeaver
+    private static Path m_trajectoryPath;
+    private static Trajectory m_trajectory;
+
     // Initialize all robot commands
     public static void initializeCommands() {
         Logger.setup("Initializing BotCommands...");
@@ -82,7 +98,6 @@ public class BotCommands {
         // Autonomous
         autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
         autoDriveForwardShoot = new AutoDriveForwardShoot(BotSubsystems.diffDriver);
-        autoDrivePath = new AutoDrivePath(BotSubsystems.diffDriver);
 
         // Climb Balancer
         balanceRight = new BalanceRight(BotSubsystems.climbBalancer);
@@ -136,7 +151,49 @@ public class BotCommands {
 
     // Return the command to run in autonomous mode
     public static Command getAutonomousCommand() {
-        return autoDrivePath;
+
+        String trajectoryJSON = "paths/testScenario.wpilib.json";
+
+        try {
+            m_trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+            m_trajectory = TrajectoryUtil.fromPathweaverJson(m_trajectoryPath);
+
+            Logger.info("Trajectory created.");
+        }
+
+        catch (IOException ex) {
+            DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+        }
+
+        RamseteController ramseteController;
+        ramseteController = new RamseteController(PathConstants.AutoConstants.kRamseteB,
+                PathConstants.AutoConstants.kRamseteZeta);
+
+        SimpleMotorFeedforward simpleMotorFeedforward;
+        simpleMotorFeedforward = new SimpleMotorFeedforward(PathConstants.ksVolts, PathConstants.kvVoltSecondsPerMeter,
+                PathConstants.kaVoltSecondsSquaredPerMeter);
+
+        PIDController leftPIDController;
+        leftPIDController = new PIDController(PathConstants.kPDriveVel, 0, 0);
+
+        PIDController rightPIDController;
+        rightPIDController = new PIDController(PathConstants.kPDriveVel, 0, 0);
+
+        RamseteCommand ramseteCommand = new RamseteCommand(
+                m_trajectory,
+                BotSubsystems.diffDriver::getPose,
+                ramseteController,
+                simpleMotorFeedforward,
+                PathConstants.kDriveKinematics,
+                BotSubsystems.diffDriver::getWheelSpeeds,
+                leftPIDController,
+                rightPIDController,
+                // RamseteCommand passes volts to the callback
+                BotSubsystems.diffDriver::tankDriveVolts,
+                BotSubsystems.diffDriver
+        );
+
+        return ramseteCommand.andThen(() -> BotSubsystems.diffDriver.tankDriveVolts(0, 0));
 
     }
 
