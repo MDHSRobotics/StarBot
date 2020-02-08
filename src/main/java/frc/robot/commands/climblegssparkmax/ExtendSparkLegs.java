@@ -1,18 +1,18 @@
 
-package frc.robot.commands.sparkmaxclimb;
+package frc.robot.commands.climblegssparkmax;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.SparkMaxClimb;
+import frc.robot.subsystems.ClimbLegsSparkMax;
 
-// This command lowers the robot
-public class LowerRobot extends CommandBase {
+// This command lifts the robot
+public class ExtendSparkLegs extends CommandBase {
 
-    private SparkMaxClimb m_climb;
+    private ClimbLegsSparkMax m_climb;
 
-    public LowerRobot(SparkMaxClimb climb) {
-        Logger.setup("Constructing Command: LowerRobot...");
+    public ExtendSparkLegs(ClimbLegsSparkMax climb) {
+        Logger.setup("Constructing Command: LiftRobot...");
 
         // Add given subsystem requirements
         m_climb = climb;
@@ -21,13 +21,14 @@ public class LowerRobot extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: LowerRobot...");
+        Logger.action("Initializing Command: LiftRobot...");
 
-        m_climb.lowerRobot();
+        m_climb.liftRobot();
     }
 
     @Override
     public void execute() {
+
     }
 
     // This command continues until interrupted
@@ -40,9 +41,9 @@ public class LowerRobot extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: LowerRobot...");
+            Logger.ending("Interrupting Command: LiftRobot...");
         } else {
-            Logger.ending("Ending Command: LowerRobot...");
+            Logger.ending("Ending Command: LiftRobot...");
         }
 
         m_climb.stop();

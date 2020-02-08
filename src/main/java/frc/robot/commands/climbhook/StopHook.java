@@ -1,17 +1,17 @@
 
-package frc.robot.commands.climbarm;
+package frc.robot.commands.climbhook;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.ClimbArm;
+import frc.robot.subsystems.ClimbHook;
 
 // This command stops the ClimbArm
-public class StopClimbArm extends CommandBase {
+public class StopHook extends CommandBase {
 
-    private ClimbArm m_climbArm;
+    private ClimbHook m_climbArm;
 
-    public StopClimbArm(ClimbArm climbArm) {
+    public StopHook(ClimbHook climbArm) {
         Logger.setup("Constructing Command: ClimbArmStop...");
 
         // Add given subsystem requirements

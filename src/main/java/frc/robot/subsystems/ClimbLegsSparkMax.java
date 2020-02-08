@@ -14,7 +14,7 @@ import static frc.robot.subsystems.Devices.sparkMaxClimbLegSlave;;
 
 // Climb subsystem, for lifting the robot, hooking onto the level,
 // retracting the legs, and rolling on the level
-public class SparkMaxClimb extends SubsystemBase {
+public class ClimbLegsSparkMax extends SubsystemBase {
 
     // Subsystem state variables
     public boolean hookIsOut = true;
@@ -42,7 +42,7 @@ public class SparkMaxClimb extends SubsystemBase {
     // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
 
-    public SparkMaxClimb() {
+    public ClimbLegsSparkMax() {
         Logger.setup("Constructing Subsystem: Climb...");
         m_disabled = (sparkMaxClimbLegMaster == null);
         if (m_disabled) {

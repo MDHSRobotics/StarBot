@@ -7,53 +7,64 @@ import frc.robot.subsystems.*;
 // Contains singleton instances of all the subsystems on the robot.
 public class BotSubsystems {
 
-    public static SparkMaxClimb sparkMaxClimb;
-    public static RedLineClimb redLineClimb;
+    public static ClimbBalancer climbBalancer;
+    public static ClimbHook climbHook;
+    public static ClimbLegsRedLine climbLegsRedLine;
+    public static ClimbLegsSparkMax climbLegsSparkMax;
     public static Conveyor conveyor;
     public static DiffDriver diffDriver;
     public static Lighter lighter;
     public static Roller roller;
     public static RollerArm rollerArm;
     public static Shooter shooter;
-    public static ClimbArm climbArm;
-    public static ClimbRoller climbRoller;
 
     // Initialize all robot subsystems
     public static void initializeSubsystems() {
         Logger.setup("Initializing BotSubsystems...");
 
-        sparkMaxClimb = new SparkMaxClimb();
-        redLineClimb = new RedLineClimb();
+        climbBalancer = new ClimbBalancer();
+        climbHook = new ClimbHook();
+        climbLegsRedLine = new ClimbLegsRedLine();
+        climbLegsSparkMax = new ClimbLegsSparkMax();
         conveyor = new Conveyor();
         diffDriver = new DiffDriver();
         lighter = new Lighter();
         roller = new Roller();
         rollerArm = new RollerArm();
         shooter = new Shooter();
-        climbArm = new ClimbArm();
-        climbRoller = new ClimbRoller();
     }
 
     // Set all the subsystem "teleop" default commands
     public static void setTeleopDefaultCommands() {
-        Logger.setup("SparkMaxClimb Default Command -> StandStop...");
-        sparkMaxClimb.setDefaultCommand(BotCommands.standStop);
+        // Climb Balancer
+        Logger.setup("ClimbBalancer Default Command -> StopBalancer...");
+        climbBalancer.setDefaultCommand(BotCommands.stopBalancer);
 
-        Logger.setup("RedLineClimb Default Command -> StandStop...");
-        redLineClimb.setDefaultCommand(BotCommands.standStop);
+        // Climb Hook
+        Logger.setup("ClimbHook Default Command -> StopHook...");
+        climbHook.setDefaultCommand(BotCommands.stopHook);
 
-        Logger.setup("Conveyor Default Command -> StopClimbRoller...");
-        climbRoller.setDefaultCommand(BotCommands.stopClimbRoller);
+        // Climb Legs Redline
+        Logger.setup("ClimbLegsRedLine Default Command -> StopRedlineLegs...");
+        climbLegsRedLine.setDefaultCommand(BotCommands.stopRedlineLegs);
 
+        // Climb Legs SparkMax
+        Logger.setup("ClimbLegsSparkMax Default Command -> StopSparkLegs...");
+        climbLegsSparkMax.setDefaultCommand(BotCommands.stopSparkLegs);
+
+        // Conveyor
         Logger.setup("Conveyor Default Command -> StopConveyor...");
         conveyor.setDefaultCommand(BotCommands.stopConveyor);
 
+        // DiffDriver
         Logger.setup("DiffDriver Teleop Default Command -> DriveDiffTank...");
         diffDriver.setDefaultCommand(BotCommands.driveDiffTank);
 
+        // Roller
         Logger.setup("Roller Default Command -> StopRoller...");
         roller.setDefaultCommand(BotCommands.stopRoller);
 
+        // Shooter
         Logger.setup("Shooter Default Command -> StopShooter");
         shooter.setDefaultCommand(BotCommands.stopShooter);
     }

@@ -12,7 +12,7 @@ import frc.robot.subsystems.Devices;
 import frc.robot.subsystems.utils.EncoderUtils;
 
 // RedLineClimb subsystem, for grabbing and releasing hatches
-public class RedLineClimb extends SubsystemBase {
+public class ClimbLegsRedLine extends SubsystemBase {
 
     // The public property to determine the RedLineClimb's RedLineClimb state
     public boolean legsAreUp = false;
@@ -32,7 +32,7 @@ public class RedLineClimb extends SubsystemBase {
     // If not all the talons are initialized, this should be true
     private boolean m_disabled = false;
 
-    public RedLineClimb() {
+    public ClimbLegsRedLine() {
         Logger.setup("Constructing Subsystem: RedLineClimb...");
 
         // Determine whether or not to disable the subsystem

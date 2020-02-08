@@ -1,20 +1,20 @@
 
-package frc.robot.commands.climbarm;
+package frc.robot.commands.climbhook;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.ClimbArm;
+import frc.robot.subsystems.ClimbHook;
 import edu.wpi.first.wpilibj.Timer;
 
 // This command moves the climbArm belt forward
-public class TurnArm extends CommandBase {
+public class MoveHookForward extends CommandBase {
 
-    private ClimbArm m_climbArm;
+    private ClimbHook m_climbArm;
     private Timer m_timer = new Timer();
 
-    public TurnArm(ClimbArm climbArm) {
-        Logger.setup("Constructing Command: TurnArm...");
+    public MoveHookForward(ClimbHook climbArm) {
+        Logger.setup("Constructing Command: RetractArm...");
 
         // Add given subsystem requirements
         m_climbArm = climbArm;
@@ -23,14 +23,15 @@ public class TurnArm extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: TurnArm...");
+        Logger.action("Initializing Command: RetractArm...");
+        m_timer.stop();
         m_timer.reset();
         m_timer.start();
     }
 
     @Override
     public void execute() {
-        m_climbArm.turn();
+            m_climbArm.retract();
     }
 
     @Override
@@ -45,9 +46,9 @@ public class TurnArm extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: TurnArm...");
+            Logger.ending("Interrupting Command: RetractArm...");
         } else {
-            Logger.ending("Ending Command: TurnArm...");
+            Logger.ending("Ending Command: RetractArm...");
         }
 
         //m_climbArm.stop();

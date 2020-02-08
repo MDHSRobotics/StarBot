@@ -9,13 +9,13 @@ import frc.robot.consoles.Logger;
 import static frc.robot.subsystems.Devices.talonSrxClimbArm;
 
 // ClimbArm Subsytem, for sucking in balls
-public class ClimbArm extends SubsystemBase {
+public class ClimbHook extends SubsystemBase {
 
     // If any of the motor contClimbArms are null, this should be true
     private boolean m_disabled = false;
     public boolean armIsUp = true;
 
-    public ClimbArm() {
+    public ClimbHook() {
          Logger.setup("Constructing Subsystem: ClimbArm...");
 
         // Determine whether or not to disable the subsystem

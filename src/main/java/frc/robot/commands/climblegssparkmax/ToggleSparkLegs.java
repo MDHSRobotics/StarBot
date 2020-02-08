@@ -1,18 +1,18 @@
 
-package frc.robot.commands.sparkmaxclimb;
+package frc.robot.commands.climblegssparkmax;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.SparkMaxClimb;
+import frc.robot.subsystems.ClimbLegsSparkMax;
 import frc.robot.BotCommands;
 
 // Toggles the position of the climb legs
-public class ToggleLegs extends InstantCommand {
+public class ToggleSparkLegs extends InstantCommand {
 
-    private SparkMaxClimb m_climb;
+    private ClimbLegsSparkMax m_climb;
 
-    public ToggleLegs(SparkMaxClimb climb) {
+    public ToggleSparkLegs(ClimbLegsSparkMax climb) {
         Logger.setup("Constructing InstantCommand: ToggleLegs...");
 
         m_climb = climb;
@@ -25,10 +25,10 @@ public class ToggleLegs extends InstantCommand {
 
         if (m_climb.legsAreUp) {
             Logger.action("ToggleLegs -> LOWERING the climbing robot legs...");
-            BotCommands.lowerRobot.schedule();
+            BotCommands.retractSparkLegs.schedule();
         } else {
             Logger.action("ToggleLegs -> LIFTING the climbing robot legs...");
-            BotCommands.liftRobot.schedule();
+            BotCommands.extendSparkLegs.schedule();
         }
         m_climb.toggleLegsPosition();
     }

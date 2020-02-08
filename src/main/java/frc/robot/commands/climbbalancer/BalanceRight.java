@@ -1,18 +1,18 @@
 
-package frc.robot.commands.climbroller;
+package frc.robot.commands.climbbalancer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.ClimbRoller;
+import frc.robot.subsystems.ClimbBalancer;
 
 // This command stops the ClimbArm
-public class StopClimbRoller extends CommandBase {
+public class BalanceRight extends CommandBase {
 
-    private ClimbRoller m_climbRoller;
+    private ClimbBalancer m_climbRoller;
 
-    public StopClimbRoller(ClimbRoller climbRoller) {
-        Logger.setup("Constructing Command: ClimbRollerStop...");
+    public BalanceRight(ClimbBalancer climbRoller) {
+        Logger.setup("Constructing Command: RollerForward...");
 
         // Add given subsystem requirements
         m_climbRoller = climbRoller;
@@ -21,12 +21,12 @@ public class StopClimbRoller extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: ClimbRollerStop...");
+        Logger.action("Initializing Command: RollerForward...");
     }
 
     @Override
     public void execute() {
-        m_climbRoller.stop();
+        m_climbRoller.forward();
     }
 
     // This command continues until interrupted
@@ -39,12 +39,10 @@ public class StopClimbRoller extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: ClimbRollerStop...");
+            Logger.ending("Interrupting Command: RollerForward...");
         } else {
-            Logger.ending("Ending Command: ClimbRollerStop...");
+            Logger.ending("Ending Command: RollerForward...");
         }
-
-        m_climbRoller.stop();
     }
 
 }

@@ -1,18 +1,18 @@
 
-package frc.robot.commands.climbarm;
+package frc.robot.commands.climbhook;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.ClimbArm;
+import frc.robot.subsystems.ClimbHook;
 import frc.robot.BotCommands;
 
 // Toggles the position of the roller arm
-public class ToggleClimbArm extends InstantCommand {
+public class ToggleHook extends InstantCommand {
 
-    private ClimbArm m_climbArm;
+    private ClimbHook m_climbArm;
 
-    public ToggleClimbArm(ClimbArm climbArm) {
+    public ToggleHook(ClimbHook climbArm) {
         Logger.setup("Constructing InstantCommand: ToggleClimbArm...");
 
         m_climbArm = climbArm;
@@ -26,10 +26,10 @@ public class ToggleClimbArm extends InstantCommand {
 
         if (m_climbArm.armIsUp) {
             Logger.action("RollerArm -> Lowering...");
-            BotCommands.retractArm.schedule();
+            BotCommands.moveHookForward.schedule();
         } else {
             Logger.action("RollerArm -> Raising...");
-            BotCommands.turnArm.schedule();
+            BotCommands.moveHookBackward.schedule();
         }
         m_climbArm.toggleArmPosition();
 

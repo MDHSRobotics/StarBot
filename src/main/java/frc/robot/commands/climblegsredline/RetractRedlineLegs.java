@@ -1,17 +1,17 @@
 
-package frc.robot.commands.redlineclimb;
+package frc.robot.commands.climblegsredline;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.RedLineClimb;
+import frc.robot.subsystems.ClimbLegsRedLine;
 
 // This command lowers the robot
-public class LowerClimb extends CommandBase {
+public class RetractRedlineLegs extends CommandBase {
 
-    private RedLineClimb m_climb;
+    private ClimbLegsRedLine m_climb;
 
-    public LowerClimb(RedLineClimb redLineClimb) {
+    public RetractRedlineLegs(ClimbLegsRedLine redLineClimb) {
         Logger.setup("Constructing Command: LowerRobot...");
 
         // Add given subsystem requirements

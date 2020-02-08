@@ -1,18 +1,18 @@
 
-package frc.robot.commands.redlineclimb;
+package frc.robot.commands.climblegsredline;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.RedLineClimb;
+import frc.robot.subsystems.ClimbLegsRedLine;
 import frc.robot.BotCommands;
 
 // Toggles the position of the climb legs
-public class ToggleClimb extends InstantCommand {
+public class ToggleRedlineLegs extends InstantCommand {
 
-    private RedLineClimb m_climb;
+    private ClimbLegsRedLine m_climb;
 
-    public ToggleClimb(RedLineClimb redLineClimb) {
+    public ToggleRedlineLegs(ClimbLegsRedLine redLineClimb) {
         Logger.setup("Constructing InstantCommand: ToggleClimb...");
 
         m_climb = redLineClimb;
@@ -25,10 +25,10 @@ public class ToggleClimb extends InstantCommand {
 
         if (m_climb.legsAreUp) {
             Logger.action("ToggleClimb -> LOWERING the climbing robot legs...");
-            BotCommands.lowerClimb.schedule();
+            BotCommands.retractRedlineLegs.schedule();
         } else {
             Logger.action("ToggleClimb -> LIFTING the climbing robot legs...");
-            BotCommands.raiseClimb.schedule();
+            BotCommands.extendRedlineLegs.schedule();
         }
         m_climb.toggleLegsPosition();
     }

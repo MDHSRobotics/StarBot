@@ -1,17 +1,17 @@
 
-package frc.robot.commands.climbroller;
+package frc.robot.commands.climbbalancer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.ClimbRoller;
+import frc.robot.subsystems.ClimbBalancer;
 
 // This command stops the ClimbArm
-public class RollerReverse extends CommandBase {
+public class BalanceLeft extends CommandBase {
 
-    private ClimbRoller m_climbRoller;
+    private ClimbBalancer m_climbRoller;
 
-    public RollerReverse(ClimbRoller climbRoller) {
+    public BalanceLeft(ClimbBalancer climbRoller) {
         Logger.setup("Constructing Command: RollerReverse...");
 
         // Add given subsystem requirements
