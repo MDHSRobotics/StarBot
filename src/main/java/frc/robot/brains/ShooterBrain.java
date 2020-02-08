@@ -17,6 +17,11 @@ public class ShooterBrain {
     public static double shootTopWheelCurrentVelocityDefault = 0;
     public static double shootBottomWheelCurrentVelocityDefault = 0;
 
+    public static double shootBottomWheelMaxVelocityDefault = 0;
+    public static double shootBottomWheelMinVelocityDefault = 0;
+    public static double shootTopWheelMaxVelocityDefault = 0;
+    public static double shootTopWheelMinVelocityDefault = 0;
+
     //---------------------//
     // NetworkTableEntries //
     //---------------------//
@@ -26,6 +31,11 @@ public class ShooterBrain {
 
     public static NetworkTableEntry shootBottomWheelCurrentVelocityEntry;
     public static NetworkTableEntry shootTopWheelCurrentVelocityEntry;
+
+    public static NetworkTableEntry shootBottomWheelMaxVelocityEntry;
+    public static NetworkTableEntry shootBottomWheelMinVelocityEntry;
+    public static NetworkTableEntry shootTopWheelMaxVelocityEntry;
+    public static NetworkTableEntry shootTopWheelMinVelocityEntry;
 
     //---------//
     // Setters //
@@ -38,6 +48,23 @@ public class ShooterBrain {
     public static void setBottomWheelCurrentVelocity(double value) {
         shootBottomWheelCurrentVelocityEntry.setDouble(value);
     }
+
+    public static void setBottomWheelMaxVelocity(double value) {
+        shootBottomWheelMaxVelocityEntry.setDouble(value);
+    }
+
+    public static void setBottomWheelMinVelocity(double value) {
+        shootBottomWheelMinVelocityEntry.setDouble(value);
+    }
+
+    public static void setTopWheelMaxVelocity(double value) {
+        shootTopWheelMaxVelocityEntry.setDouble(value);
+    }
+
+    public static void setTopWheelMinVelocity(double value) {
+        shootTopWheelMinVelocityEntry.setDouble(value);
+    }
+
 
     //---------//
     // Getters //
