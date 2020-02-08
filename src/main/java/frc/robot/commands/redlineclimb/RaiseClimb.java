@@ -1,21 +1,21 @@
 
-package frc.robot.commands.climb;
+package frc.robot.commands.redlineclimb;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.Climb;
+import frc.robot.subsystems.RedLineClimb;
 
 // This command lifts the robot
-public class LiftRobot extends CommandBase {
+public class RaiseClimb extends CommandBase {
 
-    private Climb m_climb;
+    private RedLineClimb m_climb;
 
-    public LiftRobot(Climb climb) {
+    public RaiseClimb(RedLineClimb redLineClimb) {
         Logger.setup("Constructing Command: LiftRobot...");
 
         // Add given subsystem requirements
-        m_climb = climb;
+        m_climb = redLineClimb;
         addRequirements(m_climb);
     }
 
@@ -23,12 +23,12 @@ public class LiftRobot extends CommandBase {
     public void initialize() {
         Logger.action("Initializing Command: LiftRobot...");
 
-        m_climb.liftRobot();
+        m_climb.raiseRedLineClimb();
     }
 
     @Override
     public void execute() {
-
+        System.out.println("Raise Position: " + m_climb.getPosition());
     }
 
     // This command continues until interrupted

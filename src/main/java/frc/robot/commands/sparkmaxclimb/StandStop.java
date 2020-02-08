@@ -1,17 +1,17 @@
 
-package frc.robot.commands.climb;
+package frc.robot.commands.sparkmaxclimb;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.Climb;
+import frc.robot.subsystems.SparkMaxClimb;
 
 // This command stops all the climb devices
 public class StandStop extends CommandBase {
 
-    private Climb m_climb;
+    private SparkMaxClimb m_climb;
 
-    public StandStop(Climb climb) {
+    public StandStop(SparkMaxClimb climb) {
         Logger.setup("Constructing Command: StandStop...");
 
         // Add given subsystem requirements

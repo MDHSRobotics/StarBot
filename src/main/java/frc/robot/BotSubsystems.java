@@ -7,7 +7,8 @@ import frc.robot.subsystems.*;
 // Contains singleton instances of all the subsystems on the robot.
 public class BotSubsystems {
 
-    public static Climb climb;
+    public static SparkMaxClimb sparkMaxClimb;
+    public static RedLineClimb redLineClimb;
     public static Conveyor conveyor;
     public static DiffDriver diffDriver;
     public static Lighter lighter;
@@ -21,7 +22,8 @@ public class BotSubsystems {
     public static void initializeSubsystems() {
         Logger.setup("Initializing BotSubsystems...");
 
-        climb = new Climb();
+        sparkMaxClimb = new SparkMaxClimb();
+        redLineClimb = new RedLineClimb();
         conveyor = new Conveyor();
         diffDriver = new DiffDriver();
         lighter = new Lighter();
@@ -34,11 +36,11 @@ public class BotSubsystems {
 
     // Set all the subsystem "teleop" default commands
     public static void setTeleopDefaultCommands() {
-        Logger.setup("Climb Default Command -> StandStop...");
-        climb.setDefaultCommand(BotCommands.standStop);
+        Logger.setup("SparkMaxClimb Default Command -> StandStop...");
+        sparkMaxClimb.setDefaultCommand(BotCommands.standStop);
 
-        Logger.setup("Climb Default Command -> StopClimbArm...");
-        //climbArm.setDefaultCommand(BotCommands.stopClimbArm);
+        Logger.setup("RedLineClimb Default Command -> StandStop...");
+        redLineClimb.setDefaultCommand(BotCommands.standStop);
 
         Logger.setup("Conveyor Default Command -> StopClimbRoller...");
         climbRoller.setDefaultCommand(BotCommands.stopClimbRoller);

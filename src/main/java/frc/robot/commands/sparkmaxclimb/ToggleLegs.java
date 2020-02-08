@@ -1,18 +1,18 @@
 
-package frc.robot.commands.climb;
+package frc.robot.commands.sparkmaxclimb;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.Climb;
+import frc.robot.subsystems.SparkMaxClimb;
 import frc.robot.BotCommands;
 
 // Toggles the position of the climb legs
 public class ToggleLegs extends InstantCommand {
 
-    private Climb m_climb;
+    private SparkMaxClimb m_climb;
 
-    public ToggleLegs(Climb climb) {
+    public ToggleLegs(SparkMaxClimb climb) {
         Logger.setup("Constructing InstantCommand: ToggleLegs...");
 
         m_climb = climb;

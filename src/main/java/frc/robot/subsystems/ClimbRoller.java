@@ -21,7 +21,7 @@ public class ClimbRoller extends SubsystemBase {
         // Determine whether or not to disable the subsystem
         m_disabled = (talonSrxClimbRoller == null);
         if (m_disabled) {
-            Logger.error("ClimbRoller devices not initialized! Disabling subsystem...");
+            Logger.problem("ClimbRoller devices not initialized! Disabling subsystem...");
             return;
         }
 

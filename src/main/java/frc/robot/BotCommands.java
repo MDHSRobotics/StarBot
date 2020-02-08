@@ -4,7 +4,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.auto.*;
-import frc.robot.commands.climb.*;
+import frc.robot.commands.sparkmaxclimb.*;
 import frc.robot.commands.climbarm.*;
 import frc.robot.commands.climbroller.RollerForward;
 import frc.robot.commands.climbroller.RollerReverse;
@@ -12,6 +12,9 @@ import frc.robot.commands.climbroller.StopClimbRoller;
 import frc.robot.commands.conveyor.*;
 import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
+import frc.robot.commands.redlineclimb.LowerClimb;
+import frc.robot.commands.redlineclimb.RaiseClimb;
+import frc.robot.commands.redlineclimb.ToggleClimb;
 import frc.robot.commands.roller.*;
 import frc.robot.commands.rollerarm.*;
 import frc.robot.commands.shooter.*;
@@ -33,15 +36,20 @@ public class BotCommands {
     public static ToggleClimbArm toggleClimbArm;
     public static StopClimbArm stopClimbArm;
 
-    // Climb Legs
-    public static LiftRobot liftRobot;
-    public static LowerRobot lowerRobot;
-    public static ToggleLegs toggleLegs;
-
     // Climb Roller
     public static RollerForward rollerForward;
     public static RollerReverse rollerReverse;
     public static StopClimbRoller stopClimbRoller;
+
+    // RedLineClimb Legs
+    public static RaiseClimb raiseClimb;
+    public static LowerClimb lowerClimb;
+    public static ToggleClimb toggleClimb;
+
+    // SparkMaxClimb Legs
+    public static LiftRobot liftRobot;
+    public static LowerRobot lowerRobot;
+    public static ToggleLegs toggleLegs;
 
     // Conveyor
     public static ForwardConveyor forwardConveyor;
@@ -80,7 +88,7 @@ public class BotCommands {
         autoDriveForwardShoot = new AutoDriveForwardShoot(BotSubsystems.diffDriver);
 
         // Climb
-        standStop = new StandStop(BotSubsystems.climb);
+        standStop = new StandStop(BotSubsystems.sparkMaxClimb);
 
         // Climb Arm
         turnArm = new TurnArm(BotSubsystems.climbArm);
@@ -88,15 +96,20 @@ public class BotCommands {
         toggleClimbArm = new ToggleClimbArm(BotSubsystems.climbArm);
         stopClimbArm = new StopClimbArm(BotSubsystems.climbArm);
 
-        // Climb Legs
-        liftRobot = new LiftRobot(BotSubsystems.climb);
-        lowerRobot = new LowerRobot(BotSubsystems.climb);
-        toggleLegs = new ToggleLegs(BotSubsystems.climb);
-
         // Climb Roller
         rollerForward = new RollerForward(BotSubsystems.climbRoller);
         rollerReverse = new RollerReverse(BotSubsystems.climbRoller);
         stopClimbRoller = new StopClimbRoller(BotSubsystems.climbRoller);
+
+        // RedLineClimb Legs
+        raiseClimb = new RaiseClimb(BotSubsystems.redLineClimb);
+        lowerClimb = new LowerClimb(BotSubsystems.redLineClimb);
+        toggleClimb = new ToggleClimb(BotSubsystems.redLineClimb);
+
+        // SparkMaxClimb Legs
+        liftRobot = new LiftRobot(BotSubsystems.sparkMaxClimb);
+        lowerRobot = new LowerRobot(BotSubsystems.sparkMaxClimb);
+        toggleLegs = new ToggleLegs(BotSubsystems.sparkMaxClimb);
 
         // Conveyor
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);

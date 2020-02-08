@@ -25,14 +25,19 @@ public class ButtonBindings {
     public static void configureSecondary() {
         Logger.setup("Configure Buttons -> Secondary Controller...");
 
+        // SparkMaxClimb Legs
+        BotControllers.secondary.btnB.whenPressed(BotCommands.toggleLegs);
+
+        // RedLineClimb Legs
+        BotControllers.secondary.btnX.whenPressed(BotCommands.toggleClimb);
+
         // Climb
         BotControllers.secondary.btnA.whenPressed(BotCommands.toggleClimbArm);
-        BotControllers.secondary.btnB.whenPressed(BotCommands.toggleLegs);
-        BotControllers.secondary.btnX.whileHeld(BotCommands.rollerForward);
-        BotControllers.secondary.btnY.whileHeld(BotCommands.rollerReverse);
+        BotControllers.secondary.btnDpadRight.whileHeld(BotCommands.rollerForward);
+        BotControllers.secondary.btnDpadLeft.whileHeld(BotCommands.rollerReverse);
 
         // Conveyor
-        BotControllers.secondary.btnBumperLeft.whileHeld(BotCommands.reverseConveyor);
+        BotControllers.secondary.btnY.whileHeld(BotCommands.reverseConveyor);
 
         // Shooter
         BotControllers.secondary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);

@@ -24,12 +24,8 @@ public class Devices {
     //////////////////////
 
     // CANSparkMax
-    static CANSparkMax sparkMaxClimbArm = new CANSparkMax(1, MotorType.kBrushless);
-    static CANSparkMax sparkMaxClimbRoller = new CANSparkMax(2, MotorType.kBrushless);
-    static CANSparkMax sparkMaxClimbStandTwo = new CANSparkMax(3, MotorType.kBrushless);
-    static CANSparkMax sparkMaxClimbStandThree = new CANSparkMax(4, MotorType.kBrushless);
-    static CANSparkMax sparkMaxClimbStandFour = new CANSparkMax(5, MotorType.kBrushless);
-    static CANSparkMax sparkMaxClimbHook = new CANSparkMax(6, MotorType.kBrushless);
+    static CANSparkMax sparkMaxClimbLegMaster = new CANSparkMax(1, MotorType.kBrushless);
+    static CANSparkMax sparkMaxClimbLegSlave = new CANSparkMax(2, MotorType.kBrushless);
 
     // Pneumatics
     static Compressor compressorRollerArm = new Compressor(0);
@@ -49,6 +45,8 @@ public class Devices {
     static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(99);
     static WPI_TalonSRX talonSrxClimbArm = new WPI_TalonSRX(15);
     static WPI_TalonSRX talonSrxClimbRoller = new WPI_TalonSRX(11);
+    static WPI_TalonSRX talonSrxRedLineClimbLeg = new WPI_TalonSRX(99);
+    static WPI_TalonSRX talonSrxRedLineClimbLeg2 = new WPI_TalonSRX(100);
 
     static WPI_TalonSRX talonSrxShooterTopWheel = new WPI_TalonSRX(9);
     static WPI_TalonSRX talonSrxShooterBottomWheel = new WPI_TalonSRX(98);

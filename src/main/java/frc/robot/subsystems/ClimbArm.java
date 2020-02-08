@@ -21,7 +21,7 @@ public class ClimbArm extends SubsystemBase {
         // Determine whether or not to disable the subsystem
         m_disabled = (talonSrxClimbArm == null);
         if (m_disabled) {
-            Logger.error("ClimbArm devices not initialized! Disabling subsystem...");
+            Logger.problem("ClimbArm devices not initialized! Disabling subsystem...");
             return;
         }
 
