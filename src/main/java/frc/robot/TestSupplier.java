@@ -19,6 +19,7 @@ public class TestSupplier {
 
         // Driving
         addTest(new AlignDiffDriveToGyroTest());
+        addTest(new DriveDiffTankTest());
     }
 
     // Adds the given test to the list

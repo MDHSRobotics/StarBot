@@ -3,7 +3,7 @@ package frc.robot.sensors;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import frc.robot.consoles.Logger;
+
 import frc.robot.BotSensors;
 
 // This class contains methods for obtaining useful distance sensor readings
