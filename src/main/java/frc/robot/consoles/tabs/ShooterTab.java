@@ -121,6 +121,7 @@ public class ShooterTab {
         topVelocity = BotSubsystems.shooter.getTopWheelVelocity();
         bottomVelocity = BotSubsystems.shooter.getBottomWheelVelocity();
 
+
         if (topVelocity < minTopVelocity) minTopVelocity = topVelocity;
         if (topVelocity > maxTopVelocity) maxTopVelocity = topVelocity;
         if (bottomVelocity < minBottomVelocity) minBottomVelocity = bottomVelocity;
