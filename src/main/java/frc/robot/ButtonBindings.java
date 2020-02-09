@@ -41,6 +41,7 @@ public class ButtonBindings {
         BotControllers.secondary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
         ControlDevices.driveXboxBtnBumperRight.whenPressed(BotCommands.shoot);
         ControlDevices.driveXboxBtnBumperLeft.whenPressed(BotCommands.stopShoot);
+        ControlDevices.driveXboxBtnStart.whenPressed(BotCommands.resetShoot);
     }
 
 }

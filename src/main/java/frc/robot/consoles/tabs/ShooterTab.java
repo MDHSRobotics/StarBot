@@ -31,14 +31,14 @@ public class ShooterTab {
     private SimpleWidget m_shooterTopWheelMaxVelocity;
     private SimpleWidget m_shooterTopWheelMinVelocity;
 
-    double topVelocity = 0;
-    double bottomVelocity = 0;
+    double topVelocity = ShooterBrain.shootTopWheelCurrentVelocityDefault;
+    double bottomVelocity = ShooterBrain.shootBottomWheelCurrentVelocityDefault;
 
-    double minTopVelocity = 100000;
-    double maxTopVelocity = 0;
+    double minTopVelocity = ShooterBrain.shootTopWheelMinVelocityDefault;
+    double maxTopVelocity = ShooterBrain.shootTopWheelMaxVelocityDefault;
 
-    double minBottomVelocity = 100000;
-    double maxBottomVelocity = 0;
+    double minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
+    double maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
 
     // Constructor
     public ShooterTab() {
@@ -47,17 +47,17 @@ public class ShooterTab {
         m_tab = Shuffleboard.getTab("Shooter");
 
         m_bottomWheelLayout = m_tab.getLayout("Bottom Wheel", BuiltInLayouts.kGrid);
-        m_bottomWheelLayout.withPosition(0, 1);
-        m_bottomWheelLayout.withSize(2, 1);
-        m_bottomWheelLayout.withProperties(Map.of("Number of columns", 1));
-        m_bottomWheelLayout.withProperties(Map.of("Number of rows", 2));
+        m_bottomWheelLayout.withPosition(0, 0);
+        m_bottomWheelLayout.withSize(2, 3);
+        m_bottomWheelLayout.withProperties(Map.of("Number of columns", 2));
+        m_bottomWheelLayout.withProperties(Map.of("Number of rows", 3));
         m_bottomWheelLayout.withProperties(Map.of("Label position", "LEFT"));
 
         m_topWheelLayout = m_tab.getLayout("Top Wheel", BuiltInLayouts.kGrid);
-        m_topWheelLayout.withPosition(0, 0);
-        m_topWheelLayout.withSize(2, 1);
-        m_topWheelLayout.withProperties(Map.of("Number of columns", 1));
-        m_topWheelLayout.withProperties(Map.of("Number of rows", 2));
+        m_topWheelLayout.withPosition(0, 3);
+        m_topWheelLayout.withSize(2, 3);
+        m_topWheelLayout.withProperties(Map.of("Number of columns", 2));
+        m_topWheelLayout.withProperties(Map.of("Number of rows", 3));
         m_topWheelLayout.withProperties(Map.of("Label position", "LEFT"));
     }
 
@@ -78,12 +78,12 @@ public class ShooterTab {
         m_shooterBottomWheelCurrentVelocity = m_bottomWheelLayout.add("Bottom Wheel Current Velocity Entry",
                 ShooterBrain.shootBottomWheelCurrentVelocityDefault);
         ShooterBrain.shootBottomWheelCurrentVelocityEntry = m_shooterBottomWheelCurrentVelocity.getEntry();
-        m_shooterBottomWheelCurrentVelocity.withWidget(BuiltInWidgets.kTextView);
+        m_shooterBottomWheelCurrentVelocity.withWidget(BuiltInWidgets.kGraph);
 
         m_shooterTopWheelCurrentVelocity = m_topWheelLayout.add("Top Wheel Current Velocity Entry",
                 ShooterBrain.shootTopWheelCurrentVelocityDefault);
         ShooterBrain.shootTopWheelCurrentVelocityEntry = m_shooterTopWheelCurrentVelocity.getEntry();
-        m_shooterTopWheelCurrentVelocity.withWidget(BuiltInWidgets.kTextView);
+        m_shooterTopWheelCurrentVelocity.withWidget(BuiltInWidgets.kGraph);
 
         // Min velocity
         m_shooterBottomWheelMinVelocity = m_bottomWheelLayout.add("Bottom Wheel Min Velocity Entry",
@@ -114,6 +114,8 @@ public class ShooterTab {
 
     // Configure all Widgets
     public void configure() {
+        m_schedulerWidget.withPosition(4, 1);
+        m_schedulerWidget.withSize(2, 1);
     }
 
     // This will be called in the robotPeriodic
@@ -121,20 +123,28 @@ public class ShooterTab {
         topVelocity = BotSubsystems.shooter.getTopWheelVelocity();
         bottomVelocity = BotSubsystems.shooter.getBottomWheelVelocity();
 
+        ShooterBrain.setTopWheelCurrentVelocity(topVelocity);
+        ShooterBrain.setBottomWheelCurrentVelocity(bottomVelocity);
 
         if (topVelocity < minTopVelocity) minTopVelocity = topVelocity;
         if (topVelocity > maxTopVelocity) maxTopVelocity = topVelocity;
         if (bottomVelocity < minBottomVelocity) minBottomVelocity = bottomVelocity;
         if (bottomVelocity > maxBottomVelocity) maxBottomVelocity = bottomVelocity;
 
-        ShooterBrain.setTopWheelCurrentVelocity(topVelocity);
-        ShooterBrain.setBottomWheelCurrentVelocity(bottomVelocity);
-
         ShooterBrain.setBottomWheelMinVelocity(minBottomVelocity);
         ShooterBrain.setBottomWheelMaxVelocity(maxBottomVelocity);
         ShooterBrain.setTopWheelMinVelocity(minTopVelocity);
         ShooterBrain.setTopWheelMaxVelocity(maxTopVelocity);
 
+    }
+
+    // Resets the min/max velocity capture variables to their default values
+    public void reset(){
+        minTopVelocity = ShooterBrain.shootTopWheelMinVelocityDefault;
+        maxTopVelocity = ShooterBrain.shootTopWheelMaxVelocityDefault;
+
+        minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
+        maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
     }
 
 }

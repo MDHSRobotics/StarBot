@@ -18,9 +18,9 @@ public class ShooterBrain {
     public static double shootBottomWheelCurrentVelocityDefault = 0;
 
     public static double shootBottomWheelMaxVelocityDefault = 0;
-    public static double shootBottomWheelMinVelocityDefault = 0;
+    public static double shootBottomWheelMinVelocityDefault = 1000000;
     public static double shootTopWheelMaxVelocityDefault = 0;
-    public static double shootTopWheelMinVelocityDefault = 0;
+    public static double shootTopWheelMinVelocityDefault = 1000000;
 
     //---------------------//
     // NetworkTableEntries //
