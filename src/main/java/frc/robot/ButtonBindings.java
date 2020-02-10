@@ -14,30 +14,31 @@ public class ButtonBindings {
         BotControllers.primary.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
         BotControllers.primary.btnBumperRight.whileHeld(BotCommands.centerDiffDriveOnTarget);
 
-        // Roller
-        BotControllers.primary.btnB.whileHeld(BotCommands.spinRollerAndConveyor);
-
-        // RollerArm
-        BotControllers.primary.btnX.whenPressed(BotCommands.toggleRollerArm);
+        // Climb
+        BotControllers.primary.btnY.whenPressed(BotCommands.toggleHook);
+        // BotControllers.primary.btnA.whenPressed(BotCommands.toggleRedLegs);
+        BotControllers.primary.btnA.whenPressed(BotCommands.toggleSparkLegs);
+        // TODO: Use the triggers for the balancer, so that you have fine analog control.
+        // BotControllers.primary.btnDpadLeft.whileHeld(BotCommands.balanceLeft);
+        // BotControllers.primary.btnDpadRight.whileHeld(BotCommands.balanceRight);
     }
 
     // Configure "secondary" xbox buttons
     public static void configureSecondary() {
         Logger.setup("Configure Buttons -> Secondary Controller...");
 
-        // Climb
-        BotControllers.secondary.btnA.whenPressed(BotCommands.toggleHook);
-        BotControllers.secondary.btnX.whenPressed(BotCommands.toggleRedLegs);
-        BotControllers.secondary.btnY.whenPressed(BotCommands.toggleSparkLegs);
-        BotControllers.secondary.btnDpadLeft.whileHeld(BotCommands.balanceLeft);
-        BotControllers.secondary.btnDpadRight.whileHeld(BotCommands.balanceRight);
+        // RollerArm
+        BotControllers.primary.btnY.whenPressed(BotCommands.toggleRollerArm);
+
+        // Roller
+        BotControllers.primary.btnA.whileHeld(BotCommands.spinRollerAndConveyor);
 
         // Conveyor
-        BotControllers.secondary.btnB.whileHeld(BotCommands.reverseConveyor);
+        BotControllers.secondary.btnX.whileHeld(BotCommands.reverseConveyor);
 
         // Shooter
-        BotControllers.secondary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
         BotControllers.secondary.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
+        BotControllers.secondary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
     }
 
 }
