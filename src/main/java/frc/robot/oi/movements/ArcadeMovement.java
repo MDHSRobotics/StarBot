@@ -4,7 +4,7 @@ package frc.robot.oi.movements;
 import frc.robot.oi.controllers.XboxPositionAccessible;
 import frc.robot.oi.positions.ThumbstickPosition;
 
-// The values needed to drive using arcade mode
+// The values needed to drive using arcade mode.
 public class ArcadeMovement {
 
     public double straightSpeed = 0; // x Forward & Backward

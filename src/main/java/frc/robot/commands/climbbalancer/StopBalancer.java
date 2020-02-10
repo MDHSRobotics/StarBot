@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbBalancer;
 
-// This command stops the ClimbArm
+// This command stops the ClimbBalancer.
 public class StopBalancer extends CommandBase {
 
     private ClimbBalancer m_climbRoller;
 
     public StopBalancer(ClimbBalancer climbRoller) {
-        Logger.setup("Constructing Command: ClimbRollerStop...");
+        Logger.setup("Constructing Command: StopBalancer...");
 
         // Add given subsystem requirements
         m_climbRoller = climbRoller;
@@ -21,7 +21,7 @@ public class StopBalancer extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: ClimbRollerStop...");
+        Logger.action("Initializing Command: StopBalancer...");
     }
 
     @Override
@@ -39,11 +39,10 @@ public class StopBalancer extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: ClimbRollerStop...");
+            Logger.ending("Interrupting Command: StopBalancer...");
         } else {
-            Logger.ending("Ending Command: ClimbRollerStop...");
+            Logger.ending("Ending Command: StopBalancer...");
         }
-
         m_climbRoller.stop();
     }
 

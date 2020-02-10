@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.BotSensors;
 
-// This class contains methods for obtaining useful distance sensor readings
+// This class contains methods for obtaining useful distance sensor readings.
 public class DistanceSensor {
 
     // Used to convert distance sensor voltage to meters

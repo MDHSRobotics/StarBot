@@ -16,7 +16,7 @@ import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontRight;
 import static frc.robot.subsystems.Devices.talonFxDiffWheelRearLeft;
 import static frc.robot.subsystems.Devices.talonFxDiffWheelRearRight;
 
-// Differential driver subsystem
+// Differential driver subsystem.
 public class DiffDriver extends SubsystemBase {
 
     // The direction of forward/backward via the controller

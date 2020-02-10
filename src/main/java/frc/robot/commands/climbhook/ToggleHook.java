@@ -7,31 +7,31 @@ import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbHook;
 import frc.robot.BotCommands;
 
-// Toggles the position of the roller arm
+// Toggles the position of the climb hook.
 public class ToggleHook extends InstantCommand {
 
-    private ClimbHook m_climbArm;
+    private ClimbHook m_climbHook;
 
-    public ToggleHook(ClimbHook climbArm) {
-        Logger.setup("Constructing InstantCommand: ToggleClimbArm...");
+    public ToggleHook(ClimbHook climbHook) {
+        Logger.setup("Constructing InstantCommand: ToggleHook...");
 
-        m_climbArm = climbArm;
-        addRequirements(m_climbArm);
+        m_climbHook = climbHook;
+        addRequirements(m_climbHook);
     }
 
     @Override
     public void initialize() {
         System.out.println("--");
-        Logger.action("Initializing InstantCommand: ToggleClimbArm...");
+        Logger.action("Initializing InstantCommand: ToggleHook...");
 
-        if (m_climbArm.armIsUp) {
-            Logger.action("RollerArm -> Lowering...");
+        if (m_climbHook.hookIsBack) {
+            Logger.action("ClimbHook -> Moving Forward...");
             BotCommands.moveHookForward.schedule();
         } else {
-            Logger.action("RollerArm -> Raising...");
+            Logger.action("ClimbHook -> Moving Backward...");
             BotCommands.moveHookBackward.schedule();
         }
-        m_climbArm.toggleArmPosition();
-
+        m_climbHook.toggleHookPosition();
     }
+
 }

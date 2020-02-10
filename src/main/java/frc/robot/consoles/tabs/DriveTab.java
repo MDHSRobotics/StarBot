@@ -7,11 +7,13 @@ import frc.robot.brains.DiffDriverBrain;
 import frc.robot.consoles.ShuffleLogger;
 import frc.robot.subsystems.Devices;
 
-// The Shuffleboard Drive Tab
+// The Shuffleboard Drive tab.
 public class DriveTab {
 
-    // Tab, layout, and widget objects
+    // Tab & Layouts
     private ShuffleboardTab m_tab;
+
+    // Widgets
     private ComplexWidget m_diffDriveWidget;
     private SimpleWidget m_alignZSensitivityWidget;
     private SimpleWidget m_alignZSpeedMinimumWidget;

@@ -55,7 +55,7 @@ public class Logger {
 
     // Red text for problems
     public static void problem(Object message) {
-        DriverStation.reportError("PROBLEM --> " + message.toString(), false);
+        DriverStation.reportWarning("PROBLEM --> " + message.toString(), false);
     }
 
 }

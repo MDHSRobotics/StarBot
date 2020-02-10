@@ -24,8 +24,8 @@ public class Devices {
     //////////////////////
 
     // CANSparkMax
-    static CANSparkMax sparkMaxClimbLegMaster = new CANSparkMax(1, MotorType.kBrushless);
-    static CANSparkMax sparkMaxClimbLegSlave = new CANSparkMax(2, MotorType.kBrushless);
+    static CANSparkMax sparkMaxClimbLegsMaster = new CANSparkMax(1, MotorType.kBrushless);
+    static CANSparkMax sparkMaxClimbLegsSlave = new CANSparkMax(2, MotorType.kBrushless);
 
     // Pneumatics
     static Compressor compressorRollerArm = new Compressor(0);
@@ -36,20 +36,21 @@ public class Devices {
 
     // TalonFX
     static WPI_TalonFX talonFxDiffWheelFrontLeft = new WPI_TalonFX(12);
-    static WPI_TalonFX talonFxDiffWheelRearLeft = new WPI_TalonFX(4);
     static WPI_TalonFX talonFxDiffWheelFrontRight = new WPI_TalonFX(14);
+    static WPI_TalonFX talonFxDiffWheelRearLeft = new WPI_TalonFX(4);
     static WPI_TalonFX talonFxDiffWheelRearRight = new WPI_TalonFX(13);
 
     // TalonSRX
+    static WPI_TalonSRX talonSrxClimbBalancer = new WPI_TalonSRX(11);
+    static WPI_TalonSRX talonSrxClimbHook = new WPI_TalonSRX(15);
+    static WPI_TalonSRX talonSrxClimbLegsA = new WPI_TalonSRX(99);
+    static WPI_TalonSRX talonSrxClimbLegsB = new WPI_TalonSRX(100);
+
     static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(10);
     static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(99);
-    static WPI_TalonSRX talonSrxClimbArm = new WPI_TalonSRX(15);
-    static WPI_TalonSRX talonSrxClimbRoller = new WPI_TalonSRX(11);
-    static WPI_TalonSRX talonSrxRedLineClimbLeg = new WPI_TalonSRX(99);
-    static WPI_TalonSRX talonSrxRedLineClimbLeg2 = new WPI_TalonSRX(100);
 
-    static WPI_TalonSRX talonSrxShooterTopWheel = new WPI_TalonSRX(9);
     static WPI_TalonSRX talonSrxShooterBottomWheel = new WPI_TalonSRX(98);
+    static WPI_TalonSRX talonSrxShooterTopWheel = new WPI_TalonSRX(9);
 
     ////////////////////////
     // Drive Declarations //

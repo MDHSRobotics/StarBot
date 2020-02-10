@@ -8,10 +8,10 @@ import frc.robot.consoles.Logger;
 import static frc.robot.subsystems.Devices.compressorRollerArm;
 import static frc.robot.subsystems.Devices.solenoidRollerArm;
 
-// Arm subsystem for the Roller, for raising and lowering the Roller
+// Arm subsystem for the Roller, for raising and lowering the Roller.
 public class RollerArm extends SubsystemBase {
 
-    // The public property to determine the RollerArm's state
+    // State variables
     public boolean armIsUp = true;
 
     // If any of the motor controllers are null, this should be true
@@ -44,6 +44,11 @@ public class RollerArm extends SubsystemBase {
         return (int)compressorRollerArm.getCompressorCurrent();
     }
 
+    // Toggle the position of the roller arm
+    public void toggleArmPosition() {
+        armIsUp = !armIsUp;
+    }
+
     // Lower the roller arm
     public void lowerArm() {
         if (m_disabled) return;
@@ -54,11 +59,6 @@ public class RollerArm extends SubsystemBase {
     public void raiseArm() {
         if (m_disabled) return;
         solenoidRollerArm.set(false);
-    }
-
-    // Toggle the position of the roller arm
-    public void toggleArmPosition() {
-        armIsUp = !armIsUp;
     }
 
 }

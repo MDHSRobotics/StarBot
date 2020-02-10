@@ -7,14 +7,14 @@ import frc.robot.brains.RollerArmBrain;
 import frc.robot.consoles.ShuffleLogger;
 import frc.robot.BotSubsystems;
 
-// The Shuffleboard RollerArm Tab
+// The Shuffleboard RollerArm tab.
 public class RollerArmTab {
 
-    // Tab, layout, and widget objects
+    // Tab & Layouts
     private ShuffleboardTab m_tab;
 
-    // Properties
-    private SimpleWidget m_rollerPowerWidget;
+    // Widgets
+    private SimpleWidget m_powerWidget;
 
     // Constructor
     public RollerArmTab() {
@@ -25,8 +25,8 @@ public class RollerArmTab {
 
     // Create Brain Widgets
     public void preInitialize() {
-        m_rollerPowerWidget = m_tab.add("Compressor State", RollerArmBrain.compressorState);
-        RollerArmBrain.compressorStateEntry = m_rollerPowerWidget.getEntry();
+        m_powerWidget = m_tab.add("Compressor State", RollerArmBrain.compressorState);
+        RollerArmBrain.compressorStateEntry = m_powerWidget.getEntry();
     }
 
     // Create all other Widgets
@@ -35,7 +35,7 @@ public class RollerArmTab {
 
     // Configure all Widgets
     public void configure() {
-        m_rollerPowerWidget.withPosition(0, 0);
+        m_powerWidget.withPosition(0, 0);
     }
 
     // This will be called in the robotPeriodic

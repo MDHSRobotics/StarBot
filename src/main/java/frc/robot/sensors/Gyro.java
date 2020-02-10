@@ -4,7 +4,7 @@ package frc.robot.sensors;
 import frc.robot.consoles.Logger;
 import frc.robot.BotSensors;
 
-// This class contains methods for obtaining useful gyro readings
+// This class contains methods for obtaining useful gyro readings.
 public class Gyro {
 
     public static final double YAW_TOLERANCE = 5;

@@ -4,7 +4,7 @@ package frc.robot.oi.positions;
 import frc.robot.brains.XboxBrain;
 import frc.robot.oi.controllers.XboxPositionAccessible;
 
-// The position values obtained from xbox thumbsticks
+// The position values obtained from xbox thumbsticks.
 public class ThumbstickPosition {
 
     public double leftForwardBackPosition = 0; // y left Forward & Backward

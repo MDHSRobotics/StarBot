@@ -3,11 +3,11 @@ package frc.robot.consoles.tabs;
 
 import edu.wpi.first.wpilibj.shuffleboard.*;
 
-import frc.robot.brains.RollerBrain;
+import frc.robot.brains.ClimbBalancerBrain;
 import frc.robot.consoles.ShuffleLogger;
 
-// The Shuffleboard Roller tab.
-public class RollerTab {
+// The Shuffleboard ClimbBalancer tab.
+public class ClimbBalancerTab {
 
     // Tab & Layouts
     private ShuffleboardTab m_tab;
@@ -16,16 +16,16 @@ public class RollerTab {
     private SimpleWidget m_powerWidget;
 
     // Constructor
-    public RollerTab() {
-        ShuffleLogger.logTrivial("Constructing RollerTab...");
+    public ClimbBalancerTab() {
+        ShuffleLogger.logTrivial("Constructing ClimbBalancerTab...");
 
-        m_tab = Shuffleboard.getTab("Roller");
+        m_tab = Shuffleboard.getTab("ClimbBalancer");
     }
 
     // Create Brain Widgets
     public void preInitialize() {
-        m_powerWidget = m_tab.add("Power", RollerBrain.powerDefault);
-        RollerBrain.powerEntry = m_powerWidget.getEntry();
+        m_powerWidget = m_tab.add("Power", ClimbBalancerBrain.powerDefault);
+        ClimbBalancerBrain.powerEntry = m_powerWidget.getEntry();
     }
 
     // Create all other Widgets

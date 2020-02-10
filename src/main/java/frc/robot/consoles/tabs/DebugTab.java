@@ -6,11 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.consoles.ShuffleLogger;
 
-// The Shuffleboard Debug Tab
+// The Shuffleboard Debug tab.
 public class DebugTab {
 
-    // Tab, layout, and widget objects
+    // Tab & Layouts
     private ShuffleboardTab m_tab;
+
+    // Widgets
     private ComplexWidget m_schedulerWidget;
 
     // Constructor

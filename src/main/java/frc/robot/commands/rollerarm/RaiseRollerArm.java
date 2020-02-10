@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.RollerArm;
 
-// This command raises the roller arm
+// This command raises the RollerArm.
 public class RaiseRollerArm extends InstantCommand {
 
     private RollerArm m_rollerArm;

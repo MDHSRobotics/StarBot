@@ -9,8 +9,8 @@ public class BotSubsystems {
 
     public static ClimbBalancer climbBalancer;
     public static ClimbHook climbHook;
-    public static ClimbLegsRedLine climbLegsRedLine;
-    public static ClimbLegsSparkMax climbLegsSparkMax;
+    public static ClimbLegsRed climbLegsRed;
+    public static ClimbLegsSpark climbLegsSpark;
     public static Conveyor conveyor;
     public static DiffDriver diffDriver;
     public static Lighter lighter;
@@ -24,8 +24,8 @@ public class BotSubsystems {
 
         climbBalancer = new ClimbBalancer();
         climbHook = new ClimbHook();
-        climbLegsRedLine = new ClimbLegsRedLine();
-        climbLegsSparkMax = new ClimbLegsSparkMax();
+        climbLegsRed = new ClimbLegsRed();
+        climbLegsSpark = new ClimbLegsSpark();
         conveyor = new Conveyor();
         diffDriver = new DiffDriver();
         lighter = new Lighter();
@@ -44,13 +44,13 @@ public class BotSubsystems {
         Logger.setup("ClimbHook Default Command -> StopHook...");
         climbHook.setDefaultCommand(BotCommands.stopHook);
 
-        // Climb Legs Redline
-        Logger.setup("ClimbLegsRedLine Default Command -> StopRedlineLegs...");
-        climbLegsRedLine.setDefaultCommand(BotCommands.stopRedlineLegs);
+        // Climb Legs Red
+        Logger.setup("ClimbLegsRed Default Command -> StopRedLegs...");
+        // climbLegsRed.setDefaultCommand(BotCommands.stopRedLegs);
 
-        // Climb Legs SparkMax
-        Logger.setup("ClimbLegsSparkMax Default Command -> StopSparkLegs...");
-        climbLegsSparkMax.setDefaultCommand(BotCommands.stopSparkLegs);
+        // Climb Legs Spark
+        Logger.setup("ClimbLegsSpark Default Command -> StopSparkLegs...");
+        climbLegsSpark.setDefaultCommand(BotCommands.stopSparkLegs);
 
         // Conveyor
         Logger.setup("Conveyor Default Command -> StopConveyor...");

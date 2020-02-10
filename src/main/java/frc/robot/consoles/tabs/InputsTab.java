@@ -7,23 +7,23 @@ import java.util.Map;
 import frc.robot.brains.XboxBrain;
 import frc.robot.consoles.ShuffleLogger;
 
-// The Shuffleboard Inputs Tab
+// The Shuffleboard Inputs tab.
 public class InputsTab {
 
-    // Tab, layout, and widget objects
+    // Tab & Layouts
     private ShuffleboardTab m_tab;
     private ShuffleboardLayout m_controllersLayout;
     private ShuffleboardLayout m_xboxLeftLayout;
     private ShuffleboardLayout m_xboxRightLayout;
     private ShuffleboardLayout m_joystickLayout;
 
-    // Thumbstick - Left
+    // Thumbstick Widget - Left
     private SimpleWidget m_yLeftDeadZoneWidget;
     private SimpleWidget m_xLeftDeadZoneWidget;
     private SimpleWidget m_yLeftSensitivityWidget;
     private SimpleWidget m_xLeftSensitivityWidget;
 
-    // Thumbstick - Right
+    // Thumbstick Widget - Right
     private SimpleWidget m_yRightDeadZoneWidget;
     private SimpleWidget m_xRightDeadZoneWidget;
     private SimpleWidget m_yRightSensitivityWidget;

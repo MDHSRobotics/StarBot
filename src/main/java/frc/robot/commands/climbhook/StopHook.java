@@ -6,27 +6,27 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbHook;
 
-// This command stops the ClimbArm
+// This command stops the ClimbHook.
 public class StopHook extends CommandBase {
 
-    private ClimbHook m_climbArm;
+    private ClimbHook m_climbHook;
 
-    public StopHook(ClimbHook climbArm) {
-        Logger.setup("Constructing Command: ClimbArmStop...");
+    public StopHook(ClimbHook climbHook) {
+        Logger.setup("Constructing Command: StopHook...");
 
         // Add given subsystem requirements
-        m_climbArm = climbArm;
-        addRequirements(m_climbArm);
+        m_climbHook = climbHook;
+        addRequirements(m_climbHook);
     }
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: ClimbArmStop...");
+        Logger.action("Initializing Command: StopHook...");
     }
 
     @Override
     public void execute() {
-        m_climbArm.stop();
+        m_climbHook.stop();
     }
 
     // This command continues until interrupted
@@ -39,12 +39,11 @@ public class StopHook extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: ClimbArmStop...");
+            Logger.ending("Interrupting Command: StopHook...");
         } else {
-            Logger.ending("Ending Command: ClimbArmStop...");
+            Logger.ending("Ending Command: StopHook...");
         }
-
-        m_climbArm.stop();
+        m_climbHook.stop();
     }
 
 }

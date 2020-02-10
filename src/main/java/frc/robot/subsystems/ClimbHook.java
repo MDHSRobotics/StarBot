@@ -3,30 +3,32 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.brains.ClimbArmBrain;
+import frc.robot.brains.ClimbHookBrain;
 import frc.robot.consoles.Logger;
 
-import static frc.robot.subsystems.Devices.talonSrxClimbArm;
+import static frc.robot.subsystems.Devices.talonSrxClimbHook;
 
-// ClimbArm Subsytem, for sucking in balls
+// ClimbHook Subsystem, for hooking onto the lever.
 public class ClimbHook extends SubsystemBase {
 
-    // If any of the motor contClimbArms are null, this should be true
+    // State variables
+    public boolean hookIsBack = true;
+
+    // If any of the motor controllers are null, this should be true
     private boolean m_disabled = false;
-    public boolean armIsUp = true;
 
     public ClimbHook() {
-         Logger.setup("Constructing Subsystem: ClimbArm...");
+         Logger.setup("Constructing Subsystem: ClimbHook...");
 
         // Determine whether or not to disable the subsystem
-        m_disabled = (talonSrxClimbArm == null);
+        m_disabled = (talonSrxClimbHook == null);
         if (m_disabled) {
-            Logger.problem("ClimbArm devices not initialized! Disabling subsystem...");
+            Logger.problem("ClimbHook devices not initialized! Disabling subsystem...");
             return;
         }
 
         // Configure the subsystem devices
-        talonSrxClimbArm.configFactoryDefault();
+        talonSrxClimbHook.configFactoryDefault();
     }
 
     @Override
@@ -34,27 +36,29 @@ public class ClimbHook extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // Stop the ClimbArm motor
+    // Toggle the hook position
+    public void toggleHookPosition() {
+        hookIsBack = !hookIsBack;
+    }
+
+    // Stop the hook
     public void stop() {
         if (m_disabled) return;
-        talonSrxClimbArm.stopMotor();
+        talonSrxClimbHook.stopMotor();
     }
 
-    // Spin the ClimbArm motor
-    public void turn() {
+    // Move the hook forward
+    public void moveForward() {
         if (m_disabled) return;
-        double power = ClimbArmBrain.getClimbArmPower();
-        talonSrxClimbArm.set(power);
+        double power = ClimbHookBrain.getPower();
+        talonSrxClimbHook.set(power);
     }
 
-    public void retract() {
+    // Move the hook backward
+    public void moveBackward() {
         if (m_disabled) return;
-        double power = ClimbArmBrain.getClimbArmPower();
-        talonSrxClimbArm.set(-power);
-    }
-
-    public void toggleArmPosition() {
-        armIsUp = !armIsUp;
+        double power = ClimbHookBrain.getPower();
+        talonSrxClimbHook.set(-power);
     }
 
 }

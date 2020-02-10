@@ -1,3 +1,4 @@
+
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -5,8 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 
-// This command waits two second before autoDriveForward() is executed
-
+// This command waits two seconds before autoDriveForward() is executed.
 public class AutoWait extends CommandBase {
 
     private Timer m_timer = new Timer();

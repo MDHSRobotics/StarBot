@@ -15,7 +15,7 @@ public class ButtonBindings {
         BotControllers.primary.btnBumperRight.whileHeld(BotCommands.centerDiffDriveOnTarget);
 
         // Roller
-        BotControllers.primary.btnB.whileHeld(BotCommands.spinRoller);
+        BotControllers.primary.btnB.whileHeld(BotCommands.spinRollerAndConveyor);
 
         // RollerArm
         BotControllers.primary.btnX.whenPressed(BotCommands.toggleRollerArm);
@@ -27,7 +27,7 @@ public class ButtonBindings {
 
         // Climb
         BotControllers.secondary.btnA.whenPressed(BotCommands.toggleHook);
-        BotControllers.secondary.btnX.whenPressed(BotCommands.toggleRedlineLegs);
+        BotControllers.secondary.btnX.whenPressed(BotCommands.toggleRedLegs);
         BotControllers.secondary.btnY.whenPressed(BotCommands.toggleSparkLegs);
         BotControllers.secondary.btnDpadLeft.whileHeld(BotCommands.balanceLeft);
         BotControllers.secondary.btnDpadRight.whileHeld(BotCommands.balanceRight);

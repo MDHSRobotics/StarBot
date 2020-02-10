@@ -2,24 +2,22 @@
 package frc.robot.consoles.tabs;
 
 import edu.wpi.first.wpilibj.shuffleboard.*;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import java.util.Map;
 
 import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.ShuffleLogger;
 
-// The Shuffleboard Shooter Tab
+// The Shuffleboard Shooter tab.
 public class ShooterTab {
 
-    // Tab, layout, and widget objects
+    // Tab & Layouts
     private ShuffleboardTab m_tab;
     private ShuffleboardLayout m_bottomWheelLayout;
     private ShuffleboardLayout m_topWheelLayout;
 
-    private ComplexWidget m_schedulerWidget;
-
-    private SimpleWidget m_shooterBottomWheelVelocity;
-    private SimpleWidget m_shooterTopWheelVelocity;
+    // Widgets
+    private SimpleWidget m_bottomWheelVelocity;
+    private SimpleWidget m_topWheelVelocity;
 
     // Constructor
     public ShooterTab() {
@@ -44,27 +42,21 @@ public class ShooterTab {
 
     // Create Brain Widgets
     public void preInitialize() {
-        m_shooterBottomWheelVelocity = m_bottomWheelLayout.add("Bottom Wheel Velocity", ShooterBrain.shootBottomWheelVelocityDefault);
-        ShooterBrain.shootBottomWheelVelocityEntry = m_shooterBottomWheelVelocity.getEntry();
-        m_shooterBottomWheelVelocity.withWidget(BuiltInWidgets.kTextView);
+        m_bottomWheelVelocity = m_bottomWheelLayout.add("Bottom Wheel Velocity", ShooterBrain.bottomWheelVelocityDefault);
+        ShooterBrain.bottomWheelVelocityEntry = m_bottomWheelVelocity.getEntry();
+        m_bottomWheelVelocity.withWidget(BuiltInWidgets.kTextView);
 
-        m_shooterTopWheelVelocity = m_topWheelLayout.add("Top Wheel Velocity", ShooterBrain.shootTopWheelVelocityDefault);
-        ShooterBrain.shootTopWheelVelocityEntry = m_shooterTopWheelVelocity.getEntry();
-        m_shooterTopWheelVelocity.withWidget(BuiltInWidgets.kTextView);
+        m_topWheelVelocity = m_topWheelLayout.add("Top Wheel Velocity", ShooterBrain.topWheelVelocityDefault);
+        ShooterBrain.topWheelVelocityEntry = m_topWheelVelocity.getEntry();
+        m_topWheelVelocity.withWidget(BuiltInWidgets.kTextView);
     }
 
     // Create all other Widgets
     public void initialize() {
-        // TODO: This is probably left over from where it was copied from, right?
-        //  Command Scheduler - Not sure why this isn't working
-        CommandScheduler sched = CommandScheduler.getInstance();
-        m_schedulerWidget = m_tab.add("Command Scheduler", sched);
     }
 
     // Configure all Widgets
     public void configure() {
-        m_schedulerWidget.withPosition(0, 1);
-        m_schedulerWidget.withSize(2, 1);
     }
 
     // This will be called in the robotPeriodic

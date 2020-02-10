@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.auto.*;
 import frc.robot.commands.climbbalancer.*;
 import frc.robot.commands.climbhook.*;
-import frc.robot.commands.climblegs.*;
-import frc.robot.commands.climblegsredline.*;
-import frc.robot.commands.climblegssparkmax.*;
+//import frc.robot.commands.climblegs.*;
+import frc.robot.commands.climblegsred.*;
+import frc.robot.commands.climblegsspark.*;
 import frc.robot.commands.conveyor.*;
 import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
@@ -35,12 +35,12 @@ public class BotCommands {
     public static StopHook stopHook;
     public static ToggleHook toggleHook;
 
-    // Climb Legs Redline
-    public static ExtendRedlineLegs extendRedlineLegs;
-    public static RetractRedlineLegs retractRedlineLegs;
-    public static ToggleRedlineLegs toggleRedlineLegs;
+    // Climb Legs Red
+    public static ExtendRedLegs extendRedLegs;
+    public static RetractRedLegs retractRedLegs;
+    public static ToggleRedLegs toggleRedLegs;
 
-    // Climb Legs SparkMax
+    // Climb Legs Spark
     public static ExtendSparkLegs extendSparkLegs;
     public static RetractSparkLegs retractSparkLegs;
     public static StopSparkLegs stopSparkLegs;
@@ -60,7 +60,7 @@ public class BotCommands {
     public static CycleLights cycleLights;
 
     // Roller
-    public static SpinRoller spinRoller;
+    public static SpinRollerAndConveyor spinRollerAndConveyor;
     public static StopRoller stopRoller;
 
     // RollerArm
@@ -69,10 +69,10 @@ public class BotCommands {
     public static ToggleRollerArm toggleRollerArm;
 
     // Shooter
-    public static Shoot shoot;
-    public static StopShooter stopShooter;
+    public static ConveyAndShoot conveyAndShoot;
     public static ReverseConveyorAndShoot reverseConveyorAndShoot;
     public static StopConveyorAndShooter stopConveyorAndShooter;
+    public static StopShooter stopShooter;
 
     // Initialize all robot commands
     public static void initializeCommands() {
@@ -93,16 +93,16 @@ public class BotCommands {
         toggleHook = new ToggleHook(BotSubsystems.climbHook);
         stopHook = new StopHook(BotSubsystems.climbHook);
 
-        // Climb Legs Redline
-        extendRedlineLegs = new ExtendRedlineLegs(BotSubsystems.climbLegsRedLine);
-        retractRedlineLegs = new RetractRedlineLegs(BotSubsystems.climbLegsRedLine);
-        toggleRedlineLegs = new ToggleRedlineLegs(BotSubsystems.climbLegsRedLine);
+        // Climb Legs Red
+        extendRedLegs = new ExtendRedLegs(BotSubsystems.climbLegsRed);
+        retractRedLegs = new RetractRedLegs(BotSubsystems.climbLegsRed);
+        toggleRedLegs = new ToggleRedLegs(BotSubsystems.climbLegsRed);
 
-        // Climb Legs SparkMax
-        extendSparkLegs = new ExtendSparkLegs(BotSubsystems.climbLegsSparkMax);
-        retractSparkLegs = new RetractSparkLegs(BotSubsystems.climbLegsSparkMax);
-        stopSparkLegs = new StopSparkLegs(BotSubsystems.climbLegsSparkMax);
-        toggleSparkLegs = new ToggleSparkLegs(BotSubsystems.climbLegsSparkMax);
+        // Climb Legs Spark
+        extendSparkLegs = new ExtendSparkLegs(BotSubsystems.climbLegsSpark);
+        retractSparkLegs = new RetractSparkLegs(BotSubsystems.climbLegsSpark);
+        stopSparkLegs = new StopSparkLegs(BotSubsystems.climbLegsSpark);
+        toggleSparkLegs = new ToggleSparkLegs(BotSubsystems.climbLegsSpark);
 
         // Conveyor
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
@@ -117,7 +117,7 @@ public class BotCommands {
         cycleLights = new CycleLights(BotSubsystems.lighter);
 
         // Roller
-        spinRoller = new SpinRoller(BotSubsystems.roller, BotSubsystems.conveyor);
+        spinRollerAndConveyor = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
         stopRoller = new StopRoller(BotSubsystems.roller);
 
         // RollerArm
@@ -126,10 +126,10 @@ public class BotCommands {
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
 
         // Shooter
-        shoot = new Shoot(BotSubsystems.shooter, BotSubsystems.conveyor);
-        stopShooter = new StopShooter(BotSubsystems.shooter);
+        conveyAndShoot = new ConveyAndShoot(BotSubsystems.shooter, BotSubsystems.conveyor);
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         stopConveyorAndShooter = new StopConveyorAndShooter(BotSubsystems.conveyor, BotSubsystems.shooter);
+        stopShooter = new StopShooter(BotSubsystems.shooter);
     }
 
     // Return the command to run in autonomous mode

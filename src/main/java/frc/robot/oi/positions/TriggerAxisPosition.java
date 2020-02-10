@@ -3,7 +3,7 @@ package frc.robot.oi.positions;
 
 import frc.robot.oi.controllers.XboxPositionAccessible;
 
-// The position values obtained from xbox trigger axis
+// The position values obtained from xbox trigger axis.
 public class TriggerAxisPosition {
 
     public double leftTriggerAxisPosition = 0;
