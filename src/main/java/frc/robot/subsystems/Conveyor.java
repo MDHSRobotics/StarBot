@@ -8,7 +8,7 @@ import frc.robot.consoles.Logger;
 import static frc.robot.subsystems.constants.TalonConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxConveyor;
 
-// Conveyor subsystem, for delivering the balls to the shoot system
+// Conveyor subsystem, for delivering the balls to the shoot system.
 public class Conveyor extends SubsystemBase {
 
     // Motor constants
@@ -60,7 +60,7 @@ public class Conveyor extends SubsystemBase {
         talonSrxConveyor.set(-POWER);
     }
 
-    // Stop the conveyor motor
+    // Stop the conveyor
     public void stop() {
         if (m_disabled) return;
         talonSrxConveyor.stopMotor();

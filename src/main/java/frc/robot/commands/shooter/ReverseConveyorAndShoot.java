@@ -8,7 +8,7 @@ import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Shooter;
 import frc.robot.BotCommands;
 
-// This command reverses the conveyor, and then shoots
+// This command reverses the conveyor, and then shoots.
 public class ReverseConveyorAndShoot extends SequentialCommandGroup {
 
     private Conveyor m_conveyor;
@@ -24,7 +24,7 @@ public class ReverseConveyorAndShoot extends SequentialCommandGroup {
         m_shooter = shooter;
         addRequirements(m_shooter);
 
-        addCommands(BotCommands.reverseConveyor, BotCommands.shoot);
+        addCommands(BotCommands.reverseConveyor, BotCommands.conveyAndShoot);
     }
 
 }

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.DiffDriver;
 
-// This command auto drives the DiffDriver forward for a short time
+// This command auto drives the DiffDriver forward for a short time.
 public class AutoDriveForward extends CommandBase {
 
     private DiffDriver m_diffDriver;

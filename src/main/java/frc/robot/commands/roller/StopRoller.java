@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Roller;
 
-// This command stops the Roller
+// This command stops the Roller.
 public class StopRoller extends CommandBase {
 
     private Roller m_roller;
 
     public StopRoller(Roller roller) {
-        Logger.setup("Constructing Command: RollerStop...");
+        Logger.setup("Constructing Command: StopRoller...");
 
         // Add given subsystem requirements
         m_roller = roller;
@@ -21,7 +21,7 @@ public class StopRoller extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: RollerStop...");
+        Logger.action("Initializing Command: StopRoller...");
     }
 
     @Override
@@ -39,11 +39,10 @@ public class StopRoller extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: RollerStop...");
+            Logger.ending("Interrupting Command: StopRoller...");
         } else {
-            Logger.ending("Ending Command: RollerStop...");
+            Logger.ending("Ending Command: StopRoller...");
         }
-
         m_roller.stop();
     }
 

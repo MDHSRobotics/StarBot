@@ -6,14 +6,14 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 import frc.robot.brains.RollerBrain;
 import frc.robot.consoles.ShuffleLogger;
 
-// The Shuffleboard Roller Tab
+// The Shuffleboard Roller tab.
 public class RollerTab {
 
-    // Tab, layout, and widget objects
+    // Tab & Layouts
     private ShuffleboardTab m_tab;
 
-    // Properties
-    private SimpleWidget m_rollerPowerWidget;
+    // Widgets
+    private SimpleWidget m_powerWidget;
 
     // Constructor
     public RollerTab() {
@@ -24,8 +24,8 @@ public class RollerTab {
 
     // Create Brain Widgets
     public void preInitialize() {
-        m_rollerPowerWidget = m_tab.add("Roller Power", RollerBrain.rollerPowerDefault);
-        RollerBrain.rollerPowerEntry = m_rollerPowerWidget.getEntry();
+        m_powerWidget = m_tab.add("Power", RollerBrain.powerDefault);
+        RollerBrain.powerEntry = m_powerWidget.getEntry();
     }
 
     // Create all other Widgets
@@ -34,8 +34,8 @@ public class RollerTab {
 
     // Configure all Widgets
     public void configure() {
-        m_rollerPowerWidget.withWidget(BuiltInWidgets.kTextView);
-        m_rollerPowerWidget.withPosition(0, 0);
+        m_powerWidget.withWidget(BuiltInWidgets.kTextView);
+        m_powerWidget.withPosition(0, 0);
     }
 
     // This will be called in the robotPeriodic

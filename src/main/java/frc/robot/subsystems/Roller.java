@@ -8,7 +8,7 @@ import frc.robot.consoles.Logger;
 
 import static frc.robot.subsystems.Devices.talonSrxRoller;
 
-// Roller Subsytem, for sucking in balls
+// Roller Subsytem, for sucking in balls.
 public class Roller extends SubsystemBase {
 
     // If any of the motor controllers are null, this should be true
@@ -33,16 +33,16 @@ public class Roller extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // Stop the roller motor
+    // Stop the roller
     public void stop() {
         if (m_disabled) return;
         talonSrxRoller.stopMotor();
     }
 
-    // Spin the roller motor
+    // Spin the roller
     public void spin() {
+        double power = RollerBrain.getPower();
         if (m_disabled) return;
-        double power = RollerBrain.getRollerPower();
         talonSrxRoller.set(power);
     }
 

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.RollerArm;
 
-// This command lowers the roller arm
+// This command lowers the RollerArm.
 public class LowerRollerArm extends InstantCommand {
 
     private RollerArm m_rollerArm;

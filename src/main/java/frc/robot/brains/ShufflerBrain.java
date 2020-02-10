@@ -5,7 +5,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 
 // This class contains all the shared NetworkTableEntries for the Shuffler,
-// their default values, and methods for retrieving their current values
+// their default values, and methods for retrieving their current values.
 public class ShufflerBrain {
 
     //----------------//

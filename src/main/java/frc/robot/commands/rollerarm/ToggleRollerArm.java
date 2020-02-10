@@ -7,7 +7,7 @@ import frc.robot.consoles.Logger;
 import frc.robot.subsystems.RollerArm;
 import frc.robot.BotCommands;
 
-// Toggles the position of the roller arm
+// Toggles the position of the RollerArm.
 public class ToggleRollerArm extends InstantCommand {
 
     private RollerArm m_rollerArm;

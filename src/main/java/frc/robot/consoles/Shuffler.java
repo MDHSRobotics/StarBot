@@ -9,16 +9,19 @@ import frc.robot.consoles.tabs.*;
 // to make it easier to change things rather than having to look throughout all of the
 // classes for subsystems, commands, etc.
 
-// The Shuffler class knows about the subsystems, commands, etc. but generally not vice versa
+// The Shuffler class knows about the subsystems, commands, etc. but generally not vice versa.
 public class Shuffler {
 
     // Tabs
     private MainTab m_mainTab;
     private InputsTab m_inputsTab;
     private DriveTab m_driveTab;
-    private RollerTab m_rollerTab;
     private RollerArmTab m_rollerArmTab;
+    private RollerTab m_rollerTab;
     private ShooterTab m_shooterTab;
+    private ClimbHookTab m_climbHookTab;
+    private ClimbLegsSparkTab m_climbLegsSparkTab;
+    private ClimbBalancerTab m_climbBalancerTab;
     private DebugTab m_debugTab;
 
     public Shuffler() {
@@ -27,9 +30,12 @@ public class Shuffler {
         m_mainTab = new MainTab();
         m_inputsTab = new InputsTab();
         m_driveTab = new DriveTab();
-        m_rollerTab = new RollerTab();
         m_rollerArmTab = new RollerArmTab();
+        m_rollerTab = new RollerTab();
         m_shooterTab = new ShooterTab();
+        m_climbHookTab = new ClimbHookTab();
+        m_climbLegsSparkTab = new ClimbLegsSparkTab();
+        m_climbBalancerTab = new ClimbBalancerTab();
         m_debugTab = new DebugTab();
     }
 
@@ -39,9 +45,12 @@ public class Shuffler {
         m_mainTab.preInitialize();
         m_inputsTab.preInitialize();
         m_driveTab.preInitialize();
-        m_rollerTab.preInitialize();
         m_rollerArmTab.preInitialize();
+        m_rollerTab.preInitialize();
         m_shooterTab.preInitialize();
+        m_climbHookTab.preInitialize();
+        m_climbLegsSparkTab.preInitialize();
+        m_climbBalancerTab.preInitialize();
         m_debugTab.preInitialize();
     }
 
@@ -51,9 +60,12 @@ public class Shuffler {
         m_mainTab.initialize();
         m_inputsTab.initialize();
         m_driveTab.initialize();
-        m_rollerTab.initialize();
         m_rollerArmTab.initialize();
+        m_rollerTab.initialize();
         m_shooterTab.initialize();
+        m_climbHookTab.initialize();
+        m_climbLegsSparkTab.initialize();
+        m_climbBalancerTab.initialize();
         m_debugTab.initialize();
     }
 
@@ -63,9 +75,12 @@ public class Shuffler {
         m_mainTab.configure();
         m_inputsTab.configure();
         m_driveTab.configure();
-        m_rollerTab.configure();
         m_rollerArmTab.configure();
+        m_rollerTab.configure();
         m_shooterTab.configure();
+        m_climbHookTab.configure();
+        m_climbLegsSparkTab.configure();
+        m_climbBalancerTab.configure();
         m_debugTab.configure();
 
         setupSmartdashboard();
@@ -75,9 +90,12 @@ public class Shuffler {
         m_mainTab.update();
         m_inputsTab.update();
         m_driveTab.update();
-        m_rollerTab.update();
         m_rollerArmTab.update();
+        m_rollerTab.update();
         m_shooterTab.update();
+        m_climbHookTab.update();
+        m_climbLegsSparkTab.update();
+        m_climbBalancerTab.update();
         m_debugTab.update();
     }
 

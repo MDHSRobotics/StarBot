@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Shooter;
 
-// This command deactivates the shoot mechanism
+// This command stops the Shooter.
 public class StopShooter extends CommandBase {
 
     private Shooter m_shooter;
@@ -29,7 +29,7 @@ public class StopShooter extends CommandBase {
         m_shooter.stop();
     }
 
-    // This command continues until it cycles through the set number of cycles
+    // This command continues until interrupted
     @Override
     public boolean isFinished() {
         return false;

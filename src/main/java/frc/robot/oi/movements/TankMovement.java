@@ -4,7 +4,7 @@ package frc.robot.oi.movements;
 import frc.robot.oi.controllers.XboxPositionAccessible;
 import frc.robot.oi.positions.ThumbstickPosition;
 
-// The values needed to drive using tank mode
+// The values needed to drive using tank mode.
 public class TankMovement {
 
     public double leftSpeed = 0; // x left Forward & Backward

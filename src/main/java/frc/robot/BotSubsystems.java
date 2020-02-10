@@ -7,7 +7,10 @@ import frc.robot.subsystems.*;
 // Contains singleton instances of all the subsystems on the robot.
 public class BotSubsystems {
 
-    public static Climb climb;
+    public static ClimbBalancer climbBalancer;
+    public static ClimbHook climbHook;
+    public static ClimbLegsRed climbLegsRed;
+    public static ClimbLegsSpark climbLegsSpark;
     public static Conveyor conveyor;
     public static DiffDriver diffDriver;
     public static Lighter lighter;
@@ -19,7 +22,10 @@ public class BotSubsystems {
     public static void initializeSubsystems() {
         Logger.setup("Initializing BotSubsystems...");
 
-        climb = new Climb();
+        climbBalancer = new ClimbBalancer();
+        climbHook = new ClimbHook();
+        climbLegsRed = new ClimbLegsRed();
+        climbLegsSpark = new ClimbLegsSpark();
         conveyor = new Conveyor();
         diffDriver = new DiffDriver();
         lighter = new Lighter();
@@ -30,18 +36,35 @@ public class BotSubsystems {
 
     // Set all the subsystem "teleop" default commands
     public static void setTeleopDefaultCommands() {
-        Logger.setup("Climb Default Command -> StandStop...");
-        climb.setDefaultCommand(BotCommands.standStop);
+        // Climb Balancer
+        Logger.setup("ClimbBalancer Default Command -> StopBalancer...");
+        climbBalancer.setDefaultCommand(BotCommands.stopBalancer);
 
+        // Climb Hook
+        Logger.setup("ClimbHook Default Command -> StopHook...");
+        climbHook.setDefaultCommand(BotCommands.stopHook);
+
+        // Climb Legs Red
+        Logger.setup("ClimbLegsRed Default Command -> StopRedLegs...");
+        // climbLegsRed.setDefaultCommand(BotCommands.stopRedLegs);
+
+        // Climb Legs Spark
+        Logger.setup("ClimbLegsSpark Default Command -> StopSparkLegs...");
+        climbLegsSpark.setDefaultCommand(BotCommands.stopSparkLegs);
+
+        // Conveyor
         Logger.setup("Conveyor Default Command -> StopConveyor...");
         conveyor.setDefaultCommand(BotCommands.stopConveyor);
 
+        // DiffDriver
         Logger.setup("DiffDriver Teleop Default Command -> DriveDiffTank...");
         diffDriver.setDefaultCommand(BotCommands.driveDiffTank);
 
+        // Roller
         Logger.setup("Roller Default Command -> StopRoller...");
         roller.setDefaultCommand(BotCommands.stopRoller);
 
+        // Shooter
         Logger.setup("Shooter Default Command -> StopShooter");
         shooter.setDefaultCommand(BotCommands.stopShooter);
     }

@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 
 // Log events to various places: Shuffleboard, stdout, etc.
 // Note: Event names should be terse
-
 public class ShuffleLogger {
 
     //--------------------------------------------------------------------------------------------//
@@ -108,5 +107,5 @@ public class ShuffleLogger {
         // Print to stdout
         System.out.println(eventName);
     }
-    
+
 }

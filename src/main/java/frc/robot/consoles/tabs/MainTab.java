@@ -9,11 +9,13 @@ import frc.robot.brains.ShufflerBrain;
 import frc.robot.consoles.ShuffleLogger;
 import frc.robot.RobotManager;
 
-// The Shuffleboard Main Tab
+// The Shuffleboard Main tab.
 public class MainTab {
 
-    // Tab, layout, and widget objects
+    // Tab & Layouts
     private ShuffleboardTab m_tab;
+
+    // Widgets
     private ComplexWidget m_autoCmdWidget;
     private SimpleWidget m_matchTimeWidget;
 

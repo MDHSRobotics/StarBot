@@ -4,7 +4,7 @@ package frc.robot.oi.controllers;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.Button;
 
-// Represents the directional pad button on an xbox controller (or equivalent on another device).
+// Represents the directional pad button on an xbox controller (or equivalent on another device.)
 public class DPadButton extends Button {
 
     public enum Direction {

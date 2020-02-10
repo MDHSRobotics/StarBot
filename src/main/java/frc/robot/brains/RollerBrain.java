@@ -4,20 +4,20 @@ package frc.robot.brains;
 import edu.wpi.first.networktables.NetworkTableEntry;
 
 // This class contains all the shared NetworkTableEntries for the Roller Subsystem,
-// their default values, and methods for retrieving their current values
+// their default values, and methods for retrieving their current values.
 public class RollerBrain {
 
     //----------------//
     // Default Values //
     //----------------//
 
-    public static double rollerPowerDefault = 0.20;
+    public static double powerDefault = 0.20;
 
     //---------------------//
     // NetworkTableEntries //
     //---------------------//
 
-    public static NetworkTableEntry rollerPowerEntry;
+    public static NetworkTableEntry powerEntry;
 
     //---------//
     // Setters //
@@ -27,8 +27,8 @@ public class RollerBrain {
     // Getters //
     //---------//
 
-    public static double getRollerPower() {
-        return rollerPowerEntry.getDouble(rollerPowerDefault);
+    public static double getPower() {
+        return powerEntry.getDouble(powerDefault);
     }
 
 }
