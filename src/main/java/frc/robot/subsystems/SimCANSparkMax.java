@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -73,6 +74,20 @@ public class SimCANSparkMax extends CANSparkMax {
             String pidControllerName = String.format("PID Controller for %s", m_logicalID);
             SimCANPIDController pidController = new SimCANPIDController(pidControllerName, this);
             return pidController;
+        }
+    }
+
+    public CANEncoder getEncoder() {
+
+        if (RobotBase.isReal()) {
+            // This upcast is a bit tricky but should be ok as long as a real connection to the
+            // RoboRio does not require any of the behavior of the parent class (SimCANPIDController)
+            return (SimSparkEncoder) super.getEncoder();
+
+        } else {
+            String encoderName = String.format("Encoder for %s", m_logicalID);
+            SimSparkEncoder encoder = new SimSparkEncoder(encoderName, this);
+            return encoder;
         }
     }
 

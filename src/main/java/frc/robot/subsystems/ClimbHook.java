@@ -1,6 +1,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.ClimbHookBrain;
@@ -27,8 +28,10 @@ public class ClimbHook extends SubsystemBase {
             return;
         }
 
-        // Configure the subsystem devices
-        talonSrxClimbHook.configFactoryDefault();
+        if (RobotBase.isReal()) {
+            // Configure the subsystem devices
+            talonSrxClimbHook.configFactoryDefault();
+        }
     }
 
     @Override
