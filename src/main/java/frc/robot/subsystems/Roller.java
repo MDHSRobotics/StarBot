@@ -1,6 +1,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.RollerBrain;
@@ -24,8 +25,11 @@ public class Roller extends SubsystemBase {
             return;
         }
 
-        // Configure the subsystem devices
-        talonSrxRoller.configFactoryDefault();
+        if (RobotBase.isReal()) {
+            // Configure the subsystem devices
+            talonSrxRoller.configFactoryDefault();
+        }
+
     }
 
     @Override

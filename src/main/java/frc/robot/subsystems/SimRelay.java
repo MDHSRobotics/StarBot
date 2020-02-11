@@ -43,7 +43,7 @@ public class SimRelay extends Relay {
         }
         else {
             String cmdStr = String.format("set(%s)", value.toString());
-            m_simMonitor.logCommand(cmdStr);
+            if (m_simMonitor != null) m_simMonitor.logCommand(cmdStr);
         }
     }
 
