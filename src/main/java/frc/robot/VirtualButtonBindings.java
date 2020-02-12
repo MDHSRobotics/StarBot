@@ -12,7 +12,6 @@ public class VirtualButtonBindings {
 
         // DiffDriver
         VirtualControllers.primary.btnDpad.whileActiveContinuous(TestCommands.alignDiffDriveToGyro);
-        VirtualControllers.primary.btnDpad.whileActiveContinuous(TestCommands.driveDiffTank);
     }
 
     // Configure "secondary" virtual buttons
