@@ -37,11 +37,11 @@ public class ButtonBindings {
         BotControllers.secondary.btnX.whileHeld(BotCommands.reverseConveyor);
 
         // Shooter
-        BotControllers.secondary.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
-        BotControllers.secondary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
-        ControlDevices.driveXboxBtnBumperRight.whenPressed(BotCommands.shoot);
-        ControlDevices.driveXboxBtnBumperLeft.whenPressed(BotCommands.stopShoot);
-        ControlDevices.driveXboxBtnStart.whenPressed(BotCommands.resetShoot);
+        // BotControllers.secondary.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
+        // BotControllers.secondary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
+        BotControllers.secondary.btnBumperRight.whenPressed(BotCommands.shoot);
+        BotControllers.secondary.btnBumperLeft.whenPressed(BotCommands.stopShooter);
+        BotControllers.secondary.btnStart.whenPressed(BotCommands.resetShoot);
     }
 
 }

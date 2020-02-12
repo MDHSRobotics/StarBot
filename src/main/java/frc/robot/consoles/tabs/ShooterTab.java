@@ -114,8 +114,7 @@ public class ShooterTab {
 
     // Configure all Widgets
     public void configure() {
-        m_schedulerWidget.withPosition(4, 1);
-        m_schedulerWidget.withSize(2, 1);
+
     }
 
     // This will be called in the robotPeriodic
