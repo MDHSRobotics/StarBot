@@ -26,9 +26,11 @@ public class AlignDiffDriveToGyroTest implements TestRunnable {
             // Start the test on the first iteration
             Logger.setup("Starting AlignDiffDriveToGyroTest for " + TOTAL_SECONDS + " seconds...");
             m_currentTime = 0.0;
-            m_timer.stop();
+
             m_timer.reset();
             m_timer.start();
+
+            m_currentTime = m_timer.get();
             VirtualControllers.primary.xbox.dpadActive = true;
             VirtualControllers.primary.xbox.dpadDirection = Direction.UP;
         }
