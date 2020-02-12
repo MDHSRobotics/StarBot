@@ -3,6 +3,7 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.SPI;
 
 import frc.robot.consoles.Logger;
@@ -20,8 +21,13 @@ public class BotSensors {
     public static void initializeSensors() {
         Logger.setup("Initializing BotSensors...");
 
-        initializeDistanceSensor();
-        initializeGyro();
+        if (RobotBase.isReal()) {
+            initializeDistanceSensor();
+            initializeGyro();
+        } else {
+            Logger.setup("Skipping initializion of sensors in Simulation mode...");
+        }
+
     }
 
     // Distance Sensor

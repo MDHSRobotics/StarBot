@@ -1,14 +1,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.Solenoid;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.utils.DeviceUtils;
@@ -24,39 +17,39 @@ public class Devices {
     //////////////////////
 
     // CANSparkMax
-    static CANSparkMax sparkMaxClimbLegsMaster = new CANSparkMax(1, MotorType.kBrushless);
-    static CANSparkMax sparkMaxClimbLegsSlave = new CANSparkMax(2, MotorType.kBrushless);
+    static SimCANSparkMax sparkMaxClimbLegsMaster = new SimCANSparkMax("sparkMaxClimbLegsMaster", 1, MotorType.kBrushless);
+    static SimCANSparkMax sparkMaxClimbLegsSlave = new SimCANSparkMax("sparkMaxClimbLegsSlave", 2, MotorType.kBrushless);
 
     // Pneumatics
-    static Compressor compressorRollerArm = new Compressor(0);
-    static Solenoid solenoidRollerArm = new Solenoid(0);
+    static SimCompressor compressorRollerArm = new SimCompressor("compressorRollerArm", 0);
+    static SimSolenoid solenoidRollerArm = new SimSolenoid("solenoidRollerArm", 0);
 
     // Relays
-    static Relay relayLighter = new Relay(1);
+    static SimRelay relayLighter = new SimRelay("relayLighter", 1);
 
     // TalonFX
-    static WPI_TalonFX talonFxDiffWheelFrontLeft = new WPI_TalonFX(12);
-    static WPI_TalonFX talonFxDiffWheelFrontRight = new WPI_TalonFX(14);
-    static WPI_TalonFX talonFxDiffWheelRearLeft = new WPI_TalonFX(4);
-    static WPI_TalonFX talonFxDiffWheelRearRight = new WPI_TalonFX(13);
+    static SimTalonFX talonFxDiffWheelFrontLeft = new SimTalonFX("talonFxDiffWheelFrontLeft", 12);
+    static SimTalonFX talonFxDiffWheelFrontRight = new SimTalonFX("talonFxDiffWheelFrontRight", 14);
+    static SimTalonFX talonFxDiffWheelRearLeft = new SimTalonFX("talonFxDiffWheelRearLeft", 4);
+    static SimTalonFX talonFxDiffWheelRearRight = new SimTalonFX("talonFxDiffWheelRearRight", 13);
 
     // TalonSRX
-    static WPI_TalonSRX talonSrxClimbBalancer = new WPI_TalonSRX(11);
-    static WPI_TalonSRX talonSrxClimbHook = new WPI_TalonSRX(15);
-    static WPI_TalonSRX talonSrxClimbLegsA = new WPI_TalonSRX(99);
-    static WPI_TalonSRX talonSrxClimbLegsB = new WPI_TalonSRX(100);
+    static SimTalonSRX talonSrxClimbBalancer = new SimTalonSRX("talonSrxClimbBalancer", 11);
+    static SimTalonSRX talonSrxClimbHook = new SimTalonSRX("talonSrxClimbHook", 15);
+    static SimTalonSRX talonSrxClimbLegsA = new SimTalonSRX("talonSrxClimbLegsA", 99);
+    static SimTalonSRX talonSrxClimbLegsB = new SimTalonSRX("talonSrxClimbLegsB", 100);
 
-    static WPI_TalonSRX talonSrxConveyor = new WPI_TalonSRX(10);
-    static WPI_TalonSRX talonSrxRoller = new WPI_TalonSRX(99);
+    static SimTalonSRX talonSrxConveyor = new SimTalonSRX("talonSrxConveyor", 10);
+    static SimTalonSRX talonSrxRoller = new SimTalonSRX("talonSrxRoller", 99);
 
-    static WPI_TalonSRX talonSrxShooterBottomWheel = new WPI_TalonSRX(98);
-    static WPI_TalonSRX talonSrxShooterTopWheel = new WPI_TalonSRX(9);
+    static SimTalonSRX talonSrxShooterBottomWheel = new SimTalonSRX("talonSrxShooterBottomWheel", 98);
+    static SimTalonSRX talonSrxShooterTopWheel = new SimTalonSRX("talonSrxShooterTopWheel", 9);
 
     ////////////////////////
     // Drive Declarations //
     ////////////////////////
 
-    public static DifferentialDrive diffDrive;
+    public static SimDifferentialDrive diffDrive;
 
     /////////////////////
     // Initializations //
@@ -75,7 +68,7 @@ public class Devices {
 
     // Conveyor
     private static void initConveyorDevices() {
-        boolean talonSrxConveyorIsConnected = DeviceUtils.isConnected(talonSrxConveyor);
+        boolean talonSrxConveyorIsConnected = talonSrxConveyor.isConnected();
         if (!talonSrxConveyorIsConnected) {
             talonSrxConveyor = null;
             Logger.problem("Conveyor talon is not connected!");
@@ -84,10 +77,10 @@ public class Devices {
 
     // Differential Drive
     private static void initDiffDriverDevices() {
-        boolean talonFxDiffWheelFrontLeftIsConnected = DeviceUtils.isConnected(talonFxDiffWheelFrontLeft);
-        boolean talonFxDiffWheelFrontRightIsConnected = DeviceUtils.isConnected(talonFxDiffWheelFrontRight);
-        boolean talonFxDiffWheelRearLeftIsConnected = DeviceUtils.isConnected(talonFxDiffWheelRearLeft);
-        boolean talonFxDiffWheelRearRightIsConnected = DeviceUtils.isConnected(talonFxDiffWheelRearRight);
+        boolean talonFxDiffWheelFrontLeftIsConnected = talonFxDiffWheelFrontLeft.isConnected();
+        boolean talonFxDiffWheelFrontRightIsConnected = talonFxDiffWheelFrontRight.isConnected();
+        boolean talonFxDiffWheelRearLeftIsConnected = talonFxDiffWheelRearLeft.isConnected();
+        boolean talonFxDiffWheelRearRightIsConnected = talonFxDiffWheelRearRight.isConnected();
 
         boolean talonsAreConnected = true;
         if (!talonFxDiffWheelFrontLeftIsConnected) {
@@ -114,13 +107,13 @@ public class Devices {
             talonFxDiffWheelRearLeft = null;
             talonFxDiffWheelRearRight = null;
         } else {
-            diffDrive = new DifferentialDrive(talonFxDiffWheelFrontLeft, talonFxDiffWheelFrontRight);
+            diffDrive = new SimDifferentialDrive("Drive", talonFxDiffWheelFrontLeft, talonFxDiffWheelFrontRight);
         }
     }
 
     // Roller
     private static void initRollerDevices() {
-        boolean talonSrxRollerIsConnected = DeviceUtils.isConnected(talonSrxRoller);
+        boolean talonSrxRollerIsConnected = talonSrxRoller.isConnected();
         if (!talonSrxRollerIsConnected) {
             talonSrxRoller = null;
             Logger.problem("Roller talon is not connected! Disabling...");
@@ -129,8 +122,8 @@ public class Devices {
 
     // Roller Arm
     private static void initRollerArmDevices() {
-        boolean compressorRollerArmIsConnected = DeviceUtils.isConnected(compressorRollerArm);
-        boolean solenoidRollerArmIsConnected = DeviceUtils.isConnected(solenoidRollerArm);
+        boolean compressorRollerArmIsConnected = compressorRollerArm.isConnected();
+        boolean solenoidRollerArmIsConnected = solenoidRollerArm.isConnected();
 
         boolean pneumaticsAreConnected = true;
         if (!compressorRollerArmIsConnected) {
@@ -153,8 +146,8 @@ public class Devices {
     private static void initShooterDevices() {
         // TODO: Check both talons and log individually if each is not connected.
         //       If either talon is not connected, make both talon instances null, to prevent the need to feed them.
-        boolean talonSrxShooterTopIsConnected = DeviceUtils.isConnected(talonSrxShooterTopWheel);
-        boolean talonSRXShooterBottomIsConnect = DeviceUtils.isConnected(talonSrxShooterBottomWheel);
+        boolean talonSrxShooterTopIsConnected = talonSrxShooterTopWheel.isConnected();
+        boolean talonSRXShooterBottomIsConnect = talonSrxShooterBottomWheel.isConnected();
 
         if (!(talonSrxShooterTopIsConnected && talonSRXShooterBottomIsConnect)) {
             talonSrxShooterTopWheel = null;

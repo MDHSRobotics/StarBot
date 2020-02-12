@@ -1,7 +1,7 @@
 
-
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.DiffDriverBrain;
@@ -33,27 +33,30 @@ public class DiffDriver extends SubsystemBase {
     public DiffDriver() {
         Logger.setup("Constructing Subsystem: DiffDriver...");
 
-        // Determine whether or not to disable the subsystem
-        m_disabled = (diffDrive == null);
-        if (m_disabled) {
-            Logger.problem("DiffDriver devices not initialized! Disabling subsystem...");
-            return;
+        if (RobotBase.isReal()) {
+
+            // Determine whether or not to disable the subsystem
+            m_disabled = (diffDrive == null);
+            if (m_disabled) {
+                Logger.problem("DiffDriver devices not initialized! Disabling subsystem...");
+                return;
+            }
+
+            // Configure the subsystem devices
+            // TODO: Investigate why these motor controllers have to be inverted.
+            //       Are all TalonFx Motor Controllers backwards?
+            talonFxDiffWheelFrontLeft.setInverted(true);
+            talonFxDiffWheelFrontRight.setInverted(true);
+            talonFxDiffWheelRearLeft.setInverted(true);
+            talonFxDiffWheelRearRight.setInverted(true);
+            talonFxDiffWheelRearLeft.follow(talonFxDiffWheelFrontLeft);
+            talonFxDiffWheelRearRight.follow(talonFxDiffWheelFrontRight);
+
+            talonFxDiffWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            talonFxDiffWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            talonFxDiffWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+            talonFxDiffWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
         }
-
-        // Configure the subsystem devices
-        // TODO: Investigate why these motor controllers have to be inverted.
-        //       Are all TalonFx Motor Controllers backwards?
-        talonFxDiffWheelFrontLeft.setInverted(true);
-        talonFxDiffWheelFrontRight.setInverted(true);
-        talonFxDiffWheelRearLeft.setInverted(true);
-        talonFxDiffWheelRearRight.setInverted(true);
-        talonFxDiffWheelRearLeft.follow(talonFxDiffWheelFrontLeft);
-        talonFxDiffWheelRearRight.follow(talonFxDiffWheelFrontRight);
-
-        talonFxDiffWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-        talonFxDiffWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-        talonFxDiffWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-        talonFxDiffWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
     }
 
     @Override

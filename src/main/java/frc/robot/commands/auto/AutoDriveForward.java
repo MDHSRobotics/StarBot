@@ -65,6 +65,8 @@ public class AutoDriveForward extends CommandBase {
         } else {
             Logger.ending("Ending Command: AutoDriveForward...");
         }
+
+        m_diffDriver.stop();
     }
 
 }

@@ -5,6 +5,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
+
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
@@ -46,9 +48,11 @@ public class ClimbLegsRed extends SubsystemBase {
             return;
         }
 
-        // Configure devices
-        configureTalon(talonSrxClimbLegsA, SENSOR_PHASE_A, MOTOR_INVERT_A);
-        configureTalon(talonSrxClimbLegsB, SENSOR_PHASE_B, MOTOR_INVERT_B);
+        if (RobotBase.isReal()) {
+            // Configure devices
+            configureTalon(talonSrxClimbLegsA, SENSOR_PHASE_A, MOTOR_INVERT_A);
+            configureTalon(talonSrxClimbLegsB, SENSOR_PHASE_B, MOTOR_INVERT_B);
+        }
     }
 
     // Configure the given talon

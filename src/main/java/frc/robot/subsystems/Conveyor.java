@@ -1,6 +1,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
@@ -27,20 +28,23 @@ public class Conveyor extends SubsystemBase {
             return;
         }
 
-        // Configure the subsystem devices
-        talonSrxConveyor.configFactoryDefault();
+        if (RobotBase.isReal()) {
 
-        talonSrxConveyor.configPeakCurrentDuration(PEAK_AMPERAGE_DURATION, TIMEOUT_MS);
-        talonSrxConveyor.configPeakCurrentLimit(PEAK_AMPERAGE, TIMEOUT_MS);
-        talonSrxConveyor.configContinuousCurrentLimit(CONTINUOUS_AMPERAGE_LIMIT, TIMEOUT_MS);
+            // Configure the subsystem devices
+            talonSrxConveyor.configFactoryDefault();
 
-        talonSrxConveyor.configNominalOutputForward(0);
-        talonSrxConveyor.configNominalOutputReverse(0);
-        talonSrxConveyor.configPeakOutputForward(0.5);
-        talonSrxConveyor.configPeakOutputReverse(-0.5);
+            talonSrxConveyor.configPeakCurrentDuration(PEAK_AMPERAGE_DURATION, TIMEOUT_MS);
+            talonSrxConveyor.configPeakCurrentLimit(PEAK_AMPERAGE, TIMEOUT_MS);
+            talonSrxConveyor.configContinuousCurrentLimit(CONTINUOUS_AMPERAGE_LIMIT, TIMEOUT_MS);
 
-        talonSrxConveyor.configMotionAcceleration(3000, TIMEOUT_MS);
-        talonSrxConveyor.configMotionCruiseVelocity(8000, TIMEOUT_MS);
+            talonSrxConveyor.configNominalOutputForward(0);
+            talonSrxConveyor.configNominalOutputReverse(0);
+            talonSrxConveyor.configPeakOutputForward(0.5);
+            talonSrxConveyor.configPeakOutputReverse(-0.5);
+
+            talonSrxConveyor.configMotionAcceleration(3000, TIMEOUT_MS);
+            talonSrxConveyor.configMotionCruiseVelocity(8000, TIMEOUT_MS);
+        }
     }
 
     @Override
