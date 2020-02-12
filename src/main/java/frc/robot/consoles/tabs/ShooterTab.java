@@ -2,12 +2,13 @@
 package frc.robot.consoles.tabs;
 
 import edu.wpi.first.wpilibj.shuffleboard.*;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import java.util.Map;
 
 import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.ShuffleLogger;
 import frc.robot.BotSubsystems;
+import frc.robot.subsystems.utils.EncoderUtils;
+import frc.robot.subsystems.Shooter;
 
 // The Shuffleboard Shooter tab.
 public class ShooterTab {
@@ -18,13 +19,13 @@ public class ShooterTab {
     private ShuffleboardLayout m_topWheelLayout;
 
     // Widgets
-    private SimpleWidget m_bottomWheelVelocity;
-    private SimpleWidget m_topWheelVelocity;
-
     private SimpleWidget m_shooterBottomWheelTargetVelocity;
     private SimpleWidget m_shooterTopWheelTargetVelocity;
     private SimpleWidget m_shooterTopWheelCurrentVelocity;
     private SimpleWidget m_shooterBottomWheelCurrentVelocity;
+
+    private SimpleWidget m_shooterBottomWheelCurrentVelocityFPS;
+    private SimpleWidget m_shooterTopWheelCurrentVelocityFPS;
 
     private SimpleWidget m_shooterBottomWheelMaxVelocity;
     private SimpleWidget m_shooterBottomWheelMinVelocity;
@@ -33,6 +34,9 @@ public class ShooterTab {
 
     double topVelocity = ShooterBrain.shootTopWheelCurrentVelocityDefault;
     double bottomVelocity = ShooterBrain.shootBottomWheelCurrentVelocityDefault;
+
+    double bottomVelocityFPS = ShooterBrain.shootBottomWheelCurrentVelocityFPSDefault;
+    double topVelocityFPS = ShooterBrain.shootTopWheelCurrentVelocityFPSDefault;
 
     double minTopVelocity = ShooterBrain.shootTopWheelMinVelocityDefault;
     double maxTopVelocity = ShooterBrain.shootTopWheelMaxVelocityDefault;
@@ -48,16 +52,16 @@ public class ShooterTab {
 
         m_bottomWheelLayout = m_tab.getLayout("Bottom Wheel", BuiltInLayouts.kGrid);
         m_bottomWheelLayout.withPosition(0, 0);
-        m_bottomWheelLayout.withSize(2, 3);
+        m_bottomWheelLayout.withSize(2, 4);
         m_bottomWheelLayout.withProperties(Map.of("Number of columns", 2));
-        m_bottomWheelLayout.withProperties(Map.of("Number of rows", 3));
+        m_bottomWheelLayout.withProperties(Map.of("Number of rows", 4));
         m_bottomWheelLayout.withProperties(Map.of("Label position", "LEFT"));
 
         m_topWheelLayout = m_tab.getLayout("Top Wheel", BuiltInLayouts.kGrid);
-        m_topWheelLayout.withPosition(0, 3);
-        m_topWheelLayout.withSize(2, 3);
+        m_topWheelLayout.withPosition(0, 4);
+        m_topWheelLayout.withSize(2, 4);
         m_topWheelLayout.withProperties(Map.of("Number of columns", 2));
-        m_topWheelLayout.withProperties(Map.of("Number of rows", 3));
+        m_topWheelLayout.withProperties(Map.of("Number of rows", 4));
         m_topWheelLayout.withProperties(Map.of("Label position", "LEFT"));
     }
 
@@ -84,6 +88,17 @@ public class ShooterTab {
                 ShooterBrain.shootTopWheelCurrentVelocityDefault);
         ShooterBrain.shootTopWheelCurrentVelocityEntry = m_shooterTopWheelCurrentVelocity.getEntry();
         m_shooterTopWheelCurrentVelocity.withWidget(BuiltInWidgets.kGraph);
+
+        // Current velocity FPS
+        m_shooterBottomWheelCurrentVelocityFPS = m_bottomWheelLayout.add("Bottom Wheel Current Velocity FPS Entry",
+                ShooterBrain.shootBottomWheelCurrentVelocityFPSDefault);
+        ShooterBrain.shootBottomWheelCurrentVelocityFPSEntry = m_shooterBottomWheelCurrentVelocityFPS.getEntry();
+        m_shooterBottomWheelCurrentVelocityFPS.withWidget(BuiltInWidgets.kTextView);
+
+        m_shooterTopWheelCurrentVelocityFPS = m_topWheelLayout.add("Top Wheel Current Velocity FPS Entry",
+                ShooterBrain.shootTopWheelCurrentVelocityFPSDefault);
+        ShooterBrain.shootTopWheelCurrentVelocityFPSEntry = m_shooterTopWheelCurrentVelocityFPS.getEntry();
+        m_shooterTopWheelCurrentVelocityFPS.withWidget(BuiltInWidgets.kTextView);
 
         // Min velocity
         m_shooterBottomWheelMinVelocity = m_bottomWheelLayout.add("Bottom Wheel Min Velocity Entry",
@@ -122,8 +137,14 @@ public class ShooterTab {
         topVelocity = BotSubsystems.shooter.getTopWheelVelocity();
         bottomVelocity = BotSubsystems.shooter.getBottomWheelVelocity();
 
+        topVelocityFPS = EncoderUtils.translateTicksPerDecisecondToFPS(topVelocity, BotSubsystems.shooter.getWheelDiameter(), BotSubsystems.shooter.getGearRatio());
+        bottomVelocityFPS = EncoderUtils.translateTicksPerDecisecondToFPS(bottomVelocity, BotSubsystems.shooter.getWheelDiameter(), BotSubsystems.shooter.getGearRatio());
+
         ShooterBrain.setTopWheelCurrentVelocity(topVelocity);
         ShooterBrain.setBottomWheelCurrentVelocity(bottomVelocity);
+
+        ShooterBrain.setTopWheelCurrentVelocityFPS(topVelocityFPS);
+        ShooterBrain.setBottomWheelCurrentVelocityFPS(bottomVelocityFPS);
 
         if (topVelocity < minTopVelocity) minTopVelocity = topVelocity;
         if (topVelocity > maxTopVelocity) maxTopVelocity = topVelocity;

@@ -8,7 +8,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.FollowerType;
 import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.SensorTerm;
 import com.ctre.phoenix.motorcontrol.StatusFrame;
 
@@ -285,6 +284,14 @@ public class Shooter extends SubsystemBase {
         double tpds = getTopWheelVelocity();
         double fps = EncoderUtils.translateTicksPerDecisecondToFPS(tpds, WHEEL_DIAMETER, GEAR_RATIO);
         return fps;
+    }
+
+    public double getGearRatio(){
+        return GEAR_RATIO;
+    }
+
+    public double getWheelDiameter(){
+        return WHEEL_DIAMETER;
     }
 
     //---------//
