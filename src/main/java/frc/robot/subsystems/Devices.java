@@ -39,11 +39,11 @@ public class Devices {
     static SimTalonSRX talonSrxClimbLegsA = new SimTalonSRX("talonSrxClimbLegsA", 99);
     static SimTalonSRX talonSrxClimbLegsB = new SimTalonSRX("talonSrxClimbLegsB", 100);
 
-    static SimTalonSRX talonSrxConveyor = new SimTalonSRX("", 10);
-    static SimTalonSRX talonSrxRoller = new SimTalonSRX("", 99);
+    static SimTalonSRX talonSrxConveyor = new SimTalonSRX("talonSrxConveyor", 10);
+    static SimTalonSRX talonSrxRoller = new SimTalonSRX("talonSrxRoller", 99);
 
-    static SimTalonSRX talonSrxShooterBottomWheel = new SimTalonSRX("", 98);
-    static SimTalonSRX talonSrxShooterTopWheel = new SimTalonSRX("", 9);
+    static SimTalonSRX talonSrxShooterBottomWheel = new SimTalonSRX("talonSrxShooterBottomWheel", 98);
+    static SimTalonSRX talonSrxShooterTopWheel = new SimTalonSRX("talonSrxShooterTopWheel", 9);
 
     ////////////////////////
     // Drive Declarations //
