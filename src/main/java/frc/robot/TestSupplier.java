@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import frc.robot.tests.driving.*;
 import frc.robot.tests.lighting.*;
 import frc.robot.tests.roller.*;
+import frc.robot.tests.rollerarm.*;
+
 import frc.robot.tests.TestRunnable;
 
 // This class supplies the list of tests to run in Test mode on the robot.
@@ -23,8 +25,12 @@ public class TestSupplier {
         addTest(new DriveDiffTankTest());
         addTest(new CenterDiffDriveOnTargetTest());
 
-        //Roller
+        // Roller
         addTest(new SpinRollerTest());
+        addTest(new StopRollerTest());
+
+        // RollerArm
+        addTest(new LowerRollerArmTest());
     }
 
     // Adds the given test to the list
