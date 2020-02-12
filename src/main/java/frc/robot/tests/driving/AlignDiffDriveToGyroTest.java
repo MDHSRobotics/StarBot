@@ -24,7 +24,7 @@ public class AlignDiffDriveToGyroTest implements TestRunnable {
     public int run(int iteration) {
         if (iteration == 0) {
             // Start the test on the first iteration
-            Logger.setup("Starting CenterDiffDriveOnTargetTest for " + TOTAL_SECONDS + " seconds...");
+            Logger.setup("Starting AlignDiffDriveOnTargetTest for " + TOTAL_SECONDS + " seconds...");
             m_currentTime = 0.0;
 
             m_timer.reset();
