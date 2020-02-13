@@ -1,5 +1,10 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.SensorCollection;
+
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
@@ -16,6 +21,8 @@ import frc.robot.BotSensors;
 import frc.robot.BotSubsystems;
 
 import frc.robot.subsystems.constants.PathConstants;
+import static frc.robot.subsystems.constants.EncoderConstants.*;
+import static frc.robot.subsystems.constants.TalonConstants.*;
 
 import static frc.robot.subsystems.Devices.diffDrive;
 import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontLeft;
@@ -36,7 +43,6 @@ public class DiffDriver extends SubsystemBase {
 
     // Motor constants
     private final double SECONDS_FROM_NEUTRAL_TO_FULL = 0;
-    private final int TIMEOUT_MS = 10;
     private final double AUTO_PERIOD_SPEED = 0.5;
 
     //Odometry class for tracking robot pose (PathWeaver)
@@ -72,7 +78,54 @@ public class DiffDriver extends SubsystemBase {
 
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
 
-        // TODO: set up talon fx encoders for drive
+        configureTalon(talonFxDiffWheelFrontLeft, false, false);
+        configureTalon(talonFxDiffWheelFrontRight, false, false);
+        configureTalon(talonFxDiffWheelRearLeft, false, false);
+        configureTalon(talonFxDiffWheelRearRight, false, false);
+    }
+
+    // Configure the talons for this subsystem
+    private static void configureTalon(WPI_TalonFX talon, boolean sensorPhase, boolean motorInvert) {
+        talon.configFactoryDefault();
+
+        talon.configPeakCurrentDuration(PEAK_AMPERAGE_DURATION, TIMEOUT_MS);
+        talon.configPeakCurrentLimit(PEAK_AMPERAGE, TIMEOUT_MS);
+        talon.configContinuousCurrentLimit(CONTINUOUS_AMPERAGE_LIMIT, TIMEOUT_MS);
+        talon.enableCurrentLimit(true);
+
+        talon.configVoltageCompSaturation(12);
+        talon.enableVoltageCompensation(true);
+
+        talon.configNominalOutputForward(0);
+        talon.configNominalOutputReverse(0);
+        talon.configPeakOutputForward(0.5);
+        talon.configPeakOutputReverse(-0.5);
+
+        talon.configMotionAcceleration(3000, TIMEOUT_MS);
+        talon.configMotionCruiseVelocity(8000, TIMEOUT_MS);
+
+        // Config TalonSRX Redline encoder
+        talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_LOOP_PRIMARY, TIMEOUT_MS);
+        talon.setSensorPhase(sensorPhase);
+        talon.setInverted(motorInvert);
+        talon.configAllowableClosedloopError(0, PID_SLOT_0, TIMEOUT_MS);
+
+        talon.config_kF(PID_SLOT_0, 0.7, TIMEOUT_MS);
+        talon.config_kP(PID_SLOT_0, 0.0, TIMEOUT_MS);
+        talon.config_kI(PID_SLOT_0, 0.0, TIMEOUT_MS);
+        talon.config_kD(PID_SLOT_0, 0.0, TIMEOUT_MS);
+
+        // Initialize current encoder position as zero
+        talon.setSelectedSensorPosition(0, PID_LOOP_PRIMARY, TIMEOUT_MS);
+        SensorCollection sensorCol2 = talon.getSensorCollection();
+        int absolutePosition2 = sensorCol2.getPulseWidthPosition();
+        absolutePosition2 &= 0xFFF;
+        if (sensorPhase)
+            absolutePosition2 *= -1;
+        if (motorInvert)
+            absolutePosition2 *= -1;
+        // Set the quadrature (relative) sensor to match absolute
+        talon.setSelectedSensorPosition(absolutePosition2, PID_LOOP_PRIMARY, TIMEOUT_MS);
     }
 
     @Override
