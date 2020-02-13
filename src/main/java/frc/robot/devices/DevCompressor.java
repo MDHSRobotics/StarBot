@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.devices;
 
 import edu.wpi.first.wpilibj.Compressor;
 
@@ -17,7 +17,7 @@ import static frc.robot.RobotManager.isSim;
 // If the compressor is not connected, only a subset of the Compressor interface is
 // supported, mainly by tracing and other monitoring.
 
-public class SimCompressor extends Compressor {
+public class DevCompressor extends Compressor {
 
     private String m_logicalID;
     private String m_physicalID;
@@ -26,7 +26,7 @@ public class SimCompressor extends Compressor {
 
     private SimulationMonitor m_simMonitor;
 
-    public SimCompressor(String logicalDeviceID, int module) {
+    public DevCompressor(String logicalDeviceID, int module) {
         super(module);
 
         m_logicalID = logicalDeviceID;

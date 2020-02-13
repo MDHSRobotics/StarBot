@@ -1,5 +1,5 @@
 
-package frc.robot.subsystems;
+package frc.robot.devices;
 
 import com.revrobotics.CANError;
 import com.revrobotics.CANPIDController;
@@ -20,14 +20,14 @@ import static frc.robot.RobotManager.isSim;
 // If the CANPIDController is not connected, only a subset of the CANPIDController interface is
 // supported, mainly by tracing and other monitoring.
 
-public class SimCANPIDController extends CANPIDController {
+public class DevCANPIDController extends CANPIDController {
 
     private String m_logicalID;
     private String m_physicalID;
 
     private SimulationMonitor m_simMonitor;
 
-    public SimCANPIDController(String logicalDeviceID, SimCANSparkMax sparkDevice) {
+    public DevCANPIDController(String logicalDeviceID, DevCANSparkMax sparkDevice) {
         super(sparkDevice);
 
         m_logicalID = logicalDeviceID;

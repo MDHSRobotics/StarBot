@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.devices;
 
 import edu.wpi.first.wpilibj.Relay;
 
@@ -17,14 +17,14 @@ import static frc.robot.RobotManager.isSim;
 // If the Relay is not connected, only a subset of the Relay interface is
 // supported, mainly by tracing and other monitoring.
 
-public class SimRelay extends Relay {
+public class DevRelay extends Relay {
 
     private String m_logicalID;
     private String m_physicalID;
 
     private SimulationMonitor m_simMonitor;
 
-    public SimRelay(String logicalDeviceID, int channel) {
+    public DevRelay(String logicalDeviceID, int channel) {
         super(channel);
 
         m_logicalID = logicalDeviceID;

@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.devices;
 
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -17,14 +17,14 @@ import static frc.robot.RobotManager.isSim;
 // If the Solenoid is not connected, only a subset of the Solenoid interface is
 // supported, mainly by tracing and other monitoring.
 
-public class SimSolenoid extends Solenoid {
+public class DevSolenoid extends Solenoid {
 
     private String m_logicalID;
     private String m_physicalID;
 
     private SimulationMonitor m_simMonitor;
 
-    public SimSolenoid(String logicalDeviceID, int module) {
+    public DevSolenoid(String logicalDeviceID, int module) {
         super(module);
 
         m_logicalID = logicalDeviceID;

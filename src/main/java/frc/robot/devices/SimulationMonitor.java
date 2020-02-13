@@ -1,5 +1,5 @@
 
-package frc.robot.subsystems;
+package frc.robot.devices;
 
 import frc.robot.consoles.Logger;
 

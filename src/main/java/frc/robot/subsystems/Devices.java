@@ -4,6 +4,13 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.consoles.Logger;
+import frc.robot.devices.DevCANSparkMax;
+import frc.robot.devices.DevCompressor;
+import frc.robot.devices.DevDifferentialDrive;
+import frc.robot.devices.DevRelay;
+import frc.robot.devices.DevSolenoid;
+import frc.robot.devices.DevTalonFX;
+import frc.robot.devices.DevTalonSRX;
 
 // This class contains singleton (static) instances of id mapped subsystem components.
 // If a device is not connected at initialization, it should be set to null.
@@ -16,39 +23,39 @@ public class Devices {
     //////////////////////
 
     // CANSparkMax
-    static SimCANSparkMax sparkMaxClimbLegsMaster = new SimCANSparkMax("sparkMaxClimbLegsMaster", 1, MotorType.kBrushless);
-    static SimCANSparkMax sparkMaxClimbLegsSlave = new SimCANSparkMax("sparkMaxClimbLegsSlave", 2, MotorType.kBrushless);
+    static DevCANSparkMax sparkMaxClimbLegsMaster = new DevCANSparkMax("sparkMaxClimbLegsMaster", 1, MotorType.kBrushless);
+    static DevCANSparkMax sparkMaxClimbLegsSlave = new DevCANSparkMax("sparkMaxClimbLegsSlave", 2, MotorType.kBrushless);
 
     // Pneumatics
-    static SimCompressor compressorRollerArm = new SimCompressor("compressorRollerArm", 0);
-    static SimSolenoid solenoidRollerArm = new SimSolenoid("solenoidRollerArm", 0);
+    static DevCompressor compressorRollerArm = new DevCompressor("compressorRollerArm", 0);
+    static DevSolenoid solenoidRollerArm = new DevSolenoid("solenoidRollerArm", 0);
 
     // Relays
-    static SimRelay relayLighter = new SimRelay("relayLighter", 1);
+    static DevRelay relayLighter = new DevRelay("relayLighter", 1);
 
     // TalonFX
-    static SimTalonFX talonFxDiffWheelFrontLeft = new SimTalonFX("talonFxDiffWheelFrontLeft", 12);
-    static SimTalonFX talonFxDiffWheelFrontRight = new SimTalonFX("talonFxDiffWheelFrontRight", 14);
-    static SimTalonFX talonFxDiffWheelRearLeft = new SimTalonFX("talonFxDiffWheelRearLeft", 4);
-    static SimTalonFX talonFxDiffWheelRearRight = new SimTalonFX("talonFxDiffWheelRearRight", 13);
+    static DevTalonFX talonFxDiffWheelFrontLeft = new DevTalonFX("talonFxDiffWheelFrontLeft", 12);
+    static DevTalonFX talonFxDiffWheelFrontRight = new DevTalonFX("talonFxDiffWheelFrontRight", 14);
+    static DevTalonFX talonFxDiffWheelRearLeft = new DevTalonFX("talonFxDiffWheelRearLeft", 4);
+    static DevTalonFX talonFxDiffWheelRearRight = new DevTalonFX("talonFxDiffWheelRearRight", 13);
 
     // TalonSRX
-    static SimTalonSRX talonSrxClimbBalancer = new SimTalonSRX("talonSrxClimbBalancer", 11);
-    static SimTalonSRX talonSrxClimbHook = new SimTalonSRX("talonSrxClimbHook", 15);
-    static SimTalonSRX talonSrxClimbLegsA = new SimTalonSRX("talonSrxClimbLegsA", 99);
-    static SimTalonSRX talonSrxClimbLegsB = new SimTalonSRX("talonSrxClimbLegsB", 100);
+    static DevTalonSRX talonSrxClimbBalancer = new DevTalonSRX("talonSrxClimbBalancer", 11);
+    static DevTalonSRX talonSrxClimbHook = new DevTalonSRX("talonSrxClimbHook", 15);
+    static DevTalonSRX talonSrxClimbLegsA = new DevTalonSRX("talonSrxClimbLegsA", 99);
+    static DevTalonSRX talonSrxClimbLegsB = new DevTalonSRX("talonSrxClimbLegsB", 100);
 
-    static SimTalonSRX talonSrxConveyor = new SimTalonSRX("talonSrxConveyor", 10);
-    static SimTalonSRX talonSrxRoller = new SimTalonSRX("talonSrxRoller", 99);
+    static DevTalonSRX talonSrxConveyor = new DevTalonSRX("talonSrxConveyor", 10);
+    static DevTalonSRX talonSrxRoller = new DevTalonSRX("talonSrxRoller", 99);
 
-    static SimTalonSRX talonSrxShooterBottomWheel = new SimTalonSRX("talonSrxShooterBottomWheel", 98);
-    static SimTalonSRX talonSrxShooterTopWheel = new SimTalonSRX("talonSrxShooterTopWheel", 9);
+    static DevTalonSRX talonSrxShooterBottomWheel = new DevTalonSRX("talonSrxShooterBottomWheel", 98);
+    static DevTalonSRX talonSrxShooterTopWheel = new DevTalonSRX("talonSrxShooterTopWheel", 9);
 
     ////////////////////////
     // Drive Declarations //
     ////////////////////////
 
-    public static SimDifferentialDrive diffDrive;
+    public static DevDifferentialDrive diffDrive;
 
     /////////////////////
     // Initializations //
@@ -106,7 +113,7 @@ public class Devices {
             talonFxDiffWheelRearLeft = null;
             talonFxDiffWheelRearRight = null;
         } else {
-            diffDrive = new SimDifferentialDrive("Drive", talonFxDiffWheelFrontLeft, talonFxDiffWheelFrontRight);
+            diffDrive = new DevDifferentialDrive("Drive", talonFxDiffWheelFrontLeft, talonFxDiffWheelFrontRight);
         }
     }
 

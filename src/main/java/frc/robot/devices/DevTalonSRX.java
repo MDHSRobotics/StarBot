@@ -1,27 +1,23 @@
+package frc.robot.devices;
 
-package frc.robot.subsystems;
-
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-
-import frc.robot.consoles.Logger;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import static frc.robot.RobotManager.isReal;
 import static frc.robot.RobotManager.isSim;
 
-// This class is a wrapper around CANSparkMax in order to handle cases where the
+// This class is a wrapper around TalonSRX in order to handle cases where the
 // Talon controller and associated motor are not physically connected.  This
 // can be the case when running the simulator but it can also happen when
 // executing code on the RoboRio without a fully assembled robot with all of
 // necessary motors and controllers.
 
 // If the Talon is connected then this class just forwards any calls directly
-// to the CANSparkMax class.
+// to the TalonSRX class.
 
-// If the Talon is not connected, only a subset of the CANSparkMax interface is
+// If the Talon is not connected, only a subset of the TalonSRX interface is
 // supported, mainly by tracing and other monitoring.
 
-public class SimCANSparkMax extends CANSparkMax {
+public class DevTalonSRX extends WPI_TalonSRX {
 
     private String m_logicalID;
     private String m_physicalID;
@@ -30,15 +26,15 @@ public class SimCANSparkMax extends CANSparkMax {
 
     private SimulationMonitor m_simMonitor;
 
-    public SimCANSparkMax(String logicalDeviceID, int deviceNumber, MotorType motorType) {
-        super(deviceNumber, motorType);
+    public DevTalonSRX(String logicalDeviceID, int deviceNumber) {
+        super(deviceNumber);
 
         m_logicalID = logicalDeviceID;
 
         m_deviceNumber = deviceNumber;
 
         if (isSim) {
-            m_physicalID = String.format("CANSparkMax #%d", deviceNumber);
+            m_physicalID = String.format("TalonSRX #%d", deviceNumber);
             m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
     }
@@ -51,25 +47,8 @@ public class SimCANSparkMax extends CANSparkMax {
     public boolean isConnected() {
         if (isSim) return true;
 
-        // TODO: Figure out how to check for connectedness of CANSparkMax
-        Logger.warning("Missing technique for testing whether CANSparkMax is connected");
-        return true;
-    }
-
-    public SimCANPIDController getPIDController() {
-        if (isReal) return (SimCANPIDController)super.getPIDController();
-
-        String pidControllerName = String.format("PID Controller for %s", m_logicalID);
-        SimCANPIDController pidController = new SimCANPIDController(pidControllerName, this);
-        return pidController;
-    }
-
-    public CANEncoder getEncoder() {
-        if (isReal) return (SimSparkEncoder)super.getEncoder();
-
-        String encoderName = String.format("Encoder for %s", m_logicalID);
-        SimSparkEncoder encoder = new SimSparkEncoder(encoderName, this);
-        return encoder;
+        int firmVer = this.getFirmwareVersion();
+        return (firmVer != -1);
     }
 
     public void set(double power){

@@ -1,5 +1,5 @@
 
-package frc.robot.subsystems;
+package frc.robot.devices;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
@@ -18,7 +18,7 @@ import static frc.robot.RobotManager.isSim;
 // If the Talon is not connected, only a subset of the TalonFX interface is
 // supported, mainly by tracing and other monitoring.
 
-public class SimTalonFX extends WPI_TalonFX {
+public class DevTalonFX extends WPI_TalonFX {
 
     private String m_logicalID;
     private String m_physicalID;
@@ -27,7 +27,7 @@ public class SimTalonFX extends WPI_TalonFX {
 
     private SimulationMonitor m_simMonitor;
 
-    public SimTalonFX(String logicalDeviceID, int deviceNumber) {
+    public DevTalonFX(String logicalDeviceID, int deviceNumber) {
         super(deviceNumber);
 
         m_logicalID = logicalDeviceID;

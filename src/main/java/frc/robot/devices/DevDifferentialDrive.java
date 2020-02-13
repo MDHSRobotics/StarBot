@@ -1,5 +1,5 @@
 
-package frc.robot.subsystems;
+package frc.robot.devices;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -19,14 +19,14 @@ import static frc.robot.RobotManager.isSim;
 // If the DifferentialDrive motors are not connected, only a subset of the DifferentialDrive interface is
 // supported, mainly by tracing and other monitoring.
 
-public class SimDifferentialDrive extends DifferentialDrive {
+public class DevDifferentialDrive extends DifferentialDrive {
 
     private String m_logicalID;
     private String m_physicalID;
 
     private SimulationMonitor m_simMonitor;
 
-    public SimDifferentialDrive(String logicalDeviceID, SpeedController leftMotor, SpeedController rightMotor) {
+    public DevDifferentialDrive(String logicalDeviceID, SpeedController leftMotor, SpeedController rightMotor) {
         super(leftMotor, rightMotor);
 
         m_logicalID = logicalDeviceID;
