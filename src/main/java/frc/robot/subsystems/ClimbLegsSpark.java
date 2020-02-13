@@ -46,19 +46,19 @@ public class ClimbLegsSpark extends SubsystemBase {
         }
 
         // Configure devices
-        configureSparks(sparkMaxClimbLegsMaster, m_encoderMaster, m_pidMaster);
-        configureSparks(sparkMaxClimbLegsSlave, m_encoderSlave, m_pidSlave);
+        m_encoderMaster = sparkMaxClimbLegsMaster.getEncoder();
+        m_encoderSlave = sparkMaxClimbLegsSlave.getEncoder();
+
+        m_pidMaster = sparkMaxClimbLegsMaster.getPIDController();
+        m_pidSlave = sparkMaxClimbLegsSlave.getPIDController();
+
+        configureSpark(sparkMaxClimbLegsMaster, m_pidMaster);
+        configureSpark(sparkMaxClimbLegsSlave, m_pidSlave);
     }
 
     // Configure the given spark
-    private void configureSparks(CANSparkMax spark, CANEncoder encoder, CANPIDController pidController) {
+    private void configureSpark(CANSparkMax spark, CANPIDController pidController) {
         spark.restoreFactoryDefaults();
-
-        // Encoder object created to display position values
-        encoder = spark.getEncoder();
-
-        // Get the PID contoller from the CANSparkMax device
-        pidController = spark.getPIDController();
 
         // Set PID coefficients
         pidController.setP(kP);
