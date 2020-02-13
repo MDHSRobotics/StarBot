@@ -1,8 +1,11 @@
+
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.SpeedController;
+
+import static frc.robot.RobotManager.isReal;
+import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around DifferentialDrive in order to handle cases where the
 // motors for the DifferentialDrive are not physically connected.  This
@@ -18,8 +21,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class SimDifferentialDrive extends DifferentialDrive {
 
-    private SpeedController m_leftMotor;
-    private SpeedController m_rightMotor;
     private String m_logicalID;
     private String m_physicalID;
 
@@ -28,49 +29,40 @@ public class SimDifferentialDrive extends DifferentialDrive {
     public SimDifferentialDrive(String logicalDeviceID, SpeedController leftMotor, SpeedController rightMotor) {
         super(leftMotor, rightMotor);
 
-        m_leftMotor = leftMotor;
-        m_rightMotor = rightMotor;
+        m_logicalID = logicalDeviceID;
 
-        if (RobotBase.isSimulation()) {
+        if (isSim) {
             // Turn off motor safety if we are not attached to RoboRio
             setSafetyEnabled(false);
 
-            String physcialDeviceID = String.format("2-Motor Drive");
-            m_simMonitor = new SimulationMonitor(physcialDeviceID, logicalDeviceID);
+            m_physicalID = String.format("2-Motor Drive");
+            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
     }
 
-    // Intercept method if we are in Simulation; otherwise, just delegate it
     public void stopMotor() {
+        if (isReal) super.stopMotor();
 
-        if (RobotBase.isReal()) {
-            super.stopMotor();
-        } else {
-            String cmdStr = String.format("stopMotor()");
-            m_simMonitor.logCommand(cmdStr);
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        m_simMonitor.log(methodName);
     }
 
-    // Intercept method if we are in Simulation; otherwise, just delegate it
     public void tankDrive(double leftSpeed, double rightSpeed) {
+        if (isReal) super.tankDrive(leftSpeed, rightSpeed);
 
-        if (RobotBase.isReal()) {
-            super.tankDrive(leftSpeed, rightSpeed);
-        } else {
-            String cmdString = String.format("tankDrive(%.2f, %.2f)", leftSpeed, rightSpeed);
-            m_simMonitor.logCommand(cmdString);
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        String arg1 = String.format("%.2f", leftSpeed);
+        String arg2 = String.format("%.2f", rightSpeed);
+        m_simMonitor.log(methodName, arg1, arg2);
     }
 
-    // Intercept method if we are in Simulation; otherwise, just delegate it
     public void arcadeDrive(double xSpeed, double zRotation) {
+        if (isReal) super.arcadeDrive(xSpeed, zRotation);
 
-        if (RobotBase.isReal()) {
-            super.arcadeDrive(xSpeed, zRotation);
-        } else {
-            String cmdString = String.format("arcadeDrive(%.2f, %.2f)", xSpeed, zRotation);
-            m_simMonitor.logCommand(cmdString);
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        String arg1 = String.format("%.2f", xSpeed);
+        String arg2 = String.format("%.2f", zRotation);
+        m_simMonitor.log(methodName, arg1, arg2);
     }
 
 }

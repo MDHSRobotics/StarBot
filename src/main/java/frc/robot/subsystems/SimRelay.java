@@ -1,8 +1,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.RobotBase;
-import frc.robot.consoles.Logger;
+
+import static frc.robot.RobotManager.isReal;
+import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around Relay in order to handle cases where the
 // Relay is not physically connected.  This
@@ -18,7 +19,6 @@ import frc.robot.consoles.Logger;
 
 public class SimRelay extends Relay {
 
-    private int m_channel;
     private String m_logicalID;
     private String m_physicalID;
 
@@ -27,24 +27,22 @@ public class SimRelay extends Relay {
     public SimRelay(String logicalDeviceID, int channel) {
         super(channel);
 
-        m_channel = channel;
+        m_logicalID = logicalDeviceID;
 
-        if (RobotBase.isSimulation()) {
-            String physcialDeviceID = String.format("Relay channel #%d", channel);
-            m_simMonitor = new SimulationMonitor(physcialDeviceID, logicalDeviceID);
+        if (isSim) {
+            m_physicalID = String.format("Relay channel #%d", channel);
+            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
+            set(Value.kOff);
         }
     }
 
-    // Intercept set method if we are in Simulation; otherwise, just delegate it
     public void set(Value value){
+        if (isReal) super.set(value);
+        if (m_simMonitor == null) return;
 
-        if (RobotBase.isReal()) {
-            super.set(value);
-        }
-        else {
-            String cmdStr = String.format("set(%s)", value.toString());
-            if (m_simMonitor != null) m_simMonitor.logCommand(cmdStr);
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        String arg = value.toString();
+        m_simMonitor.log(methodName, arg);
     }
 
 }

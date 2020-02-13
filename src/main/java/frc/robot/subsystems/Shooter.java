@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.ShooterBrain;
@@ -17,6 +16,7 @@ import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.constants.TalonConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
 import static frc.robot.subsystems.Devices.talonSrxShooterTopWheel;
+import static frc.robot.RobotManager.isReal;
 
 // Shooter subsystem, for shooting balls.
 public class Shooter extends SubsystemBase {
@@ -44,7 +44,7 @@ public class Shooter extends SubsystemBase {
             return;
         }
 
-        if (RobotBase.isReal()) {
+        if (isReal) {
             // Configure devices
             configureTalon(talonSrxShooterBottomWheel, SENSOR_PHASE_BOTTOM, MOTOR_INVERT_BOTTOM);
             configureTalon(talonSrxShooterTopWheel, SENSOR_PHASE_TOP, MOTOR_INVERT_TOP);

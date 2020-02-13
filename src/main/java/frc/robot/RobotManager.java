@@ -3,6 +3,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.consoles.Logger;
@@ -23,6 +24,10 @@ public class RobotManager {
     // Variant is used to configure different device mappings for different "robots"
     // TODO: This needs to be added to the Brain and Shuffleboard, so that it is settable on the fly
     public static Variant botVariant = Variant.TEST_BOARD;
+
+    // If the robot is running in the real world or in simulation
+    public static final boolean isReal = RobotBase.isReal();
+    public static final boolean isSim = !isReal;
 
     //-------------------------------//
     // Shuffleboard & SmartDashboard //

@@ -2,8 +2,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.RobotBase;
-import frc.robot.consoles.Logger;
+import static frc.robot.RobotManager.isReal;
+import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around TalonSRX in order to handle cases where the
 // Talon controller and associated motor are not physically connected.  This
@@ -19,20 +19,23 @@ import frc.robot.consoles.Logger;
 
 public class SimTalonSRX extends WPI_TalonSRX {
 
-    private int m_deviceNumber;
     private String m_logicalID;
     private String m_physicalID;
+
+    private int m_deviceNumber;
 
     private SimulationMonitor m_simMonitor;
 
     public SimTalonSRX(String logicalDeviceID, int deviceNumber) {
         super(deviceNumber);
 
+        m_logicalID = logicalDeviceID;
+
         m_deviceNumber = deviceNumber;
 
-        if (RobotBase.isSimulation()) {
-            String physcialDeviceID = String.format("TalonSRX #%d", deviceNumber);
-            m_simMonitor = new SimulationMonitor(physcialDeviceID, logicalDeviceID);
+        if (isSim) {
+            m_physicalID = String.format("TalonSRX #%d", deviceNumber);
+            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
     }
 
@@ -42,41 +45,25 @@ public class SimTalonSRX extends WPI_TalonSRX {
 
     // Determines if this is connected
     public boolean isConnected() {
+        if (isSim) return true;
 
-        boolean connected;
-
-        // Devices are not connected in Simulation mode
-        if (RobotBase.isSimulation()) {
-            connected = true;
-        }
-        else {
-            int firmVer = this.getFirmwareVersion();
-            connected = (firmVer != -1);
-        }
-        return connected;
+        int firmVer = this.getFirmwareVersion();
+        return (firmVer != -1);
     }
 
-    // Intercept set method if we are in Simulation; otherwise, just delegate it
     public void set(double power){
+        if (isReal) super.set(power);
 
-        if (RobotBase.isReal()) {
-            super.set(power);
-        }
-        else {
-            String cmdStr = String.format("set(%.3f)", power);
-            m_simMonitor.logCommand(cmdStr);
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        String arg = String.format("%.3f", power);
+        m_simMonitor.log(methodName, arg);
     }
 
-    // Intercept stopMotor method if we are in Simulation; otherwise, just delegate it
     public void stopMotor() {
+        if (isReal) super.stopMotor();
 
-        if (RobotBase.isReal()) {
-            super.stopMotor();
-        } else {
-            String cmdStr = String.format("stopMotor()");
-            m_simMonitor.logCommand(cmdStr);
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        m_simMonitor.log(methodName);
     }
 
 }

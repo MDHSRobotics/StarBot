@@ -1,11 +1,12 @@
+
 package frc.robot.subsystems;
 
 import com.revrobotics.CANError;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.ControlType;
 
-import edu.wpi.first.wpilibj.RobotBase;
-import frc.robot.consoles.Logger;
+import static frc.robot.RobotManager.isReal;
+import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around CANPIDController in order to handle cases where the
 // CANPIDController is not physically connected.  This
@@ -21,7 +22,6 @@ import frc.robot.consoles.Logger;
 
 public class SimCANPIDController extends CANPIDController {
 
-    private SimCANSparkMax m_sparkDevice;
     private String m_logicalID;
     private String m_physicalID;
 
@@ -30,46 +30,22 @@ public class SimCANPIDController extends CANPIDController {
     public SimCANPIDController(String logicalDeviceID, SimCANSparkMax sparkDevice) {
         super(sparkDevice);
 
-        m_sparkDevice = sparkDevice;
+        m_logicalID = logicalDeviceID;
 
-        if (RobotBase.isSimulation()) {
-            String physcialDeviceID = String.format("CANPIDController sparkDevice");
-            m_simMonitor = new SimulationMonitor(physcialDeviceID, logicalDeviceID);
+        if (isSim) {
+            m_physicalID = String.format("CANPIDController sparkDevice");
+            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
     }
 
-    // Intercept set method if we are in Simulation; otherwise, just delegate it
-    public CANError setReference(double value, ControlType ctrl){
+    public CANError setReference(double value, ControlType ctrl) {
+        if (isReal) return super.setReference(value, ctrl);
 
-        if (RobotBase.isReal()) {
-            return super.setReference(value, ctrl);
-        }
-        else {
-            String cmdStr = String.format("setReference(%.2f, %s)", value, controlTypeToString(ctrl));
-            m_simMonitor.logCommand(cmdStr);
-            return CANError.kOk;
-        }
-    }
-
-    private static String controlTypeToString(ControlType ctrl) {
-          switch(ctrl) {
-                case kDutyCycle:
-                    return "kDutyCycle";
-                case kVelocity:
-                    return "kVelocity";
-                case kVoltage:
-                    return "kVoltage";
-                case kPosition:
-                    return "kPosition";
-                case kSmartMotion:
-                    return "kSmartMotion";
-                case kCurrent:
-                    return "kCurrent";
-                case kSmartVelocity:
-                    return "kSmartVelocity";
-                default:
-                    return "Unknown Control Type";
-          }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        String arg1 = String.format("%.2f", value);
+        String arg2 = ctrl.name();
+        m_simMonitor.log(methodName, arg1, arg2);
+        return CANError.kOk;
     }
 
 }

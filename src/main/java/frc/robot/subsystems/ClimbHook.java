@@ -1,13 +1,13 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.ClimbHookBrain;
 import frc.robot.consoles.Logger;
 
 import static frc.robot.subsystems.Devices.talonSrxClimbHook;
+import static frc.robot.RobotManager.isReal;
 
 // ClimbHook Subsystem, for hooking onto the lever.
 public class ClimbHook extends SubsystemBase {
@@ -28,7 +28,7 @@ public class ClimbHook extends SubsystemBase {
             return;
         }
 
-        if (RobotBase.isReal()) {
+        if (isReal) {
             // Configure the subsystem devices
             talonSrxClimbHook.configFactoryDefault();
         }

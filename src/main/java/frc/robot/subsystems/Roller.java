@@ -1,13 +1,13 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.RollerBrain;
 import frc.robot.consoles.Logger;
 
 import static frc.robot.subsystems.Devices.talonSrxRoller;
+import static frc.robot.RobotManager.isReal;
 
 // Roller Subsytem, for sucking in balls.
 public class Roller extends SubsystemBase {
@@ -25,7 +25,7 @@ public class Roller extends SubsystemBase {
             return;
         }
 
-        if (RobotBase.isReal()) {
+        if (isReal) {
             // Configure the subsystem devices
             talonSrxRoller.configFactoryDefault();
         }

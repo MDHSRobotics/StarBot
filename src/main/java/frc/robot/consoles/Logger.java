@@ -1,7 +1,6 @@
 
 package frc.robot.consoles;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import java.time.LocalTime;
 
 // This is a helper class for colorful custom console logging.
@@ -50,12 +49,12 @@ public class Logger {
 
     // Yellow text for warnings
     public static void warning(Object message) {
-        DriverStation.reportWarning("WARNING --> " + message.toString(), false);
+        System.out.println("WARNING --> " + LocalTime.now() + " :: " + message);
     }
 
     // Red text for problems
     public static void problem(Object message) {
-        DriverStation.reportWarning("PROBLEM --> " + message.toString(), false);
+        System.out.println("PROBLEM --> " + LocalTime.now() + " :: " + message);
     }
 
 }

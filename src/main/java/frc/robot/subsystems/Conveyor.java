@@ -1,13 +1,13 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
 
 import static frc.robot.subsystems.constants.TalonConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxConveyor;
+import static frc.robot.RobotManager.isReal;
 
 // Conveyor subsystem, for delivering the balls to the shoot system.
 public class Conveyor extends SubsystemBase {
@@ -28,7 +28,7 @@ public class Conveyor extends SubsystemBase {
             return;
         }
 
-        if (RobotBase.isReal()) {
+        if (isReal) {
 
             // Configure the subsystem devices
             talonSrxConveyor.configFactoryDefault();

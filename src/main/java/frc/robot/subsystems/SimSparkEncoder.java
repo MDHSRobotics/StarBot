@@ -3,8 +3,8 @@ package frc.robot.subsystems;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANError;
 
-import edu.wpi.first.wpilibj.RobotBase;
-
+import static frc.robot.RobotManager.isReal;
+import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around CANPIDController in order to handle cases where the
 // CANPIDController is not physically connected.  This
@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj.RobotBase;
 
 public class SimSparkEncoder extends CANEncoder {
 
-    private SimCANSparkMax m_sparkDevice;
     private String m_logicalID;
     private String m_physicalID;
 
@@ -29,25 +28,21 @@ public class SimSparkEncoder extends CANEncoder {
     public SimSparkEncoder(String logicalDeviceID, SimCANSparkMax sparkDevice) {
         super(sparkDevice);
 
-        m_sparkDevice = sparkDevice;
+        m_logicalID = logicalDeviceID;
 
-        if (RobotBase.isSimulation()) {
-            String physcialDeviceID = String.format("CANEncoder sparkDevice");
-            m_simMonitor = new SimulationMonitor(physcialDeviceID, logicalDeviceID);
+        if (isSim) {
+            m_physicalID = String.format("CANEncoder sparkDevice");
+            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
     }
 
-    // Intercept set method if we are in Simulation; otherwise, just delegate it
     public CANError setPosition(double position){
+        if (isReal) return super.setPosition(position);
 
-        if (RobotBase.isReal()) {
-            return super.setPosition(position);
-        }
-        else {
-            String cmdStr = String.format("setPosition(%.2f)", position);
-            m_simMonitor.logCommand(cmdStr);
-            return CANError.kOk;
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        String arg = String.format("%.2f", position);
+        m_simMonitor.log(methodName, arg);
+        return CANError.kOk;
     }
 
 }

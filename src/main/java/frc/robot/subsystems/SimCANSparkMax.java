@@ -1,12 +1,13 @@
+
 package frc.robot.subsystems;
 
 import com.revrobotics.CANEncoder;
-import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.consoles.Logger;
+
+import static frc.robot.RobotManager.isReal;
+import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around CANSparkMax in order to handle cases where the
 // Talon controller and associated motor are not physically connected.  This
@@ -22,23 +23,23 @@ import frc.robot.consoles.Logger;
 
 public class SimCANSparkMax extends CANSparkMax {
 
-    private int m_deviceNumber;
     private String m_logicalID;
     private String m_physicalID;
-    private MotorType m_motorType;
+
+    private int m_deviceNumber;
 
     private SimulationMonitor m_simMonitor;
 
     public SimCANSparkMax(String logicalDeviceID, int deviceNumber, MotorType motorType) {
         super(deviceNumber, motorType);
 
-        m_deviceNumber = deviceNumber;
         m_logicalID = logicalDeviceID;
-        m_motorType = motorType;
 
-        if (RobotBase.isSimulation()) {
-            String physcialDeviceID = String.format("CANSparkMax #%d", deviceNumber);
-            m_simMonitor = new SimulationMonitor(physcialDeviceID, logicalDeviceID);
+        m_deviceNumber = deviceNumber;
+
+        if (isSim) {
+            m_physicalID = String.format("CANSparkMax #%d", deviceNumber);
+            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
     }
 
@@ -48,70 +49,42 @@ public class SimCANSparkMax extends CANSparkMax {
 
     // Determines if this is connected
     public boolean isConnected() {
+        if (isSim) return true;
 
-        boolean connected;
-
-        // Devices are not connected in Simulation mode
-        if (RobotBase.isSimulation()) {
-            connected = true;
-        }
-        else {
-            // TODO: Figure out how to check for connectedness of CANSparkMax
-            Logger.problem("Missing technique for testing whether CANSparkMax is connected");
-            connected = false;
-        }
-        return connected;
+        // TODO: Figure out how to check for connectedness of CANSparkMax
+        Logger.warning("Missing technique for testing whether CANSparkMax is connected");
+        return true;
     }
 
     public SimCANPIDController getPIDController() {
+        if (isReal) return (SimCANPIDController)super.getPIDController();
 
-        if (RobotBase.isReal()) {
-            // This upcast is a bit tricky but should be ok as long as a real connection to the
-            // RoboRio does not require any of the behavior of the parent class (SimCANPIDController)
-            return (SimCANPIDController) super.getPIDController();
-
-        } else {
-            String pidControllerName = String.format("PID Controller for %s", m_logicalID);
-            SimCANPIDController pidController = new SimCANPIDController(pidControllerName, this);
-            return pidController;
-        }
+        String pidControllerName = String.format("PID Controller for %s", m_logicalID);
+        SimCANPIDController pidController = new SimCANPIDController(pidControllerName, this);
+        return pidController;
     }
 
     public CANEncoder getEncoder() {
+        if (isReal) return (SimSparkEncoder)super.getEncoder();
 
-        if (RobotBase.isReal()) {
-            // This upcast is a bit tricky but should be ok as long as a real connection to the
-            // RoboRio does not require any of the behavior of the parent class (SimCANPIDController)
-            return (SimSparkEncoder) super.getEncoder();
-
-        } else {
-            String encoderName = String.format("Encoder for %s", m_logicalID);
-            SimSparkEncoder encoder = new SimSparkEncoder(encoderName, this);
-            return encoder;
-        }
+        String encoderName = String.format("Encoder for %s", m_logicalID);
+        SimSparkEncoder encoder = new SimSparkEncoder(encoderName, this);
+        return encoder;
     }
 
-    // Intercept set method if we are in Simulation; otherwise, just delegate it
     public void set(double power){
+        if (isReal) super.set(power);
 
-        if (RobotBase.isReal()) {
-            super.set(power);
-        }
-        else {
-            String cmdStr = String.format("set(%.3f)", power);
-            m_simMonitor.logCommand(cmdStr);
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        String arg = String.format("%.3f", power);
+        m_simMonitor.log(methodName, arg);
     }
 
-    // Intercept stopMotor method if we are in Simulation; otherwise, just delegate it
     public void stopMotor() {
+        if (isReal) super.stopMotor();
 
-        if (RobotBase.isReal()) {
-            super.stopMotor();
-        } else {
-            String cmdStr = "stopMotor()";
-            m_simMonitor.logCommand(cmdStr);
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        m_simMonitor.log(methodName);
     }
 
 }

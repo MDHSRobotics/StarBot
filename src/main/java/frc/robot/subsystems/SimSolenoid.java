@@ -1,8 +1,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.RobotBase;
-import frc.robot.consoles.Logger;
+
+import static frc.robot.RobotManager.isReal;
+import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around Solenoid in order to handle cases where the
 // Solenoid is not physically connected.  This
@@ -18,8 +19,7 @@ import frc.robot.consoles.Logger;
 
 public class SimSolenoid extends Solenoid {
 
-    private int m_module;
-        private String m_logicalID;
+    private String m_logicalID;
     private String m_physicalID;
 
     private SimulationMonitor m_simMonitor;
@@ -27,40 +27,28 @@ public class SimSolenoid extends Solenoid {
     public SimSolenoid(String logicalDeviceID, int module) {
         super(module);
 
-        m_module = module;
+        m_logicalID = logicalDeviceID;
 
-        if (RobotBase.isSimulation()) {
-            String physcialDeviceID = String.format("Solenoid module #%d", module);
-            m_simMonitor = new SimulationMonitor(physcialDeviceID, logicalDeviceID);
+        if (isSim) {
+            m_physicalID = String.format("Solenoid module #%d", module);
+            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
     }
 
     // Determines if this is connected
     public boolean isConnected() {
+        if (isSim) return true;
 
-        boolean connected;
-
-        // Devices are not connected in Simulation mode
-        if (RobotBase.isSimulation()) {
-            connected = true;
-        }
-        else {
-            boolean outputOn = this.get();
-            connected = !outputOn;
-        }
-        return connected;
+        boolean outputOn = this.get();
+        return !outputOn;
     }
 
-    // Intercept set method if we are in Simulation; otherwise, just delegate it
-    public void set(boolean state){
+    public void set(boolean state) {
+        if (isReal) super.set(state);
 
-        if (RobotBase.isReal()) {
-            super.set(state);
-        }
-        else {
-            String cmdStr = String.format("set(%b)", state);
-            m_simMonitor.logCommand(cmdStr);
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        String arg = String.valueOf(state);
+        m_simMonitor.log(methodName, arg);
     }
 
 }

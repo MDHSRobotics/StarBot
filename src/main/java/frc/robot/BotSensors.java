@@ -3,10 +3,11 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.SPI;
 
 import frc.robot.consoles.Logger;
+
+import static frc.robot.RobotManager.isReal;
 
 // This class contains singleton instances of id mapped sensors.
 public class BotSensors {
@@ -21,13 +22,12 @@ public class BotSensors {
     public static void initializeSensors() {
         Logger.setup("Initializing BotSensors...");
 
-        if (RobotBase.isReal()) {
+        if (isReal) {
             initializeDistanceSensor();
             initializeGyro();
         } else {
             Logger.setup("Skipping initializion of sensors in Simulation mode...");
         }
-
     }
 
     // Distance Sensor

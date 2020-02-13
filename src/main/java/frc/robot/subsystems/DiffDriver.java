@@ -1,7 +1,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.DiffDriverBrain;
@@ -15,6 +14,7 @@ import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontLeft;
 import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontRight;
 import static frc.robot.subsystems.Devices.talonFxDiffWheelRearLeft;
 import static frc.robot.subsystems.Devices.talonFxDiffWheelRearRight;
+import static frc.robot.RobotManager.isReal;
 
 // Differential driver subsystem.
 public class DiffDriver extends SubsystemBase {
@@ -33,7 +33,7 @@ public class DiffDriver extends SubsystemBase {
     public DiffDriver() {
         Logger.setup("Constructing Subsystem: DiffDriver...");
 
-        if (RobotBase.isReal()) {
+        if (isReal) {
 
             // Determine whether or not to disable the subsystem
             m_disabled = (diffDrive == null);

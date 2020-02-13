@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
@@ -16,6 +15,7 @@ import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.constants.TalonConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxClimbLegsA;
 import static frc.robot.subsystems.Devices.talonSrxClimbLegsB;
+import static frc.robot.RobotManager.isReal;
 
 // ClimbLegsRed subsystem, for extending and retracting the climb legs with redline motors.
 public class ClimbLegsRed extends SubsystemBase {
@@ -48,7 +48,7 @@ public class ClimbLegsRed extends SubsystemBase {
             return;
         }
 
-        if (RobotBase.isReal()) {
+        if (isReal) {
             // Configure devices
             configureTalon(talonSrxClimbLegsA, SENSOR_PHASE_A, MOTOR_INVERT_A);
             configureTalon(talonSrxClimbLegsB, SENSOR_PHASE_B, MOTOR_INVERT_B);

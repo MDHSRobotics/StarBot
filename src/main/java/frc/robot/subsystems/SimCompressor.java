@@ -1,8 +1,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.RobotBase;
-import frc.robot.consoles.Logger;
+
+import static frc.robot.RobotManager.isReal;
+import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around Compressor in order to handle cases where the
 // compressor is not physically connected.  This
@@ -18,56 +19,43 @@ import frc.robot.consoles.Logger;
 
 public class SimCompressor extends Compressor {
 
-    private int m_module;
     private String m_logicalID;
     private String m_physicalID;
+
+    private int m_module;
 
     private SimulationMonitor m_simMonitor;
 
     public SimCompressor(String logicalDeviceID, int module) {
         super(module);
 
+        m_logicalID = logicalDeviceID;
+
         m_module = module;
 
-        if (RobotBase.isSimulation()) {
-            String physcialDeviceID = String.format("Compressor module #%d", module);
-            m_simMonitor = new SimulationMonitor(physcialDeviceID, logicalDeviceID);
+        if (isSim) {
+            m_physicalID = String.format("Compressor module #%d", m_module);
+            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
     }
 
     // Determines if this is connected
     public boolean isConnected() {
-
-        boolean connected;
-
-        // Devices are not connected in Simulation mode
-        if (RobotBase.isSimulation()) {
-            connected = true;
-        }
-        else {
-            connected = this.enabled();
-        }
-        return connected;
+        if (isSim) return true;
+        return this.enabled();
     }
 
-    // Intercept setClosedLoopControl method if we are in Simulation; otherwise, just delegate it
     public void setClosedLoopControl(boolean closedLoopState) {
+        if (isReal) super.setClosedLoopControl(closedLoopState);
 
-        if (RobotBase.isReal()) {
-            super.setClosedLoopControl(closedLoopState);
-        } else {
-            String cmdStr = String.format("setClosedLoop(%b)", closedLoopState);
-            m_simMonitor.logCommand(cmdStr);
-        }
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        String arg = String.valueOf(closedLoopState);
+        m_simMonitor.log(methodName, arg);
     }
 
-    // Intercept getCompressorCurrent method if we are in Simulation; otherwise, just delegate it
     public double getCompressorCurrent() {
-
-        if (RobotBase.isReal()) {
-            return super.getCompressorCurrent();
-        } else {
-            return 9.99;
-        }
+        if (isReal) return super.getCompressorCurrent();
+        return 9.99;
     }
+
 }

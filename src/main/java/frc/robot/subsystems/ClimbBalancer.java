@@ -1,13 +1,13 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.ClimbBalancerBrain;
 import frc.robot.consoles.Logger;
 
 import static frc.robot.subsystems.Devices.talonSrxClimbBalancer;
+import static frc.robot.RobotManager.isReal;
 
 // ClimbBalancer subsystem, for balancing the robot on the level.
 public class ClimbBalancer extends SubsystemBase {
@@ -25,7 +25,7 @@ public class ClimbBalancer extends SubsystemBase {
             return;
         }
 
-        if (RobotBase.isReal()) {
+        if (isReal) {
             // Configure the subsystem devices
             talonSrxClimbBalancer.configFactoryDefault();
         }
