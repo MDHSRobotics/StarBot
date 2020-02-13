@@ -26,6 +26,17 @@ public class Devices {
     // Relays
     static DevRelay relayLighter = new DevRelay("relayLighter", 1);
 
+    // CANSparkMax
+    static DevCANSparkMax sparkMaxDiffWheelFrontLeft = new DevCANSparkMax("sparkMaxDiffWheelFrontLeft", 12,
+            MotorType.kBrushless);
+    static DevCANSparkMax sparkMaxDiffWheelFrontRight = new DevCANSparkMax("sparkMaxDiffWheelFrontRight", 14,
+            MotorType.kBrushless);
+    static DevCANSparkMax sparkMaxDiffWheelRearLeft = new DevCANSparkMax("sparkMaxDiffWheelRearLeft", 14,
+            MotorType.kBrushless);
+    static DevCANSparkMax sparkMaxDiffWheelRearRight = new DevCANSparkMax("sparkMaxDiffWheelRearRight", 13,
+            MotorType.kBrushless);
+
+
     // TalonFX
     static DevTalonFX talonFxDiffWheelFrontLeft = new DevTalonFX("talonFxDiffWheelFrontLeft", 12);
     static DevTalonFX talonFxDiffWheelFrontRight = new DevTalonFX("talonFxDiffWheelFrontRight", 14);
