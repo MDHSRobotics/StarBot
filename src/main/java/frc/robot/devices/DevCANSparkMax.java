@@ -4,8 +4,6 @@ package frc.robot.devices;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 
-import frc.robot.consoles.Logger;
-
 import static frc.robot.RobotManager.isReal;
 import static frc.robot.RobotManager.isSim;
 
@@ -25,39 +23,35 @@ public class DevCANSparkMax extends CANSparkMax {
 
     private String m_logicalID;
     private String m_physicalID;
-
-    private int m_deviceNumber;
-
     private SimulationMonitor m_simMonitor;
+    public boolean isConnected = false;
 
     public DevCANSparkMax(String logicalDeviceID, int deviceNumber, MotorType motorType) {
         super(deviceNumber, motorType);
 
         m_logicalID = logicalDeviceID;
-
-        m_deviceNumber = deviceNumber;
+        m_physicalID = String.format("CANSparkMax #%d", deviceNumber);
 
         if (isSim) {
-            m_physicalID = String.format("CANSparkMax #%d", deviceNumber);
             m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
+        }
+
+        isConnected = isConnected();
+        if (isReal && isConnected) {
+            restoreFactoryDefaults();
         }
     }
 
-    public int getID() {
-        return m_deviceNumber;
-    }
-
     // Determines if this is connected
-    public boolean isConnected() {
+    private boolean isConnected() {
         if (isSim) return true;
-
-        // TODO: Figure out how to check for connectedness of CANSparkMax
-        Logger.warning("Missing technique for testing whether CANSparkMax is connected");
         return true;
     }
 
     public DevCANPIDController getPIDController() {
-        if (isReal) return (DevCANPIDController)super.getPIDController();
+        if (isReal) {
+            return (DevCANPIDController)super.getPIDController();
+        }
 
         String pidControllerName = String.format("PID Controller for %s", m_logicalID);
         DevCANPIDController pidController = new DevCANPIDController(pidControllerName, this);
@@ -65,7 +59,9 @@ public class DevCANSparkMax extends CANSparkMax {
     }
 
     public CANEncoder getEncoder() {
-        if (isReal) return (DevSparkEncoder)super.getEncoder();
+        if (isReal) {
+            return (DevSparkEncoder)super.getEncoder();
+        }
 
         String encoderName = String.format("Encoder for %s", m_logicalID);
         DevSparkEncoder encoder = new DevSparkEncoder(encoderName, this);
@@ -73,7 +69,10 @@ public class DevCANSparkMax extends CANSparkMax {
     }
 
     public void set(double power){
-        if (isReal) super.set(power);
+        if (isReal) {
+            if (isConnected) super.set(power);
+            return;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg = String.format("%.3f", power);
@@ -81,7 +80,10 @@ public class DevCANSparkMax extends CANSparkMax {
     }
 
     public void stopMotor() {
-        if (isReal) super.stopMotor();
+        if (isReal) {
+            if (isConnected) super.stopMotor();
+            return;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         m_simMonitor.log(methodName);

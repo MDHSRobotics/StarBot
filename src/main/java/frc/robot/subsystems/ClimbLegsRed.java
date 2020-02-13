@@ -1,7 +1,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
@@ -9,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.SensorCollection;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.consoles.Logger;
+import frc.robot.devices.DevTalonSRX;
 import frc.robot.subsystems.utils.EncoderUtils;
 
 import static frc.robot.subsystems.constants.EncoderConstants.*;
@@ -35,18 +35,8 @@ public class ClimbLegsRed extends SubsystemBase {
     private final boolean SENSOR_PHASE_B = false;
     private final boolean MOTOR_INVERT_B = false;
 
-    // If any of the motor controllers are null, this should be true
-    private boolean m_disabled = false;
-
     public ClimbLegsRed() {
         Logger.setup("Constructing Subsystem: ClimbLegsRed...");
-
-        // Determine whether or not to disable the subsystem
-        m_disabled = (talonSrxClimbLegsA == null || talonSrxClimbLegsB == null);
-        if (m_disabled) {
-            Logger.problem("ClimbLegsRed devices not initialized! Disabling subsystem...");
-            return;
-        }
 
         if (isReal) {
             // Configure devices
@@ -56,8 +46,8 @@ public class ClimbLegsRed extends SubsystemBase {
     }
 
     // Configure the given talon
-    private void configureTalon(WPI_TalonSRX talon, boolean sensorPhase, boolean motorInvert) {
-        talon.configFactoryDefault();
+    private void configureTalon(DevTalonSRX talon, boolean sensorPhase, boolean motorInvert) {
+        if (!talon.isConnected) return;
 
         talon.configPeakCurrentDuration(PEAK_AMPERAGE_DURATION, TIMEOUT_MS);
         talon.configPeakCurrentLimit(PEAK_AMPERAGE, TIMEOUT_MS);
@@ -105,7 +95,6 @@ public class ClimbLegsRed extends SubsystemBase {
 
     // Stop the legs
     public void stop() {
-        if (m_disabled) return;
         talonSrxClimbLegsA.stopMotor();
         talonSrxClimbLegsB.stopMotor();
     }
@@ -113,7 +102,6 @@ public class ClimbLegsRed extends SubsystemBase {
     // Extend the legs
     public void extendLegs() {
         double ticks = EncoderUtils.translateDistanceToTicks(DISTANCE, SPOOL_DIAMETER, GEAR_RATIO);
-        if (m_disabled) return;
         talonSrxClimbLegsA.setSelectedSensorPosition(0);
         talonSrxClimbLegsB.setSelectedSensorPosition(0);
         talonSrxClimbLegsA.set(ControlMode.MotionMagic, ticks);
@@ -122,20 +110,17 @@ public class ClimbLegsRed extends SubsystemBase {
 
     // Retract the legs
     public void retractLegs() {
-        if (m_disabled) return;
         talonSrxClimbLegsA.set(ControlMode.MotionMagic, 0);
         talonSrxClimbLegsB.set(ControlMode.MotionMagic, 0);
     }
 
     // Get the current motor velocity
     public int getVelocity() {
-        if (m_disabled) return 0;
         return talonSrxClimbLegsA.getSelectedSensorVelocity();
     }
 
     // Get the current motor position
     public int getPosition() {
-        if (m_disabled) return 0;
         return talonSrxClimbLegsA.getSelectedSensorPosition();
     }
 
@@ -144,7 +129,6 @@ public class ClimbLegsRed extends SubsystemBase {
     //---------//
 
     public void testMotor() {
-        if (m_disabled) return;
         talonSrxClimbLegsB.set(0.2);
     }
 

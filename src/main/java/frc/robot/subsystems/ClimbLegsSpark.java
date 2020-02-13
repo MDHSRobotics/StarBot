@@ -3,15 +3,16 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
-import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.ClimbLegsSparkBrain;
 import frc.robot.consoles.Logger;
+import frc.robot.devices.DevCANSparkMax;
 
 import static frc.robot.subsystems.Devices.sparkMaxClimbLegsMaster;
 import static frc.robot.subsystems.Devices.sparkMaxClimbLegsSlave;
+import static frc.robot.RobotManager.isReal;
 
 // ClimbLegsSpark subsystem, for extending and retracting the climb legs with spark max motors.
 public class ClimbLegsSpark extends SubsystemBase {
@@ -34,31 +35,25 @@ public class ClimbLegsSpark extends SubsystemBase {
     private CANPIDController m_pidMaster;
     private CANPIDController m_pidSlave;
 
-    // If any of the motor controllers are null, this should be true
-    private boolean m_disabled = false;
-
     public ClimbLegsSpark() {
         Logger.setup("Constructing Subsystem: ClimbLegsSpark...");
-        m_disabled = (sparkMaxClimbLegsMaster == null);
-        if (m_disabled) {
-            Logger.problem("ClimbLegsSpark devices not initialized! Disabling subsystem...");
-            return;
+
+        if (isReal) {
+            // Configure devices
+            m_encoderMaster = sparkMaxClimbLegsMaster.getEncoder();
+            m_encoderSlave = sparkMaxClimbLegsSlave.getEncoder();
+
+            m_pidMaster = sparkMaxClimbLegsMaster.getPIDController();
+            m_pidSlave = sparkMaxClimbLegsSlave.getPIDController();
+
+            configureSpark(sparkMaxClimbLegsMaster, m_pidMaster);
+            configureSpark(sparkMaxClimbLegsSlave, m_pidSlave);
         }
-
-        // Configure devices
-        m_encoderMaster = sparkMaxClimbLegsMaster.getEncoder();
-        m_encoderSlave = sparkMaxClimbLegsSlave.getEncoder();
-
-        m_pidMaster = sparkMaxClimbLegsMaster.getPIDController();
-        m_pidSlave = sparkMaxClimbLegsSlave.getPIDController();
-
-        configureSpark(sparkMaxClimbLegsMaster, m_pidMaster);
-        configureSpark(sparkMaxClimbLegsSlave, m_pidSlave);
     }
 
     // Configure the given spark
-    private void configureSpark(CANSparkMax spark, CANPIDController pidController) {
-        spark.restoreFactoryDefaults();
+    private void configureSpark(DevCANSparkMax spark, CANPIDController pidController) {
+        if (!spark.isConnected) return;
 
         // Set PID coefficients
         pidController.setP(kP);

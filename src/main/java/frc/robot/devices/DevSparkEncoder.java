@@ -22,22 +22,33 @@ public class DevSparkEncoder extends CANEncoder {
 
     private String m_logicalID;
     private String m_physicalID;
-
     private SimulationMonitor m_simMonitor;
+    public boolean isConnected = false;
 
     public DevSparkEncoder(String logicalDeviceID, DevCANSparkMax sparkDevice) {
         super(sparkDevice);
 
         m_logicalID = logicalDeviceID;
+        m_physicalID = String.format("CANEncoder sparkDevice");
 
         if (isSim) {
-            m_physicalID = String.format("CANEncoder sparkDevice");
             m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
+
+        isConnected = isConnected();
+    }
+
+    // Determines if this is connected
+    private boolean isConnected() {
+        if (isSim) return true;
+        return true;
     }
 
     public CANError setPosition(double position){
-        if (isReal) return super.setPosition(position);
+        if (isReal) {
+            if (isConnected) return super.setPosition(position);
+            return CANError.kOk;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg = String.format("%.2f", position);

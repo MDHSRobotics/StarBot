@@ -3,14 +3,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import frc.robot.consoles.Logger;
-import frc.robot.devices.DevCANSparkMax;
-import frc.robot.devices.DevCompressor;
-import frc.robot.devices.DevDifferentialDrive;
-import frc.robot.devices.DevRelay;
-import frc.robot.devices.DevSolenoid;
-import frc.robot.devices.DevTalonFX;
-import frc.robot.devices.DevTalonSRX;
+import frc.robot.devices.*;
 
 // This class contains singleton (static) instances of id mapped subsystem components.
 // If a device is not connected at initialization, it should be set to null.
@@ -51,114 +44,12 @@ public class Devices {
     static DevTalonSRX talonSrxShooterBottomWheel = new DevTalonSRX("talonSrxShooterBottomWheel", 98);
     static DevTalonSRX talonSrxShooterTopWheel = new DevTalonSRX("talonSrxShooterTopWheel", 9);
 
-    ////////////////////////
-    // Drive Declarations //
-    ////////////////////////
-
-    public static DevDifferentialDrive diffDrive;
-
     /////////////////////
-    // Initializations //
+    // Drive Instances //
     /////////////////////
 
-    // Intialize the subsystem devices
-    public static void initializeDevices() {
-        Logger.setup("Initializing subsystem Devices...");
-
-        initConveyorDevices();
-        initDiffDriverDevices();
-        initRollerDevices();
-        initRollerArmDevices();
-        initShooterDevices();
-    }
-
-    // Conveyor
-    private static void initConveyorDevices() {
-        boolean talonSrxConveyorIsConnected = talonSrxConveyor.isConnected();
-        if (!talonSrxConveyorIsConnected) {
-            talonSrxConveyor = null;
-            Logger.problem("Conveyor talon is not connected!");
-        }
-    }
-
-    // Differential Drive
-    private static void initDiffDriverDevices() {
-        boolean talonFxDiffWheelFrontLeftIsConnected = talonFxDiffWheelFrontLeft.isConnected();
-        boolean talonFxDiffWheelFrontRightIsConnected = talonFxDiffWheelFrontRight.isConnected();
-        boolean talonFxDiffWheelRearLeftIsConnected = talonFxDiffWheelRearLeft.isConnected();
-        boolean talonFxDiffWheelRearRightIsConnected = talonFxDiffWheelRearRight.isConnected();
-
-        boolean talonsAreConnected = true;
-        if (!talonFxDiffWheelFrontLeftIsConnected) {
-            talonsAreConnected = false;
-            Logger.problem("DiffWheelFrontLeft talon is not connected!");
-        }
-        if (!talonFxDiffWheelFrontRightIsConnected) {
-            talonsAreConnected = false;
-            Logger.problem("DiffWheelFrontRight talon is not connected!");
-        }
-        if (!talonFxDiffWheelRearLeftIsConnected) {
-            talonsAreConnected = false;
-            Logger.problem("DiffWheelRearLeft talon is not connected!");
-        }
-        if (!talonFxDiffWheelRearRightIsConnected) {
-            talonsAreConnected = false;
-            Logger.problem("DiffWheelRearRight talon is not connected!");
-        }
-
-        if (!talonsAreConnected) {
-            Logger.problem("DiffDriver devices not all connected! Disabling...");
-            talonFxDiffWheelFrontLeft = null;
-            talonFxDiffWheelFrontRight = null;
-            talonFxDiffWheelRearLeft = null;
-            talonFxDiffWheelRearRight = null;
-        } else {
-            diffDrive = new DevDifferentialDrive("Drive", talonFxDiffWheelFrontLeft, talonFxDiffWheelFrontRight);
-        }
-    }
-
-    // Roller
-    private static void initRollerDevices() {
-        boolean talonSrxRollerIsConnected = talonSrxRoller.isConnected();
-        if (!talonSrxRollerIsConnected) {
-            talonSrxRoller = null;
-            Logger.problem("Roller talon is not connected! Disabling...");
-        }
-    }
-
-    // Roller Arm
-    private static void initRollerArmDevices() {
-        boolean compressorRollerArmIsConnected = compressorRollerArm.isConnected();
-        boolean solenoidRollerArmIsConnected = solenoidRollerArm.isConnected();
-
-        boolean pneumaticsAreConnected = true;
-        if (!compressorRollerArmIsConnected) {
-            pneumaticsAreConnected = false;
-            Logger.problem("RollerArm compressor is not connected!");
-        }
-        if (!solenoidRollerArmIsConnected) {
-            pneumaticsAreConnected = false;
-            Logger.problem("RollerArm solenoid is not connected!");
-        }
-
-        if (!pneumaticsAreConnected) {
-            compressorRollerArm = null;
-            solenoidRollerArm = null;
-            Logger.problem("RollerArm pnuematics are not connected! Disabling...");
-        }
-    }
-
-    // Shooter
-    private static void initShooterDevices() {
-        // TODO: Check both talons and log individually if each is not connected.
-        //       If either talon is not connected, make both talon instances null, to prevent the need to feed them.
-        boolean talonSrxShooterTopIsConnected = talonSrxShooterTopWheel.isConnected();
-        boolean talonSRXShooterBottomIsConnect = talonSrxShooterBottomWheel.isConnected();
-
-        if (!(talonSrxShooterTopIsConnected && talonSRXShooterBottomIsConnect)) {
-            talonSrxShooterTopWheel = null;
-            Logger.problem("Shooter talon is not connected! Disabling...");
-        }
-    }
+    public static DevDifferentialDrive diffDrive = new DevDifferentialDrive("diffDrive",
+                                                                            talonFxDiffWheelFrontLeft,
+                                                                            talonFxDiffWheelFrontRight);
 
 }

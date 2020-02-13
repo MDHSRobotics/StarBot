@@ -23,32 +23,45 @@ public class DevDifferentialDrive extends DifferentialDrive {
 
     private String m_logicalID;
     private String m_physicalID;
-
     private SimulationMonitor m_simMonitor;
+    public boolean isConnected = false;
 
     public DevDifferentialDrive(String logicalDeviceID, SpeedController leftMotor, SpeedController rightMotor) {
         super(leftMotor, rightMotor);
 
         m_logicalID = logicalDeviceID;
+        m_physicalID = String.format("2-Motor Drive");
 
         if (isSim) {
             // Turn off motor safety if we are not attached to RoboRio
             setSafetyEnabled(false);
-
-            m_physicalID = String.format("2-Motor Drive");
             m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
+
+        isConnected = isConnected();
+    }
+
+    // Determines if this is connected
+    private boolean isConnected() {
+        if (isSim) return true;
+        return true;
     }
 
     public void stopMotor() {
-        if (isReal) super.stopMotor();
+        if (isReal) {
+            if (isConnected) super.stopMotor();
+            return;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         m_simMonitor.log(methodName);
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed) {
-        if (isReal) super.tankDrive(leftSpeed, rightSpeed);
+        if (isReal) {
+            if (isConnected) super.tankDrive(leftSpeed, rightSpeed);
+            return;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg1 = String.format("%.2f", leftSpeed);
@@ -57,7 +70,10 @@ public class DevDifferentialDrive extends DifferentialDrive {
     }
 
     public void arcadeDrive(double xSpeed, double zRotation) {
-        if (isReal) super.arcadeDrive(xSpeed, zRotation);
+        if (isReal) {
+            if (isConnected) super.arcadeDrive(xSpeed, zRotation);
+            return;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg1 = String.format("%.2f", xSpeed);

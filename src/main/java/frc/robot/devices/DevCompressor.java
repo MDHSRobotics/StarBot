@@ -21,32 +21,33 @@ public class DevCompressor extends Compressor {
 
     private String m_logicalID;
     private String m_physicalID;
-
-    private int m_module;
-
     private SimulationMonitor m_simMonitor;
+    public boolean isConnected = false;
 
     public DevCompressor(String logicalDeviceID, int module) {
         super(module);
 
         m_logicalID = logicalDeviceID;
-
-        m_module = module;
+        m_physicalID = String.format("Compressor module #%d", module);
 
         if (isSim) {
-            m_physicalID = String.format("Compressor module #%d", m_module);
             m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
+
+        isConnected = isConnected();
     }
 
     // Determines if this is connected
-    public boolean isConnected() {
+    private boolean isConnected() {
         if (isSim) return true;
         return this.enabled();
     }
 
     public void setClosedLoopControl(boolean closedLoopState) {
-        if (isReal) super.setClosedLoopControl(closedLoopState);
+        if (isReal) {
+            if (isConnected) super.setClosedLoopControl(closedLoopState);
+            return;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg = String.valueOf(closedLoopState);
@@ -54,7 +55,11 @@ public class DevCompressor extends Compressor {
     }
 
     public double getCompressorCurrent() {
-        if (isReal) return super.getCompressorCurrent();
+        if (isReal) {
+            if (isConnected) return super.getCompressorCurrent();
+            return -1;
+        }
+
         return 9.99;
     }
 

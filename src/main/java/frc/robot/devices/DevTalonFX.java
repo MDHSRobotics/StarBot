@@ -22,30 +22,27 @@ public class DevTalonFX extends WPI_TalonFX {
 
     private String m_logicalID;
     private String m_physicalID;
-
-    private int m_deviceNumber;
-
     private SimulationMonitor m_simMonitor;
+    public boolean isConnected = false;
 
     public DevTalonFX(String logicalDeviceID, int deviceNumber) {
         super(deviceNumber);
 
         m_logicalID = logicalDeviceID;
-
-        m_deviceNumber = deviceNumber;
+        m_physicalID = String.format("TalonFX #%d", deviceNumber);
 
         if (isSim) {
-            m_physicalID = String.format("TalonFX #%d", deviceNumber);
             m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
+        }
+
+        isConnected = isConnected();
+        if (isReal && isConnected) {
+            configFactoryDefault();
         }
     }
 
-    public int getID(){
-        return m_deviceNumber;
-    }
-
     // Determines if this is connected
-    public boolean isConnected() {
+    private boolean isConnected() {
         if (isSim) return true;
 
         int firmVer = this.getFirmwareVersion();
@@ -53,7 +50,10 @@ public class DevTalonFX extends WPI_TalonFX {
     }
 
     public void set(double power){
-        if (isReal) super.set(power);
+        if (isReal) {
+            if (isConnected) super.set(power);
+            return;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg = String.format("%.3f", power);
@@ -61,7 +61,10 @@ public class DevTalonFX extends WPI_TalonFX {
     }
 
     public void stopMotor() {
-        if (isReal) super.stopMotor();
+        if (isReal) {
+            if (isConnected) super.stopMotor();
+            return;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         m_simMonitor.log(methodName);

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.DiffDriverBrain;
 import frc.robot.consoles.Logger;
+import frc.robot.devices.DevTalonFX;
 import frc.robot.sensors.DistanceSensor;
 import frc.robot.sensors.Gyro;
 import frc.robot.BotSensors;
@@ -27,36 +28,27 @@ public class DiffDriver extends SubsystemBase {
     private final int TIMEOUT_MS = 10;
     private final double AUTO_PERIOD_SPEED = 0.5;
 
-    // If any of the motor controllers are null, this should be true
-    private boolean m_disabled = false;
-
     public DiffDriver() {
         Logger.setup("Constructing Subsystem: DiffDriver...");
 
         if (isReal) {
-
-            // Determine whether or not to disable the subsystem
-            m_disabled = (diffDrive == null);
-            if (m_disabled) {
-                Logger.problem("DiffDriver devices not initialized! Disabling subsystem...");
-                return;
-            }
-
             // Configure the subsystem devices
-            // TODO: Investigate why these motor controllers have to be inverted.
-            //       Are all TalonFx Motor Controllers backwards?
-            talonFxDiffWheelFrontLeft.setInverted(true);
-            talonFxDiffWheelFrontRight.setInverted(true);
-            talonFxDiffWheelRearLeft.setInverted(true);
-            talonFxDiffWheelRearRight.setInverted(true);
+            configureTalon(talonFxDiffWheelFrontLeft);
+            configureTalon(talonFxDiffWheelFrontRight);
+            configureTalon(talonFxDiffWheelRearLeft);
+            configureTalon(talonFxDiffWheelRearRight);
             talonFxDiffWheelRearLeft.follow(talonFxDiffWheelFrontLeft);
             talonFxDiffWheelRearRight.follow(talonFxDiffWheelFrontRight);
-
-            talonFxDiffWheelFrontLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            talonFxDiffWheelRearLeft.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            talonFxDiffWheelFrontRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
-            talonFxDiffWheelRearRight.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
         }
+    }
+
+    // Configure the given talon
+    private void configureTalon(DevTalonFX talon) {
+        if (!talon.isConnected) return;
+
+        // TODO: Investigate why these motor controllers have to be inverted.
+        talon.setInverted(true);
+        talon.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
     }
 
     @Override
@@ -79,20 +71,17 @@ public class DiffDriver extends SubsystemBase {
 
     // Stop all the drive motors
     public void stop() {
-        if (m_disabled) return;
         diffDrive.stopMotor();
     }
 
     // Drive using the tank method
     public void driveTank(double leftSpeed, double rightSpeed) {
-        if (m_disabled) return;
         // Logger.info("Left Speed: " + leftSpeed + "; Right Speed: " + rightSpeed);
         diffDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
     // Drive forward at a set speed
     public void moveForwardAuto() {
-        if (m_disabled) return;
         diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
     }
 
@@ -133,7 +122,6 @@ public class DiffDriver extends SubsystemBase {
         }
 
         Logger.action("DiffDriver -> Drive Tank: " + zRotation);
-        if (m_disabled) return;
         diffDrive.arcadeDrive(0, zRotation);
     }
 

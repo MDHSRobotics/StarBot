@@ -24,22 +24,33 @@ public class DevCANPIDController extends CANPIDController {
 
     private String m_logicalID;
     private String m_physicalID;
-
     private SimulationMonitor m_simMonitor;
+    public boolean isConnected = false;
 
     public DevCANPIDController(String logicalDeviceID, DevCANSparkMax sparkDevice) {
         super(sparkDevice);
 
         m_logicalID = logicalDeviceID;
+        m_physicalID = String.format("CANPIDController sparkDevice");
 
         if (isSim) {
-            m_physicalID = String.format("CANPIDController sparkDevice");
             m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
+
+        isConnected = isConnected();
+    }
+
+    // Determines if this is connected
+    private boolean isConnected() {
+        if (isSim) return true;
+        return true;
     }
 
     public CANError setReference(double value, ControlType ctrl) {
-        if (isReal) return super.setReference(value, ctrl);
+        if (isReal) {
+            if (isConnected) return super.setReference(value, ctrl);
+            return CANError.kOk;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg1 = String.format("%.2f", value);

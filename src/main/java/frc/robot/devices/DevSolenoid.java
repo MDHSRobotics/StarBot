@@ -21,22 +21,24 @@ public class DevSolenoid extends Solenoid {
 
     private String m_logicalID;
     private String m_physicalID;
-
     private SimulationMonitor m_simMonitor;
+    public boolean isConnected = false;
 
     public DevSolenoid(String logicalDeviceID, int module) {
         super(module);
 
         m_logicalID = logicalDeviceID;
+        m_physicalID = String.format("Solenoid module #%d", module);
 
         if (isSim) {
-            m_physicalID = String.format("Solenoid module #%d", module);
             m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
         }
+
+        isConnected = isConnected();
     }
 
     // Determines if this is connected
-    public boolean isConnected() {
+    private boolean isConnected() {
         if (isSim) return true;
 
         boolean outputOn = this.get();
@@ -44,7 +46,10 @@ public class DevSolenoid extends Solenoid {
     }
 
     public void set(boolean state) {
-        if (isReal) super.set(state);
+        if (isReal) {
+            if (isConnected) super.set(state);
+            return;
+        }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg = String.valueOf(state);

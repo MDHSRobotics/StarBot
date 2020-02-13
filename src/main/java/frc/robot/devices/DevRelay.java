@@ -21,25 +21,36 @@ public class DevRelay extends Relay {
 
     private String m_logicalID;
     private String m_physicalID;
-
     private SimulationMonitor m_simMonitor;
+    public boolean isConnected = false;
 
     public DevRelay(String logicalDeviceID, int channel) {
         super(channel);
 
         m_logicalID = logicalDeviceID;
+        m_physicalID = String.format("Relay channel #%d", channel);
 
         if (isSim) {
-            m_physicalID = String.format("Relay channel #%d", channel);
             m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
-            set(Value.kOff);
+            set(Value.kOff); // The super constructor calls set(Value.kOff)
         }
+
+        isConnected = isConnected();
+    }
+
+    // Determines if this is connected
+    private boolean isConnected() {
+        if (isSim) return true;
+        return true;
     }
 
     public void set(Value value){
-        if (isReal) super.set(value);
-        if (m_simMonitor == null) return;
+        if (isReal) {
+            if (isConnected) super.set(value);
+            return;
+        }
 
+        if (m_simMonitor == null) return; // The super constructor calls set(Value.kOff)
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg = value.toString();
         m_simMonitor.log(methodName, arg);

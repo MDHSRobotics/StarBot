@@ -14,21 +14,10 @@ public class RollerArm extends SubsystemBase {
     // State variables
     public boolean armIsUp = true;
 
-    // If any of the motor controllers are null, this should be true
-    private boolean m_disabled = false;
-
     public RollerArm() {
         Logger.setup("Constructing Subsystem: RollerArm...");
 
-        // Determine whether or not to disable the subsystem
-        m_disabled = (compressorRollerArm == null ||
-                      solenoidRollerArm == null);
-        if (m_disabled) {
-            Logger.problem("RollerArm devices not initialized! Disabling subsystem...");
-            return;
-        }
-
-        // Configure the subsystem devices
+        // Configure devices
         compressorRollerArm.setClosedLoopControl(true);
         solenoidRollerArm.set(false);
     }
@@ -40,7 +29,6 @@ public class RollerArm extends SubsystemBase {
 
     // Get the current being used by the roller arm compressor
     public int getCurrent() {
-        if (m_disabled) return 0;
         return (int)compressorRollerArm.getCompressorCurrent();
     }
 
@@ -51,13 +39,11 @@ public class RollerArm extends SubsystemBase {
 
     // Lower the roller arm
     public void lowerArm() {
-        if (m_disabled) return;
         solenoidRollerArm.set(true);
     }
 
     // Raise the roller arm
     public void raiseArm() {
-        if (m_disabled) return;
         solenoidRollerArm.set(false);
     }
 
