@@ -17,7 +17,7 @@ import static frc.robot.subsystems.Devices.sparkMaxDiffWheelRearLeft;
 import static frc.robot.subsystems.Devices.sparkMaxDiffWheelRearRight;
 import static frc.robot.RobotManager.isReal;
 
-// Differential driver subsystem.
+// Differential driver subsystem for the spark max's.
 public class DiffDriverSpark extends SubsystemBase {
 
     // The direction of forward/backward via the controller
@@ -41,7 +41,7 @@ public class DiffDriverSpark extends SubsystemBase {
         }
     }
 
-    // Configure the given talon
+    // Configure the given spark max
     private void configureSparkMax(DevCANSparkMax sparkMax) {
         if (!sparkMax.isConnected) return;
 
