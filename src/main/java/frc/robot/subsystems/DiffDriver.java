@@ -87,8 +87,8 @@ public class DiffDriver extends SubsystemBase {
 
     // Drive to center the robot perpendicular to the shoot target
     // based on the detected distance to the near side arena wall
-    public void centerOnTarget() {
-        double distance = DistanceSensor.getDistanceInMeters();
+    public void centerOnFrontTarget() {
+        double distance = DistanceSensor.getDistanceInMeters(BotSensors.distanceSensorFront);
         double targetMaximum = 3;
         double targetMinimum = 2;
         if (distance > targetMinimum && distance < targetMaximum) {
@@ -100,6 +100,19 @@ public class DiffDriver extends SubsystemBase {
         } else if (distance < targetMinimum) {
             diffDrive.arcadeDrive(.4, 0);
             Logger.info("DiffDriver -> CenterOnTarget -> Distance: " + distance + " Too close to the target!");
+        }
+    }
+
+    public void centerOnTopTarget() {
+        double distance = DistanceSensor.getDistanceInMeters(BotSensors.distanceSensorTop);
+        double targetMaximum = 3;
+        double targetMinimum = 2;
+        if (distance > targetMinimum && distance < targetMaximum) {
+            diffDrive.stopMotor();
+        } else if (distance > targetMaximum) {
+            diffDrive.arcadeDrive(.4, 0);
+        } else if (distance < targetMinimum) {
+            diffDrive.arcadeDrive(.4, 0);
         }
     }
 

@@ -13,8 +13,8 @@ import static frc.robot.RobotManager.isReal;
 public class BotSensors {
 
     // Analog Inputs
-    public static final AnalogInput distanceSensor = new AnalogInput(0); // (pins 3, 6 and 7 from MB1013 to analog input 0)
-
+    public static final AnalogInput distanceSensorFront = new AnalogInput(0); // pins 3, 6 and 7 from MB1013 to analog input 0
+    public static final AnalogInput distanceSensorTop = new AnalogInput(1); // pins 3, 6 and 7 from MB1013 to analog input 1
     // Attitude and Heading Reference Systems
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
@@ -23,18 +23,28 @@ public class BotSensors {
         Logger.setup("Initializing BotSensors...");
 
         if (isReal) {
-            initializeDistanceSensor();
+            initializeDistanceSensorFront();
+            initializeDistanceSensorTop();
             initializeGyro();
         } else {
             Logger.setup("Skipping initializion of sensors in Simulation mode...");
         }
     }
 
-    // Distance Sensor
-    private static void initializeDistanceSensor() {
+    // Distance Sensor Front
+    private static void initializeDistanceSensorFront() {
         // TODO: How can we check connections?
-        boolean distanceSensorIsConnected = true;
-        if (!distanceSensorIsConnected) {
+        boolean distanceSensorFrontIsConnected = true;
+        if (!distanceSensorFrontIsConnected) {
+            Logger.problem("Distance sensor not connected!");
+        }
+    }
+
+    //Distance Sensor Top
+    private static void initializeDistanceSensorTop() {
+        // TODO: How can we check connections?
+        boolean distanceSensorFrontIsConnected = true;
+        if (!distanceSensorFrontIsConnected) {
             Logger.problem("Distance sensor not connected!");
         }
     }
