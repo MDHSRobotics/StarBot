@@ -40,6 +40,8 @@ public class LimelightBrain {
     public static void setXOffset() {
         x = tx.getDouble(0.0);
         SmartDashboard.putNumber("LimelightX", x);
+
+        Logger.info("tx: " + x);
     }
 
     public static void setYOffset() {
