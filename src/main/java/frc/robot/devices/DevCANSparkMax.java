@@ -3,6 +3,7 @@ package frc.robot.devices;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.EncoderType;
 
 import static frc.robot.RobotManager.isReal;
 import static frc.robot.RobotManager.isSim;
@@ -50,7 +51,7 @@ public class DevCANSparkMax extends CANSparkMax {
 
     public DevCANPIDController getPIDController() {
         if (isReal) {
-            return (DevCANPIDController)super.getPIDController();
+            return new DevCANPIDController(m_logicalID + "PIDController", this);
         }
 
         String pidControllerName = String.format("PID Controller for %s", m_logicalID);
@@ -58,13 +59,13 @@ public class DevCANSparkMax extends CANSparkMax {
         return pidController;
     }
 
-    public CANEncoder getEncoder() {
+    public DevCANSparkMaxEncoder getEncoder() {
         if (isReal) {
-            return (DevSparkEncoder)super.getEncoder();
+            return new DevCANSparkMaxEncoder(m_logicalID + "Encoder", this);
         }
 
         String encoderName = String.format("Encoder for %s", m_logicalID);
-        DevSparkEncoder encoder = new DevSparkEncoder(encoderName, this);
+        DevCANSparkMaxEncoder encoder = new DevCANSparkMaxEncoder(encoderName, this);
         return encoder;
     }
 
