@@ -17,6 +17,7 @@ public class Shuffler {
     private InputsTab m_inputsTab;
     private DriveTab m_driveTab;
     private LimelightTab m_limelightTab;
+    private RollerArmTab m_rollerArmTab;
     private RollerTab m_rollerTab;
     private ShooterTab m_shooterTab;
     private ClimbHookTab m_climbHookTab;
@@ -86,7 +87,6 @@ public class Shuffler {
         m_climbLegsSparkTab.configure();
         m_climbBalancerTab.configure();
         m_debugTab.configure();
-        m_limelightTab.configure();
 
         setupSmartdashboard();
     }
