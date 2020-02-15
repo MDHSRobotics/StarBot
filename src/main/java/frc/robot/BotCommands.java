@@ -70,11 +70,11 @@ public class BotCommands {
 
     // Shooter
     public static ConveyAndShoot conveyAndShoot;
+    public static ResetShoot resetShoot;
     public static ReverseConveyorAndShoot reverseConveyorAndShoot;
+    public static Shoot shoot;
     public static StopConveyorAndShooter stopConveyorAndShooter;
     public static StopShooter stopShooter;
-    public static Shoot shoot;
-    public static ResetShoot resetShoot;
 
     // Initialize all robot commands
     public static void initializeCommands() {
@@ -129,11 +129,11 @@ public class BotCommands {
 
         // Shooter
         conveyAndShoot = new ConveyAndShoot(BotSubsystems.shooter, BotSubsystems.conveyor);
+        resetShoot = new ResetShoot(BotSubsystems.shooter);
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
+        shoot = new Shoot(BotSubsystems.shooter);
         stopConveyorAndShooter = new StopConveyorAndShooter(BotSubsystems.conveyor, BotSubsystems.shooter);
         stopShooter = new StopShooter(BotSubsystems.shooter);
-        shoot = new Shoot(BotSubsystems.shooter);
-        resetShoot = new ResetShoot(BotSubsystems.shooter);
     }
 
     // Return the command to run in autonomous mode

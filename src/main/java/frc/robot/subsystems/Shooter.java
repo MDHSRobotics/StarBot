@@ -3,26 +3,21 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.FollowerType;
-import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
-import com.ctre.phoenix.motorcontrol.SensorCollection;
-import com.ctre.phoenix.motorcontrol.SensorTerm;
-import com.ctre.phoenix.motorcontrol.StatusFrame;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.devices.DevTalonSRX;
 import frc.robot.subsystems.utils.EncoderUtils;
+import frc.robot.subsystems.utils.PIDValues;
+import frc.robot.subsystems.utils.TalonUtils;
 
 import static frc.robot.subsystems.constants.EncoderConstants.*;
-import static frc.robot.subsystems.constants.TalonConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
 import static frc.robot.subsystems.Devices.talonSrxShooterTopWheel;
 import static frc.robot.RobotManager.isReal;
 
-// Shooter subsystem, for shooting balls with two flywheels
+// Shooter subsystem, for shooting balls with two flywheels.
 public class Shooter extends SubsystemBase {
 
     // Mechanical constants
@@ -30,158 +25,23 @@ public class Shooter extends SubsystemBase {
     private final double WHEEL_DIAMETER = 4.0;
 
     // Encoder constants
-    private static final boolean SENSOR_PHASE_TOP = true;
-    private static final boolean MOTOR_INVERT_TOP = false;
-
     private static final boolean SENSOR_PHASE_BOTTOM = true;
     private static final boolean MOTOR_INVERT_BOTTOM = false;
+
+    private static final boolean SENSOR_PHASE_TOP = true;
+    private static final boolean MOTOR_INVERT_TOP = false;
 
     public Shooter() {
         Logger.setup("Constructing Subsystem: Shooter...");
 
         if (isReal) {
             // Configure devices
-            configureTalon(talonSrxShooterBottomWheel, SENSOR_PHASE_BOTTOM, MOTOR_INVERT_BOTTOM);
-            configureTalon(talonSrxShooterTopWheel, SENSOR_PHASE_TOP, MOTOR_INVERT_TOP);
+            PIDValues pidBottom = new PIDValues(0.1, 0, 0, 0);
+            TalonUtils.configureTalonWithEncoder(talonSrxShooterBottomWheel, SENSOR_PHASE_BOTTOM, MOTOR_INVERT_BOTTOM, pidBottom);
+
+            PIDValues pidTop = new PIDValues(0.1, 0, 0, 0);
+            TalonUtils.configureTalonWithEncoder(talonSrxShooterTopWheel, SENSOR_PHASE_TOP, MOTOR_INVERT_TOP, pidTop);
         }
-    }
-
-    // Configure the given talon
-    private static void configureTalon(DevTalonSRX talon, boolean sensorPhase, boolean motorInvert) {
-        if (!talon.isConnected) return;
-
-        talon.configPeakCurrentDuration(PEAK_AMPERAGE_DURATION, TIMEOUT_MS);
-        talon.configPeakCurrentLimit(PEAK_AMPERAGE, TIMEOUT_MS);
-        talon.configContinuousCurrentLimit(CONTINUOUS_AMPERAGE_LIMIT, TIMEOUT_MS);
-        talon.enableCurrentLimit(true);
-
-        talon.configVoltageCompSaturation(12);
-        talon.enableVoltageCompensation(true);
-
-        talon.configNominalOutputForward(0);
-        talon.configNominalOutputReverse(0);
-        talon.configPeakOutputForward(1);
-        talon.configPeakOutputReverse(-1);
-
-        talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_LOOP_PRIMARY, TIMEOUT_MS);
-        talon.setSensorPhase(sensorPhase);
-        talon.setInverted(motorInvert);
-        talon.configAllowableClosedloopError(PID_SLOT_0, 0, TIMEOUT_MS);
-
-        talon.config_kF(PID_SLOT_0, 0.1, TIMEOUT_MS);
-        talon.config_kP(PID_SLOT_0, 0.0, TIMEOUT_MS);
-        talon.config_kI(PID_SLOT_0, 0.0, TIMEOUT_MS);
-        talon.config_kD(PID_SLOT_0, 0.0, TIMEOUT_MS);
-
-        //talon.configNeutralDeadband(NEUTRAL_DEADBAND, TIMEOUT_MS);
-
-        talon.configMotionAcceleration(3000, TIMEOUT_MS);
-        talon.configMotionCruiseVelocity(8000, TIMEOUT_MS);
-
-        zeroOutEncoder(talon);
-    }
-
-    // Config TalonSRX Redline Master
-    private void configureTalonMaster(WPI_TalonSRX talonM, WPI_TalonSRX talonF, boolean SENSOR_PHASE, boolean MOTOR_INVERT) {
-        talonM.configFactoryDefault();
-
-        talonM.configPeakCurrentDuration(PEAK_AMPERAGE_DURATION, TIMEOUT_MS);
-        talonM.configPeakCurrentLimit(PEAK_AMPERAGE, TIMEOUT_MS);
-        talonM.configContinuousCurrentLimit(CONTINUOUS_AMPERAGE_LIMIT, TIMEOUT_MS);
-        talonM.enableCurrentLimit(true);
-
-        talonM.configVoltageCompSaturation(12);
-        talonM.enableVoltageCompensation(true);
-
-        talonM.configNominalOutputForward(0);
-        talonM.configNominalOutputReverse(0);
-        talonM.configPeakOutputForward(1);
-        talonM.configPeakOutputReverse(-1);
-
-        talonM.configRemoteFeedbackFilter(talonF.getDeviceID(), RemoteSensorSource.TalonSRX_SelectedSensor, 1,
-                TIMEOUT_MS);
-
-        // Configure both top and bottom wheel encoders to use for summation feedback (feedback to reach target velocity)
-        talonM.configSensorTerm(SensorTerm.Sum0, FeedbackDevice.RemoteSensor1, TIMEOUT_MS); // Quadrature Encoder of BottomWheel Talon
-        talonM.configSensorTerm(SensorTerm.Sum1, FeedbackDevice.QuadEncoder, TIMEOUT_MS); // Quadrature Encoder of TopWheel Talon
-
-        // Configure both top and bottom wheel encoders to use for difference feedback (feedback to minimize velocity header)
-        talonM.configSensorTerm(SensorTerm.Diff1, FeedbackDevice.RemoteSensor1, TIMEOUT_MS); // Quadrature Encoder of BottomWheel Talon
-        talonM.configSensorTerm(SensorTerm.Diff0, FeedbackDevice.QuadEncoder, TIMEOUT_MS); // Quadrature Encoder of TopWheelTalon
-
-        talonM.configSelectedFeedbackSensor(FeedbackDevice.SensorSum, PID_LOOP_PRIMARY, TIMEOUT_MS); // Assign summation feedback to the primary PID loop
-        talonM.configSelectedFeedbackCoefficient(0.5, PID_LOOP_PRIMARY, TIMEOUT_MS);
-
-        talonM.configSelectedFeedbackSensor(FeedbackDevice.SensorDifference, PID_LOOP_AUXILIARY, TIMEOUT_MS); // Assign difference feedback to the auxiliary PID loop
-        talonM.configSelectedFeedbackCoefficient(1, PID_LOOP_AUXILIARY, TIMEOUT_MS);
-
-        talonM.setSensorPhase(SENSOR_PHASE);
-        talonM.setInverted(MOTOR_INVERT);
-
-        // Satus frames to ensure no stale values
-        talonM.setStatusFramePeriod(StatusFrame.Status_12_Feedback1, 20, TIMEOUT_MS);
-        talonM.setStatusFramePeriod(StatusFrame.Status_13_Base_PIDF0, 20, TIMEOUT_MS);
-        talonM.setStatusFramePeriod(StatusFrame.Status_14_Turn_PIDF1, 20, TIMEOUT_MS);
-
-        // PID configuration for target velocity
-        talonM.config_kF(PID_SLOT_0, 0.1, TIMEOUT_MS);
-        talonM.config_kP(PID_SLOT_0, 0.0, TIMEOUT_MS);
-        talonM.config_kI(PID_SLOT_0, 0.0, TIMEOUT_MS);
-        talonM.config_kD(PID_SLOT_0, 0.0, TIMEOUT_MS);
-        talonM.config_IntegralZone(PID_SLOT_0, 300, TIMEOUT_MS);
-        talonM.configClosedLoopPeakOutput(PID_SLOT_0, 1, TIMEOUT_MS);
-        talonM.configAllowableClosedloopError(PID_SLOT_0, 0, TIMEOUT_MS);
-
-        // PID configuration for velocity header
-        talonM.config_kF(PID_SLOT_1, 0.1, TIMEOUT_MS);
-        talonM.config_kP(PID_SLOT_1, 0.0, TIMEOUT_MS);
-        talonM.config_kI(PID_SLOT_1, 0.0, TIMEOUT_MS);
-        talonM.config_kD(PID_SLOT_1, 0.0, TIMEOUT_MS);
-        talonM.config_IntegralZone(PID_SLOT_1, 300, TIMEOUT_MS);
-        talonM.configClosedLoopPeakOutput(PID_SLOT_1, 1, TIMEOUT_MS);
-        talonM.configAllowableClosedloopError(PID_SLOT_1, 0, TIMEOUT_MS);
-
-        talonM.configClosedLoopPeriod(PID_SLOT_0, CLOSED_LOOP_TIME_MS, TIMEOUT_MS);
-        talonM.configClosedLoopPeriod(PID_SLOT_1, CLOSED_LOOP_TIME_MS, TIMEOUT_MS);
-
-        talonM.configAuxPIDPolarity(false, TIMEOUT_MS);
-
-        talonM.selectProfileSlot(PID_SLOT_0, PID_LOOP_PRIMARY);
-        talonM.selectProfileSlot(PID_SLOT_1, PID_LOOP_AUXILIARY);
-
-        zeroOutEncoder(talonM);
-    }
-
-    // Config TalonSRX Redline Follower
-    private void configureTalonFollower(WPI_TalonSRX talon, boolean SENSOR_PHASE, boolean MOTOR_INVERT) {
-        talon.configFactoryDefault();
-
-        talon.configPeakCurrentDuration(PEAK_AMPERAGE_DURATION, TIMEOUT_MS);
-        talon.configPeakCurrentLimit(PEAK_AMPERAGE, TIMEOUT_MS);
-        talon.configContinuousCurrentLimit(CONTINUOUS_AMPERAGE_LIMIT, TIMEOUT_MS);
-        talon.enableCurrentLimit(true);
-
-        talon.configVoltageCompSaturation(12);
-        talon.enableVoltageCompensation(true);
-
-        talon.configNominalOutputForward(0);
-        talon.configNominalOutputReverse(0);
-        talon.configPeakOutputForward(1);
-        talon.configPeakOutputReverse(-1);
-
-        talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_LOOP_PRIMARY, TIMEOUT_MS);
-        talon.setSensorPhase(SENSOR_PHASE);
-        talon.setInverted(MOTOR_INVERT);
-
-        talon.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 5, TIMEOUT_MS);
-
-        zeroOutEncoder(talon);
-    }
-
-    // Initialize current encoder position as zero
-    private static void zeroOutEncoder(WPI_TalonSRX talon){
-        SensorCollection sensorCol = talon.getSensorCollection();
-        sensorCol.setQuadraturePosition(0, TIMEOUT_MS);
     }
 
     @Override
@@ -195,52 +55,37 @@ public class Shooter extends SubsystemBase {
         talonSrxShooterTopWheel.stopMotor();
     }
 
+    private void spinWheel(DevTalonSRX talon, double velocity) {
+        double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocity, WHEEL_DIAMETER, GEAR_RATIO);
+        Logger.info("Shooter -> FlyWheel Velocity:" + velocity + " FPS");
+        Logger.info("Shooter -> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
+
+        Logger.action("Shooter -> Setting " + talon.getName() + " velocity...");
+        talon.set(ControlMode.Velocity, nativeVelocity);
+    }
+
     // Spin the bottom shooter wheel
     public void spinBottomWheel() {
         double velocity = ShooterBrain.getBottomWheelVelocity();
-        double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocity, WHEEL_DIAMETER, GEAR_RATIO);
-        Logger.info("Shooter -> FlyWheel Velocity to:" + velocity + " FPS");
-        Logger.info("Shooter -> FlyWheel Native Velocity to:" + nativeVelocity + " TPDS");
-
-        Logger.action("Shooter -> Setting bottom wheel velocity...");
-        talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
-
-        Logger.info("------spinBottomWheel IS BEING CALLED");
-    }
-
-    // Spin the bottom Shooter wheel follower
-    public void spinBottomWheelFollower() {
-        if (m_disabled) return;
-        talonSrxShooterBottomWheel.follow(talonSrxShooterTopWheel, FollowerType.AuxOutput1);
-
-        Logger.info("------spinBottomWheelFollower IS BEING CALLED");
+        spinWheel(talonSrxShooterBottomWheel, velocity);
     }
 
     // Spin the top Shooter wheel
     public void spinTopWheel() {
         double velocity = ShooterBrain.getTopWheelVelocity();
-        double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocity, WHEEL_DIAMETER, GEAR_RATIO);
-        Logger.info("Shooter -> FlyWheel Velocity to:" + velocity + " FPS");
-        Logger.info("Shooter -> FlyWheel Native Velocity to:" + nativeVelocity + " TPDS");
-
-        Logger.action("Shooter -> Setting top wheel velocity...");
-        talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
-
-        Logger.info("------spinTopWheel IS BEING CALLED");
+        spinWheel(talonSrxShooterBottomWheel, velocity);
     }
 
-    // Spin the top Shooter wheel master
-    public void spinTopWheelMaster() {
+    // Spin the top Shooter wheel master and follower
+    public void spinTopWheelMasterFollower() {
         double velocity = ShooterBrain.getTopWheelVelocity();
         double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocity, WHEEL_DIAMETER, GEAR_RATIO);
         double heading = talonSrxShooterBottomWheel.getSelectedSensorPosition(PID_SLOT_1);
-        Logger.info("Shooter -> FlyWheel Velocity to:" + velocity + " FPS");
-        Logger.info("Shooter -> FlyWheel Native Velocity to:" + nativeVelocity + " TPDS");
+        Logger.info("Shooter -> FlyWheel Velocity:" + velocity + " FPS");
+        Logger.info("Shooter -> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
 
-        if (m_disabled) return;
+        Logger.action("Shooter -> Setting top wheel velocity...");
         talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity, DemandType.AuxPID, heading);
-
-        Logger.info("------spinTopWheel IS BEING CALLED");
     }
 
     //---------//
@@ -254,8 +99,7 @@ public class Shooter extends SubsystemBase {
     }
 
     // Get the current Shooter BottomWheel motor velocity in feet per second
-    public double getBottomWheelVelocityFPS(){
-        if (m_disabled) return 0;
+    public double getBottomWheelVelocityFPS() {
         double tpds = getBottomWheelVelocity();
         double fps = EncoderUtils.translateTicksPerDecisecondToFPS(tpds, WHEEL_DIAMETER, GEAR_RATIO);
         return fps;
@@ -268,18 +112,17 @@ public class Shooter extends SubsystemBase {
     }
 
     // Get the current Shooter TopWheel motor velocity in feet per second
-    public double getTopWheelVelocityFPS(){
-        if (m_disabled) return 0;
+    public double getTopWheelVelocityFPS() {
         double tpds = getTopWheelVelocity();
         double fps = EncoderUtils.translateTicksPerDecisecondToFPS(tpds, WHEEL_DIAMETER, GEAR_RATIO);
         return fps;
     }
 
-    public double getGearRatio(){
+    public double getGearRatio() {
         return GEAR_RATIO;
     }
 
-    public double getWheelDiameter(){
+    public double getWheelDiameter() {
         return WHEEL_DIAMETER;
     }
 
