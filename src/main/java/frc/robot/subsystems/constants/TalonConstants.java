@@ -15,16 +15,19 @@ public final class TalonConstants {
     public static final int PEAK_AMPERAGE_DURATION = 100;
 
     // Max amps that the talon can supply at peak.
-    public static final int PEAK_AMPERAGE = 11;
+    public static final int PEAK_AMPERAGE = 12;
 
     // Max amps that the talon can supply continuously.
-    public static final int CONTINUOUS_AMPERAGE_LIMIT = 10;
+    public static final int CONTINUOUS_AMPERAGE_LIMIT = 11;
 
     // Minimum speed the talon can move forwards.
     public static final int NOMINAL_OUTPUT_FORWARD = 0;
 
     // Minimum speed the talon can move backwards.
     public static final int NOMINAL_OUTPUT_REVERSE = 0;
+
+    // Output deadband percentage of the motor
+    public final static double NEUTRAL_DEADBAND = 0.001;
 
     // Set to zero to skip waiting for confirmation,
     // set to nonzero to wait and report to DS if action fails.
