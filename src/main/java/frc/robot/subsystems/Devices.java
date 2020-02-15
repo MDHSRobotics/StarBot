@@ -51,8 +51,8 @@ public class Devices {
     static DevTalonSRX talonSrxConveyor = new DevTalonSRX("talonSrxConveyor", 9);
     static DevTalonSRX talonSrxRoller = new DevTalonSRX("talonSrxRoller", 3);
 
-    static DevTalonSRX talonSrxShooterBottomWheel = new DevTalonSRX("talonSrxShooterBottomWheel", 6);
-    static DevTalonSRX talonSrxShooterTopWheel = new DevTalonSRX("talonSrxShooterTopWheel", 11);
+    static DevTalonSRX talonSrxShooterBottomWheel = new DevTalonSRX("talonSrxShooterBottomWheel", 10);
+    static DevTalonSRX talonSrxShooterTopWheel = new DevTalonSRX("talonSrxShooterTopWheel", 7);
 
     /////////////////////
     // Drive Instances //

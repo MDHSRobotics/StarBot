@@ -133,6 +133,7 @@ public class ShooterTab {
 
     // This will be called in the robotPeriodic
     public void update() {
+        // TODO move all of this logic to subsystem inculding reset method
         topVelocity = BotSubsystems.shooter.getTopWheelVelocity();
         bottomVelocity = BotSubsystems.shooter.getBottomWheelVelocity();
 

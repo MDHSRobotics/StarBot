@@ -10,7 +10,6 @@ import frc.robot.consoles.tabs.ShooterTab;
 public class ResetShoot extends CommandBase {
 
     private Shooter m_shooter;
-    private ShooterTab m_shooterTab;
 
     public ResetShoot(Shooter shooter) {
         Logger.setup("Constructing Command: ResetShoot...");
@@ -24,7 +23,7 @@ public class ResetShoot extends CommandBase {
     public void initialize() {
         Logger.action("Initializing Command: ResetShoot...");
 
-        m_shooterTab.reset();
+        // m_shooterTab.reset(); TODO move to subsystem
 
         Logger.action("Shooter min/max velocity values RESET!");
     }

@@ -73,7 +73,7 @@ public class Shooter extends SubsystemBase {
     // Spin the top Shooter wheel
     public void spinTopWheel() {
         double velocity = ShooterBrain.getTopWheelVelocity();
-        spinWheel(talonSrxShooterBottomWheel, velocity);
+        spinWheel(talonSrxShooterTopWheel, velocity);
     }
 
     // Spin the top Shooter wheel master and follower
