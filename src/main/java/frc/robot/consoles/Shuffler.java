@@ -102,7 +102,7 @@ public class Shuffler {
     // This is for stuff that can't be displayed easily in custom Shuffleboard tabs.
     // It will end up on the SmartDashboard tab.
     private void setupSmartdashboard() {
-        // SmartDashboard.putData("Command Scheduler",Scheduler.getInstance());
+        // SmartDashboard.putData("Command Scheduler", Scheduler.getInstance());
     }
 
 }

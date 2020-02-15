@@ -1,9 +1,7 @@
 package frc.robot.commands.auto;
 
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
-import frc.robot.sensors.DistanceSensor;
 import frc.robot.subsystems.DiffDriver;
 
 // This command auto drives the DiffDriver forward for a short time
@@ -11,23 +9,20 @@ public class AutoDriveToTarget extends CommandBase {
 
     private DiffDriver m_diffDriver;
 
-    private double distanceTraveled = (Encoder ticks / 360) * circumference;
+    private boolean m_isDistanceReached = false;
 
-    private boolean isDistanceReached = false;
+    private double m_targetMax;
+    private double m_targetMin;
 
-    public AutoDriveToTarget(DistanceSensor distanceSensor, Gyro gyro, DiffDriver diffDriver) {
+    public AutoDriveToTarget(DiffDriver diffDriver, double targetMin, double targetMax) {
         Logger.setup("Constructing Command: AutoDriveToTarget...");
 
         // Add given subsystem requirements
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
 
-        double encoderDistanceReading = encoder.getDistance();
-        SmartDashboard.putNumber("encoder reading", encoderDistanceReading);
-
-        encoder.reset();
-        encoder.setDistancePerPulse(5);
-        encoder.getDistance();
+        m_targetMin = targetMin;
+        m_targetMax = targetMax;
     }
 
     @Override
@@ -37,26 +32,12 @@ public class AutoDriveToTarget extends CommandBase {
 
     @Override
     public void execute() {
-        double encodersReading = encoder.get();
-        m_diffDriver.driveTank(0.5, 0.5);
-
-		if (encodersReading > desiredDistance) {
-            m_diffDriver.stop();
-            isDistanceReached = true;
-        }
+        m_isDistanceReached = m_diffDriver.driveWithinRange(m_targetMin, m_targetMax);
     }
 
-    // This command continues until it MAX_DRIVE_SECONDS is reached
     @Override
     public boolean isFinished() {
-        if (!isDistanceReached) {
-            return false;
-        }
-        else {
-            m_diffDriver.stop();
-            Logger.action("AutoDriveToTarget: -> Stopped");
-            return true;
-        }
+        return m_isDistanceReached;
     }
 
     @Override
