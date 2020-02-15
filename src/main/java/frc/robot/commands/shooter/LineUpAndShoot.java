@@ -21,7 +21,6 @@ public class LineUpAndShoot extends CommandBase {
     private Timer m_timer = new Timer();
 
     private double INITIAL_ANGLE = 0.0;
-    private double RIGHT_ANGLE = 90.0;
     private static double targetAngle;
 
     public LineUpAndShoot(Shooter shooter, Conveyor conveyor, Gyro gyro, DiffDriver diffDriver) {
@@ -46,8 +45,7 @@ public class LineUpAndShoot extends CommandBase {
         m_timer.reset();
         m_timer.start();
 
-        m_shooter.spinTopWheel();
-        m_shooter.spinBottomWheel();
+        m_gyro.getAngle();
     }
 
     @Override
@@ -55,8 +53,7 @@ public class LineUpAndShoot extends CommandBase {
         double currentAngle = m_gyro.getAngle();
         double angleElapsed = currentAngle - INITIAL_ANGLE;
 
-        m_gyro.getAngle();
-
+        m_diffDriver.centerOnTarget();
         m_diffDriver.isAligned(targetAngle);
 
     }
