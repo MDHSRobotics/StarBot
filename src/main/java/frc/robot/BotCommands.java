@@ -62,7 +62,7 @@ public class BotCommands {
     // Climb Legs Spark
     public static ExtendSparkLegs extendSparkLegs;
     public static RetractSparkLegs retractSparkLegs;
-    public static StopSparkLegs stopSparkLegs;
+    // public static StopSparkLegs stopSparkLegs;
     public static ToggleSparkLegs toggleSparkLegs;
 
     // Conveyor
@@ -163,7 +163,7 @@ public class BotCommands {
         // Climb Legs Spark
         extendSparkLegs = new ExtendSparkLegs(BotSubsystems.climbLegsSpark);
         retractSparkLegs = new RetractSparkLegs(BotSubsystems.climbLegsSpark);
-        stopSparkLegs = new StopSparkLegs(BotSubsystems.climbLegsSpark);
+        // stopSparkLegs = new StopSparkLegs(BotSubsystems.climbLegsSpark);
         toggleSparkLegs = new ToggleSparkLegs(BotSubsystems.climbLegsSpark);
 
         // Conveyor
