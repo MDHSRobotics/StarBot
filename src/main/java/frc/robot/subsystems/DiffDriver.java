@@ -68,13 +68,15 @@ public class DiffDriver extends SubsystemBase {
         if (distance > targetMinimum && distance < targetMaximum) {
             diffDrive.stopMotor();
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Target Reached!");
+            return true;
         } else if (distance > targetMaximum) {
-            diffDrive.arcadeDrive(.4, 0);
+            diffDrive.arcadeDrive(-.4, 0);
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too far from the target!");
         } else if (distance < targetMinimum) {
             diffDrive.arcadeDrive(.4, 0);
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too close to the target!");
         }
+        return false;
     }
 
     // Drive to align the robot to a detected line at the given yaw

@@ -1,6 +1,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.auto.*;
@@ -22,7 +23,11 @@ public class BotCommands {
 
     // Autonomous
     public static AutoDriveForward autoDriveForward;
-    public static AutoDriveForwardShoot autoDriveForwardShoot;
+    public static AutoDriveToTarget firstAutoDriveToTarget;
+    public static AutoDriveToTarget secondAutoDriveToTarget;
+    public static AutoLineUpAndShoot autoLineUpAndShoot;
+    public static AutoRotate autoRotate;
+    public static AutoWait autoWait;
 
     // Climb Balancer
     public static BalanceLeft balanceLeft;
@@ -49,14 +54,18 @@ public class BotCommands {
     // Conveyor
     public static ForwardConveyor forwardConveyor;
     public static ReverseConveyor reverseConveyor;
+    public static ReverseConveyorCG reverseConveyorCG;
     public static StopConveyor stopConveyor;
 
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
+    public static AlignDiffDriveToGyroCG alignDiffDriveToGyroCG;
     public static AlignDiffDriveToTarget alignDiffDriveToTarget;
+    public static CenterDiffDriveOnTargetCG centerDiffDriveOnTargetCG;
     public static DriveDiffTank driveDiffTank;
     public static DriveDiffToWithinRange driveDiffToWithinRangeFront;
     public static DriveDiffToWithinRange driveDiffToWithinRangeTop;
+    public static DriveDiffTankCG driveDiffTankCG;
 
     // DiffDriverAlternate
     public static StopDiffDrive stopDiffDrive;
@@ -78,8 +87,13 @@ public class BotCommands {
     public static ResetShoot resetShoot;
     public static ReverseConveyorAndShoot reverseConveyorAndShoot;
     public static Shoot shoot;
+    public static ShootCG shootCG;
     public static StopConveyorAndShooter stopConveyorAndShooter;
     public static StopShooter stopShooter;
+    public static ReverseConveyorAndShoot reverseConveyorAndShoot;
+    public static ReverseConveyorAndShootCG reverseConveyorAndShootCG;
+    public static StopConveyorAndShooter stopConveyorAndShooter;
+    public static StopConveyorAndShooterCG stopConveyorAndShooterCG;
 
     // Initialize all robot commands
     public static void initializeCommands() {
@@ -87,7 +101,11 @@ public class BotCommands {
 
         // Autonomous
         autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
-        autoDriveForwardShoot = new AutoDriveForwardShoot(BotSubsystems.diffDriver);
+        firstAutoDriveToTarget = new AutoDriveToTarget(BotSubsystems.diffDriver, 1.0, 1.5);
+        autoRotate = new AutoRotate(BotSubsystems.diffDriver);
+        secondAutoDriveToTarget = new AutoDriveToTarget(BotSubsystems.diffDriver, 0.5, 1.0);
+        autoLineUpAndShoot = new AutoLineUpAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter, BotSubsystems.diffDriver);
+        autoWait = new AutoWait();
 
         // Climb Balancer
         balanceRight = new BalanceRight(BotSubsystems.climbBalancer);
@@ -115,6 +133,7 @@ public class BotCommands {
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
         reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
+        reverseConveyorAndShootCG = new ReverseConveyorAndShootCG(BotSubsystems.conveyor, BotSubsystems.shooter);
 
         // DiffDriver
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
@@ -144,6 +163,7 @@ public class BotCommands {
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         shoot = new Shoot(BotSubsystems.shooter);
         stopConveyorAndShooter = new StopConveyorAndShooter(BotSubsystems.conveyor, BotSubsystems.shooter);
+        stopConveyorAndShooterCG = new StopConveyorAndShooterCG(BotSubsystems.conveyor, BotSubsystems.shooter);
         stopShooter = new StopShooter(BotSubsystems.shooter);
     }
 
