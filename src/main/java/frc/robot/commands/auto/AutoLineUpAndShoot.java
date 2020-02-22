@@ -8,7 +8,6 @@ import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.DiffDriver;
 import frc.robot.subsystems.Shooter;
 
-// This command reverses the conveyor, and then shoots
 public class AutoLineUpAndShoot extends SequentialCommandGroup {
 
     private Conveyor m_conveyor;

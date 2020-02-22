@@ -11,8 +11,6 @@ public class StopShooterCG extends CommandBase {
 
     private Shooter m_shooter;
 
-    private static boolean shooterIsStopped = false;
-
     public StopShooterCG(Shooter shooter) {
         Logger.setup("Constructing Command: StopShooterCG...");
 
@@ -29,13 +27,12 @@ public class StopShooterCG extends CommandBase {
     @Override
     public void execute() {
         m_shooter.stop();
-        shooterIsStopped = true;
     }
 
     // This command continues until it cycles through the set number of cycles
     @Override
     public boolean isFinished() {
-        return shooterIsStopped;
+        return true;
     }
 
     @Override

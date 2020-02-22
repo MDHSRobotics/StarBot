@@ -14,6 +14,10 @@ public class AutoWait extends CommandBase {
 
     private static final double DELAY_DRIVE_SECONDS = 2.0;
 
+    public AutoWait() {
+        Logger.setup("Constructing Command: AutoWait...");
+    }
+
     @Override
     public void initialize() {
         Logger.action("Initializing Command: AutoWait...");

@@ -108,7 +108,6 @@ public class BotCommands {
         firstAutoDriveToTarget = new AutoDriveToTarget(BotSubsystems.diffDriver, 1.0, 1.5);
         autoRotate = new AutoRotate(BotSubsystems.diffDriver);
         secondAutoDriveToTarget = new AutoDriveToTarget(BotSubsystems.diffDriver, 0.5, 1.0);
-        autoLineUpAndShoot = new AutoLineUpAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter, BotSubsystems.diffDriver);
         autoWait = new AutoWait();
 
         // Climb Balancer
@@ -138,6 +137,7 @@ public class BotCommands {
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
         reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
         reverseConveyorBurst = new ReverseConveyor(BotSubsystems.conveyor);
+        reverseConveyorCG = new ReverseConveyorCG(BotSubsystems.conveyor);
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
         stopConveyorCG = new StopConveyorCG(BotSubsystems.conveyor);
 
@@ -171,9 +171,13 @@ public class BotCommands {
         resetShoot = new ResetShoot(BotSubsystems.shooter);
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         shoot = new Shoot(BotSubsystems.shooter);
+        shootCG = new ShootCG(BotSubsystems.shooter);
         stopConveyorAndShooter = new StopConveyorAndShooter(BotSubsystems.conveyor, BotSubsystems.shooter);
         stopShooter = new StopShooter(BotSubsystems.shooter);
         stopShooterCG = new StopShooterCG(BotSubsystems.shooter);
+
+        // Autonomous Command Group
+        autoLineUpAndShoot = new AutoLineUpAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter, BotSubsystems.diffDriver);
     }
 
     // Return the command to run in autonomous mode
