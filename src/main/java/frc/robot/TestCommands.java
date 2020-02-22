@@ -1,7 +1,7 @@
 
 package frc.robot;
 
-import frc.robot.commands.climb.*;
+//import frc.robot.commands.climb.*;
 import frc.robot.commands.diffdriver.*;
 import frc.robot.consoles.Logger;
 
@@ -13,15 +13,15 @@ public class TestCommands {
     public static DriveDiffTank driveDiffTank;
 
     // Climb
-    public static HookForward hookForward;
-    public static HookReverse hookReverse;
-    public static LiftRobot liftRobot;
-    public static LowerRobot lowerRobot;
-    public static RollerForward rollerForward;
-    public static RollerReverse rollerReverse;
-    public static StandStop standStop;
-    public static ToggleHook toggleHook;
-    public static ToggleLegs toggleLegs;
+    // public static HookForward hookForward;
+    // public static HookReverse hookReverse;
+    // public static LiftRobot liftRobot;
+    // public static LowerRobot lowerRobot;
+    // public static RollerForward rollerForward;
+    // public static RollerReverse rollerReverse;
+    // public static StandStop standStop;
+    // public static ToggleHook toggleHook;
+    // public static ToggleLegs toggleLegs;
 
     // Initialize all test commands
     public static void initializeCommands() {

@@ -1,6 +1,7 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.BotSensors;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.DiffDriver;
 
@@ -32,7 +33,7 @@ public class AutoDriveToTarget extends CommandBase {
 
     @Override
     public void execute() {
-        m_isDistanceReached = m_diffDriver.driveWithinRange(m_targetMin, m_targetMax);
+        m_isDistanceReached = m_diffDriver.driveToWithinRange(BotSensors.distanceSensorFront, m_targetMin, m_targetMax);
     }
 
     @Override

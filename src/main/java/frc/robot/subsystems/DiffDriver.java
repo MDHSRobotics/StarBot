@@ -63,7 +63,7 @@ public class DiffDriver extends SubsystemBase {
     }
 
     // Drive to within the given range based on the given distance sensor
-    public void driveToWithinRange(AnalogInput distanceSensor, double targetMinimum, double targetMaximum) {
+    public boolean driveToWithinRange(AnalogInput distanceSensor, double targetMinimum, double targetMaximum) {
         double distance = DistanceSensor.getDistanceInMeters(distanceSensor);
         if (distance > targetMinimum && distance < targetMaximum) {
             diffDrive.stopMotor();

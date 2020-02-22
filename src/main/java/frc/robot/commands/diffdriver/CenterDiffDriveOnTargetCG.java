@@ -1,7 +1,7 @@
 package frc.robot.commands.diffdriver;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
+import frc.robot.BotSensors;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.DiffDriver;
 
@@ -24,7 +24,7 @@ public class CenterDiffDriveOnTargetCG extends CommandBase {
 
     @Override
     public void execute() {
-        m_diffDriver.driveWithinRange(1.0, 1.5);
+        m_diffDriver.driveToWithinRange(BotSensors.distanceSensorFront, 1.0, 1.5);
     }
 
     // This finishes immediately, but is intended to be continually restarted while a button is held
