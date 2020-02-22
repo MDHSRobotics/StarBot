@@ -15,7 +15,6 @@ public class ResetShoot extends CommandBase {
 
         // Add given subsystem requirements
         m_shooter = shooter;
-        addRequirements(m_shooter);
     }
 
     @Override
