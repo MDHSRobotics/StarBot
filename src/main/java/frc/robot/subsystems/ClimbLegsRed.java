@@ -24,9 +24,9 @@ public class ClimbLegsRed extends SubsystemBase {
     public boolean legsAreRetracted = false;
 
     // Position constants
-    private final double GEAR_RATIO = 52;
+    private final double GEAR_RATIO = 208;
     private final double SPOOL_DIAMETER = 2.5;
-    private final double DISTANCE = 8;
+    private final double DISTANCE = 32;
 
     // Encoder constants
     private final boolean SENSOR_PHASE_A = false;
@@ -58,8 +58,8 @@ public class ClimbLegsRed extends SubsystemBase {
         talon.configPeakOutputForward(0.5);
         talon.configPeakOutputReverse(-0.5);
 
-        talon.configMotionAcceleration(3000, TIMEOUT_MS);
-        talon.configMotionCruiseVelocity(8000, TIMEOUT_MS);
+        talon.configMotionAcceleration(10000, TIMEOUT_MS);
+        talon.configMotionCruiseVelocity(20000, TIMEOUT_MS);
 
         // Config TalonSRX Redline encoder
         talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_LOOP_PRIMARY, TIMEOUT_MS);

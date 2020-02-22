@@ -15,7 +15,7 @@ public final class TalonConstants {
     public static final int PEAK_AMPERAGE_DURATION = 100;
 
     // Max amps that the talon can supply at peak.
-    public static final int PEAK_AMPERAGE = 12;
+    public static final int PEAK_AMPERAGE = 20;
 
     // Max amps that the talon can supply continuously.
     public static final int CONTINUOUS_AMPERAGE_LIMIT = 11;
