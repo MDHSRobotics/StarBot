@@ -12,9 +12,10 @@ public class ButtonBindings {
 
         // DiffDriver
         BotControllers.primary.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
-        BotControllers.primary.btnBumperRight.whileHeld(BotCommands.centerDiffDriveOnTarget);
+        BotControllers.primary.btnBumperRight.whileHeld(BotCommands.driveDiffToWithinRangeFront);
 
         // Climb
+        BotControllers.primary.btnBumperLeft.whileHeld(BotCommands.driveDiffToWithinRangeTop);
         BotControllers.primary.btnY.whenPressed(BotCommands.toggleHook);
         // BotControllers.primary.btnA.whenPressed(BotCommands.toggleRedLegs);
         BotControllers.primary.btnA.whenPressed(BotCommands.toggleSparkLegs);
