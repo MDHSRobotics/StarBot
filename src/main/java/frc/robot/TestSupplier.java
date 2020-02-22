@@ -23,10 +23,9 @@ public class TestSupplier {
         // Driving
         addTest(new AlignDiffDriveToGyroTest());
         addTest(new DriveDiffTankTest());
-        addTest(new CenterDiffDriveOnTargetTest());
 
         // Roller
-        addTest(new SpinRollerTest());
+        addTest(new SpinRollerandConveyorTest());
         addTest(new StopRollerTest());
 
         // RollerArm

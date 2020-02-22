@@ -8,7 +8,7 @@ import frc.robot.tests.TestRunnable;
 import frc.robot.VirtualControllers;
 
 // Test class for the SpinRoller command.
-public class SpinRollerTest implements TestRunnable {
+public class SpinRollerandConveyorTest implements TestRunnable {
 
     // Timer variables
     private Timer m_timer = new Timer();
@@ -21,7 +21,7 @@ public class SpinRollerTest implements TestRunnable {
     public int run(int iteration) {
         if (iteration == 0) {
             // Start the test on the first iteration
-            Logger.setup("Starting SpinRollerTest for " + TOTAL_SECONDS + " seconds...");
+            Logger.setup("Starting SpinRollerandConveyorTest for " + TOTAL_SECONDS + " seconds...");
             m_timer.stop();
             m_timer.reset();
             m_timer.start();
@@ -41,7 +41,7 @@ public class SpinRollerTest implements TestRunnable {
             m_currentTime = m_timer.get();
         } else {
             // Reset the time and return 0 when all movements are complete
-            Logger.ending("Ending SpinRollerTest...");
+            Logger.ending("Ending SpinRollerandConveyorTest...");
             m_currentTime = 0.0;
             return 0;
         }
