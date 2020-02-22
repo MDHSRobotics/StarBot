@@ -117,8 +117,8 @@ public class BotCommands {
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
 
         // DiffDriver
-        driveDiffToWithinRangeFront = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorFront, 2, 3);
-        driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);
+        driveDiffToWithinRangeFront = new DriveDiffToWithinRange(currentDiffDriver, BotSensors.distanceSensorFront, 2, 3);
+        driveDiffToWithinRangeTop = new DriveDiffToWithinRange(currentDiffDriver, BotSensors.distanceSensorTop, 2, 3);
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(currentDiffDriver, BotControllers.primary.xbox);
         driveDiffTank = new DriveDiffTank(currentDiffDriver, BotControllers.primary);
 

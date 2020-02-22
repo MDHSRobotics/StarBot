@@ -65,13 +65,13 @@ public class DiffDriver extends SubsystemBase {
     public void driveToWithinRange(AnalogInput distanceSensor, double targetMinimum, double targetMaximum) {
         double distance = DistanceSensor.getDistanceInMeters(distanceSensor);
         if (distance > targetMinimum && distance < targetMaximum) {
-            diffDrive.stopMotor();
+            m_diffDrive.stopMotor();
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Target Reached!");
         } else if (distance > targetMaximum) {
-            diffDrive.arcadeDrive(.4, 0);
+            m_diffDrive.arcadeDrive(.4, 0);
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too far from the target!");
         } else if (distance < targetMinimum) {
-            diffDrive.arcadeDrive(.4, 0);
+            m_diffDrive.arcadeDrive(.4, 0);
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too close to the target!");
         }
     }
