@@ -37,6 +37,6 @@ public class AutoLineUpAndShoot extends SequentialCommandGroup {
                     BotCommands.reverseConveyorCG,
                     BotCommands.shootCG,
                     BotCommands.stopConveyorCG,
-                    BotCommands.StopShooterCG);
+                    BotCommands.stopShooterCG);
     }
 }
