@@ -59,6 +59,7 @@ public class BotCommands {
     public static ReverseConveyor reverseConveyorBurst;
     public static ReverseConveyorCG reverseConveyorCG;
     public static StopConveyor stopConveyor;
+    public static StopConveyorCG stopConveyorCG;
 
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
@@ -96,10 +97,9 @@ public class BotCommands {
     public static ShootCG shootCG;
     public static StopConveyorAndShooter stopConveyorAndShooter;
     public static StopShooter stopShooter;
+    public static StopShooterCG StopShooterCG;
     public static ReverseConveyorAndShoot reverseConveyorAndShoot;
-    public static ReverseConveyorAndShootCG reverseConveyorAndShootCG;
     public static StopConveyorAndShooter stopConveyorAndShooter;
-    public static StopConveyorAndShooterCG stopConveyorAndShooterCG;
 
     // Initialize all robot commands
     public static void initializeCommands() {
@@ -141,7 +141,7 @@ public class BotCommands {
         reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
         reverseConveyorBurst = new ReverseConveyor(BotSubsystems.conveyor);
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
-        reverseConveyorAndShootCG = new ReverseConveyorAndShootCG(BotSubsystems.conveyor, BotSubsystems.shooter);
+        stopConveyorCG = new StopConveyorCG(BotSubsystems.conveyor);
 
         // DiffDriver
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
@@ -171,6 +171,7 @@ public class BotCommands {
         // Shooter
         conveyAndShoot = new ConveyAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         resetShoot = new ResetShoot(BotSubsystems.shooter);
+        StopShooterCG = new StopShooterCG(BotSubsystems.shooter);
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         shoot = new Shoot(BotSubsystems.shooter);
         stopConveyorAndShooter = new StopConveyorAndShooter(BotSubsystems.conveyor, BotSubsystems.shooter);
