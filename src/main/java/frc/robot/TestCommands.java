@@ -17,6 +17,7 @@ public class TestCommands {
     public static DriveDiffTank driveDiffTank;
 
     // Roller
+    public static SpinRollerAndConveyor spinRollerAndConveyor;
     public static StopRoller stopRoller;
 
     // RollerArm
@@ -43,6 +44,7 @@ public class TestCommands {
         // TODO: Change this to driveDiffArcade
 
         // Roller
+        spinRollerAndConveyor = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
         stopRoller = new StopRoller(BotSubsystems.roller);
 
         // RollerArm
