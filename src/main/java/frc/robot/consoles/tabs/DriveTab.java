@@ -40,8 +40,8 @@ public class DriveTab {
 
     // Create all other Widgets
     public void initialize() {
-        if (Devices.diffDrive != null) {
-            m_diffDriveWidget = m_tab.add("Differential Drive", Devices.diffDrive);
+        if (Devices.diffDriveSpark != null) {
+            m_diffDriveWidget = m_tab.add("Differential Drive", Devices.diffDriveSpark);
         }
     }
 

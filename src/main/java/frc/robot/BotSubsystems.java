@@ -12,7 +12,7 @@ public class BotSubsystems {
     public static ClimbLegsRed climbLegsRed;
     public static ClimbLegsSpark climbLegsSpark;
     public static Conveyor conveyor;
-    public static DiffDriver diffDriver;
+    public static DiffDriverTalon diffDriverTalon;
     public static DiffDriverSpark diffDriverSpark;
     public static Lighter lighter;
     public static Roller roller;
@@ -28,7 +28,7 @@ public class BotSubsystems {
         climbLegsRed = new ClimbLegsRed();
         climbLegsSpark = new ClimbLegsSpark();
         conveyor = new Conveyor();
-        diffDriver = new DiffDriver();
+        diffDriverTalon = new DiffDriverTalon();
         diffDriverSpark = new DiffDriverSpark();
         lighter = new Lighter();
         roller = new Roller();
@@ -58,9 +58,9 @@ public class BotSubsystems {
         Logger.setup("Conveyor Default Command -> StopConveyor...");
         conveyor.setDefaultCommand(BotCommands.stopConveyor);
 
-        // DiffDriver
+        // DiffDriverTalon
         Logger.setup("DiffDriver Teleop Default Command -> DriveDiffTank...");
-        diffDriver.setDefaultCommand(BotCommands.driveDiffTank);
+        diffDriverTalon.setDefaultCommand(BotCommands.driveDiffTank);
 
         // DiffDriverSpark
         Logger.setup("DiffDriverSPark Teleop Default Command -> DriveDiffTank...");
@@ -78,7 +78,7 @@ public class BotSubsystems {
     // Set all the subsystem "test" default commands
     public static void setTestDefaultCommands() {
         Logger.setup("DiffDriver Test Default Command -> DriveDiffTank...");
-        diffDriver.setDefaultCommand(TestCommands.driveDiffTank);
+        diffDriverSpark.setDefaultCommand(TestCommands.driveDiffTank);
     }
 
 }

@@ -16,6 +16,7 @@ import frc.robot.commands.roller.*;
 import frc.robot.commands.rollerarm.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
+import frc.robot.subsystems.DiffDriver;
 
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
@@ -81,9 +82,12 @@ public class BotCommands {
     public static void initializeCommands() {
         Logger.setup("Initializing BotCommands...");
 
+        // change this to change the diffDrive type
+        DiffDriver currentDiffDriver = BotSubsystems.diffDriverSpark;
+
         // Autonomous
-        autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
-        autoDriveForwardShoot = new AutoDriveForwardShoot(BotSubsystems.diffDriver);
+        autoDriveForward = new AutoDriveForward(currentDiffDriver);
+        autoDriveForwardShoot = new AutoDriveForwardShoot(currentDiffDriver);
 
         // Climb Balancer
         balanceRight = new BalanceRight(BotSubsystems.climbBalancer);
@@ -113,10 +117,10 @@ public class BotCommands {
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
 
         // DiffDriver
-        alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
-        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.primary);
         driveDiffToWithinRangeFront = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorFront, 2, 3);
         driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);
+        alignDiffDriveToGyro = new AlignDiffDriveToGyro(currentDiffDriver, BotControllers.primary.xbox);
+        driveDiffTank = new DriveDiffTank(currentDiffDriver, BotControllers.primary);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);

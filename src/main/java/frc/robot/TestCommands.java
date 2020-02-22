@@ -16,8 +16,8 @@ public class TestCommands {
         Logger.setup("Initializing TestCommands...");
 
         // DiffDriver
-        alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, VirtualControllers.primary.xbox);
-        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, VirtualControllers.primary);
+        alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriverSpark, VirtualControllers.primary.xbox);
+        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriverSpark, VirtualControllers.primary);
     }
 
 }

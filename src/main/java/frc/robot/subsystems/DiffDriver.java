@@ -6,50 +6,25 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.DiffDriverBrain;
 import frc.robot.consoles.Logger;
-import frc.robot.devices.DevTalonFX;
+import frc.robot.devices.DevDifferentialDrive;
 import frc.robot.sensors.DistanceSensor;
 import frc.robot.sensors.Gyro;
 import frc.robot.BotSensors;
 
-import static frc.robot.subsystems.Devices.diffDrive;
-import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontLeft;
-import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontRight;
-import static frc.robot.subsystems.Devices.talonFxDiffWheelRearLeft;
-import static frc.robot.subsystems.Devices.talonFxDiffWheelRearRight;
-import static frc.robot.RobotManager.isReal;
-
-// Differential driver subsystem.
+// Differential driver base class
 public class DiffDriver extends SubsystemBase {
 
     // The direction of forward/backward via the controller
     public boolean controlStickDirectionFlipped = false;
 
     // Motor constants
-    private final double SECONDS_FROM_NEUTRAL_TO_FULL = 0;
-    private final int TIMEOUT_MS = 10;
     private final double AUTO_PERIOD_SPEED = 0.5;
 
+    protected DevDifferentialDrive m_diffDrive;
+
     public DiffDriver() {
-        Logger.setup("Constructing Subsystem: DiffDriver...");
-
-        if (isReal) {
-            // Configure the subsystem devices
-            configureTalon(talonFxDiffWheelFrontLeft);
-            configureTalon(talonFxDiffWheelFrontRight);
-            configureTalon(talonFxDiffWheelRearLeft);
-            configureTalon(talonFxDiffWheelRearRight);
-            talonFxDiffWheelRearLeft.follow(talonFxDiffWheelFrontLeft);
-            talonFxDiffWheelRearRight.follow(talonFxDiffWheelFrontRight);
-        }
-    }
-
-    // Configure the given talon
-    private void configureTalon(DevTalonFX talon) {
-        if (!talon.isConnected) return;
-
-        // TODO: Investigate why these motor controllers have to be inverted.
-        talon.setInverted(true);
-        talon.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+        // should be assigned in derived class
+        m_diffDrive = null;
     }
 
     @Override
@@ -72,18 +47,18 @@ public class DiffDriver extends SubsystemBase {
 
     // Stop all the drive motors
     public void stop() {
-        diffDrive.stopMotor();
+        m_diffDrive.stopMotor();
     }
 
     // Drive using the tank method
     public void driveTank(double leftSpeed, double rightSpeed) {
         // Logger.info("Left Speed: " + leftSpeed + "; Right Speed: " + rightSpeed);
-        diffDrive.tankDrive(leftSpeed, rightSpeed);
+        m_diffDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
     // Drive forward at a set speed
     public void moveForwardAuto() {
-        diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
+        m_diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
     }
 
     // Drive to within the given range based on the given distance sensor
@@ -120,7 +95,7 @@ public class DiffDriver extends SubsystemBase {
         }
 
         Logger.action("DiffDriver -> Drive Tank: " + zRotation);
-        diffDrive.arcadeDrive(0, zRotation);
+        m_diffDrive.arcadeDrive(0, zRotation);
     }
 
     // TODO: Use this to indicate to the driver that the robot is aligned with the target (lights? Shuffleboard?)
