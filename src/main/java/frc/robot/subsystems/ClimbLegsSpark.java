@@ -38,17 +38,15 @@ public class ClimbLegsSpark extends SubsystemBase {
     public ClimbLegsSpark() {
         Logger.setup("Constructing Subsystem: ClimbLegsSpark...");
 
-        if (isReal) {
-            // Configure devices
-            m_encoderMaster = sparkMaxClimbLegsMaster.getEncoder();
-            m_encoderSlave = sparkMaxClimbLegsSlave.getEncoder();
+        // Configure devices
+        m_encoderMaster = sparkMaxClimbLegsMaster.getEncoder();
+        m_encoderSlave = sparkMaxClimbLegsSlave.getEncoder();
 
-            m_pidMaster = sparkMaxClimbLegsMaster.getPIDController();
-            m_pidSlave = sparkMaxClimbLegsSlave.getPIDController();
+        m_pidMaster = sparkMaxClimbLegsMaster.getPIDController();
+        m_pidSlave = sparkMaxClimbLegsSlave.getPIDController();
 
-            configureSpark(sparkMaxClimbLegsMaster, m_pidMaster);
-            configureSpark(sparkMaxClimbLegsSlave, m_pidSlave);
-        }
+        configureSpark(sparkMaxClimbLegsMaster, m_pidMaster);
+        configureSpark(sparkMaxClimbLegsSlave, m_pidSlave);
     }
 
     // Configure the given spark
