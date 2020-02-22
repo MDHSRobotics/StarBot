@@ -95,8 +95,8 @@ public class DiffDriver extends SubsystemBase {
             if (0 > zRotation && zRotation > -alignZSpeedMinimum) zRotation = -alignZSpeedMinimum;
         }
 
+        diffDrive.arcadeDrive(0, zRotation*2);
         Logger.action("DiffDriver -> Drive Tank: " + zRotation);
-        diffDrive.arcadeDrive(0, zRotation);
     }
 
     // TODO: Use this to indicate to the driver that the robot is aligned with the target (lights? Shuffleboard?)
