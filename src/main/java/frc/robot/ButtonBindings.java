@@ -29,10 +29,10 @@ public class ButtonBindings {
         Logger.setup("Configure Buttons -> Secondary Controller...");
 
         // RollerArm
-        BotControllers.primary.btnY.whenPressed(BotCommands.toggleRollerArm);
+        BotControllers.secondary.btnY.whenPressed(BotCommands.toggleRollerArm);
 
         // Roller
-        BotControllers.primary.btnA.whileHeld(BotCommands.spinRollerAndConveyor);
+        BotControllers.secondary.btnA.whileHeld(BotCommands.spinRollerAndConveyor);
 
         // Conveyor
         // BotControllers.secondary.btnX.whileHeld(BotCommands.reverseConveyor);
