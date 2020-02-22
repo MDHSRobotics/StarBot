@@ -13,7 +13,7 @@ public class DiffDriverBrain {
 
     public static double alignZSensitivityDefault = .7;
     public static double alignZSpeedMinimumDefault = .25;
-    public static double alignZToleranceDefault = 10;
+    public static double alignZToleranceDefault = 5;
 
     //---------------------//
     // NetworkTableEntries //

@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.brains.LimelightBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.DiffDriver;
+import frc.robot.BotSensors;
 
 // DiffDrive uses limelight to align to the target
 public class AlignToTarget extends CommandBase {
@@ -28,7 +29,10 @@ public class AlignToTarget extends CommandBase {
         System.out.println("--");
         Logger.action("Initializing Command: AlignToTarget...");
 
-        m_targetAngle = LimelightBrain.getXOffset();
+        double yaw = BotSensors.gyro.getYaw();
+        double xOffset = LimelightBrain.getXOffset();
+        m_targetAngle = yaw + xOffset;
+
     }
 
     @Override

@@ -13,7 +13,6 @@ public class ButtonBindings {
         // DiffDriver
         BotControllers.primary.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
         BotControllers.primary.btnBumperRight.whileHeld(BotCommands.driveDiffToWithinRangeFront);
-        BotControllers.primary.btnBumperRight.whileHeld(BotCommands.centerDiffDriveOnTarget);
         BotControllers.primary.btnB.whileHeld(BotCommands.alignToTarget);
 
         // RollerArm

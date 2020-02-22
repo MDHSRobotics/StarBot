@@ -54,7 +54,6 @@ public class BotCommands {
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
     public static AlignToTarget alignToTarget;
-    public static CenterDiffDriveOnTarget centerDiffDriveOnTarget;
     public static DriveDiffTank driveDiffTank;
     public static DriveDiffToWithinRange driveDiffToWithinRangeFront;
     public static DriveDiffToWithinRange driveDiffToWithinRangeTop;
