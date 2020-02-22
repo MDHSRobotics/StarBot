@@ -11,6 +11,7 @@ import frc.robot.commands.climblegsred.*;
 import frc.robot.commands.climblegsspark.*;
 import frc.robot.commands.conveyor.*;
 import frc.robot.commands.diffdriver.*;
+import frc.robot.commands.diffdriverspark.*;
 import frc.robot.commands.lighter.*;
 import frc.robot.commands.roller.*;
 import frc.robot.commands.rollerarm.*;
@@ -57,6 +58,11 @@ public class BotCommands {
     public static DriveDiffTank driveDiffTank;
     public static DriveDiffToWithinRange driveDiffToWithinRangeFront;
     public static DriveDiffToWithinRange driveDiffToWithinRangeTop;
+
+    // DiffDriverSpark
+    public static AlignDiffDriveSparkToGyro alignDiffDriveSparkToGyro;
+    public static CenterDiffDriveSparkOnTarget centerDiffDriveSparkOnTarget;
+    public static DriveDiffTankSpark driveDiffTankSpark;
 
     // Lighter
     public static CycleLights cycleLights;
@@ -121,6 +127,10 @@ public class BotCommands {
         driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(currentDiffDriver, BotControllers.primary.xbox);
         driveDiffTank = new DriveDiffTank(currentDiffDriver, BotControllers.primary);
+
+        // DiffDriver
+        alignDiffDriveSparkToGyro = new AlignDiffDriveSparkToGyro(BotSubsystems.diffDriverSpark, BotControllers.primary.xbox);
+        driveDiffTankSpark = new DriveDiffTankSpark(BotSubsystems.diffDriverSpark, BotControllers.primary);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);
