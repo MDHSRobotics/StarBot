@@ -1,7 +1,7 @@
 
-// package frc.robot.commands.climblegsred;
+package frc.robot.commands.climblegsred;
 
-// import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbLegsRed;
@@ -46,4 +46,4 @@ public class StopRedLegs extends CommandBase {
         m_climbLegsRed.stop();
     }
 
-// }
+}
