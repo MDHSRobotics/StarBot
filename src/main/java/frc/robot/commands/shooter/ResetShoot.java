@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Shooter;
-import frc.robot.consoles.tabs.ShooterTab;
 
 // This command activates the shoot mechanism
 public class ResetShoot extends CommandBase {
@@ -23,7 +22,7 @@ public class ResetShoot extends CommandBase {
     public void initialize() {
         Logger.action("Initializing Command: ResetShoot...");
 
-        // m_shooterTab.reset(); TODO move to subsystem
+        m_shooter.reset();
 
         Logger.action("Shooter min/max velocity values RESET!");
     }
@@ -36,7 +35,7 @@ public class ResetShoot extends CommandBase {
     // This command continues until it cycles through the set number of cycles
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 
     @Override

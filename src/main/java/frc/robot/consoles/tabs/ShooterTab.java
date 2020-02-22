@@ -6,9 +6,6 @@ import java.util.Map;
 
 import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.ShuffleLogger;
-import frc.robot.BotSubsystems;
-import frc.robot.subsystems.utils.EncoderUtils;
-import frc.robot.subsystems.Shooter;
 
 // The Shuffleboard Shooter tab.
 public class ShooterTab {
@@ -31,18 +28,6 @@ public class ShooterTab {
     private SimpleWidget m_shooterBottomWheelMinVelocity;
     private SimpleWidget m_shooterTopWheelMaxVelocity;
     private SimpleWidget m_shooterTopWheelMinVelocity;
-
-    double topVelocity = ShooterBrain.shootTopWheelCurrentVelocityDefault;
-    double bottomVelocity = ShooterBrain.shootBottomWheelCurrentVelocityDefault;
-
-    double bottomVelocityFPS = ShooterBrain.shootBottomWheelCurrentVelocityFPSDefault;
-    double topVelocityFPS = ShooterBrain.shootTopWheelCurrentVelocityFPSDefault;
-
-    double minTopVelocity = ShooterBrain.shootTopWheelMinVelocityDefault;
-    double maxTopVelocity = ShooterBrain.shootTopWheelMaxVelocityDefault;
-
-    double minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
-    double maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
 
     // Constructor
     public ShooterTab() {
@@ -133,38 +118,7 @@ public class ShooterTab {
 
     // This will be called in the robotPeriodic
     public void update() {
-        // TODO move all of this logic to subsystem inculding reset method
-        topVelocity = BotSubsystems.shooter.getTopWheelVelocity();
-        bottomVelocity = BotSubsystems.shooter.getBottomWheelVelocity();
 
-        topVelocityFPS = EncoderUtils.translateTicksPerDecisecondToFPS(topVelocity, BotSubsystems.shooter.getWheelDiameter(), BotSubsystems.shooter.getGearRatio());
-        bottomVelocityFPS = EncoderUtils.translateTicksPerDecisecondToFPS(bottomVelocity, BotSubsystems.shooter.getWheelDiameter(), BotSubsystems.shooter.getGearRatio());
-
-        ShooterBrain.setTopWheelCurrentVelocity(topVelocity);
-        ShooterBrain.setBottomWheelCurrentVelocity(bottomVelocity);
-
-        ShooterBrain.setTopWheelCurrentVelocityFPS(topVelocityFPS);
-        ShooterBrain.setBottomWheelCurrentVelocityFPS(bottomVelocityFPS);
-
-        if (topVelocity < minTopVelocity) minTopVelocity = topVelocity;
-        if (topVelocity > maxTopVelocity) maxTopVelocity = topVelocity;
-        if (bottomVelocity < minBottomVelocity) minBottomVelocity = bottomVelocity;
-        if (bottomVelocity > maxBottomVelocity) maxBottomVelocity = bottomVelocity;
-
-        ShooterBrain.setBottomWheelMinVelocity(minBottomVelocity);
-        ShooterBrain.setBottomWheelMaxVelocity(maxBottomVelocity);
-        ShooterBrain.setTopWheelMinVelocity(minTopVelocity);
-        ShooterBrain.setTopWheelMaxVelocity(maxTopVelocity);
-
-    }
-
-    // Resets the min/max velocity capture variables to their default values
-    public void reset(){
-        minTopVelocity = ShooterBrain.shootTopWheelMinVelocityDefault;
-        maxTopVelocity = ShooterBrain.shootTopWheelMaxVelocityDefault;
-
-        minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
-        maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
     }
 
 }

@@ -35,10 +35,10 @@ public class Shoot extends CommandBase {
         double topVelocityFPS = m_shooter.getTopWheelVelocityFPS();
         double bottomVelocityFPS = m_shooter.getBottomWheelVelocityFPS();
 
-        Logger.info("Top wheel velocity: " + topVelocity);
-        Logger.info("Top wheel fps: " + topVelocityFPS);
-        Logger.info("\n Bottom wheel velocity: " + bottomVelocity);
-        Logger.info("Bottom wheel fps: " + bottomVelocityFPS);
+        // Logger.info("Top wheel velocity: " + topVelocity);
+        // Logger.info("Top wheel fps: " + topVelocityFPS);
+        // Logger.info("\n Bottom wheel velocity: " + bottomVelocity);
+        // Logger.info("Bottom wheel fps: " + bottomVelocityFPS);
     }
 
     // This command continues until it cycles through the set number of cycles

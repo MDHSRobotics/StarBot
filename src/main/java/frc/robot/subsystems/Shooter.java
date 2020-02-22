@@ -11,6 +11,7 @@ import frc.robot.devices.DevTalonSRX;
 import frc.robot.subsystems.utils.EncoderUtils;
 import frc.robot.subsystems.utils.PIDValues;
 import frc.robot.subsystems.utils.TalonUtils;
+import frc.robot.BotSubsystems;
 
 import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
@@ -31,6 +32,19 @@ public class Shooter extends SubsystemBase {
     private static final boolean SENSOR_PHASE_TOP = true;
     private static final boolean MOTOR_INVERT_TOP = false;
 
+    // Shuffleboard
+    private double topVelocity = ShooterBrain.shootTopWheelCurrentVelocityDefault;
+    private double bottomVelocity = ShooterBrain.shootBottomWheelCurrentVelocityDefault;
+
+    private double bottomVelocityFPS = ShooterBrain.shootBottomWheelCurrentVelocityFPSDefault;
+    private double topVelocityFPS = ShooterBrain.shootTopWheelCurrentVelocityFPSDefault;
+
+    private double minTopVelocity = ShooterBrain.shootTopWheelMinVelocityDefault;
+    private double maxTopVelocity = ShooterBrain.shootTopWheelMaxVelocityDefault;
+
+    private double minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
+    private double maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
+
     public Shooter() {
         Logger.setup("Constructing Subsystem: Shooter...");
 
@@ -47,6 +61,27 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        topVelocity = BotSubsystems.shooter.getTopWheelVelocity();
+        bottomVelocity = BotSubsystems.shooter.getBottomWheelVelocity();
+
+        topVelocityFPS = EncoderUtils.translateTicksPerDecisecondToFPS(topVelocity, WHEEL_DIAMETER, GEAR_RATIO);
+        bottomVelocityFPS = EncoderUtils.translateTicksPerDecisecondToFPS(bottomVelocity, WHEEL_DIAMETER, GEAR_RATIO);
+
+        ShooterBrain.setTopWheelCurrentVelocity(topVelocity);
+        ShooterBrain.setBottomWheelCurrentVelocity(bottomVelocity);
+
+        ShooterBrain.setTopWheelCurrentVelocityFPS(topVelocityFPS);
+        ShooterBrain.setBottomWheelCurrentVelocityFPS(bottomVelocityFPS);
+
+        if (topVelocity < minTopVelocity) minTopVelocity = topVelocity;
+        if (topVelocity > maxTopVelocity) maxTopVelocity = topVelocity;
+        if (bottomVelocity < minBottomVelocity) minBottomVelocity = bottomVelocity;
+        if (bottomVelocity > maxBottomVelocity) maxBottomVelocity = bottomVelocity;
+
+        ShooterBrain.setBottomWheelMinVelocity(minBottomVelocity);
+        ShooterBrain.setBottomWheelMaxVelocity(maxBottomVelocity);
+        ShooterBrain.setTopWheelMinVelocity(minTopVelocity);
+        ShooterBrain.setTopWheelMaxVelocity(maxTopVelocity);
     }
 
     // Stop the shooter
@@ -118,12 +153,17 @@ public class Shooter extends SubsystemBase {
         return fps;
     }
 
-    public double getGearRatio() {
-        return GEAR_RATIO;
-    }
+    //--------------//
+    // Shuffleboard //
+    //--------------//
 
-    public double getWheelDiameter() {
-        return WHEEL_DIAMETER;
+    // Resets the min/max velocity capture variables to their default values
+    public void reset(){
+        minTopVelocity = ShooterBrain.shootTopWheelMinVelocityDefault;
+        maxTopVelocity = ShooterBrain.shootTopWheelMaxVelocityDefault;
+
+        minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
+        maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
     }
 
     //---------//
