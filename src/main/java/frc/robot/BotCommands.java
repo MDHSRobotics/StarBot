@@ -117,6 +117,7 @@ public class BotCommands {
         driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.primary);
         driveDiffToWithinRangeFront = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorFront, 2, 3);
         driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);
+        centerDiffDriveOnTarget = new CenterDiffDriveOnTarget(BotSubsystems.diffDriver);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);

@@ -21,7 +21,7 @@ public class Devices {
 
     // Pneumatics
     static DevCompressor compressorRollerArm = new DevCompressor("compressorRollerArm", 0);
-    static DevSolenoid solenoidRollerArm = new DevSolenoid("solenoidRollerArm", 0);
+    static DevSolenoid solenoidRollerArm = new DevSolenoid("solenoidRollerArm", 3);
 
     // Relays
     static DevRelay relayLighter = new DevRelay("relayLighter", 1);
