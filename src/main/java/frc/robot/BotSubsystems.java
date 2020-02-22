@@ -64,7 +64,7 @@ public class BotSubsystems {
 
         // DiffDriverSpark
         Logger.setup("DiffDriverSPark Teleop Default Command -> DriveDiffTank...");
-        diffDriverSpark.setDefaultCommand(BotCommands.driveDiffTankSpark);
+        diffDriverSpark.setDefaultCommand(BotCommands.driveDiffTank);
 
         // Roller
         Logger.setup("Roller Default Command -> StopRoller...");
