@@ -4,29 +4,29 @@ package frc.robot.commands.climblegsred;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.subsystems.ClimbLegsRedLine;
+import frc.robot.subsystems.ClimbLegsRed;
 
 // This command stops the climb legs.
-public class StopSparkLegs extends CommandBase {
+public class StopRedLegs extends CommandBase {
 
-    private ClimbLegsSpark m_climbLegsSpark;
+    private ClimbLegsRed m_climbLegsRed;
 
-    public StopSparkLegs(ClimbLegsSpark climbLegsSpark) {
-        Logger.setup("Constructing Command: StopSparkLegs...");
+    public StopRedLegs(ClimbLegsRed climbLegsRed) {
+        Logger.setup("Constructing Command: StopRedLegs...");
 
         // Add given subsystem requirements
-        m_climbLegsSpark = climbLegsSpark;
-        addRequirements(m_climbLegsSpark);
+        m_climbLegsRed = climbLegsRed;
+        addRequirements(m_climbLegsRed);
     }
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: StopSparkLegs...");
+        Logger.action("Initializing Command: StopRedLegs...");
     }
 
     @Override
     public void execute() {
-        m_climbLegsSpark.stop();
+        m_climbLegsRed.stop();
     }
 
     // This command continues until interrupted
@@ -39,11 +39,11 @@ public class StopSparkLegs extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: StopSparkLegs...");
+            Logger.ending("Interrupting Command: StopRedLegs...");
         } else {
-            Logger.ending("Ending Command: StopSparkLegs...");
+            Logger.ending("Ending Command: StopRedLegs...");
         }
-        m_climbLegsSpark.stop();
+        m_climbLegsRed.stop();
     }
 
 }
