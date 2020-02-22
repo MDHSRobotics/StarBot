@@ -1,6 +1,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.DiffDriverBrain;
@@ -85,21 +86,18 @@ public class DiffDriver extends SubsystemBase {
         diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
     }
 
-    // Drive to center the robot perpendicular to the shoot target
-    // based on the detected distance to the near side arena wall
-    public void centerOnTarget() {
-        double distance = DistanceSensor.getDistanceInMeters();
-        double targetMaximum = 3;
-        double targetMinimum = 2;
+    // Drive to within the given range based on the given distance sensor
+    public void driveToWithinRange(AnalogInput distanceSensor, double targetMinimum, double targetMaximum) {
+        double distance = DistanceSensor.getDistanceInMeters(distanceSensor);
         if (distance > targetMinimum && distance < targetMaximum) {
             diffDrive.stopMotor();
-            Logger.info("DiffDriver -> CenterOnTarget -> Distance: " + distance + " Target Reached!");
+            Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Target Reached!");
         } else if (distance > targetMaximum) {
             diffDrive.arcadeDrive(.4, 0);
-            Logger.info("DiffDriver -> CenterOnTarget -> Distance: " + distance + " Too far from the target!");
+            Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too far from the target!");
         } else if (distance < targetMinimum) {
             diffDrive.arcadeDrive(.4, 0);
-            Logger.info("DiffDriver -> CenterOnTarget -> Distance: " + distance + " Too close to the target!");
+            Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too close to the target!");
         }
     }
 
