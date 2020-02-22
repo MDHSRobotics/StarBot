@@ -1,15 +1,15 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import frc.robot.brains.DiffDriverBrain;
 import frc.robot.consoles.Logger;
-import frc.robot.sensors.DistanceSensor;
-import frc.robot.sensors.Gyro;
-import frc.robot.BotSensors;
+import frc.robot.devices.DevCANSparkMax;
 
 import static frc.robot.subsystems.Devices.diffDriveSpark;
+import static frc.robot.subsystems.Devices.sparkMaxDiffWheelFrontLeft;
+import static frc.robot.subsystems.Devices.sparkMaxDiffWheelFrontRight;
+import static frc.robot.subsystems.Devices.sparkMaxDiffWheelRearLeft;
+import static frc.robot.subsystems.Devices.sparkMaxDiffWheelRearRight;
+import static frc.robot.RobotManager.isReal;
 
 // Differential driver subsystem for the spark max's.
 public class DiffDriverSpark extends DiffDriver {
@@ -17,25 +17,24 @@ public class DiffDriverSpark extends DiffDriver {
     public DiffDriverSpark() {
         Logger.setup("Constructing Subsystem: DiffDriverSpark...");
 
-    @Override
+        m_diffDrive = diffDriveSpark;
 
-    // Drive using the tank method
-    public void driveTank(double leftSpeed, double rightSpeed) {
-        // Logger.info("Left Speed: " + leftSpeed + "; Right Speed: " + rightSpeed);
-        diffDriveSpark.tankDrive(leftSpeed, rightSpeed);
-    }
-
-
-    // Drive to center the robot perpendicular to the shoot target
-    // based on the detected distance to the near side arena wall
+        if (isReal) {
+            // Configure the subsystem devices
+            configureSpark(sparkMaxDiffWheelFrontLeft);
+            configureSpark(sparkMaxDiffWheelFrontRight);
+            configureSpark(sparkMaxDiffWheelRearLeft);
+            configureSpark(sparkMaxDiffWheelRearRight);
+            sparkMaxDiffWheelRearLeft.follow(sparkMaxDiffWheelFrontLeft);
+            sparkMaxDiffWheelRearRight.follow(sparkMaxDiffWheelFrontRight);
         }
     }
 
-    // TODO: Use this to indicate to the driver that the robot is aligned with the target (lights? Shuffleboard?)
-    public static boolean isAligned(double targetAngle) {
-        boolean straight = Gyro.isYawAligned(targetAngle);
+    // Configure the given spark max
+    private void configureSpark(DevCANSparkMax spark) {
+        if (!spark.isConnected) return;
 
-        Logger.info("DiffDriverSpark -> Robot is fully aligned!");
+        spark.restoreFactoryDefaults();
     }
 
 }

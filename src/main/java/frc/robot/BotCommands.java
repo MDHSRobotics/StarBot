@@ -129,8 +129,8 @@ public class BotCommands {
         driveDiffTank = new DriveDiffTank(currentDiffDriver, BotControllers.primary);
 
         // DiffDriver
-        alignDiffDriveSparkToGyro = new AlignDiffDriveSparkToGyro(BotSubsystems.diffDriverSpark, BotControllers.primary.xbox);
-        driveDiffTankSpark = new DriveDiffTankSpark(BotSubsystems.diffDriverSpark, BotControllers.primary);
+        alignDiffDriveSparkToGyro = new AlignDiffDriveSparkToGyro(currentDiffDriver, BotControllers.primary.xbox);
+        driveDiffTankSpark = new DriveDiffTankSpark(currentDiffDriver, BotControllers.primary);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);
