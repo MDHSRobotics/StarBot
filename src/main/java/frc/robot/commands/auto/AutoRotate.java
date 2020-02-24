@@ -21,7 +21,7 @@ public class AutoRotate extends CommandBase {
     private int timesTurned = 1;
 
     public AutoRotate(DiffDriver diffDriver) {
-        Logger.setup("Constructing Command: AutoDriveForward...");
+        Logger.setup("Constructing Command: AutoRotate...");
 
         // Add given subsystem requirements
         m_diffDriver = diffDriver;
