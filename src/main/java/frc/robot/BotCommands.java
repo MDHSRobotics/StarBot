@@ -27,7 +27,8 @@ public class BotCommands {
     public static AutoDriveToTarget firstAutoDriveToTarget;
     public static AutoDriveToTarget secondAutoDriveToTarget;
     public static AutoLineUpAndShoot autoLineUpAndShoot;
-    public static AutoRotate autoRotate;
+    public static AutoRotate firstAutoRotate;
+    public static AutoRotate secondAutoRotate;
     public static AutoWait autoWait;
 
     // Climb Balancer
@@ -105,8 +106,9 @@ public class BotCommands {
 
         // Autonomous
         autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
+        firstAutoRotate = new AutoRotate(BotSubsystems.diffDriver);
         firstAutoDriveToTarget = new AutoDriveToTarget(BotSubsystems.diffDriver, 1.0, 1.5);
-        autoRotate = new AutoRotate(BotSubsystems.diffDriver);
+        secondAutoRotate = new AutoRotate(BotSubsystems.diffDriver);
         secondAutoDriveToTarget = new AutoDriveToTarget(BotSubsystems.diffDriver, 0.5, 1.0);
         autoWait = new AutoWait();
 
@@ -182,7 +184,7 @@ public class BotCommands {
 
     // Return the command to run in autonomous mode
     public static Command getAutonomousCommand() {
-        return autoDriveForward;
+        return autoLineUpAndShoot;
         //return autoDriveForwardShoot;
     }
 
