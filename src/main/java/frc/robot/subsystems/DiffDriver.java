@@ -2,54 +2,30 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.DiffDriverBrain;
 import frc.robot.consoles.Logger;
-import frc.robot.devices.DevTalonFX;
 import frc.robot.sensors.DistanceSensor;
 import frc.robot.sensors.Gyro;
 import frc.robot.BotSensors;
 
-import static frc.robot.subsystems.Devices.diffDrive;
-import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontLeft;
-import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontRight;
-import static frc.robot.subsystems.Devices.talonFxDiffWheelRearLeft;
-import static frc.robot.subsystems.Devices.talonFxDiffWheelRearRight;
-import static frc.robot.RobotManager.isReal;
-
-// Differential driver subsystem.
+// Differential driver subsystem base class
 public class DiffDriver extends SubsystemBase {
+
+    // Motor constants
+    private final double AUTO_PERIOD_SPEED = 0.5;
 
     // The direction of forward/backward via the controller
     public boolean controlStickDirectionFlipped = false;
 
-    // Motor constants
-    private final double SECONDS_FROM_NEUTRAL_TO_FULL = 0;
-    private final int TIMEOUT_MS = 10;
-    private final double AUTO_PERIOD_SPEED = 0.5;
+    // The subsystem devices
+    public DifferentialDrive diffDrive;
 
-    public DiffDriver() {
-        Logger.setup("Constructing Subsystem: DiffDriver...");
-
-        if (isReal) {
-            // Configure the subsystem devices
-            configureTalon(talonFxDiffWheelFrontLeft);
-            configureTalon(talonFxDiffWheelFrontRight);
-            configureTalon(talonFxDiffWheelRearLeft);
-            configureTalon(talonFxDiffWheelRearRight);
-            talonFxDiffWheelRearLeft.follow(talonFxDiffWheelFrontLeft);
-            talonFxDiffWheelRearRight.follow(talonFxDiffWheelFrontRight);
-        }
-    }
-
-    // Configure the given talon
-    private void configureTalon(DevTalonFX talon) {
-        if (!talon.isConnected) return;
-
-        // TODO: Investigate why these motor controllers have to be inverted.
-        talon.setInverted(true);
-        talon.configOpenloopRamp(SECONDS_FROM_NEUTRAL_TO_FULL, TIMEOUT_MS);
+    // Constructor requires device instances
+    public DiffDriver(DifferentialDrive diffDrive) {
+        this.diffDrive = diffDrive;
     }
 
     @Override

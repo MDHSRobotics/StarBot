@@ -113,10 +113,10 @@ public class BotCommands {
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
 
         // DiffDriver
-        alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
-        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.primary);
         driveDiffToWithinRangeFront = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorFront, 2, 3);
         driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);
+        alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
+        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.primary);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);

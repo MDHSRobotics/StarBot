@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 
 import frc.robot.brains.DiffDriverBrain;
 import frc.robot.consoles.ShuffleLogger;
-import frc.robot.subsystems.Devices;
+import frc.robot.BotSubsystems;
 
 // The Shuffleboard Drive tab.
 public class DriveTab {
@@ -40,17 +40,13 @@ public class DriveTab {
 
     // Create all other Widgets
     public void initialize() {
-        if (Devices.diffDrive != null) {
-            m_diffDriveWidget = m_tab.add("Differential Drive", Devices.diffDrive);
-        }
+        m_diffDriveWidget = m_tab.add("Differential Drive", BotSubsystems.diffDriver.diffDrive);
     }
 
     // Configure all Widgets
     public void configure() {
-        if (m_diffDriveWidget != null) {
-            m_diffDriveWidget.withPosition(3, 1);
-            m_diffDriveWidget.withSize(4, 3);
-        }
+        m_diffDriveWidget.withPosition(3, 1);
+        m_diffDriveWidget.withSize(4, 3);
 
         m_alignZSensitivityWidget.withPosition(2, 0);
         m_alignZSpeedMinimumWidget.withPosition(0, 1);
