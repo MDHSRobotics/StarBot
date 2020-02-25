@@ -45,8 +45,10 @@ public class ClimbLegsSpark extends SubsystemBase {
         m_pidMaster = sparkMaxClimbLegsMaster.getPIDController();
         m_pidSlave = sparkMaxClimbLegsSlave.getPIDController();
 
-        configureSpark(sparkMaxClimbLegsMaster, m_pidMaster);
-        configureSpark(sparkMaxClimbLegsSlave, m_pidSlave);
+        if (isReal) {
+            configureSpark(sparkMaxClimbLegsMaster, m_pidMaster);
+            configureSpark(sparkMaxClimbLegsSlave, m_pidSlave);
+        }
     }
 
     // Configure the given spark

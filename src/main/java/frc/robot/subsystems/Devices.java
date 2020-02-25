@@ -19,14 +19,10 @@ public class Devices {
     static DevCANSparkMax sparkMaxClimbLegsMaster = new DevCANSparkMax("sparkMaxClimbLegsMaster", 1, MotorType.kBrushless);
     static DevCANSparkMax sparkMaxClimbLegsSlave = new DevCANSparkMax("sparkMaxClimbLegsSlave", 2, MotorType.kBrushless);
 
-    static DevCANSparkMax sparkMaxDiffWheelFrontLeft = new DevCANSparkMax("sparkMaxDiffWheelFrontLeft", 1,
-            MotorType.kBrushless);
-    static DevCANSparkMax sparkMaxDiffWheelFrontRight = new DevCANSparkMax("sparkMaxDiffWheelFrontRight", 1,
-            MotorType.kBrushless);
-    static DevCANSparkMax sparkMaxDiffWheelRearLeft = new DevCANSparkMax("sparkMaxDiffWheelRearLeft", 1,
-            MotorType.kBrushless);
-    static DevCANSparkMax sparkMaxDiffWheelRearRight = new DevCANSparkMax("sparkMaxDiffWheelRearRight", 1,
-            MotorType.kBrushless);
+    static DevCANSparkMax sparkMaxDiffWheelFrontLeft = new DevCANSparkMax("sparkMaxDiffWheelFrontLeft", 1, MotorType.kBrushless);
+    static DevCANSparkMax sparkMaxDiffWheelFrontRight = new DevCANSparkMax("sparkMaxDiffWheelFrontRight", 1, MotorType.kBrushless);
+    static DevCANSparkMax sparkMaxDiffWheelRearLeft = new DevCANSparkMax("sparkMaxDiffWheelRearLeft", 1, MotorType.kBrushless);
+    static DevCANSparkMax sparkMaxDiffWheelRearRight = new DevCANSparkMax("sparkMaxDiffWheelRearRight", 1, MotorType.kBrushless);
 
     // Pneumatics
     static DevCompressor compressorRollerArm = new DevCompressor("compressorRollerArm", 0);
@@ -58,10 +54,10 @@ public class Devices {
     /////////////////////
 
     public static DevDifferentialDrive diffDriveTalon = new DevDifferentialDrive("diffDriveTalon",
-                                                                            talonFxDiffWheelFrontLeft,
-                                                                            talonFxDiffWheelFrontRight);
+                                                                                 talonFxDiffWheelFrontLeft,
+                                                                                 talonFxDiffWheelFrontRight);
     public static DevDifferentialDrive diffDriveSpark = new DevDifferentialDrive("diffDriveSpark",
-                                                                            sparkMaxDiffWheelFrontLeft,
-                                                                            sparkMaxDiffWheelFrontRight);
+                                                                                 sparkMaxDiffWheelFrontLeft,
+                                                                                 sparkMaxDiffWheelFrontRight);
 
 }

@@ -2,29 +2,30 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.DiffDriverBrain;
 import frc.robot.consoles.Logger;
-import frc.robot.devices.DevDifferentialDrive;
 import frc.robot.sensors.DistanceSensor;
 import frc.robot.sensors.Gyro;
 import frc.robot.BotSensors;
 
-// Differential driver base class
+// Differential driver subsystem base class
 public class DiffDriver extends SubsystemBase {
-
-    // The direction of forward/backward via the controller
-    public boolean controlStickDirectionFlipped = false;
 
     // Motor constants
     private final double AUTO_PERIOD_SPEED = 0.5;
 
-    protected DevDifferentialDrive m_diffDrive;
+    // The direction of forward/backward via the controller
+    public boolean controlStickDirectionFlipped = false;
 
-    public DiffDriver() {
-        // should be assigned in derived class
-        m_diffDrive = null;
+    // The subsystem devices
+    public DifferentialDrive diffDrive;
+
+    // Constructor requires device instances
+    public DiffDriver(DifferentialDrive diffDrive) {
+        this.diffDrive = diffDrive;
     }
 
     @Override
@@ -47,31 +48,31 @@ public class DiffDriver extends SubsystemBase {
 
     // Stop all the drive motors
     public void stop() {
-        m_diffDrive.stopMotor();
+        diffDrive.stopMotor();
     }
 
     // Drive using the tank method
     public void driveTank(double leftSpeed, double rightSpeed) {
         // Logger.info("Left Speed: " + leftSpeed + "; Right Speed: " + rightSpeed);
-        m_diffDrive.tankDrive(leftSpeed, rightSpeed);
+        diffDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
     // Drive forward at a set speed
     public void moveForwardAuto() {
-        m_diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
+        diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
     }
 
     // Drive to within the given range based on the given distance sensor
     public void driveToWithinRange(AnalogInput distanceSensor, double targetMinimum, double targetMaximum) {
         double distance = DistanceSensor.getDistanceInMeters(distanceSensor);
         if (distance > targetMinimum && distance < targetMaximum) {
-            m_diffDrive.stopMotor();
+            diffDrive.stopMotor();
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Target Reached!");
         } else if (distance > targetMaximum) {
-            m_diffDrive.arcadeDrive(.4, 0);
+            diffDrive.arcadeDrive(.4, 0);
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too far from the target!");
         } else if (distance < targetMinimum) {
-            m_diffDrive.arcadeDrive(.4, 0);
+            diffDrive.arcadeDrive(.4, 0);
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too close to the target!");
         }
     }
@@ -95,7 +96,7 @@ public class DiffDriver extends SubsystemBase {
         }
 
         Logger.action("DiffDriver -> Drive Tank: " + zRotation);
-        m_diffDrive.arcadeDrive(0, zRotation);
+        diffDrive.arcadeDrive(0, zRotation);
     }
 
     // TODO: Use this to indicate to the driver that the robot is aligned with the target (lights? Shuffleboard?)

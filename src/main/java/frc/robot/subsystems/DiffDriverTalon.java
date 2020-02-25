@@ -19,9 +19,8 @@ public class DiffDriverTalon extends DiffDriver {
     private final int TIMEOUT_MS = 10;
 
     public DiffDriverTalon() {
+        super(diffDriveTalon);
         Logger.setup("Constructing Subsystem: DiffDriverTalon...");
-
-        m_diffDrive = diffDriveTalon;
 
         if (isReal) {
             // Configure the subsystem devices
@@ -29,9 +28,9 @@ public class DiffDriverTalon extends DiffDriver {
             configureTalon(talonFxDiffWheelFrontRight);
             configureTalon(talonFxDiffWheelRearLeft);
             configureTalon(talonFxDiffWheelRearRight);
-            talonFxDiffWheelRearLeft.follow(talonFxDiffWheelFrontLeft);
-            talonFxDiffWheelRearRight.follow(talonFxDiffWheelFrontRight);
         }
+        talonFxDiffWheelRearLeft.follow(talonFxDiffWheelFrontLeft);
+        talonFxDiffWheelRearRight.follow(talonFxDiffWheelFrontRight);
     }
 
     // Configure the given talon
