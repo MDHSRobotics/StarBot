@@ -12,8 +12,7 @@ public class BotSubsystems {
     public static ClimbLegsRed climbLegsRed;
     public static ClimbLegsSpark climbLegsSpark;
     public static Conveyor conveyor;
-    public static DiffDriverTalon diffDriverTalon;
-    public static DiffDriverSpark diffDriverSpark;
+    public static DiffDriver diffDriver;
     public static Lighter lighter;
     public static Roller roller;
     public static RollerArm rollerArm;
@@ -28,8 +27,9 @@ public class BotSubsystems {
         climbLegsRed = new ClimbLegsRed();
         climbLegsSpark = new ClimbLegsSpark();
         conveyor = new Conveyor();
-        diffDriverTalon = new DiffDriverTalon();
-        diffDriverSpark = new DiffDriverSpark();
+        // uncomment the correct diffDrive type
+        // diffDriver = new DiffDriverTalon();
+        diffDriver = new DiffDriverSpark();
         lighter = new Lighter();
         roller = new Roller();
         rollerArm = new RollerArm();
@@ -58,13 +58,9 @@ public class BotSubsystems {
         Logger.setup("Conveyor Default Command -> StopConveyor...");
         conveyor.setDefaultCommand(BotCommands.stopConveyor);
 
-        // DiffDriverTalon
+        // DiffDriver
         Logger.setup("DiffDriver Teleop Default Command -> DriveDiffTank...");
-        diffDriverTalon.setDefaultCommand(BotCommands.driveDiffTank);
-
-        // DiffDriverSpark
-        Logger.setup("DiffDriverSPark Teleop Default Command -> DriveDiffTank...");
-        diffDriverSpark.setDefaultCommand(BotCommands.driveDiffTank);
+        diffDriver.setDefaultCommand(BotCommands.driveDiffTank);
 
         // Roller
         Logger.setup("Roller Default Command -> StopRoller...");
@@ -78,7 +74,7 @@ public class BotSubsystems {
     // Set all the subsystem "test" default commands
     public static void setTestDefaultCommands() {
         Logger.setup("DiffDriver Test Default Command -> DriveDiffTank...");
-        diffDriverSpark.setDefaultCommand(TestCommands.driveDiffTank);
+        diffDriver.setDefaultCommand(TestCommands.driveDiffTank);
     }
 
 }
