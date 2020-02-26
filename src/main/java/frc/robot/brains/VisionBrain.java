@@ -2,7 +2,7 @@ package frc.robot.brains;
 
 import edu.wpi.first.networktables.*;
 
-public class VisionAlignBrain {
+public class VisionBrain {
 
 // Vision - Line Pipeline
     public static double hueMinDefault = 0;
@@ -64,8 +64,8 @@ public class VisionAlignBrain {
 
     // Distance
     public static NetworkTableEntry distanceEntry;
-    // Vision - Front Line
 
+    // Vision - Front Line
     public static void setFrontLineArea(double value) {
         frontLineAreaEntry.setDouble(value);
     }

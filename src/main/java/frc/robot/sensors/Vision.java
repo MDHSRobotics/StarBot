@@ -16,19 +16,19 @@ public class Vision {
     private static final double CENTER_X_THRESHOLD = CAM_RESOLUTION_WIDTH / 64;
 
     public static boolean frontLineDetected() {
-        double area = VisionAlignBrain.getFrontLineArea();
+        double area = VisionBrain.getFrontLineArea();
         boolean detected = lineDetected(area);
         return detected;
     }
 
     public static boolean leftLineDetected() {
-        double area = VisionAlignBrain.getLeftLineArea();
+        double area = VisionBrain.getLeftLineArea();
         boolean detected = lineDetected(area);
         return detected;
     }
 
     public static boolean rightLineDetected() {
-        double area = VisionAlignBrain.getRightLineArea();
+        double area = VisionBrain.getRightLineArea();
         boolean detected = lineDetected(area);
         return detected;
     }
@@ -39,19 +39,19 @@ public class Vision {
     }
 
     public static boolean isFrontCentered() {
-        double centerX = VisionAlignBrain.getFrontLineXcenter();
+        double centerX = VisionBrain.getFrontLineXcenter();
         boolean centered = isCentered(centerX);
         return centered;
     }
 
     public static boolean isLeftCentered() {
-        double centerX = VisionAlignBrain.getLeftLineXcenter();
+        double centerX = VisionBrain.getLeftLineXcenter();
         boolean centered = isCentered(centerX);
         return centered;
     }
 
     public static boolean isRightCentered() {
-        double centerX = VisionAlignBrain.getRightLineXcenter();
+        double centerX = VisionBrain.getRightLineXcenter();
         boolean centered = isCentered(centerX);
         return centered;
     }
@@ -63,19 +63,19 @@ public class Vision {
     }
 
     public static double getFrontCorrectedX() {
-        double centerX = VisionAlignBrain.getFrontLineXcenter();
+        double centerX = VisionBrain.getFrontLineXcenter();
         double x = getCorrectedX(centerX);
         return x;
     }
 
     public static double getLeftCorrectedX() {
-        double centerX = VisionAlignBrain.getLeftLineXcenter();
+        double centerX = VisionBrain.getLeftLineXcenter();
         double x = getCorrectedX(centerX);
         return x;
     }
 
     public static double getRightCorrectedX() {
-        double centerX = VisionAlignBrain.getRightLineXcenter();
+        double centerX = VisionBrain.getRightLineXcenter();
         double x = getCorrectedX(centerX);
         return x;
     }
