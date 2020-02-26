@@ -14,11 +14,16 @@ public class ButtonBindings {
         BotControllers.primary.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
         BotControllers.primary.btnBumperRight.whileHeld(BotCommands.driveDiffToWithinRangeFront);
 
-        // Climb
-        BotControllers.primary.btnBumperLeft.whileHeld(BotCommands.driveDiffToWithinRangeTop);
-        BotControllers.primary.btnY.whenPressed(BotCommands.toggleHook);
-        // BotControllers.primary.btnA.whenPressed(BotCommands.toggleRedLegs);
-        BotControllers.primary.btnA.whenPressed(BotCommands.toggleSparkLegs);
+        // RollerArm
+        BotControllers.secondary.btnY.whenPressed(BotCommands.toggleRollerArm);
+
+        // Roller
+        BotControllers.secondary.btnBumperRight.whileHeld(BotCommands.spinRollerAndConveyor);
+
+        // Conveyor
+        // BotControllers.secondary.btnX.whileHeld(BotCommands.reverseConveyor);
+        BotControllers.secondary.btnBumperLeft.whenPressed(BotCommands.reverseConveyorAndShoot);
+
         // TODO: Use the triggers for the balancer, so that you have fine analog control.
         // BotControllers.primary.btnDpadLeft.whileHeld(BotCommands.balanceLeft);
         // BotControllers.primary.btnDpadRight.whileHeld(BotCommands.balanceRight);
@@ -28,15 +33,11 @@ public class ButtonBindings {
     public static void configureSecondary() {
         Logger.setup("Configure Buttons -> Secondary Controller...");
 
-        // RollerArm
-        BotControllers.secondary.btnY.whenPressed(BotCommands.toggleRollerArm);
-
-        // Roller
-        BotControllers.secondary.btnA.whileHeld(BotCommands.spinRollerAndConveyor);
-
-        // Conveyor
-        // BotControllers.secondary.btnX.whileHeld(BotCommands.reverseConveyor);
-        BotControllers.secondary.btnX.whenPressed(BotCommands.reverseConveyorAndShoot);
+        // Climb
+        BotControllers.primary.btnBumperLeft.whileHeld(BotCommands.driveDiffToWithinRangeTop);
+        BotControllers.primary.btnY.whenPressed(BotCommands.toggleHook);
+        // BotControllers.primary.btnA.whenPressed(BotCommands.toggleRedLegs);
+        BotControllers.primary.btnA.whenPressed(BotCommands.toggleSparkLegs);
 
         // Shooter
         // BotControllers.secondary.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
