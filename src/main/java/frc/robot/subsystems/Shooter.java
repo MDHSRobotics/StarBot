@@ -9,12 +9,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.RobotBrain;
 import frc.robot.brains.ShooterBrain;
+import frc.robot.brains.RobotBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.devices.DevTalonSRX;
 import frc.robot.subsystems.utils.EncoderUtils;
 import frc.robot.subsystems.utils.PIDValues;
 import frc.robot.subsystems.utils.TalonUtils;
 import frc.robot.BotSubsystems;
+import frc.robot.sensors.DistanceSensor;
+import frc.robot.BotSensors;
 
 import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
