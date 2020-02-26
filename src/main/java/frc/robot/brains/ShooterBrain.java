@@ -25,6 +25,8 @@ public class ShooterBrain {
     public static double shootTopWheelMaxVelocityDefault = 0;
     public static double shootTopWheelMinVelocityDefault = 1000000;
 
+    public static double shootDistanceDefault = 0;
+
     //---------------------//
     // NetworkTableEntries //
     //---------------------//
@@ -42,6 +44,8 @@ public class ShooterBrain {
     public static NetworkTableEntry shootBottomWheelMinVelocityEntry;
     public static NetworkTableEntry shootTopWheelMaxVelocityEntry;
     public static NetworkTableEntry shootTopWheelMinVelocityEntry;
+
+    public static NetworkTableEntry shootDistanceEntry;
 
     //---------//
     // Setters //
@@ -77,6 +81,10 @@ public class ShooterBrain {
 
     public static void setTopWheelMinVelocity(double value) {
         shootTopWheelMinVelocityEntry.setDouble(value);
+    }
+
+    public static void setShootDistance(double value) {
+        shootDistanceEntry.setDouble(value);
     }
 
 

@@ -6,12 +6,15 @@ import com.ctre.phoenix.motorcontrol.DemandType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.ShooterBrain;
+import frc.robot.brains.RobotBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.devices.DevTalonSRX;
 import frc.robot.subsystems.utils.EncoderUtils;
 import frc.robot.subsystems.utils.PIDValues;
 import frc.robot.subsystems.utils.TalonUtils;
 import frc.robot.BotSubsystems;
+import frc.robot.sensors.DistanceSensor;
+import frc.robot.BotSensors;
 
 import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
@@ -123,6 +126,22 @@ public class Shooter extends SubsystemBase {
         talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity, DemandType.AuxPID, heading);
     }
 
+    public void shootWithDistance(double distanceFeet){
+        double sHeight = RobotBrain.shooterHeightFeetDefault;
+        double sAngle = RobotBrain.shooterAngleDegreesDefault;
+        double fHeight = RobotBrain.fieldTargetHeightFeet;
+
+        double numerator = 9.81 * Math.sqrt(distanceFeet);
+        double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle) - (fHeight - sHeight) * Math.sqrt(Math.cos(sAngle)));
+        double velocityFPS = Math.sqrt(numerator / denominator);
+        double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocityFPS, WHEEL_DIAMETER, GEAR_RATIO);
+
+        Logger.info("Shooter -> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
+
+        spinWheel(talonSrxShooterTopWheel, nativeVelocity);
+        spinWheel(talonSrxShooterBottomWheel, nativeVelocity);
+    }
+
     //---------//
     // Getters //
     //---------//
@@ -165,6 +184,12 @@ public class Shooter extends SubsystemBase {
         minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
         maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
     }
+
+    //-----------------//
+    // Distance Sensor //
+    //-----------------//
+
+
 
     //---------//
     // Testing //

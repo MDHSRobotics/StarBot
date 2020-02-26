@@ -14,6 +14,7 @@ public class ShooterTab {
     private ShuffleboardTab m_tab;
     private ShuffleboardLayout m_bottomWheelLayout;
     private ShuffleboardLayout m_topWheelLayout;
+    private ShuffleboardLayout m_shootDistanceLayout;
 
     // Widgets
     private SimpleWidget m_shooterBottomWheelTargetVelocity;
@@ -29,6 +30,8 @@ public class ShooterTab {
     private SimpleWidget m_shooterTopWheelMaxVelocity;
     private SimpleWidget m_shooterTopWheelMinVelocity;
 
+    private SimpleWidget m_shooterDistance;
+
     // Constructor
     public ShooterTab() {
         ShuffleLogger.logTrivial("Constructing ShooterTab...");
@@ -37,6 +40,7 @@ public class ShooterTab {
 
         m_bottomWheelLayout = m_tab.getLayout("Bottom Wheel", BuiltInLayouts.kGrid);
         m_topWheelLayout = m_tab.getLayout("Top Wheel", BuiltInLayouts.kGrid);
+        m_shootDistanceLayout = m_tab.getLayout("Distance", BuiltInLayouts.kGrid);
     }
 
     // Create Brain Widgets
@@ -95,6 +99,12 @@ public class ShooterTab {
                 ShooterBrain.shootTopWheelMaxVelocityDefault);
         ShooterBrain.shootTopWheelMaxVelocityEntry = m_shooterTopWheelMaxVelocity.getEntry();
         m_shooterTopWheelMaxVelocity.withWidget(BuiltInWidgets.kTextView);
+
+        // Distance
+        m_shooterDistance = m_shootDistanceLayout.add("Distance",
+                ShooterBrain.shootDistanceDefault);
+        ShooterBrain.shootDistanceEntry = m_shooterDistance.getEntry();
+        m_shooterDistance.withWidget(BuiltInWidgets.kTextView);
     }
 
     // Create all other Widgets
@@ -114,6 +124,12 @@ public class ShooterTab {
         m_topWheelLayout.withProperties(Map.of("Number of columns", 1));
         m_topWheelLayout.withProperties(Map.of("Number of rows", 5));
         m_topWheelLayout.withProperties(Map.of("Label position", "TOP"));
+
+        m_shootDistanceLayout.withPosition(5, 0);
+        m_shootDistanceLayout.withSize(1, 1);
+        m_shootDistanceLayout.withProperties(Map.of("Number of columns", 1));
+        m_shootDistanceLayout.withProperties(Map.of("Number of rows", 1));
+        m_shootDistanceLayout.withProperties(Map.of("Label position", "TOP"));
     }
 
     // This will be called in the robotPeriodic
