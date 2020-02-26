@@ -22,8 +22,8 @@ public class AutoDriveToTarget extends CommandBase {
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
 
-        m_targetMin = targetMin;
-        m_targetMax = targetMax;
+        m_targetMin = 1.0;  //targetMin;
+        m_targetMax = 1.5;  //targetMax;
     }
 
     @Override
