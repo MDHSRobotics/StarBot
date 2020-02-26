@@ -31,18 +31,6 @@ public class VisionTab {
     private SimpleWidget m_frontXcenterWidget;
     private SimpleWidget m_frontYcenterWidget;
 
-    // Line Detection - Left Camera
-    private SimpleWidget m_leftAreaWidget;
-    private SimpleWidget m_leftAngleWidget;
-    private SimpleWidget m_leftXcenterWidget;
-    private SimpleWidget m_leftYcenterWidget;
-
-    // Line Detection - Right Camera
-    private SimpleWidget m_rightAreaWidget;
-    private SimpleWidget m_rightAngleWidget;
-    private SimpleWidget m_rightXcenterWidget;
-    private SimpleWidget m_rightYcenterWidget;
-
     // Distance
     private SimpleWidget m_distanceWidget;
 
@@ -93,32 +81,6 @@ public class VisionTab {
         m_frontYcenterWidget = m_frontCamLayout.add("Front Line Center Y", VisionBrain.frontLineYcenterDefault);
         VisionBrain.frontLineYcenterEntry = m_frontYcenterWidget.getEntry();
 
-        // Left Camera
-        m_leftAreaWidget = m_leftCamLayout.add("Left Line Area", VisionBrain.leftLineAreaDefault);
-        VisionBrain.leftLineAreaEntry = m_leftAreaWidget.getEntry();
-
-        m_leftAngleWidget = m_leftCamLayout.add("Left Line Angle", VisionBrain.leftLineAngleDefault);
-        VisionBrain.leftLineAngleEntry = m_leftAngleWidget.getEntry();
-
-        m_leftXcenterWidget = m_leftCamLayout.add("Left Line Center X", VisionBrain.leftLineXcenterDefault);
-        VisionBrain.leftLineXcenterEntry = m_leftXcenterWidget.getEntry();
-
-        m_leftYcenterWidget = m_leftCamLayout.add("Left Line Center Y", VisionBrain.leftLineYcenterDefault);
-        VisionBrain.leftLineYcenterEntry = m_leftYcenterWidget.getEntry();
-
-        // Right Camera
-        m_rightAreaWidget = m_rightCamLayout.add("Right Line Area", VisionBrain.rightLineAreaDefault);
-        VisionBrain.rightLineAreaEntry = m_rightAreaWidget.getEntry();
-
-        m_rightAngleWidget = m_rightCamLayout.add("Right Line Angle", VisionBrain.rightLineAngleDefault);
-        VisionBrain.rightLineAngleEntry = m_rightAngleWidget.getEntry();
-
-        m_rightXcenterWidget = m_rightCamLayout.add("Right Line Center X", VisionBrain.rightLineXcenterDefault);
-        VisionBrain.rightLineXcenterEntry = m_rightXcenterWidget.getEntry();
-
-        m_rightYcenterWidget = m_rightCamLayout.add("Right Line Center Y", VisionBrain.rightLineYcenterDefault);
-        VisionBrain.rightLineYcenterEntry = m_rightYcenterWidget.getEntry();
-
         m_distanceWidget = m_tab.add("Distance Sensor", DistanceBrain.distanceDefault);
         DistanceBrain.distanceEntry = m_distanceWidget.getEntry();
     }
@@ -167,18 +129,6 @@ public class VisionTab {
         m_frontAngleWidget.withWidget(BuiltInWidgets.kTextView);
         m_frontXcenterWidget.withWidget(BuiltInWidgets.kTextView);
         m_frontYcenterWidget.withWidget(BuiltInWidgets.kTextView);
-
-        // Left Camera
-        m_leftAreaWidget.withWidget(BuiltInWidgets.kTextView);
-        m_leftAngleWidget.withWidget(BuiltInWidgets.kTextView);
-        m_leftXcenterWidget.withWidget(BuiltInWidgets.kTextView);
-        m_leftYcenterWidget.withWidget(BuiltInWidgets.kTextView);
-
-        // Right Camera
-        m_rightAreaWidget.withWidget(BuiltInWidgets.kTextView);
-        m_rightAngleWidget.withWidget(BuiltInWidgets.kTextView);
-        m_rightXcenterWidget.withWidget(BuiltInWidgets.kTextView);
-        m_rightYcenterWidget.withWidget(BuiltInWidgets.kTextView);
 
         // Distance
         m_distanceWidget.withWidget(BuiltInWidgets.kTextView);
