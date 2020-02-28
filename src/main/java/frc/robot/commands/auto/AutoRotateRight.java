@@ -6,13 +6,10 @@ import frc.robot.consoles.Logger;
 import frc.robot.subsystems.DiffDriver;
 
 // This command auto drives the DiffDriver forward for a short time
-public class AutoRotate extends CommandBase {
+public class AutoRotateRight extends CommandBase {
 
     private DiffDriver m_diffDriver;
 
-    // public double TOTAL_DISTANCE_X;
-    // public double DISTANCE_x_FROM_TARGET;
-    // public double DISTANCE_Y_FROM_TARGET;
     private double INITIAL_ANGLE = 0.0;
     private double RIGHT_ANGLE = 90.0;
 
@@ -20,8 +17,8 @@ public class AutoRotate extends CommandBase {
 
     private int timesTurned = 1;
 
-    public AutoRotate(DiffDriver diffDriver) {
-        Logger.setup("Constructing Command: AutoRotate...");
+    public AutoRotateRight(DiffDriver diffDriver) {
+        Logger.setup("Constructing Command: AutoRotateRight...");
 
         // Add given subsystem requirements
         m_diffDriver = diffDriver;
@@ -30,7 +27,7 @@ public class AutoRotate extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: AutoRotate...");
+        Logger.action("Initializing Command: AutoRotateRight...");
     }
 
     @Override
@@ -42,7 +39,7 @@ public class AutoRotate extends CommandBase {
         BotSensors.gyro.getAngle();
 
         if (angleElapsed < RIGHT_ANGLE * timesTurned) {
-            m_diffDriver.driveTank(-0.5, 0.5);
+            m_diffDriver.driveTank(0.5, - 0.5);
         }
         else {
             m_diffDriver.stop();
@@ -51,13 +48,12 @@ public class AutoRotate extends CommandBase {
         }
     }
 
-    // This command continues until it MAX_DRIVE_SECONDS is reached
     @Override
     public boolean isFinished() {
         if (!isTurned) {
             return false;
         } else {
-            Logger.action("AutoRotate: -> Stopped");
+            Logger.action("AutoRotateRight: -> Stopped");
             return true;
         }
     }
@@ -66,9 +62,9 @@ public class AutoRotate extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: AutoRotate...");
+            Logger.ending("Interrupting Command: AutoRotateRight...");
         } else {
-            Logger.ending("Ending Command: AutoRotate...");
+            Logger.ending("Ending Command: AutoRotateRight...");
         }
     }
 

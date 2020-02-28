@@ -22,13 +22,20 @@ import frc.robot.consoles.Logger;
 public class BotCommands {
 
     // Autonomous
-    public static AutoDriveForward autoDriveForward;
-    public static AutoDriveToTarget firstAutoDriveToTarget;
-    public static AutoDriveToTarget secondAutoDriveToTarget;
-    public static AutoLineUpAndShoot autoLineUpAndShoot;
-    public static AutoRotate firstAutoRotate;
-    public static AutoRotate secondAutoRotate;
-    public static AutoWait autoWait;
+    public static AutoDriveForward autoDriveForwardS1;
+    public static AutoDriveForward autoDriveForwardS2;
+    public static AutoDriveToTarget firstAutoDriveToTargetS1;
+    public static AutoDriveToTarget firstAutoDriveToTargetS2;
+    public static AutoDriveToTarget secondAutoDriveToTargetS1;
+    public static AutoDriveToTarget secondAutoDriveToTargetS2;
+    public static AutoLineUpAndShootS1 autoLineUpAndShootS1; // Red target, robot face field
+    public static AutoLineUpAndShootS2 autoLineUpAndShootS2; // Blue target, robot face field
+    public static AutoRotateLeft autoRotateLeftS1;
+    public static AutoRotateLeft autoRotateLeftS2;
+    public static AutoRotateRight autoRotateRightS1;
+    public static AutoRotateRight autoRotateRightS2;
+    public static AutoWait autoWaitS1;
+    public static AutoWait autoWaitS2;
 
     // Climb Balancer
     public static BalanceLeft balanceLeft;
@@ -55,9 +62,11 @@ public class BotCommands {
     // Conveyor
     public static ForwardConveyor forwardConveyor;
     public static ReverseConveyor reverseConveyor;
-    public static ReverseConveyorCG reverseConveyorCG;
+    public static ReverseConveyorCG reverseConveyorCGS1;
+    public static ReverseConveyorCG reverseConveyorCGS2;
     public static StopConveyor stopConveyor;
-    public static StopConveyorCG stopConveyorCG;
+    public static StopConveyorCG stopConveyorCGS1;
+    public static StopConveyorCG stopConveyorCGS2;
 
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
@@ -89,22 +98,30 @@ public class BotCommands {
     public static ResetShoot resetShoot;
     public static ReverseConveyorAndShoot reverseConveyorAndShoot;
     public static Shoot shoot;
-    public static ShootCG shootCG;
+    public static ShootCG shootCGS1;
+    public static ShootCG shootCGS2;
     public static StopConveyorAndShooter stopConveyorAndShooter;
     public static StopShooter stopShooter;
-    public static StopShooterCG stopShooterCG;
+    public static StopShooterCG stopShooterCGS1;
+    public static StopShooterCG stopShooterCGS2;
 
     // Initialize all robot commands
     public static void initializeCommands() {
         Logger.setup("Initializing BotCommands...");
 
         // Autonomous
-        autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
-        firstAutoRotate = new AutoRotate(BotSubsystems.diffDriver);
-        firstAutoDriveToTarget = new AutoDriveToTarget(BotSubsystems.diffDriver, 1.0, 1.5);
-        secondAutoRotate = new AutoRotate(BotSubsystems.diffDriver);
-        secondAutoDriveToTarget = new AutoDriveToTarget(BotSubsystems.diffDriver, 0.5, 1.0);
-        autoWait = new AutoWait();
+        autoDriveForwardS1 = new AutoDriveForward(BotSubsystems.diffDriver);
+        autoDriveForwardS2 = new AutoDriveForward(BotSubsystems.diffDriver);
+        autoRotateLeftS1 = new AutoRotateLeft(BotSubsystems.diffDriver);
+        autoRotateLeftS2 = new AutoRotateLeft(BotSubsystems.diffDriver);
+        firstAutoDriveToTargetS1 = new AutoDriveToTarget(BotSubsystems.diffDriver, 1.0, 1.5);
+        firstAutoDriveToTargetS2 = new AutoDriveToTarget(BotSubsystems.diffDriver, 1.0, 1.5);
+        autoRotateRightS1 = new AutoRotateRight(BotSubsystems.diffDriver);
+        autoRotateRightS2 = new AutoRotateRight(BotSubsystems.diffDriver);
+        secondAutoDriveToTargetS1 = new AutoDriveToTarget(BotSubsystems.diffDriver, 0.5, 1.0);
+        secondAutoDriveToTargetS2 = new AutoDriveToTarget(BotSubsystems.diffDriver, 0.5, 1.0);
+        autoWaitS1 = new AutoWait();
+        autoWaitS2 = new AutoWait();
 
         // Climb Balancer
         balanceRight = new BalanceRight(BotSubsystems.climbBalancer);
@@ -131,9 +148,11 @@ public class BotCommands {
         // Conveyor
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
         reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
-        reverseConveyorCG = new ReverseConveyorCG(BotSubsystems.conveyor);
+        reverseConveyorCGS1 = new ReverseConveyorCG(BotSubsystems.conveyor);
+        reverseConveyorCGS2 = new ReverseConveyorCG(BotSubsystems.conveyor);
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
-        stopConveyorCG = new StopConveyorCG(BotSubsystems.conveyor);
+        stopConveyorCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
+        stopConveyorCGS2 = new StopConveyorCG(BotSubsystems.conveyor);
 
         // DiffDriver
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
@@ -162,18 +181,22 @@ public class BotCommands {
         resetShoot = new ResetShoot(BotSubsystems.shooter);
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         shoot = new Shoot(BotSubsystems.shooter);
-        shootCG = new ShootCG(BotSubsystems.shooter);
+        shootCGS1 = new ShootCG(BotSubsystems.shooter);
+        shootCGS2 = new ShootCG(BotSubsystems.shooter);
         stopConveyorAndShooter = new StopConveyorAndShooter(BotSubsystems.conveyor, BotSubsystems.shooter);
         stopShooter = new StopShooter(BotSubsystems.shooter);
-        stopShooterCG = new StopShooterCG(BotSubsystems.shooter);
+        stopShooterCGS1 = new StopShooterCG(BotSubsystems.shooter);
+        stopShooterCGS2 = new StopShooterCG(BotSubsystems.shooter);
 
         // Autonomous Command Group
-        autoLineUpAndShoot = new AutoLineUpAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter, BotSubsystems.diffDriver);
+        autoLineUpAndShootS1 = new AutoLineUpAndShootS1(BotSubsystems.conveyor, BotSubsystems.shooter, BotSubsystems.diffDriver);
+        autoLineUpAndShootS2 = new AutoLineUpAndShootS2(BotSubsystems.conveyor, BotSubsystems.shooter, BotSubsystems.diffDriver);
     }
 
     // Return the command to run in autonomous mode
     public static Command getAutonomousCommand() {
-        return autoLineUpAndShoot;
+        return autoLineUpAndShootS1;
+        //return autoLineUpAndShootS2;
         //return autoDriveForwardShoot;
     }
 
