@@ -22,10 +22,9 @@ public class Shoot extends CommandBase {
     public void initialize() {
         Logger.action("Initializing Command: Shoot...");
 
-        m_shooter.spinTopWheel();
-        m_shooter.spinBottomWheel();
-
-        // m_shooter.testMotor();
+        // m_shooter.spinTopWheel();
+        // m_shooter.spinBottomWheel();
+        m_shooter.shootWithDistance();
     }
 
     @Override

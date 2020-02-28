@@ -13,8 +13,6 @@ import frc.robot.subsystems.utils.EncoderUtils;
 import frc.robot.subsystems.utils.PIDValues;
 import frc.robot.subsystems.utils.TalonUtils;
 import frc.robot.BotSubsystems;
-import frc.robot.sensors.DistanceSensor;
-import frc.robot.BotSensors;
 
 import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
@@ -53,10 +51,10 @@ public class Shooter extends SubsystemBase {
 
         if (isReal) {
             // Configure devices
-            PIDValues pidBottom = new PIDValues(0.1, 0, 0, 0);
+            PIDValues pidBottom = new PIDValues(1.0, 0.0, 0.0, 0.0);
             TalonUtils.configureTalonWithEncoder(talonSrxShooterBottomWheel, SENSOR_PHASE_BOTTOM, MOTOR_INVERT_BOTTOM, pidBottom);
 
-            PIDValues pidTop = new PIDValues(0.1, 0, 0, 0);
+            PIDValues pidTop = new PIDValues(1.0, 0.0, 0.0, 0.0);
             TalonUtils.configureTalonWithEncoder(talonSrxShooterTopWheel, SENSOR_PHASE_TOP, MOTOR_INVERT_TOP, pidTop);
         }
     }
@@ -99,7 +97,7 @@ public class Shooter extends SubsystemBase {
         Logger.info("Shooter -> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
 
         Logger.action("Shooter -> Setting " + talon.getName() + " velocity...");
-        talon.set(ControlMode.Velocity, nativeVelocity);
+        talon.set(ControlMode.Velocity, velocity);
     }
 
     // Spin the bottom shooter wheel
@@ -126,20 +124,23 @@ public class Shooter extends SubsystemBase {
         talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity, DemandType.AuxPID, heading);
     }
 
-    public void shootWithDistance(double distanceFeet){
+    public double shootWithDistance(){
         double sHeight = RobotBrain.shooterHeightFeetDefault;
         double sAngle = RobotBrain.shooterAngleDegreesDefault;
         double fHeight = RobotBrain.fieldTargetHeightFeet;
 
-        double numerator = 9.81 * Math.sqrt(distanceFeet);
-        double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle) - (fHeight - sHeight) * Math.sqrt(Math.cos(sAngle)));
+        double distanceFeet = ShooterBrain.getShootDistance();
+        double numerator = 32.2 * Math.pow(distanceFeet, 2);
+        double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle) - (fHeight - sHeight) * Math.pow(Math.cos(sAngle), 2));
         double velocityFPS = Math.sqrt(numerator / denominator);
         double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocityFPS, WHEEL_DIAMETER, GEAR_RATIO);
 
-        Logger.info("Shooter -> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
+        Logger.info("Shooter DistanceVelocity-> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
 
-        spinWheel(talonSrxShooterTopWheel, nativeVelocity);
-        spinWheel(talonSrxShooterBottomWheel, nativeVelocity);
+        talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
+        talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
+
+        return velocityFPS;
     }
 
     //---------//
@@ -172,6 +173,10 @@ public class Shooter extends SubsystemBase {
         return fps;
     }
 
+    public double getWheelPosition(){
+        return talonSrxShooterTopWheel.getSelectedSensorPosition() / 4;
+    }
+
     //--------------//
     // Shuffleboard //
     //--------------//
@@ -198,6 +203,18 @@ public class Shooter extends SubsystemBase {
     public void testMotor() {
         talonSrxShooterBottomWheel.set(0.3);
         talonSrxShooterTopWheel.set(0.3);
+    }
+
+    public void testMotorRotation(int rotations){
+        int nativeRotation = rotations * ENCODER_TPR;
+        talonSrxShooterTopWheel.set(ControlMode.Position, nativeRotation);
+        talonSrxShooterBottomWheel.set(ControlMode.Position, nativeRotation);
+    }
+
+    public void testMotorVelocity(double velocity){
+        double nativeVelocity = velocity * ENCODER_TPR / 10 * GEAR_RATIO;
+        talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
+        talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
     }
 
 }

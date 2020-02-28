@@ -100,4 +100,8 @@ public class ShooterBrain {
         return shootTopWheelTargetVelocityEntry.getDouble(shootTopWheelTargetVelocityDefault);
     }
 
+    public static double getShootDistance() {
+        return shootDistanceEntry.getDouble(shootDistanceDefault);
+    }
+
 }
