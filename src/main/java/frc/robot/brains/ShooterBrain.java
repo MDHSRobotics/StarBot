@@ -91,4 +91,8 @@ public class ShooterBrain {
         return shootDistanceEntry.getDouble(shootDistanceDefault);
     }
 
+    public static double getShootDistance() {
+        return shootDistanceEntry.getDouble(shootDistanceDefault);
+    }
+
 }
