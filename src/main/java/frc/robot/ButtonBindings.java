@@ -46,4 +46,9 @@ public class ButtonBindings {
         BotControllers.secondary.btnStart.whenPressed(BotCommands.resetShoot);
     }
 
+    // Configure joystick buttons
+    public static void configureJoystick() {
+        Logger.setup("Configure Buttons -> Joystick...");
+
+    }
 }

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 import java.util.Map;
 
 import frc.robot.brains.XboxBrain;
+import frc.robot.brains.JoystickBrain;
 import frc.robot.consoles.ShuffleLogger;
 
 // The Shuffleboard Inputs tab.
@@ -28,6 +29,14 @@ public class InputsTab {
     private SimpleWidget m_xRightDeadZoneWidget;
     private SimpleWidget m_yRightSensitivityWidget;
     private SimpleWidget m_xRightSensitivityWidget;
+
+    // Joystick
+    private SimpleWidget m_yDeadZoneWidget;
+    private SimpleWidget m_xDeadZoneWidget;
+    private SimpleWidget m_zDeadZoneWidget;
+    private SimpleWidget m_ySensitivityWidget;
+    private SimpleWidget m_xSensitivityWidget;
+    private SimpleWidget m_zSensitivityWidget;
 
     // Constructor
     public InputsTab() {
@@ -99,6 +108,31 @@ public class InputsTab {
         m_xRightSensitivityWidget = m_xboxRightLayout.add("X Right Sensitivity", XboxBrain.xRightSensitivityDefault);
         XboxBrain.xRightSensitivityEntry = m_xRightSensitivityWidget.getEntry();
         m_xRightSensitivityWidget.withWidget(BuiltInWidgets.kTextView);
+
+        // Joystick
+        m_yDeadZoneWidget = m_joystickLayout.add("Y Dead Zone", JoystickBrain.yDeadZoneDefault);
+        JoystickBrain.yDeadZoneEntry = m_yDeadZoneWidget.getEntry();
+        m_yDeadZoneWidget.withWidget(BuiltInWidgets.kTextView);
+
+        m_xDeadZoneWidget = m_joystickLayout.add("X Dead Zone", JoystickBrain.xDeadZoneDefault);
+        JoystickBrain.xDeadZoneEntry = m_xDeadZoneWidget.getEntry();
+        m_xDeadZoneWidget.withWidget(BuiltInWidgets.kTextView);
+
+        m_zDeadZoneWidget = m_joystickLayout.add("Z Dead Zone", JoystickBrain.zDeadZoneDefault);
+        JoystickBrain.zDeadZoneEntry = m_zDeadZoneWidget.getEntry();
+        m_zDeadZoneWidget.withWidget(BuiltInWidgets.kTextView);
+
+        m_ySensitivityWidget = m_joystickLayout.add("Y Sensitivity", JoystickBrain.ySensitivityDefault);
+        JoystickBrain.ySensitivityEntry = m_ySensitivityWidget.getEntry();
+        m_ySensitivityWidget.withWidget(BuiltInWidgets.kTextView);
+
+        m_xSensitivityWidget = m_joystickLayout.add("X Sensitivity", JoystickBrain.xSensitivityDefault);
+        JoystickBrain.xSensitivityEntry = m_xSensitivityWidget.getEntry();
+        m_xSensitivityWidget.withWidget(BuiltInWidgets.kTextView);
+
+        m_zSensitivityWidget = m_joystickLayout.add("Z Sensitivity", JoystickBrain.zSensitivityDefault);
+        JoystickBrain.zSensitivityEntry = m_zSensitivityWidget.getEntry();
+        m_zSensitivityWidget.withWidget(BuiltInWidgets.kTextView);
     }
 
     // Create all other Widgets
