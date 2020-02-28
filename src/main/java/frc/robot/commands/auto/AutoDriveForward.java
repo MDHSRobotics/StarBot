@@ -14,7 +14,7 @@ public class AutoDriveForward extends CommandBase {
     private Timer m_timer = new Timer();
     private double m_timeLastPrinted = 0.0;
 
-    private static final double MAX_DRIVE_SECONDS = 5.0;
+    private static final double MAX_DRIVE_SECONDS = 3.0;
 
     public AutoDriveForward(DiffDriver diffDriver) {
         Logger.setup("Constructing Command: AutoDriveForward...");
