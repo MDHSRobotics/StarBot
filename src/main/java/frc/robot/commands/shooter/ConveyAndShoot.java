@@ -32,8 +32,9 @@ public class ConveyAndShoot extends CommandBase {
         m_timer.reset();
         m_timer.start();
 
-        m_shooter.spinBottomWheel();
-        m_shooter.spinTopWheel();
+        // m_shooter.spinBottomWheel();
+        // m_shooter.spinTopWheel();
+        m_shooter.shootWithDistance();
     }
 
     @Override

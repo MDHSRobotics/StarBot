@@ -11,8 +11,8 @@ public class ShooterBrain {
     // Default Values //
     //----------------//
 
-    public static double shootBottomWheelTargetVelocityDefault = 1;
-    public static double shootTopWheelTargetVelocityDefault = 1;
+    public static double shootBottomWheelTargetVelocityDefault = 0;
+    public static double shootTopWheelTargetVelocityDefault = 0;
 
     public static double shootTopWheelCurrentVelocityDefault = 0;
     public static double shootBottomWheelCurrentVelocityDefault = 0;

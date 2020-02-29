@@ -12,7 +12,6 @@ import frc.robot.devices.DevTalonSRX;
 import frc.robot.subsystems.utils.EncoderUtils;
 import frc.robot.subsystems.utils.PIDValues;
 import frc.robot.subsystems.utils.TalonUtils;
-import frc.robot.BotSubsystems;
 
 import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
@@ -23,8 +22,8 @@ import static frc.robot.RobotManager.isReal;
 public class Shooter extends SubsystemBase {
 
     // Mechanical constants
-    private final double GEAR_RATIO = 1.0;
-    private final double WHEEL_DIAMETER = 4.0;
+    private final double GEAR_RATIO = 4.0; // (MS : GS)
+    private final double WHEEL_DIAMETER = 4.0; // In inches
 
     // Encoder constants
     private static final boolean SENSOR_PHASE_BOTTOM = true;
@@ -51,10 +50,10 @@ public class Shooter extends SubsystemBase {
 
         if (isReal) {
             // Configure devices
-            PIDValues pidBottom = new PIDValues(1.0, 0.0, 0.0, 0.0);
+            PIDValues pidBottom = new PIDValues(0.1, 0.0, 0.0, 0.0);
             TalonUtils.configureTalonWithEncoder(talonSrxShooterBottomWheel, SENSOR_PHASE_BOTTOM, MOTOR_INVERT_BOTTOM, pidBottom);
 
-            PIDValues pidTop = new PIDValues(1.0, 0.0, 0.0, 0.0);
+            PIDValues pidTop = new PIDValues(0.1, 0.0, 0.0, 0.0);
             TalonUtils.configureTalonWithEncoder(talonSrxShooterTopWheel, SENSOR_PHASE_TOP, MOTOR_INVERT_TOP, pidTop);
         }
     }
@@ -62,11 +61,11 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        topVelocity = BotSubsystems.shooter.getTopWheelVelocity();
-        bottomVelocity = BotSubsystems.shooter.getBottomWheelVelocity();
+        topVelocity = getTopWheelVelocity();
+        bottomVelocity = getBottomWheelVelocity();
 
-        topVelocityFPS = EncoderUtils.translateTicksPerDecisecondToFPS(topVelocity, WHEEL_DIAMETER, GEAR_RATIO);
-        bottomVelocityFPS = EncoderUtils.translateTicksPerDecisecondToFPS(bottomVelocity, WHEEL_DIAMETER, GEAR_RATIO);
+        topVelocityFPS = getTopWheelVelocityFPS();
+        bottomVelocityFPS = getBottomWheelVelocityFPS();
 
         ShooterBrain.setTopWheelCurrentVelocity(topVelocity);
         ShooterBrain.setBottomWheelCurrentVelocity(bottomVelocity);
@@ -92,12 +91,12 @@ public class Shooter extends SubsystemBase {
     }
 
     private void spinWheel(DevTalonSRX talon, double velocity) {
-        double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocity, WHEEL_DIAMETER, GEAR_RATIO);
+        double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocity, WHEEL_DIAMETER, GEAR_RATIO) / 10;
         Logger.info("Shooter -> FlyWheel Velocity:" + velocity + " FPS");
         Logger.info("Shooter -> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
 
         Logger.action("Shooter -> Setting " + talon.getName() + " velocity...");
-        talon.set(ControlMode.Velocity, velocity);
+        talon.set(ControlMode.Velocity, nativeVelocity);
     }
 
     // Spin the bottom shooter wheel
@@ -124,7 +123,7 @@ public class Shooter extends SubsystemBase {
         talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity, DemandType.AuxPID, heading);
     }
 
-    public double shootWithDistance(){
+    public void shootWithDistance(){
         double sHeight = RobotBrain.shooterHeightFeetDefault;
         double sAngle = RobotBrain.shooterAngleDegreesDefault;
         double fHeight = RobotBrain.fieldTargetHeightFeet;
@@ -133,14 +132,13 @@ public class Shooter extends SubsystemBase {
         double numerator = 32.2 * Math.pow(distanceFeet, 2);
         double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle) - (fHeight - sHeight) * Math.pow(Math.cos(sAngle), 2));
         double velocityFPS = Math.sqrt(numerator / denominator);
-        double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocityFPS, WHEEL_DIAMETER, GEAR_RATIO);
+        double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocityFPS, WHEEL_DIAMETER, GEAR_RATIO) / 10;
 
         Logger.info("Shooter DistanceVelocity-> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
+        Logger.info("Shooter DistanceVelocity-> FlyWheel FPS: " + velocityFPS);
 
         talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
         talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
-
-        return velocityFPS;
     }
 
     //---------//
@@ -174,7 +172,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public double getWheelPosition(){
-        return talonSrxShooterTopWheel.getSelectedSensorPosition() / 4;
+        return talonSrxShooterTopWheel.getSelectedSensorPosition() / GEAR_RATIO;
     }
 
     //--------------//
