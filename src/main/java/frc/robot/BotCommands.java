@@ -56,6 +56,8 @@ public class BotCommands {
     public static DriveDiffTank driveDiffTank;
     public static DriveDiffToWithinRange driveDiffToWithinRangeFront;
     public static DriveDiffToWithinRange driveDiffToWithinRangeTop;
+    public static DefaultDriveSensitivity defaultDriveSensitivity;
+    public static AlternateDriveSensitivity alternateDriveSensitivity;
 
     // Lighter
     public static CycleLights cycleLights;
@@ -117,6 +119,8 @@ public class BotCommands {
         driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
         driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.primary);
+        defaultDriveSensitivity = new DefaultDriveSensitivity(BotSubsystems.diffDriver, BotControllers.primary);
+        alternateDriveSensitivity = new AlternateDriveSensitivity(BotSubsystems.diffDriver, BotControllers.primary);
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);

@@ -13,6 +13,8 @@ public class ButtonBindings {
         // DiffDriver
         BotControllers.primary.btnDpad.whileHeld(BotCommands.alignDiffDriveToGyro);
         BotControllers.primary.btnBumperRight.whileHeld(BotCommands.driveDiffToWithinRangeFront);
+        BotControllers.primary.btnStart.whenPressed(BotCommands.defaultDriveSensitivity);
+        BotControllers.primary.btnBack.whenPressed(BotCommands.alternateDriveSensitivity);
 
         // RollerArm
         BotControllers.secondary.btnY.whenPressed(BotCommands.toggleRollerArm);
