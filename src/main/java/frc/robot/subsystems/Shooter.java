@@ -15,7 +15,6 @@ import frc.robot.devices.DevTalonSRX;
 import frc.robot.subsystems.utils.EncoderUtils;
 import frc.robot.subsystems.utils.PIDValues;
 import frc.robot.subsystems.utils.TalonUtils;
-import frc.robot.BotSubsystems;
 
 import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
@@ -93,7 +92,7 @@ public class Shooter extends SubsystemBase {
         Logger.info("Shooter -> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
 
         Logger.action("Shooter -> Setting " + talon.getName() + " velocity...");
-        talon.set(ControlMode.Velocity, velocity);
+        talon.set(ControlMode.Velocity, nativeVelocity);
     }
 
     // Spin the bottom shooter wheel
