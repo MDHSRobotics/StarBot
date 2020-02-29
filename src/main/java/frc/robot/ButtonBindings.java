@@ -6,9 +6,9 @@ import frc.robot.consoles.Logger;
 // Configures all the button->command bindings for the robot.
 public class ButtonBindings {
 
-    // Configure "primary" xbox buttons
-    public static void configurePrimary() {
-        Logger.setup("Configure Buttons -> Primary Controller...");
+    // Configure xbox buttons
+    public static void configureXbox() {
+        Logger.setup("Configure Buttons -> Xbox Controller...");
 
         // TODO: Convert this to joystick control.
 
@@ -46,9 +46,21 @@ public class ButtonBindings {
         BotControllers.secondary.btnStart.whenPressed(BotCommands.resetShoot);
     }
 
+    //     // TODO: Use the triggers for the balancer, so that you have fine analog control.
+    //     // BotControllers.primary.btnDpadLeft.whileHeld(BotCommands.balanceLeft);
+    //     // BotControllers.primary.btnDpadRight.whileHeld(BotCommands.balanceRight);
+    // }
+
+
     // Configure joystick buttons
     public static void configureJoystick() {
         Logger.setup("Configure Buttons -> Joystick...");
 
+        // Drive
+        BotJoystick.joystick.jstickBtn1.whileHeld(BotCommands.alignDiffDriveToGyro);
+
+        // Climb
+        BotJoystick.joystick.jstickBtn11.whenPressed(BotCommands.toggleHook);
+        BotJoystick.joystick.jstickBtn12.whenPressed(BotCommands.toggleSparkLegs);
     }
 }

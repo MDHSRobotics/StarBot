@@ -8,7 +8,7 @@ import frc.robot.consoles.Logger;
 public class BotJoystick {
 
     // Controllers
-    public static final JoystickContainer joystick = new JoystickContainer(2);
+    public static final JoystickContainer joystick = new JoystickContainer(1);
 
     // Configure all the controllers
     public static void configure() {
