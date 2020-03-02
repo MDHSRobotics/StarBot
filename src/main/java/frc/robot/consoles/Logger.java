@@ -57,4 +57,9 @@ public class Logger {
         System.out.println("PROBLEM --> " + LocalTime.now() + " :: " + message);
     }
 
+    // White text for debugging
+    public static void debug(Object message) {
+        System.out.println("DEBUG --> " + LocalTime.now() + " :: " + message);
+    }
+
 }

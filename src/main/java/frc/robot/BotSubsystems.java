@@ -13,6 +13,7 @@ public class BotSubsystems {
     public static ClimbLegsSpark climbLegsSpark;
     public static Conveyor conveyor;
     public static DiffDriver diffDriver;
+    public static DiffDriver diffDriverAlternate;
     public static Lighter lighter;
     public static Roller roller;
     public static RollerArm rollerArm;
@@ -27,7 +28,8 @@ public class BotSubsystems {
         climbLegsRed = new ClimbLegsRed();
         climbLegsSpark = new ClimbLegsSpark();
         conveyor = new Conveyor();
-        diffDriver = new DiffDriverSpark(); // Change this to DiffDriverTalon if changed on the robot
+        diffDriver = new DiffDriverSpark(); // Swap the diffDrivers if changed on the robot
+        diffDriverAlternate = new DiffDriverTalon();
         lighter = new Lighter();
         roller = new Roller();
         rollerArm = new RollerArm();
@@ -59,6 +61,10 @@ public class BotSubsystems {
         // DiffDriver
         Logger.setup("DiffDriver Teleop Default Command -> DriveDiffTank...");
         diffDriver.setDefaultCommand(BotCommands.driveDiffTank);
+
+        // DiffDriverAlternate
+        Logger.setup("DiffDriverAlternate Teleop Default Command -> StopDiffDrive...");
+        diffDriverAlternate.setDefaultCommand(BotCommands.stopDiffDrive);
 
         // Roller
         Logger.setup("Roller Default Command -> StopRoller...");

@@ -16,13 +16,18 @@ public class Devices {
     //////////////////////
 
     // CANSparkMax
-    static DevCANSparkMax sparkMaxClimbLegsMaster = new DevCANSparkMax("sparkMaxClimbLegsMaster", 1, MotorType.kBrushless);
-    static DevCANSparkMax sparkMaxClimbLegsSlave = new DevCANSparkMax("sparkMaxClimbLegsSlave", 2, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxClimbLegsMaster = DevCANSparkMax.getNew("sparkMaxClimbLegsMaster", 1, MotorType.kBrushless);
+    static CANPIDControllable pidClimbLegsMaster = sparkMaxClimbLegsMaster.getPIDControllable("pidClimbLegsMaster");
+    static CANEncodable encoderClimbLegsMaster = sparkMaxClimbLegsMaster.getEncodable("encoderClimbLegsMaster");
 
-    static DevCANSparkMax sparkMaxDiffWheelFrontLeft = new DevCANSparkMax("sparkMaxDiffWheelFrontLeft", 1, MotorType.kBrushless);
-    static DevCANSparkMax sparkMaxDiffWheelFrontRight = new DevCANSparkMax("sparkMaxDiffWheelFrontRight", 1, MotorType.kBrushless);
-    static DevCANSparkMax sparkMaxDiffWheelRearLeft = new DevCANSparkMax("sparkMaxDiffWheelRearLeft", 1, MotorType.kBrushless);
-    static DevCANSparkMax sparkMaxDiffWheelRearRight = new DevCANSparkMax("sparkMaxDiffWheelRearRight", 1, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxClimbLegsSlave = DevCANSparkMax.getNew("sparkMaxClimbLegsSlave", 2, MotorType.kBrushless);
+    static CANPIDControllable pidClimbLegsSlave = sparkMaxClimbLegsSlave.getPIDControllable("pidClimbLegsSlave");
+    static CANEncodable encoderClimbLegsSlave = sparkMaxClimbLegsSlave.getEncodable("encoderClimbLegsSlave");
+
+    static CANSparkMaxControllable sparkMaxDiffWheelFrontLeft = DevCANSparkMax.getNew("sparkMaxDiffWheelFrontLeft", 58, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxDiffWheelFrontRight = DevCANSparkMax.getNew("sparkMaxDiffWheelFrontRight", 59, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxDiffWheelRearLeft = DevCANSparkMax.getNew("sparkMaxDiffWheelRearLeft", 57, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxDiffWheelRearRight = DevCANSparkMax.getNew("sparkMaxDiffWheelRearRight", 60, MotorType.kBrushless);
 
     // Pneumatics
     static DevCompressor compressorRollerArm = new DevCompressor("compressorRollerArm", 0);
@@ -54,10 +59,10 @@ public class Devices {
     /////////////////////
 
     public static DevDifferentialDrive diffDriveTalon = new DevDifferentialDrive("diffDriveTalon",
-                                                                                 talonFxDiffWheelFrontLeft,
-                                                                                 talonFxDiffWheelFrontRight);
+                                                                                talonFxDiffWheelFrontLeft,
+                                                                                talonFxDiffWheelFrontRight);
     public static DevDifferentialDrive diffDriveSpark = new DevDifferentialDrive("diffDriveSpark",
-                                                                                 sparkMaxDiffWheelFrontLeft,
-                                                                                 sparkMaxDiffWheelFrontRight);
+                                                                                sparkMaxDiffWheelFrontLeft,
+                                                                                sparkMaxDiffWheelFrontRight);
 
 }

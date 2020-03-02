@@ -5,57 +5,54 @@ import com.revrobotics.CANError;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.ControlType;
 
-import static frc.robot.RobotManager.isReal;
 import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around CANPIDController in order to handle cases where the
-// CANPIDController is not physically connected.  This
+// SparkMax motor controller is not physically connected.  This
 // can be the case when running the simulator but it can also happen when
 // executing code on the RoboRio without a fully assembled robot with all of
 // necessary motors and controllers.
 
-// If the CANPIDController is connected then this class just forwards any calls directly
+// If the SparkMax is connected then this class just forwards any calls directly
 // to the CANPIDController class.
 
-// If the CANPIDController is not connected, only a subset of the CANPIDController interface is
+// If the SparkMax is not connected, only a subset of the CANPIDController interface is
 // supported, mainly by tracing and other monitoring.
 
-public class DevCANPIDController extends CANPIDController {
+public class DevCANPIDController extends CANPIDController implements CANPIDControllable {
 
-    private String m_logicalID;
-    private String m_physicalID;
-    private SimulationMonitor m_simMonitor;
-    public boolean isConnected = false;
+    private String m_devName;
+    private String m_devDescription;
+    private Monitor m_monitor;
+    public boolean isConnected = true;
 
-    public DevCANPIDController(String logicalDeviceID, DevCANSparkMax sparkDevice) {
-        super(sparkDevice);
+    public DevCANPIDController(String devName, DevCANSparkMax device) {
+        super(device);
 
-        m_logicalID = logicalDeviceID;
-        m_physicalID = String.format("CANPIDController sparkDevice");
-
-        if (isSim) {
-            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
-        }
+        m_devName = devName;
+        m_devDescription = String.format("CANPIDController #%d", device.getDeviceId());
 
         isConnected = isConnected();
+        if (!isConnected) {
+            m_monitor = new Monitor(m_devName, m_devDescription);
+        }
     }
 
     // Determines if this is connected
     private boolean isConnected() {
-        if (isSim) return true;
+        if (isSim) return false;
         return true;
     }
 
     public CANError setReference(double value, ControlType ctrl) {
-        if (isReal) {
-            if (isConnected) return super.setReference(value, ctrl);
-            return CANError.kOk;
+        if (isConnected) {
+            return super.setReference(value, ctrl);
         }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg1 = String.format("%.2f", value);
         String arg2 = ctrl.name();
-        m_simMonitor.log(methodName, arg1, arg2);
+        m_monitor.log(methodName, arg1, arg2);
         return CANError.kOk;
     }
 

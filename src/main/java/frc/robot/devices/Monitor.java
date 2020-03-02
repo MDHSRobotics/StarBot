@@ -3,17 +3,17 @@ package frc.robot.devices;
 
 import frc.robot.consoles.Logger;
 
-class SimulationMonitor {
+class Monitor {
 
-    private String m_physicalID;
-    private String m_logicalID;
+    private String m_devName;
+    private String m_devDescription;
 
     private String m_lastPrinted = "";
     private int m_nSkippedDuplicates = 0;
 
-    SimulationMonitor(String physicalDeviceID, String logicalDeviceID) {
-        m_physicalID = physicalDeviceID;
-        m_logicalID = logicalDeviceID;
+    Monitor(String devName, String devDescription) {
+        m_devName = devName;
+        m_devDescription = devDescription;
     }
 
     public void log(String methodName, String... args) {
@@ -21,15 +21,15 @@ class SimulationMonitor {
         if (!methodSignature.equals(m_lastPrinted)) {
             // Print number of duplicate method signatures that were not printed
             if (m_nSkippedDuplicates > 0) {
-                String skip = String.format("SIM %s (%s): %s (Skipped %d of these)", m_logicalID,
-                                                                                     m_physicalID,
-                                                                                     m_lastPrinted,
-                                                                                     m_nSkippedDuplicates);
-                Logger.action(skip);
+                String skip = String.format("(%s) %s.%s: (Skipped %d)", m_devDescription,
+                                                                        m_devName,
+                                                                        m_lastPrinted,
+                                                                        m_nSkippedDuplicates);
+                Logger.debug(skip);
                 m_nSkippedDuplicates = 0;
             }
-            String msg = String.format("SIM %s (%s): %s", m_logicalID, m_physicalID, methodSignature);
-            Logger.action(msg);
+            String msg = String.format("(%s) %s.%s", m_devDescription, m_devName, methodSignature);
+            Logger.debug(msg);
 
             m_lastPrinted = methodSignature;
         } else {
