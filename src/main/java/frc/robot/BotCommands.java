@@ -53,7 +53,7 @@ public class BotCommands {
 
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
-    public static AlignToTarget alignToTarget;
+    public static AlignDiffDriveToTarget alignDiffDriveToTarget;
     public static DriveDiffTank driveDiffTank;
     public static DriveDiffToWithinRange driveDiffToWithinRangeFront;
     public static DriveDiffToWithinRange driveDiffToWithinRangeTop;
@@ -118,7 +118,7 @@ public class BotCommands {
 
         // DiffDriver
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
-        alignToTarget = new AlignToTarget(BotSubsystems.diffDriver, BotControllers.primary.xbox);
+        alignDiffDriveToTarget = new AlignDiffDriveToTarget(BotSubsystems.diffDriver);
         driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.primary);
         driveDiffToWithinRangeFront = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorFront, 2, 3);
         driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);

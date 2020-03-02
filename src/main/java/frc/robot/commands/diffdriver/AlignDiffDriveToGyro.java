@@ -3,17 +3,18 @@ package frc.robot.commands.diffdriver;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.BotControllers;
+
 import frc.robot.consoles.Logger;
 import frc.robot.oi.controllers.DPadButton;
 import frc.robot.subsystems.DiffDriver;
+import frc.robot.BotControllers;
 
 // Assisted control of the DiffDrive to align the robot with the gyro.
 public class AlignDiffDriveToGyro extends CommandBase {
 
     public GenericHID controller;
     private DiffDriver m_diffDriver;
-    private static double m_targetAngle = -1;
+    private double m_targetAngle = -1;
 
     public AlignDiffDriveToGyro(DiffDriver diffDriver, GenericHID controller) {
         Logger.setup("Constructing Command: AlignDiffDriveToGyro...");
@@ -26,9 +27,6 @@ public class AlignDiffDriveToGyro extends CommandBase {
 
     @Override
     public void initialize() {
-        System.out.println("--");
-        Logger.action("Initializing Command: AlignDiffDriveToGyro...");
-
         m_targetAngle = DPadButton.getGyroAngleFromDpadAngle(BotControllers.primary.xbox);
     }
 

@@ -1,25 +1,23 @@
 
 package frc.robot.commands.diffdriver;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.brains.LimelightBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.DiffDriver;
 import frc.robot.BotSensors;
 
-// DiffDrive uses limelight to align to the target
-public class AlignToTarget extends CommandBase {
+// DiffDrive uses limelight to align to the target.
+public class AlignDiffDriveToTarget extends CommandBase {
 
-    public GenericHID controller;
     private DiffDriver m_diffDriver;
     private static double m_targetAngle = 0;
 
-    public AlignToTarget(DiffDriver diffDriver, GenericHID controller) {
-        Logger.setup("Constructing Command: AlignToTarget...");
+    public AlignDiffDriveToTarget(DiffDriver diffDriver) {
+        Logger.setup("Constructing Command: AlignDiffDriveToTarget...");
 
         // Add given subsystem requirements
-        this.controller = controller;
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
     }
@@ -27,12 +25,11 @@ public class AlignToTarget extends CommandBase {
     @Override
     public void initialize() {
         System.out.println("--");
-        Logger.action("Initializing Command: AlignToTarget...");
+        Logger.action("Initializing Command: AlignDiffDriveToTarget...");
 
         double yaw = BotSensors.gyro.getYaw();
         double xOffset = LimelightBrain.getXOffset();
         m_targetAngle = yaw + xOffset;
-
     }
 
     @Override
@@ -51,7 +48,7 @@ public class AlignToTarget extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: AlignToTarget...");
+            Logger.ending("Interrupting Command: AlignDiffDriveToTarget...");
         }
     }
 
