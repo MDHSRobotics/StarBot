@@ -8,11 +8,11 @@ import frc.robot.sensors.Limelight;
 import frc.robot.subsystems.DiffDriver;
 import frc.robot.BotSensors;
 
-// DiffDrive uses limelight to align to the target.
+// DiffDrive uses gyro and limelight to align to the target.
 public class AlignDiffDriveToTarget extends CommandBase {
 
     private DiffDriver m_diffDriver;
-    private static double m_targetAngle = 0;
+    private double m_targetAngle = 0;
 
     public AlignDiffDriveToTarget(DiffDriver diffDriver) {
         Logger.setup("Constructing Command: AlignDiffDriveToTarget...");
@@ -24,10 +24,7 @@ public class AlignDiffDriveToTarget extends CommandBase {
 
     @Override
     public void initialize() {
-        System.out.println("--");
-        Logger.action("Initializing Command: AlignDiffDriveToTarget...");
-
-        double yaw = BotSensors.gyro.getYaw();
+        float yaw = BotSensors.gyro.getYaw();
         double xOffset = Limelight.getXOffset();
         m_targetAngle = yaw + xOffset;
     }
@@ -39,6 +36,7 @@ public class AlignDiffDriveToTarget extends CommandBase {
         }
     }
 
+    // This finishes immediately, but is intended to be continually restarted while a button is held
     @Override
     public boolean isFinished() {
         return true;
