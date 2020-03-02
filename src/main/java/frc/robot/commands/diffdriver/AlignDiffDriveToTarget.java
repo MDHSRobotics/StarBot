@@ -3,8 +3,8 @@ package frc.robot.commands.diffdriver;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.brains.LimelightBrain;
 import frc.robot.consoles.Logger;
+import frc.robot.sensors.Limelight;
 import frc.robot.subsystems.DiffDriver;
 import frc.robot.BotSensors;
 
@@ -28,7 +28,7 @@ public class AlignDiffDriveToTarget extends CommandBase {
         Logger.action("Initializing Command: AlignDiffDriveToTarget...");
 
         double yaw = BotSensors.gyro.getYaw();
-        double xOffset = LimelightBrain.getXOffset();
+        double xOffset = Limelight.getXOffset();
         m_targetAngle = yaw + xOffset;
     }
 

@@ -16,7 +16,6 @@ public class Shuffler {
     private MainTab m_mainTab;
     private InputsTab m_inputsTab;
     private DriveTab m_driveTab;
-    private LimelightTab m_limelightTab;
     private RollerArmTab m_rollerArmTab;
     private RollerTab m_rollerTab;
     private ShooterTab m_shooterTab;
@@ -32,7 +31,6 @@ public class Shuffler {
         m_inputsTab = new InputsTab();
         m_driveTab = new DriveTab();
         m_rollerArmTab = new RollerArmTab();
-        m_limelightTab = new LimelightTab();
         m_rollerTab = new RollerTab();
         m_shooterTab = new ShooterTab();
         m_climbHookTab = new ClimbHookTab();
@@ -47,7 +45,6 @@ public class Shuffler {
         m_mainTab.preInitialize();
         m_inputsTab.preInitialize();
         m_driveTab.preInitialize();
-        m_limelightTab.preInitialize();
         m_rollerArmTab.preInitialize();
         m_rollerTab.preInitialize();
         m_shooterTab.preInitialize();
@@ -70,7 +67,6 @@ public class Shuffler {
         m_climbLegsSparkTab.initialize();
         m_climbBalancerTab.initialize();
         m_debugTab.initialize();
-        m_limelightTab.initialize();
     }
 
     public void configure() {
@@ -79,7 +75,6 @@ public class Shuffler {
         m_mainTab.configure();
         m_inputsTab.configure();
         m_driveTab.configure();
-        m_limelightTab.configure();
         m_rollerArmTab.configure();
         m_rollerTab.configure();
         m_shooterTab.configure();
@@ -95,7 +90,6 @@ public class Shuffler {
         m_mainTab.update();
         m_inputsTab.update();
         m_driveTab.update();
-        m_limelightTab.update();
         m_rollerArmTab.update();
         m_rollerTab.update();
         m_shooterTab.update();
