@@ -1,8 +1,9 @@
+
 package frc.robot.devices;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 import edu.wpi.first.wpilibj.Solenoid;
 
-import static frc.robot.RobotManager.isReal;
 import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around Solenoid in order to handle cases where the
@@ -19,41 +20,41 @@ import static frc.robot.RobotManager.isSim;
 
 public class DevSolenoid extends Solenoid {
 
-    private String m_logicalID;
-    private String m_physicalID;
-    private SimulationMonitor m_simMonitor;
-    public boolean isConnected = false;
+    private String m_devName;
+    private String m_devDescription;
+    private Monitor m_monitor;
+    public boolean isConnected = true;
 
-    public DevSolenoid(String logicalDeviceID, int module) {
-        super(module);
+    public DevSolenoid(String devName, int channel) {
+        super(channel);
 
-        m_logicalID = logicalDeviceID;
-        m_physicalID = String.format("Solenoid module #%d", module);
-
-        if (isSim) {
-            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
-        }
+        m_devName = devName;
+        m_devDescription = String.format("Solenoid #%d", channel);
 
         isConnected = isConnected();
+        if (!isConnected) {
+            SendableRegistry.disableLiveWindow(this);
+            m_monitor = new Monitor(m_devName, m_devDescription);
+        }
     }
 
     // Determines if this is connected
     private boolean isConnected() {
-        if (isSim) return true;
+        if (isSim) return false;
 
         boolean outputOn = this.get();
-        return !outputOn;
+        return outputOn;
     }
 
     public void set(boolean state) {
-        if (isReal) {
-            if (isConnected) super.set(state);
+        if (isConnected) {
+            super.set(state);
             return;
         }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg = String.valueOf(state);
-        m_simMonitor.log(methodName, arg);
+        m_monitor.log(methodName, arg);
     }
 
 }

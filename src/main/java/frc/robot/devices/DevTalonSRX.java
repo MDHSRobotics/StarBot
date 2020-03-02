@@ -22,84 +22,81 @@ import java.util.Random;
 
 public class DevTalonSRX extends WPI_TalonSRX {
 
-    private String m_logicalID;
-    private String m_physicalID;
-    private SimulationMonitor m_simMonitor;
+    private String m_devName;
+    private String m_devDescription;
+    private Monitor m_monitor;
+    public boolean isConnected = true;
+
     // Random generator to be used to return dynamic numbers (e.g. in getVelocity)
     private Random m_random;
 
-    public boolean isConnected = false;
-
-    public DevTalonSRX(String logicalDeviceID, int deviceNumber) {
+    public DevTalonSRX(String devName, int deviceNumber) {
         super(deviceNumber);
 
-        m_logicalID = logicalDeviceID;
-        m_physicalID = String.format("TalonSRX #%d", deviceNumber);
-
-        if (isSim) {
-            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
-            // create instance of Random class
-            m_random = new Random();
-        }
+        m_devName = devName;
+        m_devDescription = String.format("TalonSRX #%d", deviceNumber);
 
         isConnected = isConnected();
-        if (isReal && isConnected) {
+        if (!isConnected) {
+            m_monitor = new Monitor(m_devName, m_devDescription);
+            if (isSim) m_random = new Random();
+        }
+
+        if (isConnected) {
             configFactoryDefault();
         }
     }
 
     // Determines if this is connected
     private boolean isConnected() {
-        if (isSim) return true;
+        if (isSim) return false;
 
         int firmVer = this.getFirmwareVersion();
         return (firmVer != -1);
     }
 
     public void set(double power){
-        if (isReal) {
-            if (isConnected) super.set(power);
+        if (isConnected) {
+            super.set(power);
             return;
         }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg = String.format("%.3f", power);
-        m_simMonitor.log(methodName, arg);
+        m_monitor.log(methodName, arg);
     }
 
     public void set(ControlMode mode, double value) {
-        if (isReal) {
+        if (isConnected) {
             super.set(mode, value);
-        }
-        else {
-            String methodName = new Throwable().getStackTrace()[0].getMethodName();
-            String arg = String.format("%s, %.3f", mode, value);
-            m_simMonitor.log(methodName, arg);
-        }
-    }
-
-    public void stopMotor() {
-        if (isReal) {
-            if (isConnected) super.stopMotor();
             return;
         }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
-        m_simMonitor.log(methodName);
+        String arg = String.format("%s, %.3f", mode, value);
+        m_monitor.log(methodName, arg);
+    }
+
+    public void stopMotor() {
+        if (isConnected) {
+            super.stopMotor();
+            return;
+        }
+
+        String methodName = new Throwable().getStackTrace()[0].getMethodName();
+        m_monitor.log(methodName);
     }
 
     public int getSelectedSensorVelocity() {
-
-        int velocity;
-
-        if (isReal) {
-            velocity = super.getSelectedSensorVelocity();
+        if (isConnected) {
+            return super.getSelectedSensorVelocity();
         }
-        else {
-            // Generate dynamic velocity numbers in range of 9000 and 9999
-            int rand_int = m_random.nextInt(1000);
-            velocity = 9000 + rand_int;
-        }
+
+        if (isReal) return 0;
+
+        // Generate dynamic velocity numbers in range of 9000 and 9999
+        int rand_int = m_random.nextInt(1000);
+        int velocity = 9000 + rand_int;
         return velocity;
     }
 

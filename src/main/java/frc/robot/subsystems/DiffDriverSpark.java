@@ -9,7 +9,7 @@ import static frc.robot.subsystems.Devices.sparkMaxDiffWheelFrontRight;
 import static frc.robot.subsystems.Devices.sparkMaxDiffWheelRearLeft;
 import static frc.robot.subsystems.Devices.sparkMaxDiffWheelRearRight;
 
-// Differential driver subsystem for the spark max's.
+// Differential driver subsystem for the spark max controllers.
 public class DiffDriverSpark extends DiffDriver {
 
     public DiffDriverSpark() {

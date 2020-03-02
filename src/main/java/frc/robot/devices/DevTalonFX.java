@@ -3,7 +3,6 @@ package frc.robot.devices;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import static frc.robot.RobotManager.isReal;
 import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around TalonFX in order to handle cases where the
@@ -20,54 +19,54 @@ import static frc.robot.RobotManager.isSim;
 
 public class DevTalonFX extends WPI_TalonFX {
 
-    private String m_logicalID;
-    private String m_physicalID;
-    private SimulationMonitor m_simMonitor;
-    public boolean isConnected = false;
+    private String m_devName;
+    private String m_devDescription;
+    private Monitor m_monitor;
+    public boolean isConnected = true;
 
-    public DevTalonFX(String logicalDeviceID, int deviceNumber) {
+    public DevTalonFX(String devName, int deviceNumber) {
         super(deviceNumber);
 
-        m_logicalID = logicalDeviceID;
-        m_physicalID = String.format("TalonFX #%d", deviceNumber);
-
-        if (isSim) {
-            m_simMonitor = new SimulationMonitor(m_physicalID, m_logicalID);
-        }
+        m_devName = devName;
+        m_devDescription = String.format("TalonFX #%d", deviceNumber);
 
         isConnected = isConnected();
-        if (isReal && isConnected) {
+        if (!isConnected) {
+            m_monitor = new Monitor(m_devName, m_devDescription);
+        }
+
+        if (isConnected) {
             configFactoryDefault();
         }
     }
 
     // Determines if this is connected
     private boolean isConnected() {
-        if (isSim) return true;
+        if (isSim) return false;
 
         int firmVer = this.getFirmwareVersion();
         return (firmVer != -1);
     }
 
     public void set(double power){
-        if (isReal) {
-            if (isConnected) super.set(power);
+        if (isConnected) {
+            super.set(power);
             return;
         }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
         String arg = String.format("%.3f", power);
-        m_simMonitor.log(methodName, arg);
+        m_monitor.log(methodName, arg);
     }
 
     public void stopMotor() {
-        if (isReal) {
-            if (isConnected) super.stopMotor();
+        if (isConnected) {
+            super.stopMotor();
             return;
         }
 
         String methodName = new Throwable().getStackTrace()[0].getMethodName();
-        m_simMonitor.log(methodName);
+        m_monitor.log(methodName);
     }
 
 }
