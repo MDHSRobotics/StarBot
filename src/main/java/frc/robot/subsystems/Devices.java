@@ -43,10 +43,10 @@ public class Devices {
     static DevTalonFX talonFxDiffWheelRearRight = new DevTalonFX("talonFxDiffWheelRearRight", 13);
 
     // TalonSRX
-    static DevTalonSRX talonSrxClimbBalancer = new DevTalonSRX("talonSrxClimbBalancer", 11);
-    static DevTalonSRX talonSrxClimbHook = new DevTalonSRX("talonSrxClimbHook", 15);
+    static DevTalonSRX talonSrxClimbBalancer = new DevTalonSRX("talonSrxClimbBalancer", 99);
+    static DevTalonSRX talonSrxClimbHook = new DevTalonSRX("talonSrxClimbHook", 99);
     static DevTalonSRX talonSrxClimbLegsA = new DevTalonSRX("talonSrxClimbLegsA", 99);
-    static DevTalonSRX talonSrxClimbLegsB = new DevTalonSRX("talonSrxClimbLegsB", 100);
+    static DevTalonSRX talonSrxClimbLegsB = new DevTalonSRX("talonSrxClimbLegsB", 99);
 
     static DevTalonSRX talonSrxConveyor = new DevTalonSRX("talonSrxConveyor", 10);
     static DevTalonSRX talonSrxRoller = new DevTalonSRX("talonSrxRoller", 99);

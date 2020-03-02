@@ -95,6 +95,11 @@ public class DiffDriver extends SubsystemBase {
             if (0 > zRotation && zRotation > -alignZSpeedMinimum) zRotation = -alignZSpeedMinimum;
         }
 
+        // TODO: This could end up being greater than 1.
+        // Instead, modify the AlignZSensitivity and AlignZSpeedMinimum values
+        // to get the behavior you're looking for.
+        zRotation = zRotation * 2;
+
         Logger.action("DiffDriver -> Drive Tank: " + zRotation);
         diffDrive.arcadeDrive(0, zRotation);
     }
