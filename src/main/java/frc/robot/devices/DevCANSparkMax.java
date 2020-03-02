@@ -26,8 +26,8 @@ public class DevCANSparkMax extends CANSparkMax implements CANSparkMaxControllab
     public boolean isConnected = true;
 
     public static CANSparkMaxControllable getNew(String devName, int deviceNumber, MotorType motorType) {
-        // DevCANSparkMax device = new DevCANSparkMax(devName, deviceNumber, motorType);
-        // if (device.isConnected) return device;
+        DevCANSparkMax device = new DevCANSparkMax(devName, deviceNumber, motorType);
+        if (device.isConnected) return device;
         return new VirtualCANSparkMax(devName, deviceNumber, motorType);
     }
 
