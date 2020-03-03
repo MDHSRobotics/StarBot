@@ -1,9 +1,6 @@
 package frc.robot.devices;
 
 import com.revrobotics.CANEncoder;
-import com.revrobotics.CANError;
-
-import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around CANEncoder in order to handle cases where the
 // CANEncoder is not physically connected.  This can be the case when running the
@@ -18,38 +15,8 @@ import static frc.robot.RobotManager.isSim;
 
 public class DevCANEncoder extends CANEncoder implements CANEncodable {
 
-    private String m_devName;
-    private String m_devDescription;
-    private Monitor m_monitor;
-    public boolean isConnected = true;
-
-    public DevCANEncoder(String devName, DevCANSparkMax device) {
+    public DevCANEncoder(DevCANSparkMax device) {
         super(device);
-
-        m_devName = devName;
-        m_devDescription = String.format("CANEncoder #%d", device.getDeviceId());
-
-        isConnected = isConnected();
-        if (isConnected) {
-            m_monitor = new Monitor(m_devName, m_devDescription);
-        }
-    }
-
-    // Determines if this is connected
-    private boolean isConnected() {
-        if (isSim) return false;
-        return true;
-    }
-
-    public CANError setPosition(double position){
-        if (isConnected) {
-            return super.setPosition(position);
-        }
-
-        String methodName = new Throwable().getStackTrace()[0].getMethodName();
-        String arg = String.format("%.2f", position);
-        m_monitor.log(methodName, arg);
-        return CANError.kOk;
     }
 
 }

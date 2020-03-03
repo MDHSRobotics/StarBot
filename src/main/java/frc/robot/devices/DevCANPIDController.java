@@ -1,11 +1,7 @@
 
 package frc.robot.devices;
 
-import com.revrobotics.CANError;
 import com.revrobotics.CANPIDController;
-import com.revrobotics.ControlType;
-
-import static frc.robot.RobotManager.isSim;
 
 // This class is a wrapper around CANPIDController in order to handle cases where the
 // SparkMax motor controller is not physically connected.  This
@@ -21,39 +17,8 @@ import static frc.robot.RobotManager.isSim;
 
 public class DevCANPIDController extends CANPIDController implements CANPIDControllable {
 
-    private String m_devName;
-    private String m_devDescription;
-    private Monitor m_monitor;
-    public boolean isConnected = true;
-
-    public DevCANPIDController(String devName, DevCANSparkMax device) {
+    public DevCANPIDController(DevCANSparkMax device) {
         super(device);
-
-        m_devName = devName;
-        m_devDescription = String.format("CANPIDController #%d", device.getDeviceId());
-
-        isConnected = isConnected();
-        if (!isConnected) {
-            m_monitor = new Monitor(m_devName, m_devDescription);
-        }
-    }
-
-    // Determines if this is connected
-    private boolean isConnected() {
-        if (isSim) return false;
-        return true;
-    }
-
-    public CANError setReference(double value, ControlType ctrl) {
-        if (isConnected) {
-            return super.setReference(value, ctrl);
-        }
-
-        String methodName = new Throwable().getStackTrace()[0].getMethodName();
-        String arg1 = String.format("%.2f", value);
-        String arg2 = ctrl.name();
-        m_monitor.log(methodName, arg1, arg2);
-        return CANError.kOk;
     }
 
 }

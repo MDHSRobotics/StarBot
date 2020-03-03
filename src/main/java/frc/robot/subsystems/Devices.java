@@ -16,18 +16,18 @@ public class Devices {
     //////////////////////
 
     // CANSparkMax
-    static CANSparkMaxControllable sparkMaxClimbLegsMaster = DevCANSparkMax.getNew("sparkMaxClimbLegsMaster", 1, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxClimbLegsMaster = CANSparkMaxControllable.getNew("sparkMaxClimbLegsMaster", 1, MotorType.kBrushless);
     static CANPIDControllable pidClimbLegsMaster = sparkMaxClimbLegsMaster.getPIDControllable("pidClimbLegsMaster");
     static CANEncodable encoderClimbLegsMaster = sparkMaxClimbLegsMaster.getEncodable("encoderClimbLegsMaster");
 
-    static CANSparkMaxControllable sparkMaxClimbLegsSlave = DevCANSparkMax.getNew("sparkMaxClimbLegsSlave", 2, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxClimbLegsSlave = CANSparkMaxControllable.getNew("sparkMaxClimbLegsSlave", 2, MotorType.kBrushless);
     static CANPIDControllable pidClimbLegsSlave = sparkMaxClimbLegsSlave.getPIDControllable("pidClimbLegsSlave");
     static CANEncodable encoderClimbLegsSlave = sparkMaxClimbLegsSlave.getEncodable("encoderClimbLegsSlave");
 
-    static CANSparkMaxControllable sparkMaxDiffWheelFrontLeft = DevCANSparkMax.getNew("sparkMaxDiffWheelFrontLeft", 58, MotorType.kBrushless);
-    static CANSparkMaxControllable sparkMaxDiffWheelFrontRight = DevCANSparkMax.getNew("sparkMaxDiffWheelFrontRight", 59, MotorType.kBrushless);
-    static CANSparkMaxControllable sparkMaxDiffWheelRearLeft = DevCANSparkMax.getNew("sparkMaxDiffWheelRearLeft", 57, MotorType.kBrushless);
-    static CANSparkMaxControllable sparkMaxDiffWheelRearRight = DevCANSparkMax.getNew("sparkMaxDiffWheelRearRight", 60, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxDiffWheelFrontLeft = CANSparkMaxControllable.getNew("sparkMaxDiffWheelFrontLeft", 58, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxDiffWheelFrontRight = CANSparkMaxControllable.getNew("sparkMaxDiffWheelFrontRight", 59, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxDiffWheelRearLeft = CANSparkMaxControllable.getNew("sparkMaxDiffWheelRearLeft", 57, MotorType.kBrushless);
+    static CANSparkMaxControllable sparkMaxDiffWheelRearRight = CANSparkMaxControllable.getNew("sparkMaxDiffWheelRearRight", 60, MotorType.kBrushless);
 
     // Pneumatics
     static DevCompressor compressorRollerArm = new DevCompressor("compressorRollerArm", 0);
