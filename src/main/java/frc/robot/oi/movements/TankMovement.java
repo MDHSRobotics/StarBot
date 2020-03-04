@@ -2,8 +2,6 @@
 package frc.robot.oi.movements;
 
 import frc.robot.oi.controllers.XboxPositionAccessible;
-import frc.robot.oi.controllers.JoystickPositionAccessible;
-//import frc.robot.oi.positions.JoystickPosition;
 import frc.robot.oi.positions.ThumbstickPosition;
 
 // The values needed to drive using tank mode.
@@ -27,11 +25,5 @@ public class TankMovement {
         TankMovement move = new TankMovement(pos.leftForwardBackPosition, pos.rightForwardBackPosition);
         return move;
     }
-
-    // public static TankMovement getTankMovementFromJoystick(JoystickPositionAccessible jstick, boolean isYflipped) {
-    //     JoystickPosition pos = JoystickPosition.getJoystickPosition(jstick, isYflipped);
-    //     TankMovement move = new TankMovement(pos.leftForwardBackPosition, pos.rightForwardBackPosition);
-    //     return move;
-    // }
 
 }
