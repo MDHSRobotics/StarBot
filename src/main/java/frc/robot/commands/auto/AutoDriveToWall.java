@@ -3,10 +3,11 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.BotSensors;
 import frc.robot.consoles.Logger;
+import frc.robot.sensors.DistanceSensor;
 import frc.robot.subsystems.DiffDriver;
 
 // This command auto drives the DiffDriver forward for a short time
-public class AutoDriveToTarget extends CommandBase {
+public class AutoDriveToWall extends CommandBase {
 
     private DiffDriver m_diffDriver;
 
@@ -15,24 +16,27 @@ public class AutoDriveToTarget extends CommandBase {
     private double m_targetMax;
     private double m_targetMin;
 
-    public AutoDriveToTarget(DiffDriver diffDriver, double targetMin, double targetMax) {
-        Logger.setup("Constructing Command: AutoDriveToTarget...");
+    public static double distanceFromWall;
+
+    public AutoDriveToWall(DiffDriver diffDriver, double targetMin, double targetMax) {
+        Logger.setup("Constructing Command: AutoDriveToWall...");
 
         // Add given subsystem requirements
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
 
-        m_targetMin = 3.0;  //targetMin
-        m_targetMax = 3.048;  //targetMax
+        m_targetMin = 0.4;  //targetMin
+        m_targetMax = 0.41;  //targetMax
     }
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: AutoDriveToTarget...");
+        Logger.action("Initializing Command: AutoDriveToWall...");
     }
 
     @Override
     public void execute() {
+        distanceFromWall = DiffDriver.distance;
         m_isDistanceReached = m_diffDriver.driveToWithinRange(BotSensors.distanceSensorFront, m_targetMin, m_targetMax);
     }
 
@@ -45,9 +49,9 @@ public class AutoDriveToTarget extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: AutoDriveToTarget...");
+            Logger.ending("Interrupting Command: AutoDriveToWall...");
         } else {
-            Logger.ending("Ending Command: AutoDriveToTarget...");
+            Logger.ending("Ending Command: AutoDriveToWall...");
         }
     }
 
