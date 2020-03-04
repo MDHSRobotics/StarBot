@@ -50,7 +50,7 @@ public class ButtonBindings {
         Logger.setup("Configure Buttons -> Joystick...");
 
         // Drive
-        BotJoystick.joystick.jstickBtn1.whileHeld(BotCommands.alignDiffDriveToGyro);
+        BotJoystick.joystick.jstickBtn1.whileHeld(BotCommands.alignDiffDriveToTarget);
 
         // Climb
         BotJoystick.joystick.jstickBtn11.whenPressed(BotCommands.toggleHook);
