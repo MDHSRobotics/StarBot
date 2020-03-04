@@ -24,6 +24,8 @@ public class AlignDiffDriveToTarget extends CommandBase {
 
     @Override
     public void initialize() {
+        Limelight.ledOn();
+
         float yaw = BotSensors.gyro.getYaw();
         double xOffset = Limelight.getXOffset();
         m_targetAngle = yaw + xOffset;

@@ -16,6 +16,9 @@ public class ButtonBindings {
         BotControllers.primary.btnBumperRight.whileHeld(BotCommands.driveDiffToWithinRangeFront);
         BotControllers.primary.btnB.whileHeld(BotCommands.alignDiffDriveToTarget);
 
+        // Limelight
+        BotControllers.primary.btnB.whenReleased(BotCommands.turnOffLimelightArray);
+
         // Climb
         BotControllers.primary.btnBumperLeft.whileHeld(BotCommands.driveDiffToWithinRangeTop);
         BotControllers.primary.btnY.whenPressed(BotCommands.toggleHook); // Tested

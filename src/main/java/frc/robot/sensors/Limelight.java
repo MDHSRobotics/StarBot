@@ -11,6 +11,10 @@ import frc.robot.consoles.Logger;
 // This class contains methods for retrieving Limelight data.
 public class Limelight {
 
+    private static double cameraHeight = 10.25; // height of lens (in)
+    private static double targetHeight = 100; // height to the center of the target (in)
+    private static double cameraAngle = 0; // angle of the camera (deg)
+
     private static NetworkTable m_limelight = NetworkTableInstance.getDefault().getTable("/limelight");
     private static NetworkTableEntry m_tx = m_limelight.getEntry("tx");
     private static NetworkTableEntry m_ty = m_limelight.getEntry("ty");
@@ -34,4 +38,21 @@ public class Limelight {
         Logger.info("Limelight -> Number of keys: " + numOfKeys);
     }
 
+    // 3 equals on
+    public static void ledOn() {
+        m_limelight.getEntry("ledMode").setNumber(3);
+    }
+
+    // 1 equals off
+    public static void ledOff() {
+        m_limelight.getEntry("ledMode").setNumber(1);
+    }
+
+    // uses the limelight to find the distance in inches
+    public static double calculateDistanceToTarget() {
+        double distance = (targetHeight - cameraHeight)/
+                Math.tan((getYOffset() - cameraAngle) + cameraAngle);
+
+        return distance;
+    }
 }

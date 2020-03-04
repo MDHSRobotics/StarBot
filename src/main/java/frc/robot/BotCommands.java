@@ -2,7 +2,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-
+import frc.robot.commands.TurnOffLimelightArray;
 import frc.robot.commands.auto.*;
 import frc.robot.commands.climbbalancer.*;
 import frc.robot.commands.climbhook.*;
@@ -65,6 +65,9 @@ public class BotCommands {
 
     // Lighter
     public static CycleLights cycleLights;
+
+    //Limelight
+    public static TurnOffLimelightArray turnOffLimelightArray;
 
     // Roller
     public static SpinRollerAndConveyor spinRollerAndConveyor;
@@ -132,6 +135,9 @@ public class BotCommands {
 
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);
+
+        // Limelight
+        turnOffLimelightArray = new TurnOffLimelightArray();
 
         // Roller
         spinRollerAndConveyor = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
