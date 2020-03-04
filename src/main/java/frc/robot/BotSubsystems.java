@@ -59,8 +59,8 @@ public class BotSubsystems {
         conveyor.setDefaultCommand(BotCommands.stopConveyor);
 
         // DiffDriver
-        Logger.setup("DiffDriver Teleop Default Command -> DriveDiffTank...");
-        diffDriver.setDefaultCommand(BotCommands.driveDiffTank);
+        Logger.setup("DiffDriver Teleop Default Command -> DriveDiffArcade...");
+        diffDriver.setDefaultCommand(BotCommands.driveDiffArcade);
 
         // DiffDriverAlternate
         Logger.setup("DiffDriverAlternate Teleop Default Command -> StopDiffDrive...");
@@ -77,8 +77,8 @@ public class BotSubsystems {
 
     // Set all the subsystem "test" default commands
     public static void setTestDefaultCommands() {
-        Logger.setup("DiffDriver Test Default Command -> DriveDiffTank...");
-        diffDriver.setDefaultCommand(TestCommands.driveDiffTank);
+        Logger.setup("DiffDriver Test Default Command -> DriveDiffArcade...");
+        diffDriver.setDefaultCommand(TestCommands.driveDiffArcade);
     }
 
 }

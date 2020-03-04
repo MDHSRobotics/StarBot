@@ -1,8 +1,6 @@
 
 package frc.robot.oi.movements;
 
-import frc.robot.oi.controllers.XboxPositionAccessible;
-import frc.robot.oi.positions.ThumbstickPosition;
 import frc.robot.oi.controllers.JoystickPositionAccessible;
 import frc.robot.oi.positions.JoystickPosition;
 
@@ -24,11 +22,11 @@ public class ArcadeMovement {
 
     // Determines the arcade movement (forward/backward speed, rotation speed, square inputs)
     // from the given xbox thumbstick position(s)
-    public static ArcadeMovement getMovementFromThumbsticks(XboxPositionAccessible controller, boolean isYleftFlipped) {
-        ThumbstickPosition pos = ThumbstickPosition.getPositions(controller, isYleftFlipped);
-        ArcadeMovement move = new ArcadeMovement(pos.leftForwardBackPosition, pos.leftSideToSidePosition, pos.rightSideToSidePosition);
-        return move;
-    }
+    // public static ArcadeMovement getMovementFromThumbsticks(XboxPositionAccessible controller, boolean isYleftFlipped) {
+    //     ThumbstickPosition pos = ThumbstickPosition.getPositions(controller, isYleftFlipped);
+    //     ArcadeMovement move = new ArcadeMovement(pos.leftForwardBackPosition, pos.leftSideToSidePosition, pos.rightSideToSidePosition);
+    //     return move;
+    // }
 
     public static ArcadeMovement getMovementFromJoystick(JoystickPositionAccessible jstick, boolean isYflipped) {
         JoystickPosition pos = JoystickPosition.getJoystickPosition(jstick, isYflipped);

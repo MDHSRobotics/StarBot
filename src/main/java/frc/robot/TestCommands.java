@@ -10,7 +10,7 @@ public class TestCommands {
 
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
-    public static DriveDiffTank driveDiffTank;
+    public static DriveDiffArcade driveDiffArcade;
 
     // Climb
     // public static HookForward hookForward;

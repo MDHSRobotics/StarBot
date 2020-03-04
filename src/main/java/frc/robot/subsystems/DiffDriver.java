@@ -53,15 +53,21 @@ public class DiffDriver extends SubsystemBase {
         diffDrive.stopMotor();
     }
 
-    // Drive using the tank method
-    public void driveTank(double leftSpeed, double rightSpeed) {
-        // Logger.info("Left Speed: " + leftSpeed + "; Right Speed: " + rightSpeed);
-        diffDrive.tankDrive(leftSpeed, rightSpeed);
+    // // Drive using the tank method
+    // public void driveTank(double leftSpeed, double rightSpeed) {
+    //     // Logger.info("Left Speed: " + leftSpeed + "; Right Speed: " + rightSpeed);
+    //     diffDrive.tankDrive(leftSpeed, rightSpeed);
+    // }
+
+    // Drive using the arcade method
+    public void driveArcade(double xSpeed, double zRotation) {
+        // Logger.info("xSpeed: " + xSpeed + "; zRotation: " + zRotation);
+        diffDrive.arcadeDrive(xSpeed, zRotation);
     }
 
     // Drive forward at a set speed
     public void moveForwardAuto() {
-        diffDrive.tankDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
+        diffDrive.arcadeDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
     }
 
     // Drive to within the given range based on the given distance sensor
