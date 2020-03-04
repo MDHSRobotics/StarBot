@@ -51,7 +51,7 @@ public class Limelight {
     // uses the limelight to find the distance in inches
     public static double calculateDistanceToTarget() {
         double distance = (targetHeight - cameraHeight)/
-                Math.tan((getYOffset() - cameraAngle) + cameraAngle);
+                Math.tan(getYOffset() + cameraAngle);
 
         return distance;
     }
