@@ -24,10 +24,14 @@ public class BotCommands {
     // Autonomous
     public static AutoDriveForward autoDriveForwardS1;
     public static AutoDriveForward autoDriveForwardS2;
-    public static AutoDriveToTarget firstAutoDriveToTargetS1;
-    public static AutoDriveToTarget firstAutoDriveToTargetS2;
-    public static AutoDriveToTarget secondAutoDriveToTargetS1;
-    public static AutoDriveToTarget secondAutoDriveToTargetS2;
+    public static AutoDriveFromWall autoDriveFromWallS1;
+    public static AutoDriveFromWall autoDriveFromWallS2;
+    public static AutoDriveFromPickUp autoDriveFromPickUpS1;
+    public static AutoDriveFromPickUp autoDriveFromPickUpS2;
+    public static AutoDriveToPickUp autoDriveToPickUpS1;
+    public static AutoDriveToPickUp autoDriveToPickUpS2;
+    public static AutoDriveToWall autoDriveToWallS1;
+    public static AutoDriveToWall autoDriveToWallS2;
     public static AutoLineUpAndShootS1 autoLineUpAndShootS1; // Red target, robot face field
     public static AutoLineUpAndShootS2 autoLineUpAndShootS2; // Blue target, robot face field
     public static AutoRotateLeft autoRotateLeftS1;
@@ -36,6 +40,7 @@ public class BotCommands {
     public static AutoRotateRight autoRotateRightS2;
     public static AutoWait autoWaitS1;
     public static AutoWait autoWaitS2;
+
 
     // Climb Balancer
     public static BalanceLeft balanceLeft;
@@ -86,6 +91,7 @@ public class BotCommands {
 
     // Roller
     public static SpinRollerAndConveyor spinRollerAndConveyor;
+    public static SpinRollerAndConveyorCG spinRollerAndConveyorCG;
     public static StopRoller stopRoller;
 
     // RollerArm
@@ -114,14 +120,16 @@ public class BotCommands {
         autoDriveForwardS2 = new AutoDriveForward(BotSubsystems.diffDriver);
         autoRotateLeftS1 = new AutoRotateLeft(BotSubsystems.diffDriver);
         autoRotateLeftS2 = new AutoRotateLeft(BotSubsystems.diffDriver);
-        firstAutoDriveToTargetS1 = new AutoDriveToTarget(BotSubsystems.diffDriver, 1.0, 1.5);
-        firstAutoDriveToTargetS2 = new AutoDriveToTarget(BotSubsystems.diffDriver, 1.0, 1.5);
+        firstAutoDriveToTargetS1 = new AutoDriveToWall(BotSubsystems.diffDriver, 1.0, 1.5);
+        firstAutoDriveToTargetS2 = new AutoDriveToWall(BotSubsystems.diffDriver, 1.0, 1.5);
         autoRotateRightS1 = new AutoRotateRight(BotSubsystems.diffDriver);
         autoRotateRightS2 = new AutoRotateRight(BotSubsystems.diffDriver);
-        secondAutoDriveToTargetS1 = new AutoDriveToTarget(BotSubsystems.diffDriver, 0.5, 1.0);
-        secondAutoDriveToTargetS2 = new AutoDriveToTarget(BotSubsystems.diffDriver, 0.5, 1.0);
+        secondAutoDriveToTargetS1 = new AutoDriveToWall(BotSubsystems.diffDriver, 0.5, 1.0);
+        secondAutoDriveToTargetS2 = new AutoDriveToWall(BotSubsystems.diffDriver, 0.5, 1.0);
         autoWaitS1 = new AutoWait();
         autoWaitS2 = new AutoWait();
+        autoDriveToPickUp = new AutoDriveToPickUp(BotSubsystems.diffDriver);
+        autoDriveToShoot = new AutoDriveToShoot(BotSubsystems.diffDriver);
 
         // Climb Balancer
         balanceRight = new BalanceRight(BotSubsystems.climbBalancer);
@@ -169,6 +177,7 @@ public class BotCommands {
 
         // Roller
         spinRollerAndConveyor = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
+        spinRollerAndConveyorCG = new SpinRollerAndConveyorCG(BotSubsystems.roller, BotSubsystems.conveyor);
         stopRoller = new StopRoller(BotSubsystems.roller);
 
         // RollerArm

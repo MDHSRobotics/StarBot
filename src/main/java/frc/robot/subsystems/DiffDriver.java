@@ -23,6 +23,8 @@ public class DiffDriver extends SubsystemBase {
     // The subsystem devices
     public DifferentialDrive diffDrive;
 
+    public static double distance;
+
     // Constructor requires device instances
     public DiffDriver(DifferentialDrive diffDrive) {
         this.diffDrive = diffDrive;
@@ -64,7 +66,7 @@ public class DiffDriver extends SubsystemBase {
 
     // Drive to within the given range based on the given distance sensor
     public boolean driveToWithinRange(AnalogInput distanceSensor, double targetMinimum, double targetMaximum) {
-        double distance = DistanceSensor.getDistanceInMeters(distanceSensor);
+        distance = DistanceSensor.getDistanceInMeters(distanceSensor);
         if (distance > targetMinimum && distance < targetMaximum) {
             diffDrive.stopMotor();
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Target Reached!");
