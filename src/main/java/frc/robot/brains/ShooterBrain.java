@@ -83,11 +83,6 @@ public class ShooterBrain {
         shootTopWheelMinVelocityEntry.setDouble(value);
     }
 
-    public static void setShootDistance(double value) {
-        shootDistanceEntry.setDouble(value);
-    }
-
-
     //---------//
     // Getters //
     //---------//

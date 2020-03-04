@@ -131,11 +131,14 @@ public class Shooter extends SubsystemBase {
         double distanceFeet = ShooterBrain.getShootDistance();
         double numerator = 32.2 * Math.pow(distanceFeet, 2);
         double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle) - (fHeight - sHeight) * Math.pow(Math.cos(sAngle), 2));
-        double velocityFPS = Math.sqrt(numerator / denominator);
+        double velocityFPS = Math.sqrt(numerator) / Math.sqrt(denominator);
         double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocityFPS, WHEEL_DIAMETER, GEAR_RATIO) / 10;
 
         Logger.info("Shooter DistanceVelocity-> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
         Logger.info("Shooter DistanceVelocity-> FlyWheel FPS: " + velocityFPS);
+        Logger.info("DISTANCE -> " + distanceFeet);
+        Logger.info("NUMERATOR -> " + numerator);
+        Logger.info("DENOMINATOR -> " + denominator);
 
         talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
         talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
