@@ -3,6 +3,7 @@ package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.BotCommands;
+import frc.robot.BotSensors;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.DiffDriver;
@@ -28,23 +29,18 @@ public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
         addRequirements(m_diffDriver);
 
         addCommands(BotCommands.autoWaitS1,
-                    BotCommands.reverseConveyorCGS1,
-                    BotCommands.shootCGS1,
-                    BotCommands.stopConveyorCGS1,
-                    BotCommands.stopShooterCGS1,
-                    BotCommands.autoRotateLeftS1,
-                    BotCommands.autoDriveToWallS1,
-                    BotCommands.autoRotateRightS1,
-                    BotCommands.autoDriveToPickUpS1,
-                    BotCommands.spinRollerAndConveyorCG,
-                    BotCommands.autoDriveFromPickUpS1,
-                    BotCommands.autoRotateLeftS2,
-                    BotCommands.autoDriveFromWallS1,
-                    BotCommands.autoRotateRightS2,
-                    BotCommands.reverseConveyorCGS1,
-                    BotCommands.shootCGS1,
-                    BotCommands.stopConveyorCGS1,
-                    BotCommands.stopShooterCGS1,
+                    BotCommands.firstReverseConveyorCGS1,
+                    BotCommands.firstShootCGS1,
+                    BotCommands.firstStopConveyorCGS1,
+                    BotCommands.firstStopShooterCGS1,
+                    BotCommands.firstAutoAlignS1,
+                    BotCommands.autoDriveToPickUp,
+                    BotCommands.autoDriveFromPickUp,
+                    BotCommands.secondAutoAlignS1,
+                    BotCommands.secondReverseConveyorCGS1,
+                    BotCommands.secondShootCGS1,
+                    BotCommands.secondStopConveyorCGS1,
+                    BotCommands.secondStopShooterCGS1,
                     BotCommands.autoDriveForwardS1);
 
     }
