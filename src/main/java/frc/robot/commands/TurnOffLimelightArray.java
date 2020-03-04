@@ -14,6 +14,7 @@ public class TurnOffLimelightArray extends CommandBase {
 
     @Override
     public void initialize() {
+        // LEDs turned on in AlignDiffDriveToTarget command
         Limelight.ledOff();
     }
 

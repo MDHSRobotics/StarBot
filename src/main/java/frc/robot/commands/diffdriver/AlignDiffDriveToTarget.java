@@ -24,6 +24,7 @@ public class AlignDiffDriveToTarget extends CommandBase {
 
     @Override
     public void initialize() {
+        // LEDs turned off in TurnOffLimelightArray command
         Limelight.ledOn();
 
         float yaw = BotSensors.gyro.getYaw();
