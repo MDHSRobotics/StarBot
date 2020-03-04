@@ -28,6 +28,10 @@ public class DevCANSparkMax extends CANSparkMax implements CANSparkMaxControllab
     // CANSparkMaxControllable //
     /////////////////////////////
 
+    public boolean isVirtual() {
+        return false;
+    }
+
     public CANPIDControllable getPIDControllable(String devName) {
         return new DevCANPIDController(this);
     }
@@ -37,6 +41,7 @@ public class DevCANSparkMax extends CANSparkMax implements CANSparkMaxControllab
     }
 
     public CANError follow(final CANSparkMaxControllable leader) {
+        if(leader.isVirtual()) return CANError.kOk;
         return super.follow((DevCANSparkMax)leader, false);
     }
 

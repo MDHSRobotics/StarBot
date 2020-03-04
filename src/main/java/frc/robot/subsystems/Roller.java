@@ -28,7 +28,7 @@ public class Roller extends SubsystemBase {
     // Spin the roller
     public void spin() {
         double power = RollerBrain.getPower();
-        talonSrxRoller.set(power);
+        talonSrxRoller.set(-power);
     }
 
 }

@@ -16,8 +16,11 @@ public class DiffDriverSpark extends DiffDriver {
         super(diffDriveSpark);
         Logger.setup("Constructing Subsystem: DiffDriverSpark...");
 
+        sparkMaxDiffWheelFrontLeft.setInverted(true);
+        sparkMaxDiffWheelFrontRight.setInverted(true);
         sparkMaxDiffWheelRearLeft.follow(sparkMaxDiffWheelFrontLeft);
         sparkMaxDiffWheelRearRight.follow(sparkMaxDiffWheelFrontRight);
+
     }
 
 }
