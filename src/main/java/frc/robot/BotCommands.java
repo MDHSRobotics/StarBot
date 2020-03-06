@@ -30,6 +30,7 @@ public class BotCommands {
     public static AutoDriveForward autoDriveForwardS2;
     public static AutoDriveFromPickUp autoDriveFromPickUp;
     public static AutoDriveToPickUp autoDriveToPickUp;
+    public static AutoDriveToShoot autoDriveToShoot;
     public static AutoLineUpAndShootS1 autoLineUpAndShootS1; // Advanced
     public static AutoLineUpAndShootS2 autoLineUpAndShootS2; // Basic
     public static AutoRotateLeft autoRotateLeftS1;
@@ -126,6 +127,7 @@ public class BotCommands {
         autoDriveForwardS2 = new AutoDriveForward(BotSubsystems.diffDriver);
         autoDriveFromPickUp = new AutoDriveFromPickUp(BotSubsystems.diffDriver);
         autoDriveToPickUp = new AutoDriveToPickUp(BotSubsystems.diffDriver);
+        autoDriveToShoot = new AutoDriveToShoot(BotSubsystems.diffDriver);
         autoRotateLeftS1 = new AutoRotateLeft(BotSubsystems.diffDriver);
         autoRotateLeftS2 = new AutoRotateLeft(BotSubsystems.diffDriver);
         autoRotateRightS1 = new AutoRotateRight(BotSubsystems.diffDriver);
