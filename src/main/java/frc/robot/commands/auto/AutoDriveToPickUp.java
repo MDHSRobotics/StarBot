@@ -72,6 +72,8 @@ public class AutoDriveToPickUp extends CommandBase {
             Logger.ending("Ending Command: AutoDriveToPickUp...");
         }
 
+        m_roller.stop();
+        m_conveyor.stop();
         m_diffDriver.stop();
     }
 
