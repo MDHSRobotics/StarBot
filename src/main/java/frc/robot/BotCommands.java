@@ -207,7 +207,6 @@ public class BotCommands {
     public static Command getAutonomousCommand() {
         return autoLineUpAndShootS1;
         //return autoLineUpAndShootS2;
-        //return autoDriveForwardShoot;
     }
 
 }

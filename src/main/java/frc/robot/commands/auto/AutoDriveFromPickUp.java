@@ -42,18 +42,20 @@ public class AutoDriveFromPickUp extends CommandBase {
             Logger.action("AutoDriveForward: -> Moved Forward for " + currentTime);
             m_timeLastPrinted = currentTime;
         }
-
-        if (currentTime < MAX_DRIVE_SECONDS) {
-           m_diffDriver.driveAlign(TARGET_YAW);
-        } else {
-            m_diffDriver.stop();
-        }
+        m_diffDriver.driveAlign(TARGET_YAW);
     }
 
     // This command continues until it target is reached
     @Override
     public boolean isFinished() {
-        return false;
+        double currentTime = m_timer.get();
+
+        if (currentTime < MAX_DRIVE_SECONDS) {
+            return false;
+        } else {
+            Logger.action("AutoDriveFromPickUp: -> Stopped");
+            return true;
+        }
     }
 
     @Override
