@@ -12,7 +12,7 @@ import frc.robot.consoles.Logger;
 public class Limelight {
 
     private static double cameraHeight = 10.25; // height of lens (in)
-    private static double targetHeight = 100; // height to the center of the target (in)
+    private static double targetHeight = 81.5; // height to the bottom of the target (in)
     private static double cameraAngle = 0; // angle of the camera (deg)
 
     private static NetworkTable m_limelight = NetworkTableInstance.getDefault().getTable("/limelight");
@@ -49,10 +49,11 @@ public class Limelight {
     }
 
     // Uses the limelight to find the distance in inches
-    public static double calculateDistanceToTarget() {
+    public static void calculateDistanceToTarget() {
         double distance = (targetHeight - cameraHeight)/
-                Math.tan(getYOffset() + cameraAngle);
+                (Math.tan(getYOffset() + cameraAngle));
 
-        return distance;
+        Logger.info("Y offset: " + getYOffset());
+        Logger.info("Distance: " + distance);
     }
 }
