@@ -16,8 +16,6 @@ public class AutoDriveFromPickUp extends CommandBase {
     private static final double MAX_DRIVE_SECONDS = 3.5;
 
     private static final double TARGET_YAW = 0.0;
-    private static final double distanceXFromTarget = 3.05;
-    private static double currentXDistanceFromTarget;
 
     public AutoDriveFromPickUp(DiffDriver diffDriver) {
         Logger.setup("Constructing Command: AutoDriveFromPickUp...");
