@@ -2,7 +2,9 @@
 package frc.robot.oi.positions;
 
 import frc.robot.brains.JoystickBrain;
+import frc.robot.consoles.Logger;
 import frc.robot.oi.controllers.JoystickPositionAccessible;
+
 
 // The position values obtained from a Joystick
 public class JoystickPosition {
@@ -71,6 +73,8 @@ public class JoystickPosition {
         x = x * xSensitivity;
         z = z * zSensitivity;
 
+        Logger.info("Y Position: " + y);
+        Logger.info("X Position " + x);
         return pos;
     }
 
