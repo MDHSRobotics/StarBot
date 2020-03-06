@@ -16,6 +16,8 @@ public class AutoDriveFromPickUp extends CommandBase {
     private static final double MAX_DRIVE_SECONDS = 3.5;
 
     private static final double TARGET_YAW = 0.0;
+    private static final double distanceXFromTarget = 3.05;
+    private static double currentXDistanceFromTarget;
 
     public AutoDriveFromPickUp(DiffDriver diffDriver) {
         Logger.setup("Constructing Command: AutoDriveFromPickUp...");
@@ -31,7 +33,6 @@ public class AutoDriveFromPickUp extends CommandBase {
 
         m_timer.reset();
         m_timer.start();
-
     }
 
     @Override
@@ -43,20 +44,18 @@ public class AutoDriveFromPickUp extends CommandBase {
             Logger.action("AutoDriveForward: -> Moved Forward for " + currentTime);
             m_timeLastPrinted = currentTime;
         }
-        m_diffDriver.driveAlign(TARGET_YAW);
+
+        if (currentTime < MAX_DRIVE_SECONDS) {
+           m_diffDriver.driveAlign(TARGET_YAW);
+        } else {
+            m_diffDriver.stop();
+        }
     }
 
     // This command continues until it target is reached
     @Override
     public boolean isFinished() {
-        double currentTime = m_timer.get();
-
-        if (currentTime < MAX_DRIVE_SECONDS) {
-            return false;
-        } else {
-            Logger.action("AutoDriveFromPickUp: -> Stopped");
-            return true;
-        }
+        return false;
     }
 
     @Override
