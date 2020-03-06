@@ -31,9 +31,7 @@ public class AlignDiffDriveToTarget extends CommandBase {
 
     @Override
     public void execute() {
-        if (m_targetAngle != 0) {
             m_diffDriver.driveAlign(m_targetAngle);
-        }
     }
 
     // This finishes immediately, but is intended to be continually restarted while a button is held

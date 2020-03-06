@@ -49,6 +49,7 @@ public class BotCommands {
     // Conveyor
     public static ForwardConveyor forwardConveyor;
     public static ReverseConveyor reverseConveyor;
+    public static ReverseConveyor reverseConveyorBurst;
     public static StopConveyor stopConveyor;
 
     // DiffDriver
@@ -114,6 +115,7 @@ public class BotCommands {
         // Conveyor
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
         reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
+        reverseConveyorBurst = new ReverseConveyor(BotSubsystems.conveyor);
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
 
         // DiffDriver
