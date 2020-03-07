@@ -73,8 +73,6 @@ public class JoystickPosition {
         x = x * xSensitivity;
         z = z * zSensitivity;
 
-        Logger.info("Y Position: " + y);
-        Logger.info("X Position " + x);
         return pos;
     }
 

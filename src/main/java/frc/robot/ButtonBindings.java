@@ -6,20 +6,26 @@ import frc.robot.consoles.Logger;
 // Configures all the button->command bindings for the robot.
 public class ButtonBindings {
 
-    // // Configure xbox buttons
+    // Configure xbox buttons
     // public static void configureXbox() {
     //     Logger.setup("Configure Buttons -> Xbox Controller...");
 
-    //     // TODO: Convert this to joystick control.
+    // TODO: Convert this to joystick control.
 
-    //     // DiffDriver
+    // DiffDriver
     //     BotControllers.primary.btnBumperRight.whileHeld(BotCommands.driveDiffToWithinRangeFront);
     //     BotControllers.primary.btnB.whileHeld(BotCommands.alignDiffDriveToTarget);
 
-        // Limelight
-        //BotControllers.primary.btnB.whenReleased(BotCommands.turnOffLimelightArray);
+    // Limelight
+    //     BotControllers.primary.btnB.whenReleased(BotCommands.turnOffLimelightArray);
 
-    //     // TODO: Use the triggers for the balancer, so that you have fine analog control.
+    // Climb
+    //     BotControllers.primary.btnBumperLeft.whileHeld(BotCommands.driveDiffToWithinRangeTop);
+    //     BotControllers.primary.btnY.whenPressed(BotCommands.toggleHook);
+    //     BotControllers.primary.btnA.whenPressed(BotCommands.toggleRedLegs);
+    //     BotControllers.primary.btnA.whenPressed(BotCommands.toggleSparkLegs);
+
+    //     TODO: Use the triggers for the balancer, so that you have fine analog control.
     //     BotControllers.primary.btnDpadLeft.whileHeld(BotCommands.balanceLeft);
     //     BotControllers.primary.btnDpadRight.whileHeld(BotCommands.balanceRight);
     // }

@@ -47,7 +47,7 @@ public class JoystickContainer extends ControllerContainer implements JoystickPo
         double x = jstick.getX(); // Side to side
         double z = jstick.getZ(); // Rotate, flipped?
 
-        JoystickPosition pos = new JoystickPosition(x, y, z);
+        JoystickPosition pos = new JoystickPosition(y, x, z);
         return pos;
     }
 

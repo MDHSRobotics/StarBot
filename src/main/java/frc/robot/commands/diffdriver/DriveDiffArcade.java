@@ -31,7 +31,7 @@ public class DriveDiffArcade extends CommandBase {
     @Override
     public void execute() {
         ArcadeMovement move = ArcadeMovement.getMovementFromJoystick(controller, m_diffDriver.controlStickDirectionFlipped);
-        m_diffDriver.driveArcade(move.straightSpeed, move.rotationSpeed);
+        m_diffDriver.driveArcade(-move.straightSpeed, move.rotationSpeed);
     }
 
     // This command continues until interrupted.
