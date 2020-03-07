@@ -2,12 +2,15 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SPI;
 
 import frc.robot.consoles.Logger;
+import frc.robot.sensors.Camera;
 import frc.robot.sensors.DistanceSensor;
 import frc.robot.sensors.Gyro;
+
 
 import static frc.robot.RobotManager.isReal;
 
@@ -21,6 +24,9 @@ public class BotSensors {
     // Attitude and Heading Reference Systems
     public static final AHRS gyro = new AHRS(SPI.Port.kMXP);
 
+    // Webcam for streaming to console
+    public static UsbCamera climbCamera;
+
     // This initialization is called in RobotManager at startup.
     public static void initializeSensors() {
         Logger.setup("Initializing BotSensors...");
@@ -29,6 +35,7 @@ public class BotSensors {
             DistanceSensor.initializeDistanceSensor(distanceSensorFront);
             DistanceSensor.initializeDistanceSensor(distanceSensorTop);
             Gyro.initializeGyro(gyro);
+            climbCamera = Camera.initializeCamera(0);
         } else {
             Logger.setup("Skipping initializion of sensors in Simulation mode...");
         }
