@@ -15,7 +15,7 @@ import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
 import frc.robot.commands.roller.*;
 import frc.robot.commands.rollerarm.*;
-import frc.robot.commands.sensors.*;
+import frc.robot.sensors.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
 
@@ -67,9 +67,13 @@ public class BotCommands {
 
     // Conveyor
     public static ForwardConveyor forwardConveyor;
-    public static ForwardConveyorCG forwardConveyorCG;
+    public static ForwardConveyorCG firstForwardConveyorCGS1;
+    public static ForwardConveyorCG secondForwardConveyorCGS1;
     public static ReverseConveyor reverseConveyor;
     public static ReverseConveyor reverseConveyorBurst;
+    public static ReverseConveyorCG firstReverseConveyorCGS1;
+    public static ReverseConveyorCG secondReverseConveyorCGS1;
+    public static ReverseConveyorCG reverseConveyorCGS2;
     public static StopConveyor stopConveyor;
     public static StopConveyorCG firstStopConveyorCGS1;
     public static StopConveyorCG secondStopConveyorCGS1;
@@ -102,7 +106,7 @@ public class BotCommands {
     public static ToggleRollerArm toggleRollerArm;
 
     // Sensors
-    public static TurnOffLimelightArray turnOffLimelightArray;
+    //public static TurnOffLimelightArray turnOffLimelightArray;
 
     // Shooter
     public static ConveyAndShoot conveyAndShoot;
@@ -163,9 +167,13 @@ public class BotCommands {
 
         // Conveyor
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
-        forwardConveyorCG = new ForwardConveyorCG(BotSubsystems.conveyor);
+        firstForwardConveyorCGS1 = new ForwardConveyorCG(BotSubsystems.conveyor);
+        secondForwardConveyorCGS1 = new ForwardConveyorCG(BotSubsystems.conveyor);
         reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
         reverseConveyorBurst = new ReverseConveyor(BotSubsystems.conveyor);
+        firstReverseConveyorCGS1 = new ReverseConveyorCG(BotSubsystems.conveyor);
+        secondReverseConveyorCGS1 = new ReverseConveyorCG(BotSubsystems.conveyor);
+        reverseConveyorCGS2 = new ReverseConveyorCG(BotSubsystems.conveyor);
 
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
         firstStopConveyorCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
@@ -198,7 +206,7 @@ public class BotCommands {
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
 
         // Sensors
-        turnOffLimelightArray = new TurnOffLimelightArray();
+        //turnOffLimelightArray = new TurnOffLimelightArray();
 
         // Shooter
         conveyAndShoot = new ConveyAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
