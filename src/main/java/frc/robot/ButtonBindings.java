@@ -36,7 +36,7 @@ public class ButtonBindings {
         BotControllers.secondary.btnY.whenPressed(BotCommands.toggleRollerArm);
 
         // Roller
-        //BotControllers.secondary.btnX.whileHeld(BotCommands.reverseRoller);
+        BotControllers.secondary.btnX.whileHeld(BotCommands.reverseRoller);
         BotControllers.secondary.btnB.whileHeld(BotCommands.spinRollerAndConveyor); // Tested
 
         // Conveyor & Shooter
