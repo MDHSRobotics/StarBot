@@ -29,8 +29,10 @@ public interface CANSparkMaxControllable extends AutoCloseable, SpeedController 
     public static CANSparkMaxControllable getNew(String devName, int deviceId, MotorType motorType) {
         boolean isConnected = isConnected(deviceId);
         if (isConnected) {
+            Logger.debug("Spark connected!");
             return new DevCANSparkMax(deviceId, motorType);
         }
+        Logger.debug("Spark NOT connected!");
         return new VirtualCANSparkMax(devName, deviceId, motorType);
     }
 
@@ -48,16 +50,20 @@ public interface CANSparkMaxControllable extends AutoCloseable, SpeedController 
         int deviceManufacturer = 5; // RevRobotics
         int deviceType = 2; // Motor Controller
         CAN testCAN = new CAN(deviceId, deviceManufacturer, deviceType);
-        int apiId = 0;
+        int apiId = 96;
         CANData data = new CANData();
         boolean result = testCAN.readPacketNew(apiId, data);
         testCAN.close();
+
+        if (result) Logger.debug("CAN apiId Found:" + apiId);
         return result;
     }
 
     /////////////////////////////
     // CANSparkMaxControllable //
     /////////////////////////////
+
+    boolean isVirtual();
 
     CANPIDControllable getPIDControllable(String devName);
 

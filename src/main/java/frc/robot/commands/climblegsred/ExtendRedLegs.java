@@ -28,7 +28,7 @@ public class ExtendRedLegs extends CommandBase {
 
     @Override
     public void execute() {
-        System.out.println("ClimbLegsRed Position: " + m_climbLegsRed.getPosition());
+        //System.out.println("ClimbLegsRed Position: " + m_climbLegsRed.getPosition());
     }
 
     // This command continues until interrupted

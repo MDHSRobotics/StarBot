@@ -15,6 +15,7 @@ import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
 import frc.robot.commands.roller.*;
 import frc.robot.commands.rollerarm.*;
+import frc.robot.commands.sensors.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
 
@@ -55,6 +56,7 @@ public class BotCommands {
     // Climb Legs Red
     public static ExtendRedLegs extendRedLegs;
     public static RetractRedLegs retractRedLegs;
+    public static StopRedLegs stopRedLegs;
     public static ToggleRedLegs toggleRedLegs;
 
     // Climb Legs Spark
@@ -67,9 +69,7 @@ public class BotCommands {
     public static ForwardConveyor forwardConveyor;
     public static ForwardConveyorCG forwardConveyorCG;
     public static ReverseConveyor reverseConveyor;
-    public static ReverseConveyorCG firstReverseConveyorCGS1;
-    public static ReverseConveyorCG secondReverseConveyorCGS1;
-    public static ReverseConveyorCG reverseConveyorCGS2;
+    public static ReverseConveyor reverseConveyorBurst;
     public static StopConveyor stopConveyor;
     public static StopConveyorCG firstStopConveyorCGS1;
     public static StopConveyorCG secondStopConveyorCGS1;
@@ -100,6 +100,9 @@ public class BotCommands {
     public static LowerRollerArm lowerRollerArm;
     public static RaiseRollerArm raiseRollerArm;
     public static ToggleRollerArm toggleRollerArm;
+
+    // Sensors
+    public static TurnOffLimelightArray turnOffLimelightArray;
 
     // Shooter
     public static ConveyAndShoot conveyAndShoot;
@@ -149,6 +152,7 @@ public class BotCommands {
         // Climb Legs Red
         extendRedLegs = new ExtendRedLegs(BotSubsystems.climbLegsRed);
         retractRedLegs = new RetractRedLegs(BotSubsystems.climbLegsRed);
+        stopRedLegs = new StopRedLegs(BotSubsystems.climbLegsRed);
         toggleRedLegs = new ToggleRedLegs(BotSubsystems.climbLegsRed);
 
         // Climb Legs Spark
@@ -161,10 +165,8 @@ public class BotCommands {
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
         forwardConveyorCG = new ForwardConveyorCG(BotSubsystems.conveyor);
         reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
-        firstReverseConveyorCGS1 = new ReverseConveyorCG(BotSubsystems.conveyor);
-        secondReverseConveyorCGS1 = new ReverseConveyorCG(BotSubsystems.conveyor);
-        stopConveyorwithRollerCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
-        reverseConveyorCGS2 = new ReverseConveyorCG(BotSubsystems.conveyor);
+        reverseConveyorBurst = new ReverseConveyor(BotSubsystems.conveyor);
+
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
         firstStopConveyorCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
         secondStopConveyorCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
@@ -195,8 +197,11 @@ public class BotCommands {
         raiseRollerArm = new RaiseRollerArm(BotSubsystems.rollerArm);
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
 
+        // Sensors
+        turnOffLimelightArray = new TurnOffLimelightArray();
+
         // Shooter
-        conveyAndShoot = new ConveyAndShoot(BotSubsystems.shooter, BotSubsystems.conveyor);
+        conveyAndShoot = new ConveyAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         resetShoot = new ResetShoot(BotSubsystems.shooter);
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         shoot = new Shoot(BotSubsystems.shooter);

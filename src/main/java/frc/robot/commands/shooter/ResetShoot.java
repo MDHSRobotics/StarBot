@@ -1,53 +1,29 @@
+
 package frc.robot.commands.shooter;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Shooter;
-import frc.robot.consoles.tabs.ShooterTab;
 
-// This command activates the shoot mechanism
-public class ResetShoot extends CommandBase {
+// This command resets the shoot mechanism.
+public class ResetShoot extends InstantCommand {
 
     private Shooter m_shooter;
-    private ShooterTab m_shooterTab;
 
     public ResetShoot(Shooter shooter) {
-        Logger.setup("Constructing Command: ResetShoot...");
+        Logger.setup("Constructing InstantCommand: ResetShoot...");
 
-        // Add given subsystem requirements
         m_shooter = shooter;
-        addRequirements(m_shooter);
     }
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: ResetShoot...");
+        Logger.action("Initializing InstantCommand: ResetShoot...");
 
-        m_shooterTab.reset();
+        m_shooter.reset();
 
-        Logger.action("Shooter min/max velocity values RESET!");
-    }
-
-    @Override
-    public void execute() {
-
-    }
-
-    // This command continues until it cycles through the set number of cycles
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        if (interrupted) {
-            System.out.println("--");
-            Logger.ending("Interrupting Command: ResetShoot...");
-        } else {
-            Logger.ending("Ending Command: ResetShoot...");
-        }
+        Logger.action("ResetShoot -> Shooter min/max velocity values RESET!");
     }
 
 }

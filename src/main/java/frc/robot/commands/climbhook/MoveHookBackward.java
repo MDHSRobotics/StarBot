@@ -24,6 +24,8 @@ public class MoveHookBackward extends CommandBase {
     @Override
     public void initialize() {
         Logger.action("Initializing Command: MoveHookBackward...");
+
+        m_timer.stop();
         m_timer.reset();
         m_timer.start();
     }

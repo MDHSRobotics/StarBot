@@ -38,6 +38,10 @@ public class VirtualCANSparkMax implements CANSparkMaxControllable {
     // CANSparkMaxControllable //
     /////////////////////////////
 
+    public boolean isVirtual() {
+        return true;
+    }
+
     public CANPIDControllable getPIDControllable(String devName) {
         return new VirtualCANPIDController(devName, this);
     }
