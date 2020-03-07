@@ -36,9 +36,6 @@ public class Shooter extends SubsystemBase {
     private double topVelocity = ShooterBrain.shootTopWheelCurrentVelocityDefault;
     private double bottomVelocity = ShooterBrain.shootBottomWheelCurrentVelocityDefault;
 
-    private double bottomVelocityFPS = ShooterBrain.shootBottomWheelCurrentVelocityFPSDefault;
-    private double topVelocityFPS = ShooterBrain.shootTopWheelCurrentVelocityFPSDefault;
-
     private double minTopVelocity = ShooterBrain.shootTopWheelMinVelocityDefault;
     private double maxTopVelocity = ShooterBrain.shootTopWheelMaxVelocityDefault;
 
@@ -64,14 +61,8 @@ public class Shooter extends SubsystemBase {
         topVelocity = getTopWheelVelocity();
         bottomVelocity = getBottomWheelVelocity();
 
-        topVelocityFPS = getTopWheelVelocityFPS();
-        bottomVelocityFPS = getBottomWheelVelocityFPS();
-
         ShooterBrain.setTopWheelCurrentVelocity(topVelocity);
         ShooterBrain.setBottomWheelCurrentVelocity(bottomVelocity);
-
-        ShooterBrain.setTopWheelCurrentVelocityFPS(topVelocityFPS);
-        ShooterBrain.setBottomWheelCurrentVelocityFPS(bottomVelocityFPS);
 
         if (topVelocity < minTopVelocity) minTopVelocity = topVelocity;
         if (topVelocity > maxTopVelocity) maxTopVelocity = topVelocity;
@@ -143,6 +134,9 @@ public class Shooter extends SubsystemBase {
 
         talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
         talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
+
+        ShooterBrain.setTargetFPS(velocityFPS);
+        ShooterBrain.setTargetTPHMS(nativeVelocity);
     }
 
     //---------//

@@ -11,34 +11,24 @@ public class ShooterBrain {
     // Default Values //
     //----------------//
 
-    public static double shootBottomWheelTargetVelocityDefault = 0;
-    public static double shootTopWheelTargetVelocityDefault = 0;
+    public static double shootTopWheelCurrentVelocityDefault = 0.;
+    public static double shootBottomWheelCurrentVelocityDefault = 0.;
 
-    public static double shootTopWheelCurrentVelocityDefault = 0;
-    public static double shootBottomWheelCurrentVelocityDefault = 0;
+    public static double shootBottomWheelMaxVelocityDefault = 0.;
+    public static double shootBottomWheelMinVelocityDefault = 1000000.;
+    public static double shootTopWheelMaxVelocityDefault = 0.;
+    public static double shootTopWheelMinVelocityDefault = 1000000.;
 
-    public static double shootBottomWheelCurrentVelocityFPSDefault = 0;
-    public static double shootTopWheelCurrentVelocityFPSDefault = 0;
-
-    public static double shootBottomWheelMaxVelocityDefault = 0;
-    public static double shootBottomWheelMinVelocityDefault = 1000000;
-    public static double shootTopWheelMaxVelocityDefault = 0;
-    public static double shootTopWheelMinVelocityDefault = 1000000;
-
-    public static double shootDistanceDefault = 0;
+    public static double shootDistanceDefault = 0.;
+    public static double shootTargetFPSDefault = 0.;
+    public static double shootTargetTPHMSDefault = 0.;
 
     //---------------------//
     // NetworkTableEntries //
     //---------------------//
 
-    public static NetworkTableEntry shootBottomWheelTargetVelocityEntry;
-    public static NetworkTableEntry shootTopWheelTargetVelocityEntry;
-
     public static NetworkTableEntry shootBottomWheelCurrentVelocityEntry;
     public static NetworkTableEntry shootTopWheelCurrentVelocityEntry;
-
-    public static NetworkTableEntry shootBottomWheelCurrentVelocityFPSEntry;
-    public static NetworkTableEntry shootTopWheelCurrentVelocityFPSEntry;
 
     public static NetworkTableEntry shootBottomWheelMaxVelocityEntry;
     public static NetworkTableEntry shootBottomWheelMinVelocityEntry;
@@ -46,6 +36,8 @@ public class ShooterBrain {
     public static NetworkTableEntry shootTopWheelMinVelocityEntry;
 
     public static NetworkTableEntry shootDistanceEntry;
+    public static NetworkTableEntry shootTargetFPSEntry;
+    public static NetworkTableEntry shootTargetTPHMSEntry;
 
     //---------//
     // Setters //
@@ -57,14 +49,6 @@ public class ShooterBrain {
 
     public static void setBottomWheelCurrentVelocity(double value) {
         shootBottomWheelCurrentVelocityEntry.setDouble(value);
-    }
-
-    public static void setTopWheelCurrentVelocityFPS(double value) {
-        shootTopWheelCurrentVelocityFPSEntry.setDouble(value);
-    }
-
-    public static void setBottomWheelCurrentVelocityFPS(double value) {
-        shootBottomWheelCurrentVelocityFPSEntry.setDouble(value);
     }
 
     public static void setBottomWheelMaxVelocity(double value) {
@@ -83,16 +67,23 @@ public class ShooterBrain {
         shootTopWheelMinVelocityEntry.setDouble(value);
     }
 
+    public static void setTargetFPS(double value) {
+        shootTargetFPSEntry.setDouble(value);
+    }
+
+    public static void setTargetTPHMS(double value) {
+        shootTargetTPHMSEntry.setDouble(value);
+    }
     //---------//
     // Getters //
     //---------//
 
     public static double getBottomWheelVelocity() {
-        return shootBottomWheelTargetVelocityEntry.getDouble(shootBottomWheelTargetVelocityDefault);
+        return shootBottomWheelCurrentVelocityEntry.getDouble(shootBottomWheelCurrentVelocityDefault);
     }
 
     public static double getTopWheelVelocity() {
-        return shootTopWheelTargetVelocityEntry.getDouble(shootTopWheelTargetVelocityDefault);
+        return shootTopWheelCurrentVelocityEntry.getDouble(shootTopWheelCurrentVelocityDefault);
     }
 
     public static double getShootDistance() {
