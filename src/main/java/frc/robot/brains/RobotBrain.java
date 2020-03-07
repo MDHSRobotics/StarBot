@@ -11,8 +11,8 @@ public class RobotBrain {
     // Default Values //
     //----------------//
 
-    public static double shooterAngleDegreesDefault = Math.PI / 4; // equivalent of 45 degrees
     public static double fieldTargetHeightFeet = 98.25 / 12.0;
+    public static double shooterAngleDegreesDefault = Math.PI / 4; // equivalent of 45 degrees
     public static double shooterHeightFeetDefault = 30.0 / 12.0;
 
     //---------------------//

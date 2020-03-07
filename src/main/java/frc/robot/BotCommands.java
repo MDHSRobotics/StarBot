@@ -38,12 +38,13 @@ public class BotCommands {
     // Climb Legs Red
     public static ExtendRedLegs extendRedLegs;
     public static RetractRedLegs retractRedLegs;
+    public static StopRedLegs stopRedLegs;
     public static ToggleRedLegs toggleRedLegs;
 
     // Climb Legs Spark
     public static ExtendSparkLegs extendSparkLegs;
     public static RetractSparkLegs retractSparkLegs;
-    // public static StopSparkLegs stopSparkLegs;
+    public static StopSparkLegs stopSparkLegs;
     public static ToggleSparkLegs toggleSparkLegs;
 
     // Conveyor
@@ -104,12 +105,13 @@ public class BotCommands {
         // Climb Legs Red
         extendRedLegs = new ExtendRedLegs(BotSubsystems.climbLegsRed);
         retractRedLegs = new RetractRedLegs(BotSubsystems.climbLegsRed);
+        stopRedLegs = new StopRedLegs(BotSubsystems.climbLegsRed);
         toggleRedLegs = new ToggleRedLegs(BotSubsystems.climbLegsRed);
 
         // Climb Legs Spark
         extendSparkLegs = new ExtendSparkLegs(BotSubsystems.climbLegsSpark);
         retractSparkLegs = new RetractSparkLegs(BotSubsystems.climbLegsSpark);
-        // stopSparkLegs = new StopSparkLegs(BotSubsystems.climbLegsSpark);
+        stopSparkLegs = new StopSparkLegs(BotSubsystems.climbLegsSpark);
         toggleSparkLegs = new ToggleSparkLegs(BotSubsystems.climbLegsSpark);
 
         // Conveyor
@@ -141,7 +143,7 @@ public class BotCommands {
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
 
         // Shooter
-        conveyAndShoot = new ConveyAndShoot(BotSubsystems.shooter, BotSubsystems.conveyor);
+        conveyAndShoot = new ConveyAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         resetShoot = new ResetShoot(BotSubsystems.shooter);
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         shoot = new Shoot(BotSubsystems.shooter);

@@ -5,8 +5,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.brains.ShooterBrain;
 import frc.robot.brains.RobotBrain;
+import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.devices.DevTalonSRX;
 import frc.robot.subsystems.utils.EncoderUtils;
@@ -123,7 +123,8 @@ public class Shooter extends SubsystemBase {
         talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity, DemandType.AuxPID, heading);
     }
 
-    public void shootWithDistance(){
+    // Adjust the shooter velocity based on the distance determined by values set in Shuffleboard
+    public void shootWithDistance() {
         double sHeight = RobotBrain.shooterHeightFeetDefault;
         double sAngle = RobotBrain.shooterAngleDegreesDefault;
         double fHeight = RobotBrain.fieldTargetHeightFeet;
@@ -174,7 +175,7 @@ public class Shooter extends SubsystemBase {
         return fps;
     }
 
-    public double getWheelPosition(){
+    public double getWheelPosition() {
         return talonSrxShooterTopWheel.getSelectedSensorPosition() / GEAR_RATIO;
     }
 
@@ -183,7 +184,7 @@ public class Shooter extends SubsystemBase {
     //--------------//
 
     // Resets the min/max velocity capture variables to their default values
-    public void reset(){
+    public void reset() {
         minTopVelocity = ShooterBrain.shootTopWheelMinVelocityDefault;
         maxTopVelocity = ShooterBrain.shootTopWheelMaxVelocityDefault;
 
@@ -206,13 +207,13 @@ public class Shooter extends SubsystemBase {
         talonSrxShooterTopWheel.set(0.3);
     }
 
-    public void testMotorRotation(int rotations){
+    public void testMotorRotation(int rotations) {
         int nativeRotation = rotations * ENCODER_TPR;
         talonSrxShooterTopWheel.set(ControlMode.Position, nativeRotation);
         talonSrxShooterBottomWheel.set(ControlMode.Position, nativeRotation);
     }
 
-    public void testMotorVelocity(double velocity){
+    public void testMotorVelocity(double velocity) {
         double nativeVelocity = velocity * ENCODER_TPR / 10 * GEAR_RATIO;
         talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
         talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);

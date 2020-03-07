@@ -11,19 +11,19 @@ import frc.robot.subsystems.Conveyor;
 // This command starts the Shooter, waits one second, and then moves the Conveyor forward.
 public class ConveyAndShoot extends CommandBase {
 
-    private Shooter m_shooter;
     private Conveyor m_conveyor;
+    private Shooter m_shooter;
     private Timer m_timer = new Timer();
 
-    public ConveyAndShoot(Shooter shooter, Conveyor conveyor) {
+    public ConveyAndShoot(Conveyor conveyor, Shooter shooter) {
         Logger.setup("Constructing Command: ConveyAndShoot...");
 
         // Add given subsystem requirements
-        m_shooter = shooter;
-        addRequirements(m_shooter);
-
         m_conveyor = conveyor;
         addRequirements(m_conveyor);
+
+        m_shooter = shooter;
+        addRequirements(m_shooter);
     }
 
     @Override
@@ -32,8 +32,6 @@ public class ConveyAndShoot extends CommandBase {
         m_timer.reset();
         m_timer.start();
 
-        // m_shooter.spinBottomWheel();
-        // m_shooter.spinTopWheel();
         m_shooter.shootWithDistance();
     }
 
@@ -46,8 +44,8 @@ public class ConveyAndShoot extends CommandBase {
         double bottomVelocity = m_shooter.getBottomWheelVelocity();
         double topVelocity = m_shooter.getTopWheelVelocity();
 
-        Logger.info("Bottom wheel velocity: " + bottomVelocity);
-        Logger.info("Top wheel velocity: " + topVelocity);
+        Logger.info("ConveyAndShoot -> Bottom wheel velocity: " + bottomVelocity);
+        Logger.info("ConveyAndShoot -> Top wheel velocity: " + topVelocity);
     }
 
     // This command continues until interrupted
@@ -60,9 +58,9 @@ public class ConveyAndShoot extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: Shoot...");
+            Logger.ending("Interrupting Command: ConveyAndShoot...");
         } else {
-            Logger.ending("Ending Command: Shoot...");
+            Logger.ending("Ending Command: ConveyAndShoot...");
         }
     }
 

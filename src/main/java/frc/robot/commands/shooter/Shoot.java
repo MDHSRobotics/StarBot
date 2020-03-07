@@ -1,3 +1,4 @@
+
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -5,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Shooter;
 
-// This command activates the shoot mechanism
+// This command activates the shoot mechanism.
 public class Shoot extends CommandBase {
 
     private Shooter m_shooter;
@@ -22,8 +23,6 @@ public class Shoot extends CommandBase {
     public void initialize() {
         Logger.action("Initializing Command: Shoot...");
 
-        // m_shooter.spinTopWheel();
-        // m_shooter.spinBottomWheel();
         m_shooter.shootWithDistance();
     }
 
@@ -34,13 +33,13 @@ public class Shoot extends CommandBase {
         double topVelocityFPS = m_shooter.getTopWheelVelocityFPS();
         double bottomVelocityFPS = m_shooter.getBottomWheelVelocityFPS();
 
-        Logger.info("Top wheel velocity: " + topVelocity);
-        Logger.info("Top wheel fps: " + topVelocityFPS);
-        Logger.info("\n Bottom wheel velocity: " + bottomVelocity);
-        Logger.info("Bottom wheel fps: " + bottomVelocityFPS);
+        Logger.info("Shoot -> Top wheel velocity: " + topVelocity);
+        Logger.info("Shoot -> Top wheel fps: " + topVelocityFPS);
+        Logger.info("\n Shoot -> Bottom wheel velocity: " + bottomVelocity);
+        Logger.info("Shoot -> Bottom wheel fps: " + bottomVelocityFPS);
     }
 
-    // This command continues until it cycles through the set number of cycles
+    // This command continues until interrupted
     @Override
     public boolean isFinished() {
         return false;

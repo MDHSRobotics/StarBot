@@ -29,11 +29,11 @@ public class StopRedLegs extends CommandBase {
         m_climbLegsRed.stop();
     }
 
-//     // This command continues until interrupted
-//     @Override
-//     public boolean isFinished() {
-//         return false;
-//     }
+    // This command continues until interrupted
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 
     @Override
     public void end(boolean interrupted) {
