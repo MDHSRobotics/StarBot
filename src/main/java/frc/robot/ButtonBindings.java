@@ -40,6 +40,7 @@ public class ButtonBindings {
         BotControllers.secondary.btnA.whileHeld(BotCommands.reverseConveyor);
         BotControllers.secondary.btnBumperLeft.whileHeld(BotCommands.stopConveyorAndShooter);
         BotControllers.secondary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
+        BotControllers.secondary.btnStart.whenPressed(BotCommands.resetShoot);
     }
 
 }

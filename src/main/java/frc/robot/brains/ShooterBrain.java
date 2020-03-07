@@ -11,8 +11,8 @@ public class ShooterBrain {
     // Default Values //
     //----------------//
 
-    public static double shootBottomWheelTargetVelocityDefault = 1;
-    public static double shootTopWheelTargetVelocityDefault = 1;
+    public static double shootBottomWheelTargetVelocityDefault = 0;
+    public static double shootTopWheelTargetVelocityDefault = 0;
 
     public static double shootTopWheelCurrentVelocityDefault = 0;
     public static double shootBottomWheelCurrentVelocityDefault = 0;
@@ -24,6 +24,8 @@ public class ShooterBrain {
     public static double shootBottomWheelMinVelocityDefault = 1000000;
     public static double shootTopWheelMaxVelocityDefault = 0;
     public static double shootTopWheelMinVelocityDefault = 1000000;
+
+    public static double shootDistanceDefault = 0;
 
     //---------------------//
     // NetworkTableEntries //
@@ -42,6 +44,8 @@ public class ShooterBrain {
     public static NetworkTableEntry shootBottomWheelMinVelocityEntry;
     public static NetworkTableEntry shootTopWheelMaxVelocityEntry;
     public static NetworkTableEntry shootTopWheelMinVelocityEntry;
+
+    public static NetworkTableEntry shootDistanceEntry;
 
     //---------//
     // Setters //
@@ -79,7 +83,6 @@ public class ShooterBrain {
         shootTopWheelMinVelocityEntry.setDouble(value);
     }
 
-
     //---------//
     // Getters //
     //---------//
@@ -90,6 +93,10 @@ public class ShooterBrain {
 
     public static double getTopWheelVelocity() {
         return shootTopWheelTargetVelocityEntry.getDouble(shootTopWheelTargetVelocityDefault);
+    }
+
+    public static double getShootDistance() {
+        return shootDistanceEntry.getDouble(shootDistanceDefault);
     }
 
 }

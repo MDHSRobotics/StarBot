@@ -48,7 +48,7 @@ public class BotSubsystems {
 
         // Climb Legs Red
         Logger.setup("ClimbLegsRed Default Command -> StopRedLegs...");
-        // climbLegsRed.setDefaultCommand(BotCommands.stopRedLegs);
+        climbLegsRed.setDefaultCommand(BotCommands.stopRedLegs);
 
         // Climb Legs Spark
         Logger.setup("ClimbLegsSpark Default Command -> StopSparkLegs...");

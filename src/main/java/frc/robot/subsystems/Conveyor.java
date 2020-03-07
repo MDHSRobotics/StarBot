@@ -14,7 +14,7 @@ import static frc.robot.RobotManager.isReal;
 public class Conveyor extends SubsystemBase {
 
     // Motor constants
-    private final double POWER = 0.1;
+    private final double POWER = 0.25;
 
     public Conveyor() {
         Logger.setup("Constructing Subsystem: Conveyor...");
