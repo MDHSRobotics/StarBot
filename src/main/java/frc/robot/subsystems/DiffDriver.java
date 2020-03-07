@@ -23,6 +23,8 @@ public class DiffDriver extends SubsystemBase {
     // The subsystem devices
     public DifferentialDrive diffDrive;
 
+    public static double distance;
+
     // Constructor requires device instances
     public DiffDriver(DifferentialDrive diffDrive) {
         this.diffDrive = diffDrive;
@@ -63,18 +65,20 @@ public class DiffDriver extends SubsystemBase {
     }
 
     // Drive to within the given range based on the given distance sensor
-    public void driveToWithinRange(AnalogInput distanceSensor, double targetMinimum, double targetMaximum) {
-        double distance = DistanceSensor.getDistanceInMeters(distanceSensor);
+    public boolean driveToWithinRange(AnalogInput distanceSensor, double targetMinimum, double targetMaximum) {
+        distance = DistanceSensor.getDistanceInMeters(distanceSensor);
         if (distance > targetMinimum && distance < targetMaximum) {
             diffDrive.stopMotor();
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Target Reached!");
+            return true;
         } else if (distance > targetMaximum) {
-            diffDrive.arcadeDrive(.4, 0);
+            diffDrive.arcadeDrive(-.4, 0);
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too far from the target!");
         } else if (distance < targetMinimum) {
             diffDrive.arcadeDrive(.4, 0);
             Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too close to the target!");
         }
+        return false;
     }
 
     // Drive to align the robot to a detected line at the given yaw
