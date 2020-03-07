@@ -11,11 +11,12 @@ import frc.robot.consoles.Logger;
 // This class contains methods for retrieving Limelight data.
 public class Limelight {
 
-    private static double cameraHeight = 10.5; // height of lens (in)
-    private static double targetHeight = 89.75; // height to the center of the target (in)
-    private static double cameraAngle = 0; // angle of the camera (deg)
+    private static final double CAMERA_HEIGHT = 10.5; // height of lens (in)
+    private static final double TARGET_HEIGHT = 89.75; // height to the center of the target (in)
+    private static final double CAMERA_ANGLE = 0; // angle of the camera (deg)
 
     private static NetworkTable m_limelight = NetworkTableInstance.getDefault().getTable("/limelight");
+    private static NetworkTableEntry m_ledMode = m_limelight.getEntry("ledMode");
     private static NetworkTableEntry m_tx = m_limelight.getEntry("tx");
     private static NetworkTableEntry m_ty = m_limelight.getEntry("ty");
     private static NetworkTableEntry m_ta = m_limelight.getEntry("ta");
@@ -40,20 +41,21 @@ public class Limelight {
 
     // 3 equals on
     public static void ledOn() {
-        m_limelight.getEntry("ledMode").setNumber(3);
+        m_ledMode.setNumber(3);
     }
 
     // 1 equals off
     public static void ledOff() {
-        m_limelight.getEntry("ledMode").setNumber(1);
+        m_ledMode.setNumber(1);
     }
 
     // Uses the limelight to find the distance in inches
     public static void calculateDistanceToTarget() {
         double yOffset = getYOffset();
-        double angleInRadians = ((yOffset + cameraAngle)/180.) * Math.PI;
+        double angleInRadians = ((yOffset + CAMERA_ANGLE)/180.) * Math.PI;
 
-        double distance = (targetHeight - cameraHeight)/
-                Math.tan(angleInRadians);
+        double distance = (TARGET_HEIGHT - CAMERA_HEIGHT) / Math.tan(angleInRadians);
+        // TODO: This method effectively doesn't do anything
     }
+
 }

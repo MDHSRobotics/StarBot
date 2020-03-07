@@ -2,7 +2,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.TurnOffLimelightArray;
+
 import frc.robot.commands.auto.*;
 import frc.robot.commands.climbbalancer.*;
 import frc.robot.commands.climbhook.*;
@@ -14,6 +14,7 @@ import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
 import frc.robot.commands.roller.*;
 import frc.robot.commands.rollerarm.*;
+import frc.robot.commands.sensors.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
 
@@ -66,9 +67,6 @@ public class BotCommands {
     // Lighter
     public static CycleLights cycleLights;
 
-    //Limelight
-    public static TurnOffLimelightArray turnOffLimelightArray;
-
     // Roller
     public static SpinRollerAndConveyor spinRollerAndConveyor;
     public static StopRoller stopRoller;
@@ -77,6 +75,9 @@ public class BotCommands {
     public static LowerRollerArm lowerRollerArm;
     public static RaiseRollerArm raiseRollerArm;
     public static ToggleRollerArm toggleRollerArm;
+
+    // Sensors
+    public static TurnOffLimelightArray turnOffLimelightArray;
 
     // Shooter
     public static ConveyAndShoot conveyAndShoot;
@@ -136,9 +137,6 @@ public class BotCommands {
         // Lighter
         cycleLights = new CycleLights(BotSubsystems.lighter);
 
-        // Limelight
-        turnOffLimelightArray = new TurnOffLimelightArray();
-
         // Roller
         spinRollerAndConveyor = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
         stopRoller = new StopRoller(BotSubsystems.roller);
@@ -147,6 +145,9 @@ public class BotCommands {
         lowerRollerArm = new LowerRollerArm(BotSubsystems.rollerArm);
         raiseRollerArm = new RaiseRollerArm(BotSubsystems.rollerArm);
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
+
+        // Sensors
+        turnOffLimelightArray = new TurnOffLimelightArray();
 
         // Shooter
         conveyAndShoot = new ConveyAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
