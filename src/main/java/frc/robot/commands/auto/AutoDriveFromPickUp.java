@@ -13,6 +13,8 @@ public class AutoDriveFromPickUp extends CommandBase {
     private static double targetMin = 4.8;
     private static double targetMax = 4.87;
 
+    private static boolean isDistanceReached = false;
+
     public AutoDriveFromPickUp(DiffDriver diffDriver) {
         Logger.setup("Constructing Command: AutoDriveFromPickUp...");
 
@@ -28,13 +30,13 @@ public class AutoDriveFromPickUp extends CommandBase {
 
     @Override
     public void execute() {
-        m_diffDriver.driveToWithinRange(BotSensors.distanceSensorFront, targetMin, targetMax)
+        isDistanceReached = m_diffDriver.driveToWithinRange(BotSensors.distanceSensorFront, targetMin, targetMax);
     }
 
     // This command continues until it target is reached
     @Override
     public boolean isFinished() {
-
+        return isDistanceReached;
     }
 
     @Override
