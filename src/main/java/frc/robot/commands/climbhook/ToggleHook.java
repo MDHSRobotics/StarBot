@@ -24,12 +24,12 @@ public class ToggleHook extends InstantCommand {
         System.out.println("--");
         Logger.action("Initializing InstantCommand: ToggleHook...");
 
-        if (m_climbHook.hookIsBack) {
+        if (m_climbHook.hookIsAimed) {
             Logger.action("ClimbHook -> Moving Forward...");
-            BotCommands.moveHookForward.schedule();
+            BotCommands.hookForward.schedule();
         } else {
             Logger.action("ClimbHook -> Moving Backward...");
-            BotCommands.moveHookBackward.schedule();
+            BotCommands.aimHook.schedule();
         }
         m_climbHook.toggleHookPosition();
     }

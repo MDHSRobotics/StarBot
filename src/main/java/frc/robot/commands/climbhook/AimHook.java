@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbHook;
 
-// This command retracts the climb legs.
-public class MoveHookBackward extends CommandBase {
+// This command extends the climb legs.
+public class AimHook extends CommandBase {
 
     private ClimbHook m_climbHook;
 
-    public MoveHookBackward(ClimbHook climbHook) {
-        Logger.setup("Constructing Command: MoveHookBackward...");
+    public AimHook(ClimbHook climbHook) {
+        Logger.setup("Constructing Command: AimHook...");
 
         // Add given subsystem requirements
         m_climbHook = climbHook;
@@ -21,9 +21,9 @@ public class MoveHookBackward extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: MoveHookBackward...");
+        Logger.action("Initializing Command: AimHook...");
 
-        m_climbHook.retractHook();
+        m_climbHook.aimHook();
     }
 
     @Override
@@ -31,21 +31,19 @@ public class MoveHookBackward extends CommandBase {
         //System.out.println("ClimbLegsRed Position: " + m_climbHook.getPosition());
     }
 
-    // This command continues until its position is between -100 and 100.
+    // This command continues until interrupted
     @Override
     public boolean isFinished() {
-        int position = m_climbHook.getPosition();
-        boolean finished = (position <= 100 && position >= -100);
-        return finished;
+        return false;
     }
 
     @Override
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: MoveHookBackward...");
+            Logger.ending("Interrupting Command: AimHook...");
         } else {
-            Logger.ending("Ending Command: MoveHookBackward...");
+            Logger.ending("Ending Command: AimHook...");
         }
         m_climbHook.stop();
     }

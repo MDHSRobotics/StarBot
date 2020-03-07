@@ -49,7 +49,8 @@ public class BotCommands {
 
     // Climb Hook
     public static MoveHookBackward moveHookBackward;
-    public static MoveHookForward moveHookForward;
+    public static AimHook aimHook;
+    public static HookForward hookForward;
     public static StopHook stopHook;
     public static ToggleHook toggleHook;
 
@@ -150,7 +151,8 @@ public class BotCommands {
 
         // Climb Hook
         moveHookBackward = new MoveHookBackward(BotSubsystems.climbHook);
-        moveHookForward = new MoveHookForward(BotSubsystems.climbHook);
+        aimHook = new AimHook(BotSubsystems.climbHook);
+        hookForward = new HookForward(BotSubsystems.climbHook);
         toggleHook = new ToggleHook(BotSubsystems.climbHook);
         stopHook = new StopHook(BotSubsystems.climbHook);
 
