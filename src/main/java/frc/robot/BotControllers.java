@@ -1,6 +1,7 @@
 
 package frc.robot;
 
+import frc.robot.oi.controllers.JoystickContainer;
 import frc.robot.oi.controllers.XboxControllerContainer;
 import frc.robot.consoles.Logger;
 
@@ -9,10 +10,12 @@ public class BotControllers {
 
     // Controllers
     public static final XboxControllerContainer xbox = new XboxControllerContainer(0);
+    public static final JoystickContainer jstick = new JoystickContainer(1);
 
     // Configure all the controllers
     public static void configure() {
         configureXbox();
+        configureJoystick();
     }
 
     // Configure the xbox controller
@@ -29,4 +32,17 @@ public class BotControllers {
         }
     }
 
+    public static void configureJoystick() {
+        // Detect whether the secondary joystick has been plugged in after start-up
+        if (!BotControllers.jstick.configured) {
+            boolean isConnected = BotControllers.jstick.isConnected();
+            if (!isConnected)
+                return;
+
+            // Configure button bindings
+            ButtonBindings.configureJoystick();
+            BotControllers.jstick.configured = true;
+            Logger.setup("Joystick detected and configured");
+        }
+    }
 }
