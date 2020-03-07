@@ -25,6 +25,7 @@ public class BotCommands {
     public static AutoAlign firstAutoAlignS1;
     public static AutoAlign secondAutoAlignS1;
     public static AutoAlign autoAlignS2;
+    public static AutoDriveAndPickUp autoDriveAndPickUp;
     public static AutoDriveForward autoDriveForwardS1;
     public static AutoDriveForward autoDriveForwardS2;
     public static AutoDriveFromPickUp autoDriveFromPickUp;
@@ -88,7 +89,9 @@ public class BotCommands {
 
     // Roller
     public static SpinRollerAndConveyor spinRollerAndConveyor;
+    public static SpinRollerAndConveyor spinRollerAndConveyorCG;
     public static StopRoller stopRoller;
+    public static StopRollerAndConveyorCG stopRollerAndConveyorCG;
 
     // RollerArm
     public static LowerRollerArm lowerRollerArm;
@@ -177,7 +180,9 @@ public class BotCommands {
 
         // Roller
         spinRollerAndConveyor = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
+        spinRollerAndConveyorCG = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
         stopRoller = new StopRoller(BotSubsystems.roller);
+        stopRollerAndConveyorCG = new StopRollerAndConveyorCG(BotSubsystems.roller, BotSubsystems.conveyor);
 
         // RollerArm
         lowerRollerArm = new LowerRollerArm(BotSubsystems.rollerArm);
@@ -199,6 +204,7 @@ public class BotCommands {
         stopShooterCGS2 = new StopShooterCG(BotSubsystems.shooter);
 
         // Autonomous Command Group
+        autoDriveAndPickUp = new AutoDriveAndPickUp(BotSubsystems.diffDriver, BotSubsystems.conveyor, BotSubsystems.roller);
         autoLineUpAndShootS1 = new AutoLineUpAndShootS1(BotSubsystems.conveyor, BotSubsystems.shooter, BotSubsystems.diffDriver);
         autoLineUpAndShootS2 = new AutoLineUpAndShootS2(BotSubsystems.conveyor, BotSubsystems.shooter, BotSubsystems.diffDriver);
     }

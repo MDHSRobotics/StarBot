@@ -33,7 +33,7 @@ public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
                     BotCommands.firstStopConveyorCGS1,
                     BotCommands.firstStopShooterCGS1,
                     //BotCommands.firstAutoAlignS1,
-                    BotCommands.autoDriveToPickUp,
+                    BotCommands.autoDriveAndPickUp,
                     BotCommands.autoDriveFromPickUp,
                     //BotCommands.autoDriveToShoot,
                     //BotCommands.secondAutoAlignS1,
