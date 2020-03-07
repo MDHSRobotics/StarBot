@@ -31,17 +31,17 @@ public class AutoDriveToShoot extends CommandBase {
 
     @Override
     public void execute() {
-        if (currentXDistanceFromTarget < DISTANCE_X_FROM_TARGET) {
-            m_diffDriver.driveAlign(TARGET_YAW);
-        } else {
-            m_diffDriver.stop();
-        }
+
     }
 
     // This command continues until it target is reached
     @Override
     public boolean isFinished() {
-        return false;
+        if (currentXDistanceFromTarget < DISTANCE_X_FROM_TARGET) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override

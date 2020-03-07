@@ -65,6 +65,7 @@ public class BotCommands {
 
     // Conveyor
     public static ForwardConveyor forwardConveyor;
+    public static ForwardConveyorCG forwardConveyorCG;
     public static ReverseConveyor reverseConveyor;
     public static ReverseConveyorCG firstReverseConveyorCGS1;
     public static ReverseConveyorCG secondReverseConveyorCGS1;
@@ -72,6 +73,7 @@ public class BotCommands {
     public static StopConveyor stopConveyor;
     public static StopConveyorCG firstStopConveyorCGS1;
     public static StopConveyorCG secondStopConveyorCGS1;
+    public static StopConveyorCG stopConveyorwithRollerCGS1;
     public static StopConveyorCG stopConveyorCGS2;
 
     // DiffDriver
@@ -88,10 +90,11 @@ public class BotCommands {
     public static CycleLights cycleLights;
 
     // Roller
+    public static SpinRoller spinRoller;
+    public static SpinRollerCG spinRollerCG;
     public static SpinRollerAndConveyor spinRollerAndConveyor;
-    public static SpinRollerAndConveyor spinRollerAndConveyorCG;
     public static StopRoller stopRoller;
-    public static StopRollerAndConveyorCG stopRollerAndConveyorCG;
+    public static StopRollerCG stopRollerCG;
 
     // RollerArm
     public static LowerRollerArm lowerRollerArm;
@@ -156,13 +159,16 @@ public class BotCommands {
 
         // Conveyor
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
+        forwardConveyorCG = new ForwardConveyorCG(BotSubsystems.conveyor);
         reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
         firstReverseConveyorCGS1 = new ReverseConveyorCG(BotSubsystems.conveyor);
         secondReverseConveyorCGS1 = new ReverseConveyorCG(BotSubsystems.conveyor);
+        stopConveyorwithRollerCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
         reverseConveyorCGS2 = new ReverseConveyorCG(BotSubsystems.conveyor);
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
         firstStopConveyorCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
         secondStopConveyorCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
+        stopConveyorwithRollerCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
         stopConveyorCGS2 = new StopConveyorCG(BotSubsystems.conveyor);
 
         // DiffDriver
@@ -179,10 +185,10 @@ public class BotCommands {
         cycleLights = new CycleLights(BotSubsystems.lighter);
 
         // Roller
-        spinRollerAndConveyor = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
-        spinRollerAndConveyorCG = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
+        spinRoller = new SpinRoller(BotSubsystems.roller);
+        spinRollerCG = new SpinRollerCG(BotSubsystems.roller);
         stopRoller = new StopRoller(BotSubsystems.roller);
-        stopRollerAndConveyorCG = new StopRollerAndConveyorCG(BotSubsystems.roller, BotSubsystems.conveyor);
+        stopRollerCG = new StopRollerCG(BotSubsystems.roller);
 
         // RollerArm
         lowerRollerArm = new LowerRollerArm(BotSubsystems.rollerArm);
@@ -204,7 +210,7 @@ public class BotCommands {
         stopShooterCGS2 = new StopShooterCG(BotSubsystems.shooter);
 
         // Autonomous Command Group
-        autoDriveAndPickUp = new AutoDriveAndPickUp(BotSubsystems.diffDriver, BotSubsystems.conveyor, BotSubsystems.roller);
+        autoDriveAndPickUp = new AutoDriveAndPickUp(BotSubsystems.conveyor, BotSubsystems.diffDriver, BotSubsystems.roller);
         autoLineUpAndShootS1 = new AutoLineUpAndShootS1(BotSubsystems.conveyor, BotSubsystems.shooter, BotSubsystems.diffDriver);
         autoLineUpAndShootS2 = new AutoLineUpAndShootS2(BotSubsystems.conveyor, BotSubsystems.shooter, BotSubsystems.diffDriver);
     }
