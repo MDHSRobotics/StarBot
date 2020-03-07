@@ -15,7 +15,7 @@ import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
 import frc.robot.commands.roller.*;
 import frc.robot.commands.rollerarm.*;
-import frc.robot.sensors.*;
+import frc.robot.commands.sensors.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
 
@@ -106,7 +106,7 @@ public class BotCommands {
     public static ToggleRollerArm toggleRollerArm;
 
     // Sensors
-    //public static TurnOffLimelightArray turnOffLimelightArray;
+    public static TurnOffLimelightArray turnOffLimelightArray;
 
     // Shooter
     public static ConveyAndShoot conveyAndShoot;
