@@ -38,11 +38,14 @@ public class ButtonBindings {
 
         // Roller
         //BotControllers.secondary.btnX.whileHeld(BotCommands.reverseRoller);
-        BotControllers.xbox.btnB.whileHeld(BotCommands.spinRollerAndConveyor);
+        // BotControllers.xbox.btnB.whileHeld(BotCommands.spinRollerAndConveyor);
 
         // Conveyor & Shooter
-        BotControllers.xbox.btnBumperLeft.whileHeld(BotCommands.reverseConveyor);
-        BotControllers.xbox.btnBumperRight.whileHeld(BotCommands.reverseConveyorAndShoot);
+        BotControllers.xbox.btnX.whileHeld(BotCommands.spinRollerAndConveyor);
+        BotControllers.xbox.btnB.whileHeld(BotCommands.reverseConveyor);
+
+        // BotControllers.xbox.btnBumperLeft.whileHeld(BotCommands.reverseConveyor);
+        // BotControllers.xbox.btnBumperRight.whileHeld(BotCommands.reverseConveyorAndShoot);
     }
 
     //     // TODO: Use the triggers for the balancer, so that you have fine analog control.
