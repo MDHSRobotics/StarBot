@@ -48,7 +48,7 @@ public class Devices {
     static DevTalonSRX talonSrxClimbLegsA = new DevTalonSRX("talonSrxClimbLegsA", 99);
     static DevTalonSRX talonSrxClimbLegsB = new DevTalonSRX("talonSrxClimbLegsB", 99);
 
-    static DevTalonSRX talonSrxConveyor = new DevTalonSRX("talonSrxConveyor", 99);
+    static DevTalonSRX talonSrxConveyor = new DevTalonSRX("talonSrxConveyor", 9);
     static DevTalonSRX talonSrxRoller = new DevTalonSRX("talonSrxRoller", 3);
 
     static DevTalonSRX talonSrxShooterBottomWheel = new DevTalonSRX("talonSrxShooterBottomWheel", 99);

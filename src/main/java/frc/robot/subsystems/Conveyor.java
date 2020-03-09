@@ -14,7 +14,7 @@ import static frc.robot.RobotManager.isReal;
 public class Conveyor extends SubsystemBase {
 
     // Motor constants
-    private final double POWER = 0.25;
+    private final double POWER = 0.5;
 
     public Conveyor() {
         Logger.setup("Constructing Subsystem: Conveyor...");
@@ -49,12 +49,12 @@ public class Conveyor extends SubsystemBase {
 
     // Moves the conveyor forward at a pre-defined speed
     public void forward() {
-        talonSrxConveyor.set(POWER);
+        talonSrxConveyor.set(-POWER);
     }
 
     // Moves the conveyor back at a pre-defined speed
     public void reverse() {
-        talonSrxConveyor.set(-POWER);
+        talonSrxConveyor.set(POWER);
     }
 
     // Stop the conveyor
