@@ -10,8 +10,8 @@ public class AutoDriveFromPickUp extends CommandBase {
 
     private DiffDriver m_diffDriver;
 
-    private static double targetMin = 4.8;
-    private static double targetMax = 4.87;
+    private static double targetMin = 2.4;
+    private static double targetMax = 2.44;
 
     private static boolean isDistanceReached = false;
 

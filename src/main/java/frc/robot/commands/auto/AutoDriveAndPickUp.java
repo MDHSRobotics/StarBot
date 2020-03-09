@@ -51,8 +51,7 @@ public class AutoDriveAndPickUp extends CommandBase {
     @Override
     public void execute() {
 
-        m_diffDriver.driveAlign(TARGET_YAW);
-
+        m_diffDriver.driveTank(0.3, 0.3);
     }
 
     // This command continues until interrupted
