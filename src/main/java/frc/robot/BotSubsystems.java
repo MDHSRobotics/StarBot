@@ -28,8 +28,8 @@ public class BotSubsystems {
         climbLegsRed = new ClimbLegsRed();
         climbLegsSpark = new ClimbLegsSpark();
         conveyor = new Conveyor();
-        diffDriver = new DiffDriverSpark(); // Swap the diffDrivers if changed on the robot
-        diffDriverAlternate = new DiffDriverTalon();
+        diffDriverAlternate = new DiffDriverSpark(); // Swap the diffDrivers if changed on the robot
+        diffDriver = new DiffDriverTalon();
         lighter = new Lighter();
         roller = new Roller();
         rollerArm = new RollerArm();

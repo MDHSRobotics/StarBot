@@ -37,10 +37,10 @@ public class Devices {
     static DevRelay relayLighter = new DevRelay("relayLighter", 1);
 
     // TalonFX
-    static DevTalonSRX talonFxDiffWheelFrontLeft = new DevTalonSRX("talonFxDiffWheelFrontLeft", 99);
-    static DevTalonSRX talonFxDiffWheelFrontRight = new DevTalonSRX("talonFxDiffWheelFrontRight", 99);
-    static DevTalonSRX talonFxDiffWheelRearLeft = new DevTalonSRX("talonFxDiffWheelRearLeft", 99);
-    static DevTalonSRX talonFxDiffWheelRearRight = new DevTalonSRX("talonFxDiffWheelRearRight", 99);
+    static DevTalonSRX talonFxDiffWheelFrontLeft = new DevTalonSRX("talonFxDiffWheelFrontLeft", 12);
+    static DevTalonSRX talonFxDiffWheelFrontRight = new DevTalonSRX("talonFxDiffWheelFrontRight", 14);
+    static DevTalonSRX talonFxDiffWheelRearLeft = new DevTalonSRX("talonFxDiffWheelRearLeft", 4);
+    static DevTalonSRX talonFxDiffWheelRearRight = new DevTalonSRX("talonFxDiffWheelRearRight", 13);
 
     // TalonSRX
     static DevTalonSRX talonSrxClimbBalancer = new DevTalonSRX("talonSrxClimbBalancer", 99);
