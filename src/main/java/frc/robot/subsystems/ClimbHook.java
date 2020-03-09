@@ -23,13 +23,13 @@ public class ClimbHook extends SubsystemBase {
     public boolean hookIsAimed = false;
 
     // Position constants
-    private final double GEAR_RATIO = 208;
-    private final double SPOOL_DIAMETER = 2.5;
+    private final double GEAR_RATIO = 4;
+    private final double SPOOL_DIAMETER = 4;
     private final double DISTANCE_AIM = 32;
-    private final double DISTANCE_FORWARD = 32;
+    private final double DISTANCE_FORWARD = 64;
 
     // Encoder constants
-    private final boolean SENSOR_PHASE_A = false;
+    private final boolean SENSOR_PHASE_A = true;
     private final boolean MOTOR_INVERT_A = false;
 
     public ClimbHook() {
@@ -80,7 +80,7 @@ public class ClimbHook extends SubsystemBase {
             absolutePosition *= -1;
         // Set the quadrature (relative) sensor to match absolute
         talon.setSelectedSensorPosition(absolutePosition, PID_LOOP_PRIMARY, TIMEOUT_MS);
-        talonSrxClimbHook.setSelectedSensorPosition(0);
+        // talonSrxClimbHook.setSelectedSensorPosition(0);
     }
 
     @Override
