@@ -80,6 +80,7 @@ public class ClimbHook extends SubsystemBase {
             absolutePosition *= -1;
         // Set the quadrature (relative) sensor to match absolute
         talon.setSelectedSensorPosition(absolutePosition, PID_LOOP_PRIMARY, TIMEOUT_MS);
+        talonSrxClimbHook.setSelectedSensorPosition(0);
     }
 
     @Override
@@ -101,7 +102,6 @@ public class ClimbHook extends SubsystemBase {
     // Extend the legs
     public void aimHook() {
         double ticks = EncoderUtils.translateDistanceToTicks(DISTANCE_AIM, SPOOL_DIAMETER, GEAR_RATIO);
-        talonSrxClimbHook.setSelectedSensorPosition(0);
         talonSrxClimbHook.set(ControlMode.MotionMagic, ticks);
     }
 
