@@ -9,13 +9,13 @@ import frc.robot.oi.movements.TankMovement;
 import frc.robot.subsystems.DiffDriver;
 
 // This command uses the xbox input to differential drive using the tank method
-public class DriveDiffTankCG extends CommandBase {
+public class DriveDiffTank extends CommandBase {
 
     public XboxPositionAccessible controller;
     private DiffDriver m_diffDriver;
 
-    public DriveDiffTankCG(DiffDriver diffDriver, XboxPositionAccessible controller) {
-        Logger.setup("Constructing Command: DriveDiffTankCG...");
+    public DriveDiffTank(DiffDriver diffDriver, XboxPositionAccessible controller) {
+        Logger.setup("Constructing Command: DriveDiffTank...");
 
         // Add given subsystem requirements
         this.controller = controller;
