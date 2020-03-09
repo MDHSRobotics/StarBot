@@ -6,44 +6,45 @@ import frc.robot.consoles.Logger;
 // Configures all the button->command bindings for the robot.
 public class ButtonBindings {
 
-    // Configure "primary" xbox buttons
-    public static void configurePrimary() {
-        Logger.setup("Configure Buttons -> Primary Controller...");
+    //Configure xbox buttons
+    public static void configureJoystick() {
+        Logger.setup("Configure Buttons -> Joystick Controller...");
 
-        // TODO: Convert this to joystick control.
+    //DiffDriver
+        BotControllers.jstick.jstickBtn1.whileHeld(BotCommands.alignDiffDriveToTarget);
+        // BotControllers.jstick.jstickBtn7.whileHeld(BotCommands.alignDiffDriveToGyro);
 
-        // DiffDriver
-        BotControllers.primary.btnBumperRight.whileHeld(BotCommands.driveDiffToWithinRangeFront);
-        BotControllers.primary.btnB.whileHeld(BotCommands.alignDiffDriveToTarget);
+    //Limelight
+        BotControllers.jstick.jstickBtn1.whenReleased(BotCommands.turnOffLimelightArray);
 
-        // Limelight
-        //BotControllers.primary.btnB.whenReleased(BotCommands.turnOffLimelightArray);
+    //Climb
+        BotControllers.jstick.jstickBtn9.whileHeld(BotCommands.stopHook);
+        BotControllers.jstick.jstickBtn11.whenPressed(BotCommands.toggleHook);
+        BotControllers.jstick.jstickBtn12.whenPressed(BotCommands.toggleRedLegs);
 
-        // Climb
-        BotControllers.primary.btnBumperLeft.whileHeld(BotCommands.driveDiffToWithinRangeTop);
-        BotControllers.primary.btnY.whenPressed(BotCommands.toggleHook); // Tested
-        BotControllers.primary.btnA.whenPressed(BotCommands.toggleRedLegs); // Tested
-
-        // TODO: Use the triggers for the balancer, so that you have fine analog control.
-        BotControllers.primary.btnDpadLeft.whileHeld(BotCommands.balanceLeft);
-        BotControllers.primary.btnDpadRight.whileHeld(BotCommands.balanceRight);
+        BotControllers.jstick.jstickBtn3.whileHeld(BotCommands.balanceLeft);
+        BotControllers.jstick.jstickBtn4.whileHeld(BotCommands.balanceRight);
     }
 
-    // Configure "secondary" xbox buttons
-    public static void configureSecondary() {
-        Logger.setup("Configure Buttons -> Secondary Controller...");
+    // Configure xbox buttons
+    public static void configureXbox() {
+        Logger.setup("Configure Buttons -> Xbox Controller...");
         // RollerArm
-        BotControllers.secondary.btnY.whenPressed(BotCommands.toggleRollerArm);
+        BotControllers.xbox.btnY.whenPressed(BotCommands.toggleRollerArm);
 
         // Roller
         //BotControllers.secondary.btnX.whileHeld(BotCommands.reverseRoller);
-        BotControllers.secondary.btnB.whileHeld(BotCommands.spinRollerAndConveyor); // Tested
+        // BotControllers.xbox.btnB.whileHeld(BotCommands.spinRollerAndConveyor);
 
         // Conveyor & Shooter
-        BotControllers.secondary.btnA.whileHeld(BotCommands.reverseConveyor);
-        BotControllers.secondary.btnBumperLeft.whileHeld(BotCommands.stopConveyorAndShooter);
-        BotControllers.secondary.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
-        BotControllers.secondary.btnStart.whenPressed(BotCommands.resetShoot);
+        BotControllers.xbox.btnX.whileHeld(BotCommands.spinRollerAndConveyor);
+        BotControllers.xbox.btnB.whileHeld(BotCommands.reverseConveyor);
+
+        // BotControllers.xbox.btnBumperLeft.whileHeld(BotCommands.reverseConveyor);
+        BotControllers.xbox.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);
+        BotControllers.xbox.btnBumperLeft.whenPressed(BotCommands.stopConveyorAndShooter);
+        BotControllers.xbox.btnStart.whenPressed(BotCommands.resetShoot);
+
     }
 
 }

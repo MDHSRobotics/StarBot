@@ -2,7 +2,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.consoles.Logger;
-import frc.robot.devices.DevTalonFX;
+import frc.robot.devices.DevTalonSRX;
 
 import static frc.robot.subsystems.Devices.diffDriveTalon;
 import static frc.robot.subsystems.Devices.talonFxDiffWheelFrontLeft;
@@ -34,7 +34,7 @@ public class DiffDriverTalon extends DiffDriver {
     }
 
     // Configure the given talon
-    private void configureTalon(DevTalonFX talon) {
+    private void configureTalon(DevTalonSRX talon) {
         if (!talon.isConnected) return;
 
         // TODO: Investigate why these motor controllers have to be inverted.

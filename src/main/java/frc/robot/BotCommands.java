@@ -83,6 +83,7 @@ public class BotCommands {
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
     public static AlignDiffDriveToTarget alignDiffDriveToTarget;
+    public static DriveDiffArcade driveDiffArcade;
     public static DriveDiffTank driveDiffTank;
     public static DriveDiffToWithinRange driveDiffToWithinRangeFront;
     public static DriveDiffToWithinRange driveDiffToWithinRangeTop;
@@ -182,9 +183,10 @@ public class BotCommands {
         stopConveyorCGS2 = new StopConveyorCG(BotSubsystems.conveyor);
 
         // DiffDriver
-        alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.primary.xbox);
+        // alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.xbox);
         alignDiffDriveToTarget = new AlignDiffDriveToTarget(BotSubsystems.diffDriver);
-        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.primary);
+        driveDiffArcade = new DriveDiffArcade(BotSubsystems.diffDriver, BotJoystick.joystick);
+        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.xbox);
         driveDiffToWithinRangeFront = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorFront, 2, 3);
         driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);
 
@@ -197,6 +199,7 @@ public class BotCommands {
         // Roller
         spinRoller = new SpinRoller(BotSubsystems.roller);
         spinRollerCG = new SpinRollerCG(BotSubsystems.roller);
+        spinRollerAndConveyor = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
         stopRoller = new StopRoller(BotSubsystems.roller);
         stopRollerCG = new StopRollerCG(BotSubsystems.roller);
 
@@ -206,7 +209,7 @@ public class BotCommands {
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
 
         // Sensors
-        //turnOffLimelightArray = new TurnOffLimelightArray();
+        turnOffLimelightArray = new TurnOffLimelightArray();
 
         // Shooter
         conveyAndShoot = new ConveyAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);

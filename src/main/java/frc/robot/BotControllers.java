@@ -1,6 +1,7 @@
 
 package frc.robot;
 
+import frc.robot.oi.controllers.JoystickContainer;
 import frc.robot.oi.controllers.XboxControllerContainer;
 import frc.robot.consoles.Logger;
 
@@ -8,41 +9,40 @@ import frc.robot.consoles.Logger;
 public class BotControllers {
 
     // Controllers
-    public static final XboxControllerContainer primary = new XboxControllerContainer(0);
-    public static final XboxControllerContainer secondary = new XboxControllerContainer(1);
+    public static final JoystickContainer jstick = new JoystickContainer(0);
+    public static final XboxControllerContainer xbox = new XboxControllerContainer(1);
 
     // Configure all the controllers
     public static void configure() {
-        configurePrimary();
-        configureSecondary();
+        configureXbox();
+        configureJoystick();
     }
 
-    // Configure the "primary" controller
-    public static void configurePrimary() {
-        // Detect whether the primary controller has been plugged in after start-up
-        if (!BotControllers.primary.configured) {
-            boolean isConnected = BotControllers.primary.isConnected();
-            if (!isConnected) return;
-
-            // Configure button bindings
-            ButtonBindings.configurePrimary();
-            BotControllers.primary.configured = true;
-            Logger.setup("Primary controller detected and configured");
-        }
-    }
-
-    // Configure the "secondary" controller
-    public static void configureSecondary() {
+    // Configure the xbox controller
+    public static void configureXbox() {
         // Detect whether the secondary controller has been plugged in after start-up
-        if (!BotControllers.secondary.configured) {
-            boolean isConnected = BotControllers.secondary.isConnected();
+        if (!BotControllers.xbox.configured) {
+            boolean isConnected = BotControllers.xbox.isConnected();
             if (!isConnected) return;
 
             // Configure button bindings
-            ButtonBindings.configureSecondary();
-            BotControllers.secondary.configured = true;
-            Logger.setup("Secondary controller detected and configured");
+            ButtonBindings.configureXbox();
+            BotControllers.xbox.configured = true;
+            Logger.setup("Xbox controller detected and configured");
         }
     }
 
+    public static void configureJoystick() {
+        // Detect whether the secondary joystick has been plugged in after start-up
+        if (!BotControllers.jstick.configured) {
+            boolean isConnected = BotControllers.jstick.isConnected();
+            if (!isConnected)
+                return;
+
+            // Configure button bindings
+            ButtonBindings.configureJoystick();
+            BotControllers.jstick.configured = true;
+            Logger.setup("Joystick detected and configured");
+        }
+    }
 }

@@ -10,7 +10,7 @@ public class TestCommands {
 
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
-    public static DriveDiffTank driveDiffTank;
+    public static DriveDiffArcade driveDiffArcade;
 
     // Climb
     // public static HookForward hookForward;
@@ -29,7 +29,7 @@ public class TestCommands {
 
         // DiffDriver
         alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, VirtualControllers.primary.xbox);
-        driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, VirtualControllers.primary);
+        //driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, VirtualControllers.primary);
     }
 
 }
