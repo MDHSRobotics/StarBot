@@ -32,7 +32,7 @@ public class ConveyAndShoot extends CommandBase {
         m_timer.reset();
         m_timer.start();
 
-        m_shooter.shootWithDistance();
+        m_shooter.shootBasedOnDistance();
     }
 
     @Override
@@ -41,11 +41,6 @@ public class ConveyAndShoot extends CommandBase {
         if  (currentTime > 1) {
             m_conveyor.forward();
         }
-        double bottomVelocity = m_shooter.getBottomWheelVelocity();
-        double topVelocity = m_shooter.getTopWheelVelocity();
-
-        Logger.info("ConveyAndShoot -> Bottom wheel velocity: " + bottomVelocity);
-        Logger.info("ConveyAndShoot -> Top wheel velocity: " + topVelocity);
     }
 
     // This command continues until interrupted

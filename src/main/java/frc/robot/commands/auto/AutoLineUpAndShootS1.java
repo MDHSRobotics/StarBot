@@ -29,7 +29,7 @@ public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
 
         addCommands(BotCommands.autoWaitS1,
                     BotCommands.firstReverseConveyorCGS1,
-                    BotCommands.firstShootCGS1,
+                    BotCommands.firstShootCGS1.withTimeout(2),
                     BotCommands.firstStopConveyorCGS1,
                     BotCommands.firstStopShooterCGS1,
                     BotCommands.firstAutoAlignS1,

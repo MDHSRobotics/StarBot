@@ -19,7 +19,8 @@ public class ShooterBrain {
     public static double shootTopWheelMaxVelocityDefault = 0.;
     public static double shootTopWheelMinVelocityDefault = 1000000.;
 
-    public static double shootDistanceDefault = 0.;
+    // The ideal shooting distance is 11.38' which is where the apex is at the target center
+    public static double shootDistanceDefault = 11.38;
     public static double shootTargetFPSDefault = 0.;
     public static double shootTargetTPHMSDefault = 0.;
 
