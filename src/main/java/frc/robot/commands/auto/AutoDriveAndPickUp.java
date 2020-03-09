@@ -50,9 +50,9 @@ public class AutoDriveAndPickUp extends CommandBase {
 
     @Override
     public void execute() {
-        double currentTime = m_timer.get();
 
         m_diffDriver.driveAlign(TARGET_YAW);
+
     }
 
     // This command continues until interrupted
@@ -72,9 +72,12 @@ public class AutoDriveAndPickUp extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: Shoot...");
+            Logger.ending("Interrupting Command: AutoDriveAndPickUp...");
         } else {
-            Logger.ending("Ending Command: Shoot...");
+            Logger.ending("Ending Command: AutoDriveAndPickUp...");
         }
+        m_diffDriver.stop();
+        m_roller.spin();
+        m_conveyor.forward();
     }
 }

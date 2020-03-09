@@ -129,6 +129,9 @@ public class BotCommands {
         firstSpinConveyorBackwardCGS1 = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
 
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
+        firstStopConveyorCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
+        secondStopConveyorCGS1 = new StopConveyorCG(BotSubsystems.conveyor);
+        stopConveyorCGS2 = new StopConveyorCG(BotSubsystems.conveyor);
 
         // DiffDriver
         rotateTowardsTarget = new RotateTowardsTarget(BotSubsystems.diffDriver);
