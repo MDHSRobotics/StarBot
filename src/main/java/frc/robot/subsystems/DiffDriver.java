@@ -88,7 +88,7 @@ public class DiffDriver extends SubsystemBase {
     }
 
     // Drive to align the robot to a detected line at the given yaw
-    public void driveAlign(double targetYaw) {
+    public boolean driveAlign(double targetYaw) {
         // Get the correction yaw needed to align the Robot with the target yaw
         double yaw = BotSensors.gyro.getYaw();
         double correction = targetYaw - yaw;
@@ -107,6 +107,8 @@ public class DiffDriver extends SubsystemBase {
 
         Logger.action("DiffDriver -> Drive Tank: " + zRotation);
         diffDrive.arcadeDrive(0, zRotation);
+
+        return isCloseEnough;
     }
 
     // TODO: Use this to indicate to the driver that the robot is aligned with the target (lights? Shuffleboard?)

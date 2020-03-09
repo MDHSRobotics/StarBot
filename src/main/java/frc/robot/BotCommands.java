@@ -25,6 +25,16 @@ import frc.robot.subsystems.RollerArm.RollerArmPosition;
 public class BotCommands {
 
     // Autonomous
+    public static AutoAlign firstAutoAlignS1;
+    public static AutoAlign secondAutoAlignS1;
+    public static AutoAlign autoAlignS2;
+    public static AutoAlignToShoot firstAutoAlignToShootCGS1;
+    public static AutoAlignToShoot secondAutoAlignToShootCGS1;
+    public static AutoAlignToShoot autoAlignToShootCGS2;
+    public static AutoDriveAndPickUp autoDriveAndPickUp;
+    public static AutoDriveForward autoDriveForwardS1;
+    public static AutoDriveForward autoDriveForwardS2;
+    public static AutoDriveFromPickUp autoDriveFromPickUp;
     public static AutoDriveToPickUp autoDriveToPickUp;
     public static AutoLineUpAndShootS1 autoLineUpAndShootS1; // Advanced
     public static AutoLineUpAndShootS2 autoLineUpAndShootS2; // Basic
@@ -97,6 +107,15 @@ public class BotCommands {
         Logger.setup("Initializing BotCommands...");
 
         // Autonomous
+        firstAutoAlignS1 = new AutoAlign(BotSubsystems.diffDriver);
+        secondAutoAlignS1 = new AutoAlign(BotSubsystems.diffDriver);
+        autoAlignS2 = new AutoAlign(BotSubsystems.diffDriver);
+        firstAutoAlignToShootCGS1 = new AutoAlignToShoot(BotSubsystems.diffDriver);
+        secondAutoAlignToShootCGS1 = new AutoAlignToShoot(BotSubsystems.diffDriver);
+        autoAlignToShootCGS2 = new AutoAlignToShoot(BotSubsystems.diffDriver);
+        autoDriveForwardS1 = new AutoDriveForward(BotSubsystems.diffDriver);
+        autoDriveForwardS2 = new AutoDriveForward(BotSubsystems.diffDriver);
+        autoDriveFromPickUp = new AutoDriveFromPickUp(BotSubsystems.diffDriver);
         autoDriveToPickUp = new AutoDriveToPickUp(BotSubsystems.diffDriver);
         autoRotateLeftS1 = new AutoRotateLeft(BotSubsystems.diffDriver);
         autoRotateLeftS2 = new AutoRotateLeft(BotSubsystems.diffDriver);

@@ -37,6 +37,7 @@ public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
 
+                    BotCommands.firstStopShooterCGS1,
         InstantCommand printScenarioName = new InstantCommand(() -> Logger.info("Starting Auto Scenario #1") );
         // TODO The wait duration should be in Shuffleboard
         WaitCommand initialWait = new WaitCommand(2.);
