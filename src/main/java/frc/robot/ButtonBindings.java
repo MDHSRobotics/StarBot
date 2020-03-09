@@ -10,13 +10,11 @@ public class ButtonBindings {
     public static void configureJoystick() {
         Logger.setup("Configure Buttons -> Joystick Controller...");
 
-    //TODO: Convert this to joystick control.
-
     //DiffDriver
         BotControllers.jstick.jstickBtn1.whileHeld(BotCommands.alignDiffDriveToTarget);
 
     //Limelight
-        //BotControllers.jstick.jstickBtn1.whenReleased(BotCommands.turnOffLimelightArray);
+        BotControllers.jstick.jstickBtn1.whenReleased(BotCommands.turnOffLimelightArray);
 
     //Climb
         BotControllers.jstick.jstickBtn9.whileHeld(BotCommands.stopHook);
@@ -24,7 +22,6 @@ public class ButtonBindings {
         BotControllers.jstick.jstickBtn12.whenPressed(BotCommands.toggleRedLegs);
         BotControllers.jstick.jstickBtn7.whileHeld(BotCommands.alignDiffDriveToGyro);
 
-    //TODO: Use the triggers for the balancer, so that you have fine analog control.
         BotControllers.jstick.jstickBtn3.whileHeld(BotCommands.balanceLeft);
         BotControllers.jstick.jstickBtn4.whileHeld(BotCommands.balanceRight);
     }
