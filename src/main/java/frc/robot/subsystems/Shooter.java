@@ -77,6 +77,8 @@ public class Shooter extends SubsystemBase {
         ShooterBrain.setTopWheelMaxVelocity(maxTopVelocity);
     }
 
+    // TODO Do we really need the following 5 methods?
+
     // Stop the shooter
     public void stop() {
         talonSrxShooterBottomWheel.stopMotor();
@@ -131,6 +133,7 @@ public class Shooter extends SubsystemBase {
 
         // The data below is based on shooting experiments conducted on March 5, 2020:
         // (Feet per second, Ticks per 100ms)
+        // TODO Update the values in the table below based on latest experiment
         luTable.put(20., 200.);
         luTable.put(30., 300.);
         luTable.put(50., 500.);
@@ -145,7 +148,7 @@ public class Shooter extends SubsystemBase {
         for (Map.Entry<Double, Double> entry : luTable.entrySet()) {
             double f2 = entry.getKey();
             double t2 = entry.getValue();
-            System.out.println(f2 + " => " + t2);
+            Logger.debug(f2 + " (ft/sec) => " + t2 + " (Ticks/100ms");
 
             // Skip over the first value because we can't compute a slope until we have read at least 2 values
             if (firstPass) {
@@ -166,14 +169,15 @@ public class Shooter extends SubsystemBase {
         return targetTPHMS;
     }
 
-
-    // Adjust the shooter velocity based on the distance determined by values set in Shuffleboard
-    public void shootWithDistance() {
+    // Spin the shooter motors at a velocity to hit the target center based on a given distance
+    // Note: the distance is currently manually defined in Shuffleboard
+    public void shootBasedOnDistance() {
         double sHeight = RobotBrain.shooterHeightFeetDefault;
         double sAngle = RobotBrain.shooterAngleDegreesDefault;
         double fHeight = RobotBrain.fieldTargetHeightFeet;
 
         double distanceFeet = ShooterBrain.getShootDistance();
+        // TODO Use a bit more precise value for acceleration due to gravity
         double numerator = 32.2 * Math.pow(distanceFeet, 2);
         double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle) - (fHeight - sHeight) * Math.pow(Math.cos(sAngle), 2));
         double velocityFPS = Math.sqrt(numerator) / Math.sqrt(denominator);
@@ -181,15 +185,10 @@ public class Shooter extends SubsystemBase {
         // Convert the desired ball velocity (ft/sec) into the required motor speed (Ticks per 100 ms)
         double nativeVelocity = translateFPSToTicksViaTable(velocityFPS);
 
-        Logger.info("Shooter DistanceVelocity-> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
-        Logger.info("Shooter DistanceVelocity-> FlyWheel FPS: " + velocityFPS);
-        Logger.info("DISTANCE -> " + distanceFeet);
-        Logger.info("NUMERATOR -> " + numerator);
-        Logger.info("DENOMINATOR -> " + denominator);
-
         talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
         talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
 
+        // Update values for Shuffleboard
         ShooterBrain.setTargetFPS(velocityFPS);
         ShooterBrain.setTargetTPHMS(nativeVelocity);
 

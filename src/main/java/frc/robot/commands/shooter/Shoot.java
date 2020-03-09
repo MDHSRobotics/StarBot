@@ -23,7 +23,7 @@ public class Shoot extends CommandBase {
     public void initialize() {
         Logger.action("Initializing Command: Shoot...");
 
-        m_shooter.shootWithDistance();
+        m_shooter.shootBasedOnDistance();
     }
 
     @Override
