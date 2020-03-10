@@ -49,10 +49,10 @@ public class Shooter extends SubsystemBase {
 
         if (isReal) {
             // Configure devices
-            PIDValues pidBottom = new PIDValues(0.1, 0.0, 0.0, 0.0);
+            PIDValues pidBottom = new PIDValues(0.087, 0.0, 0.0, 0.0);
             TalonUtils.configureTalonWithEncoder(talonSrxShooterBottomWheel, SENSOR_PHASE_BOTTOM, MOTOR_INVERT_BOTTOM, pidBottom);
 
-            PIDValues pidTop = new PIDValues(0.1, 0.0, 0.0, 0.0);
+            PIDValues pidTop = new PIDValues(0.0885, 0.0, 0.0, 0.0);
             TalonUtils.configureTalonWithEncoder(talonSrxShooterTopWheel, SENSOR_PHASE_TOP, MOTOR_INVERT_TOP, pidTop);
         }
     }
