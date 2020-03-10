@@ -15,6 +15,10 @@ public class ClimbBrain {
     public static double hookPowerDefault = 0.2;
     public static double legRotationsDefault = 50;
 
+    public static double brightnessDefault = 40;
+    public static double exposureDefault = 30;
+    public static double whiteBalanceDefault = 4500;
+
     //---------------------//
     // NetworkTableEntries //
     //---------------------//
@@ -22,6 +26,10 @@ public class ClimbBrain {
     public static NetworkTableEntry balancerPowerEntry;
     public static NetworkTableEntry hookPowerEntry;
     public static NetworkTableEntry legRotationsEntry;
+
+    public static NetworkTableEntry brightnessEntry;
+    public static NetworkTableEntry exposureEntry;
+    public static NetworkTableEntry whiteBalanceEntry;
 
     //---------//
     // Setters //
@@ -41,6 +49,19 @@ public class ClimbBrain {
 
     public static double getLegRotations() {
         return legRotationsEntry.getDouble(legRotationsDefault);
+    }
+
+
+    public static double getBrightness() {
+        return brightnessEntry.getDouble(brightnessDefault);
+    }
+
+    public static double getExposure() {
+        return exposureEntry.getDouble(exposureDefault);
+    }
+
+    public static double getWhiteBalance() {
+        return whiteBalanceEntry.getDouble(whiteBalanceDefault);
     }
 
 }
