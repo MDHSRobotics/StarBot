@@ -134,10 +134,12 @@ public class Shooter extends SubsystemBase {
         // The data below is based on shooting experiments conducted on March 5, 2020:
         // (Feet per second, Ticks per 100ms)
         // TODO Update the values in the table below based on latest experiment
-        luTable.put(20., 200.);
-        luTable.put(30., 300.);
-        luTable.put(50., 500.);
-        luTable.put(90., 1700.);
+        luTable.put(22.676, 4671.); // 8
+        luTable.put(19.753, 4275.); // 10
+        luTable.put(27.878, 5425.); // 7
+        luTable.put(25.117, 4946.); // 7.5
+        luTable.put(33.766, 6402.); // 6.5
+        luTable.put(30.830, 5814.); // 6.75
 
         boolean firstPass = true;
         double f1 = -99.;
