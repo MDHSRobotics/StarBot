@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbHook;
 
-// This command extends the climb legs.
+// This command aims the climb hook before fully extending.
 public class AimHook extends CommandBase {
 
     private ClimbHook m_climbHook;
@@ -28,7 +28,6 @@ public class AimHook extends CommandBase {
 
     @Override
     public void execute() {
-        //System.out.println("ClimbLegsRed Position: " + m_climbHook.getPosition());
     }
 
     // This command continues until interrupted

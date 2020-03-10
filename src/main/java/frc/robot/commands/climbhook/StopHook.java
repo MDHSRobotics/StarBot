@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbHook;
 
-// This command stops the ClimbHook.
+// This command stops the climb hook.
 public class StopHook extends CommandBase {
 
     private ClimbHook m_climbHook;

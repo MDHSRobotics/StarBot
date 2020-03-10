@@ -16,7 +16,7 @@ import static frc.robot.subsystems.constants.TalonConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxClimbHook;
 import static frc.robot.RobotManager.isReal;
 
-// ClimbHook subsystem, for extending and retracting the climb legs with redline motors.
+// ClimbHook subsystem, for extending and retracting the climb hook with redline motors.
 public class ClimbHook extends SubsystemBase {
 
     // State variables
@@ -43,8 +43,7 @@ public class ClimbHook extends SubsystemBase {
 
     // Configure the given talon
     private void configureTalon(DevTalonSRX talon, boolean sensorPhase, boolean motorInvert) {
-        if (!talon.isConnected)
-            return;
+        if (!talon.isConnected) return;
 
         talon.configPeakCurrentDuration(PEAK_AMPERAGE_DURATION, TIMEOUT_MS);
         talon.configPeakCurrentLimit(PEAK_AMPERAGE, TIMEOUT_MS);
@@ -74,13 +73,10 @@ public class ClimbHook extends SubsystemBase {
         SensorCollection sensorCol = talon.getSensorCollection();
         int absolutePosition = sensorCol.getPulseWidthPosition();
         absolutePosition &= 0xFFF;
-        if (SENSOR_PHASE_A)
-            absolutePosition *= -1;
-        if (MOTOR_INVERT_A)
-            absolutePosition *= -1;
+        if (SENSOR_PHASE_A) absolutePosition *= -1;
+        if (MOTOR_INVERT_A) absolutePosition *= -1;
         // Set the quadrature (relative) sensor to match absolute
         talon.setSelectedSensorPosition(absolutePosition, PID_LOOP_PRIMARY, TIMEOUT_MS);
-        // talonSrxClimbHook.setSelectedSensorPosition(0);
     }
 
     @Override
@@ -88,32 +84,36 @@ public class ClimbHook extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // Toggle the legs position
+    // Toggle the hook position
     public void toggleHookPosition() {
-        hookIsAimed = !hookIsAimed
-;
+        hookIsAimed = !hookIsAimed;
     }
 
-    // Stop the legs
+    // Stop the hook
     public void stop() {
         talonSrxClimbHook.stopMotor();
     }
 
-    // Extend the legs
+    // Aim the hook before extending
     public void aimHook() {
         double ticks = EncoderUtils.translateDistanceToTicks(DISTANCE_AIM, SPOOL_DIAMETER, GEAR_RATIO);
         talonSrxClimbHook.set(ControlMode.MotionMagic, ticks);
     }
 
-    public void hookForward() {
+    // Fully extend the hook
+    public void extendHook() {
         double ticks = EncoderUtils.translateDistanceToTicks(DISTANCE_FORWARD, SPOOL_DIAMETER, GEAR_RATIO);
         talonSrxClimbHook.set(ControlMode.MotionMagic, ticks);
     }
 
-    // Retract the legs
+    // Retract the hook back to its starting position
     public void retractHook() {
         talonSrxClimbHook.set(ControlMode.MotionMagic, 0);
     }
+
+    //---------//
+    // Getters //
+    //---------//
 
     // Get the current motor velocity
     public int getVelocity() {

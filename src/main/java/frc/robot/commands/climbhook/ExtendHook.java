@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbHook;
 
-// This command extends the climb legs.
-public class HookForward extends CommandBase {
+// This command fully extends the climb hook.
+public class ExtendHook extends CommandBase {
 
     private ClimbHook m_climbHook;
 
-    public HookForward(ClimbHook climbHook) {
-        Logger.setup("Constructing Command: HookForward...");
+    public ExtendHook(ClimbHook climbHook) {
+        Logger.setup("Constructing Command: ExtendHook...");
 
         // Add given subsystem requirements
         m_climbHook = climbHook;
@@ -21,14 +21,13 @@ public class HookForward extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: HookForward...");
+        Logger.action("Initializing Command: ExtendHook...");
 
-        m_climbHook.hookForward();
+        m_climbHook.extendHook();
     }
 
     @Override
     public void execute() {
-        //System.out.println("ClimbLegsRed Position: " + m_climbHook.getPosition());
     }
 
     // This command continues until interrupted
@@ -41,9 +40,9 @@ public class HookForward extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: HookForward...");
+            Logger.ending("Interrupting Command: ExtendHook...");
         } else {
-            Logger.ending("Ending Command: HookForward...");
+            Logger.ending("Ending Command: ExtendHook...");
         }
         m_climbHook.stop();
     }

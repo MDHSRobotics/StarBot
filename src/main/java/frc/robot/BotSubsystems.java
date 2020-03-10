@@ -44,7 +44,7 @@ public class BotSubsystems {
 
         // Climb Hook
         Logger.setup("ClimbHook Default Command -> StopHook...");
-        // climbHook.setDefaultCommand(BotCommands.stopHook);
+        climbHook.setDefaultCommand(BotCommands.stopHook);
 
         // Climb Legs Red
         Logger.setup("ClimbLegsRed Default Command -> StopRedLegs...");

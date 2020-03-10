@@ -28,7 +28,7 @@ public class AutoLineUpAndShootS2 extends SequentialCommandGroup {
         addRequirements(m_diffDriver);
 
         addCommands(BotCommands.autoWaitS2,
-                    //BotCommands.reverseConveyorCGS2,
+                    BotCommands.reverseConveyorCGS2,
                     BotCommands.shootCGS2,
                     BotCommands.stopConveyorCGS2,
                     BotCommands.stopShooterCGS2,

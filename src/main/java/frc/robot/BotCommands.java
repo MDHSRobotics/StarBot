@@ -1,7 +1,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.auto.*;
@@ -48,9 +47,9 @@ public class BotCommands {
     public static StopBalancer stopBalancer;
 
     // Climb Hook
-    public static MoveHookBackward moveHookBackward;
     public static AimHook aimHook;
-    public static HookForward hookForward;
+    public static ExtendHook extendHook;
+    public static RetractHook retractHook;
     public static StopHook stopHook;
     public static ToggleHook toggleHook;
 
@@ -150,9 +149,9 @@ public class BotCommands {
         stopBalancer = new StopBalancer(BotSubsystems.climbBalancer);
 
         // Climb Hook
-        moveHookBackward = new MoveHookBackward(BotSubsystems.climbHook);
         aimHook = new AimHook(BotSubsystems.climbHook);
-        hookForward = new HookForward(BotSubsystems.climbHook);
+        extendHook = new ExtendHook(BotSubsystems.climbHook);
+        retractHook = new RetractHook(BotSubsystems.climbHook);
         toggleHook = new ToggleHook(BotSubsystems.climbHook);
         stopHook = new StopHook(BotSubsystems.climbHook);
 

@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbHook;
 
-// This command retracts the climb legs.
-public class MoveHookBackward extends CommandBase {
+// This command fully retracts the climb hook.
+public class RetractHook extends CommandBase {
 
     private ClimbHook m_climbHook;
 
-    public MoveHookBackward(ClimbHook climbHook) {
-        Logger.setup("Constructing Command: MoveHookBackward...");
+    public RetractHook(ClimbHook climbHook) {
+        Logger.setup("Constructing Command: RetractHook...");
 
         // Add given subsystem requirements
         m_climbHook = climbHook;
@@ -21,14 +21,13 @@ public class MoveHookBackward extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: MoveHookBackward...");
+        Logger.action("Initializing Command: RetractHook...");
 
         m_climbHook.retractHook();
     }
 
     @Override
     public void execute() {
-        //System.out.println("ClimbLegsRed Position: " + m_climbHook.getPosition());
     }
 
     // This command continues until its position is between -100 and 100.
@@ -43,9 +42,9 @@ public class MoveHookBackward extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: MoveHookBackward...");
+            Logger.ending("Interrupting Command: RetractHook...");
         } else {
-            Logger.ending("Ending Command: MoveHookBackward...");
+            Logger.ending("Ending Command: RetractHook...");
         }
         m_climbHook.stop();
     }
