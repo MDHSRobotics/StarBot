@@ -15,6 +15,7 @@ public class Shuffler {
     // Tabs
     private MainTab m_mainTab;
     private InputsTab m_inputsTab;
+    private ConveyorTab m_conveyorTab;
     private DriveTab m_driveTab;
     private RollerArmTab m_rollerArmTab;
     private RollerTab m_rollerTab;
@@ -27,6 +28,7 @@ public class Shuffler {
 
         m_mainTab = new MainTab();
         m_inputsTab = new InputsTab();
+        m_conveyorTab = new ConveyorTab();
         m_driveTab = new DriveTab();
         m_rollerArmTab = new RollerArmTab();
         m_rollerTab = new RollerTab();
@@ -40,6 +42,7 @@ public class Shuffler {
 
         m_mainTab.preInitialize();
         m_inputsTab.preInitialize();
+        m_conveyorTab.preInitialize();
         m_driveTab.preInitialize();
         m_rollerArmTab.preInitialize();
         m_rollerTab.preInitialize();
@@ -54,6 +57,7 @@ public class Shuffler {
         m_mainTab.initialize();
         m_inputsTab.initialize();
         m_driveTab.initialize();
+        m_conveyorTab.initialize();
         m_rollerArmTab.initialize();
         m_rollerTab.initialize();
         m_shooterTab.initialize();
@@ -66,6 +70,7 @@ public class Shuffler {
 
         m_mainTab.configure();
         m_inputsTab.configure();
+        m_conveyorTab.configure();
         m_driveTab.configure();
         m_rollerArmTab.configure();
         m_rollerTab.configure();
@@ -79,6 +84,7 @@ public class Shuffler {
     public void update() {
         m_mainTab.update();
         m_inputsTab.update();
+        m_conveyorTab.update();
         m_driveTab.update();
         m_rollerArmTab.update();
         m_rollerTab.update();

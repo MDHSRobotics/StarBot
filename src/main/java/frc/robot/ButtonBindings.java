@@ -12,6 +12,9 @@ public class ButtonBindings {
 
         //DiffDriver
         BotControllers.jstick.jstickBtn1.whileHeld(BotCommands.alignDiffDriveToTarget);
+        BotControllers.jstick.jstickBtn5.whileHeld(BotCommands.assistedClimbToTargetLeft);
+        BotControllers.jstick.jstickBtn6.whileHeld(BotCommands.assistedClimbToTargetRight);
+
         // BotControllers.jstick.jstickBtn7.whileHeld(BotCommands.alignDiffDriveToGyro);
 
         //Limelight
