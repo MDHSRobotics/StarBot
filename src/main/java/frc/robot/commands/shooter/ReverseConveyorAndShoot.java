@@ -24,7 +24,7 @@ public class ReverseConveyorAndShoot extends SequentialCommandGroup {
         m_shooter = shooter;
         addRequirements(m_shooter);
 
-        addCommands(BotCommands.reverseConveyorBurst.withTimeout(0.5), BotCommands.conveyAndShoot);
+        addCommands(BotCommands.spinConveyorBackwardBurst.withTimeout(0.5), BotCommands.conveyAndShoot);
     }
 
 }

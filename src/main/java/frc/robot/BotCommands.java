@@ -51,7 +51,7 @@ public class BotCommands {
     // Conveyor
     public static SpinConveyor spinConveyorForward;
     public static SpinConveyor spinConveyorBackward;
-    public static SpinConveyor reverseConveyorBurst;
+    public static SpinConveyor spinConveyorBackwardBurst;
     public static StopConveyor stopConveyor;
     public static SpinConveyorCG firstSpinConveyorForwardCGS1;
     public static SpinConveyorCG secondSpinConveyorForwardCGS1;
@@ -128,7 +128,7 @@ public class BotCommands {
         // Conveyor
         spinConveyorForward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.forward);
         spinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
-        reverseConveyorBurst = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
+        spinConveyorBackwardBurst = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
         firstSpinConveyorForwardCGS1 = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.forward);
         secondSpinConveyorForwardCGS1 = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.forward);
         firstSpinConveyorBackwardCGS1 = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.backward);
