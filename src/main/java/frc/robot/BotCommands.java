@@ -15,6 +15,7 @@ import frc.robot.commands.rollerarm.*;
 import frc.robot.commands.sensors.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
+import frc.robot.subsystems.ClimbBalancer.BalanceDirection;
 
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
@@ -29,8 +30,8 @@ public class BotCommands {
     public static AutoRotateRight autoRotateRightS2;
 
     // Climb Balancer
-    public static BalanceLeft balanceLeft;
-    public static BalanceRight balanceRight;
+    public static Balance balanceRight;
+    public static Balance balanceLeft;
     public static StopBalancer stopBalancer;
 
     // Climb Hook
@@ -105,8 +106,8 @@ public class BotCommands {
         autoRotateRightS2 = new AutoRotateRight(BotSubsystems.diffDriver);
 
         // Climb Balancer
-        balanceRight = new BalanceRight(BotSubsystems.climbBalancer);
-        balanceLeft = new BalanceLeft(BotSubsystems.climbBalancer);
+        balanceRight = new Balance(BotSubsystems.climbBalancer, BalanceDirection.right);
+        balanceLeft = new Balance(BotSubsystems.climbBalancer, BalanceDirection.left);
         stopBalancer = new StopBalancer(BotSubsystems.climbBalancer);
 
         // Climb Hook

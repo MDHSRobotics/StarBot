@@ -25,8 +25,8 @@ public class ButtonBindings {
         BotControllers.jstick.jstickBtn11.whenPressed(BotCommands.toggleHook);
         BotControllers.jstick.jstickBtn12.whenPressed(BotCommands.toggleLegs);
 
-        BotControllers.jstick.jstickBtn3.whileHeld(BotCommands.balanceLeft);
-        BotControllers.jstick.jstickBtn4.whileHeld(BotCommands.balanceRight);
+        BotControllers.jstick.jstickBtn3.whileHeld(BotCommands.balanceRight);
+        BotControllers.jstick.jstickBtn4.whileHeld(BotCommands.balanceLeft);
     }
 
     // Configure xbox buttons
