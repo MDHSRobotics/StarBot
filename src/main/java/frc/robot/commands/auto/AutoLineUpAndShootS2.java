@@ -1,8 +1,15 @@
 
 package frc.robot.commands.auto;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.BotCommands;
+import frc.robot.BotSubsystems;
+import frc.robot.commands.conveyor.ReverseConveyorCG;
+import frc.robot.commands.conveyor.StopConveyorCG;
+import frc.robot.commands.shooter.ShootCG;
+import frc.robot.commands.shooter.StopShooterCG;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.DiffDriver;
@@ -27,13 +34,31 @@ public class AutoLineUpAndShootS2 extends SequentialCommandGroup {
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
 
-        addCommands(BotCommands.autoWaitS2,
-                    BotCommands.reverseConveyorCGS2,
-                    BotCommands.shootCGS2,
-                    BotCommands.stopConveyorCGS2,
-                    BotCommands.stopShooterCGS2,
-                    BotCommands.autoAlignS2,
-                    BotCommands.autoDriveForwardS2);
+        // TODO The wait duration should be in Shuffleboard
+        WaitCommand initialWait = new WaitCommand(2.);
+        ReverseConveyorCG reverseConveyor = new ReverseConveyorCG(BotSubsystems.conveyor);
+        ShootCG shoot = new ShootCG(BotSubsystems.shooter);
+        StopConveyorCG stopConveyor = new StopConveyorCG(BotSubsystems.conveyor);
+        StopShooterCG stopShooter = new StopShooterCG(BotSubsystems.shooter);
+        AutoAlign autoAlign = new AutoAlign(BotSubsystems.diffDriver);
+        AutoDriveForward autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
 
+        Command cmdSequence[] = {   initialWait,
+                                    reverseConveyor,
+                                    shoot.withTimeout(2),
+                                    stopConveyor,
+                                    stopShooter,
+                                    autoAlign,
+                                    autoDriveForward
+        };
+
+        for (int i = 0; i < cmdSequence.length; i++) {
+            int stepNumber = i + 1;
+            Command cmd = cmdSequence[i];
+            String className = cmd.getClass().getName();
+            String cmdName = className.substring(className.lastIndexOf('.') + 1);
+            String stepName = String.format("============== STEP #%d - %s ===============", stepNumber, cmdName);
+            addCommands(cmd.beforeStarting(() -> Logger.info(stepName)));
+        }
     }
 }
