@@ -16,8 +16,10 @@ public class ShooterBrain {
 
     public static double shootBottomWheelMaxVelocityDefault = 0.;
     public static double shootBottomWheelMinVelocityDefault = 1000000.;
+    public static double shootBottomWheelAverageVelocityDefault = 0;
     public static double shootTopWheelMaxVelocityDefault = 0.;
     public static double shootTopWheelMinVelocityDefault = 1000000.;
+    public static double shootTopWheelAverageVelocityDefault = 0;
 
     // The ideal shooting distance is 11.38' which is where the apex is at the target center
     public static double shootDistanceDefault = 11.38;
@@ -33,8 +35,10 @@ public class ShooterBrain {
 
     public static NetworkTableEntry shootBottomWheelMaxVelocityEntry;
     public static NetworkTableEntry shootBottomWheelMinVelocityEntry;
+    public static NetworkTableEntry shootBottomWheelAverageVelocityEntry;
     public static NetworkTableEntry shootTopWheelMaxVelocityEntry;
     public static NetworkTableEntry shootTopWheelMinVelocityEntry;
+    public static NetworkTableEntry shootTopWheelAverageVelocityEntry;
 
     public static NetworkTableEntry shootDistanceEntry;
     public static NetworkTableEntry shootTargetFPSEntry;
@@ -60,12 +64,20 @@ public class ShooterBrain {
         shootBottomWheelMinVelocityEntry.setDouble(value);
     }
 
+    public static void setBottomWheelAverageVelocity(double value) {
+        shootTopWheelAverageVelocityEntry.setDouble(value);
+    }
+
     public static void setTopWheelMaxVelocity(double value) {
         shootTopWheelMaxVelocityEntry.setDouble(value);
     }
 
     public static void setTopWheelMinVelocity(double value) {
         shootTopWheelMinVelocityEntry.setDouble(value);
+    }
+
+    public static void setTopWheelAverageVelocity(double value) {
+        shootTopWheelAverageVelocityEntry.setDouble(value);
     }
 
     public static void setTargetFPS(double value) {

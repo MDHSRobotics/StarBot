@@ -22,8 +22,10 @@ public class ShooterTab {
 
     private SimpleWidget m_shooterBottomWheelMaxVelocity;
     private SimpleWidget m_shooterBottomWheelMinVelocity;
+    private SimpleWidget m_shooterBottomWheelAverageVelocity;
     private SimpleWidget m_shooterTopWheelMaxVelocity;
     private SimpleWidget m_shooterTopWheelMinVelocity;
+    private SimpleWidget m_shooterTopWheelAverageVelocity;
 
     private SimpleWidget m_shooterDistance;
     private SimpleWidget m_shooterTargetFPS;
@@ -76,6 +78,17 @@ public class ShooterTab {
         ShooterBrain.shootTopWheelMaxVelocityEntry = m_shooterTopWheelMaxVelocity.getEntry();
         m_shooterTopWheelMaxVelocity.withWidget(BuiltInWidgets.kTextView);
 
+        // Average Velocity
+        m_shooterBottomWheelAverageVelocity = m_bottomWheelLayout.add("Average Velocity (TpHMS)",
+                ShooterBrain.shootBottomWheelAverageVelocityDefault);
+        ShooterBrain.shootBottomWheelAverageVelocityEntry = m_shooterBottomWheelAverageVelocity.getEntry();
+        m_shooterBottomWheelAverageVelocity.withWidget(BuiltInWidgets.kTextView);
+
+        m_shooterTopWheelAverageVelocity = m_topWheelLayout.add("Average Velocity (TpHMS)",
+                ShooterBrain.shootTopWheelAverageVelocityDefault);
+        ShooterBrain.shootTopWheelAverageVelocityEntry = m_shooterTopWheelAverageVelocity.getEntry();
+        m_shooterTopWheelAverageVelocity.withWidget(BuiltInWidgets.kTextView);
+
         // Distance
         m_shooterDistance = m_shootTargetLayout.add("Distance (Feet)", ShooterBrain.shootDistanceDefault);
         ShooterBrain.shootDistanceEntry = m_shooterDistance.getEntry();
@@ -99,19 +112,19 @@ public class ShooterTab {
     // Configure all Widgets
     public void configure() {
         m_bottomWheelLayout.withPosition(0, 0);
-        m_bottomWheelLayout.withSize(2, 3);
+        m_bottomWheelLayout.withSize(2, 4);
         // m_bottomWheelLayout.withProperties(Map.of("Number of columns", 1));
         // m_bottomWheelLayout.withProperties(Map.of("Number of rows", 3));
         m_bottomWheelLayout.withProperties(Map.of("Label position", "TOP"));
 
         m_topWheelLayout.withPosition(2, 0);
-        m_topWheelLayout.withSize(2, 3);
+        m_topWheelLayout.withSize(2, 4);
         // m_topWheelLayout.withProperties(Map.of("Number of columns", 1));
         // m_topWheelLayout.withProperties(Map.of("Number of rows", 3));
         m_topWheelLayout.withProperties(Map.of("Label position", "TOP"));
 
         m_shootTargetLayout.withPosition(4, 0);
-        m_shootTargetLayout.withSize(1, 3);
+        m_shootTargetLayout.withSize(2, 2);
         // m_shootTargetLayout.withProperties(Map.of("Number of columns", 1));
         // m_shootTargetLayout.withProperties(Map.of("Number of rows", 3));
         m_shootTargetLayout.withProperties(Map.of("Label position", "TOP"));

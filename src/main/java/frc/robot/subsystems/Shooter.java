@@ -11,9 +11,7 @@ import frc.robot.brains.RobotBrain;
 import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.devices.DevTalonSRX;
-import frc.robot.subsystems.utils.EncoderUtils;
-import frc.robot.subsystems.utils.PIDValues;
-import frc.robot.subsystems.utils.TalonUtils;
+import frc.robot.subsystems.utils.*;
 
 import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
@@ -44,6 +42,12 @@ public class Shooter extends SubsystemBase {
     private double minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
     private double maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
 
+    private int sumTopVelocity = 0;
+    private int sumBottomVelocity = 0;
+    private int numberOfSamples = 0;
+    private double averageTopVelocity = 0;
+    private double averageBottomVelocity = 0;
+
     public Shooter() {
         Logger.setup("Constructing Subsystem: Shooter...");
 
@@ -52,7 +56,7 @@ public class Shooter extends SubsystemBase {
             PIDValues pidBottom = new PIDValues(0.087, 0.0, 0.0, 0.0);
             TalonUtils.configureTalonWithEncoder(talonSrxShooterBottomWheel, SENSOR_PHASE_BOTTOM, MOTOR_INVERT_BOTTOM, pidBottom);
 
-            PIDValues pidTop = new PIDValues(0.0885, 0.0, 0.0, 0.0);
+            PIDValues pidTop = new PIDValues(0.0885, 0.0, 0.0, 0.0); // kF should be 0.0015 greater than the bottom kF
             TalonUtils.configureTalonWithEncoder(talonSrxShooterTopWheel, SENSOR_PHASE_TOP, MOTOR_INVERT_TOP, pidTop);
         }
     }
@@ -60,12 +64,15 @@ public class Shooter extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+
         topVelocity = getTopWheelVelocity();
         bottomVelocity = getBottomWheelVelocity();
 
+        // Current Velocity
         ShooterBrain.setTopWheelCurrentVelocity(topVelocity);
         ShooterBrain.setBottomWheelCurrentVelocity(bottomVelocity);
 
+        // Min and Max Velocity
         if (topVelocity < minTopVelocity) minTopVelocity = topVelocity;
         if (topVelocity > maxTopVelocity) maxTopVelocity = topVelocity;
         if (bottomVelocity < minBottomVelocity) minBottomVelocity = bottomVelocity;
@@ -75,6 +82,16 @@ public class Shooter extends SubsystemBase {
         ShooterBrain.setBottomWheelMaxVelocity(maxBottomVelocity);
         ShooterBrain.setTopWheelMinVelocity(minTopVelocity);
         ShooterBrain.setTopWheelMaxVelocity(maxTopVelocity);
+
+        // Average Velocity
+        sumTopVelocity += topVelocity;
+        sumBottomVelocity += bottomVelocity;
+        numberOfSamples++;
+        averageTopVelocity = sumTopVelocity / numberOfSamples;
+        averageBottomVelocity = sumBottomVelocity / numberOfSamples;
+
+        ShooterBrain.setBottomWheelAverageVelocity(averageBottomVelocity);
+        ShooterBrain.setTopWheelAverageVelocity(averageTopVelocity);
     }
 
     // TODO Do we really need the following 5 methods?
@@ -87,8 +104,8 @@ public class Shooter extends SubsystemBase {
 
     private void spinWheel(DevTalonSRX talon, double velocity) {
         double nativeVelocity = EncoderUtils.translateFPSToTicksPerDecisecond(velocity, WHEEL_DIAMETER, GEAR_RATIO) / 10;
-        Logger.info("Shooter -> FlyWheel Velocity:" + velocity + " FPS");
-        Logger.info("Shooter -> FlyWheel Native Velocity:" + nativeVelocity + " TPDS");
+        Logger.info("Shooter -> FlyWheel Velocity: " + velocity + " FPS");
+        Logger.info("Shooter -> FlyWheel Native Velocity: " + nativeVelocity + " TPDS");
 
         Logger.action("Shooter -> Setting " + talon.getName() + " velocity...");
         talon.set(ControlMode.Velocity, nativeVelocity);
@@ -133,7 +150,6 @@ public class Shooter extends SubsystemBase {
 
         // The data below is based on shooting experiments conducted on March 5, 2020:
         // (Feet per second, Ticks per 100ms)
-        // TODO Update the values in the table below based on latest experiment
         luTable.put(22.676, 4671.); // 8
         luTable.put(19.753, 4275.); // 10
         luTable.put(27.878, 5425.); // 7
@@ -179,8 +195,7 @@ public class Shooter extends SubsystemBase {
         double fHeight = RobotBrain.fieldTargetHeightFeet;
 
         double distanceFeet = ShooterBrain.getShootDistance();
-        // TODO Use a bit more precise value for acceleration due to gravity
-        double numerator = 32.2 * Math.pow(distanceFeet, 2);
+        double numerator = 32.174 * Math.pow(distanceFeet, 2);
         double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle) - (fHeight - sHeight) * Math.pow(Math.cos(sAngle), 2));
         double velocityFPS = Math.sqrt(numerator) / Math.sqrt(denominator);
 
@@ -202,7 +217,7 @@ public class Shooter extends SubsystemBase {
 
     // Get the current Shooter BottomWheel motor velocity
     public int getBottomWheelVelocity() {
-        int velocity = talonSrxShooterBottomWheel.getSelectedSensorVelocity();
+        int velocity = talonSrxShooterBottomWheel.getSelectedSensorVelocity() / 10;
         return velocity;
     }
 
@@ -215,7 +230,7 @@ public class Shooter extends SubsystemBase {
 
     // Get the current Shooter TopWheel motor velocity
     public int getTopWheelVelocity() {
-        int velocity = talonSrxShooterTopWheel.getSelectedSensorVelocity();
+        int velocity = talonSrxShooterTopWheel.getSelectedSensorVelocity() / 10;
         return velocity;
     }
 
