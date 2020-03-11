@@ -2,6 +2,7 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.BotCommands;
@@ -35,6 +36,7 @@ public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
 
+        InstantCommand printScenarioName = new InstantCommand(() -> Logger.info("Starting Auto Scenario #1") );
         // TODO The wait duration should be in Shuffleboard
         WaitCommand initialWait = new WaitCommand(2.);
         ShootCG firstShoot = new ShootCG(BotSubsystems.shooter);
@@ -54,22 +56,23 @@ public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
         StopShooterCG secondStopShooter = new StopShooterCG(BotSubsystems.shooter);
         AutoDriveForward autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);;
 
-        Command cmdSequence[] = {initialWait,
-                                firstShoot.withTimeout(2),
-                                firstStopConveyor,
-                                firstStopShooter,
-                                firstAutoAlign,
-                                autoDriveAndPickUp,
-                                stopConveyorwithRoller,
-                                stopRoller,
-                                autoDriveFromPickUp,
-                                autoDriveToShoot,
-                                secondAutoAlign,
-                                secondReverseConveyor,
-                                secondShoot.withTimeout(2),
-                                secondStopConveyor,
-                                secondStopShooter,
-                                autoDriveForward
+        Command cmdSequence[] = {   printScenarioName,
+                                    initialWait,
+                                    firstShoot.withTimeout(2),
+                                    firstStopConveyor,
+                                    firstStopShooter,
+                                    firstAutoAlign,
+                                    autoDriveAndPickUp,
+                                    stopConveyorwithRoller,
+                                    stopRoller,
+                                    autoDriveFromPickUp,
+                                    autoDriveToShoot,
+                                    secondAutoAlign,
+                                    secondReverseConveyor,
+                                    secondShoot.withTimeout(2),
+                                    secondStopConveyor,
+                                    secondStopShooter,
+                                    autoDriveForward
         };
 
         for (int i=0; i < cmdSequence.length; i++) {

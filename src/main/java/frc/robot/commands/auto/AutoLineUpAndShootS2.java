@@ -2,6 +2,7 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.BotCommands;
@@ -34,6 +35,7 @@ public class AutoLineUpAndShootS2 extends SequentialCommandGroup {
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
 
+        InstantCommand printScenarioName = new InstantCommand(() -> Logger.info("Starting Auto Scenario #2"));
         // TODO The wait duration should be in Shuffleboard
         WaitCommand initialWait = new WaitCommand(2.);
         ReverseConveyorCG reverseConveyor = new ReverseConveyorCG(BotSubsystems.conveyor);
@@ -43,7 +45,8 @@ public class AutoLineUpAndShootS2 extends SequentialCommandGroup {
         AutoAlign autoAlign = new AutoAlign(BotSubsystems.diffDriver);
         AutoDriveForward autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
 
-        Command cmdSequence[] = {   initialWait,
+        Command cmdSequence[] = {   printScenarioName,
+                                    initialWait,
                                     reverseConveyor,
                                     shoot.withTimeout(2),
                                     stopConveyor,
