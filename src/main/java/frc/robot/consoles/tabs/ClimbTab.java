@@ -3,9 +3,10 @@ package frc.robot.consoles.tabs;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.*;
-import frc.robot.BotSensors;
+
 import frc.robot.brains.ClimbBrain;
 import frc.robot.consoles.ShuffleLogger;
+import frc.robot.BotSensors;
 
 // The Shuffleboard Climb tab.
 public class ClimbTab {
@@ -31,6 +32,7 @@ public class ClimbTab {
 
     // Create Brain Widgets
     public void preInitialize() {
+        // Subsystems
         m_balancerPowerWidget = m_tab.add("Balancer Power", ClimbBrain.balancerPowerDefault);
         ClimbBrain.balancerPowerEntry = m_balancerPowerWidget.getEntry();
 
@@ -40,7 +42,7 @@ public class ClimbTab {
         m_legRotationsWidget = m_tab.add("Leg Rotations", ClimbBrain.legRotationsDefault);
         ClimbBrain.legRotationsEntry = m_legRotationsWidget.getEntry();
 
-
+        // Sensors
         m_brightnessWidget = m_tab.add("Brightness", ClimbBrain.brightnessDefault);
         ClimbBrain.brightnessEntry = m_brightnessWidget.getEntry();
 
@@ -57,6 +59,7 @@ public class ClimbTab {
 
     // Configure all Widgets
     public void configure() {
+        // Subsystems
         m_balancerPowerWidget.withWidget(BuiltInWidgets.kTextView);
         m_balancerPowerWidget.withPosition(0, 0);
 
@@ -66,7 +69,7 @@ public class ClimbTab {
         m_legRotationsWidget.withWidget(BuiltInWidgets.kTextView);
         m_legRotationsWidget.withPosition(0, 2);
 
-
+        // Sensors
         m_brightnessWidget.withWidget(BuiltInWidgets.kTextView);
         m_brightnessWidget.withPosition(0, 3);
 

@@ -3,7 +3,7 @@ package frc.robot.brains;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 
-// This class contains all the shared NetworkTableEntries for the ClimbBalancer Subsystem,
+// This class contains all the shared NetworkTableEntries for the Climb Subsystems,
 // their default values, and methods for retrieving their current values.
 public class ClimbBrain {
 
@@ -50,7 +50,6 @@ public class ClimbBrain {
     public static double getLegRotations() {
         return legRotationsEntry.getDouble(legRotationsDefault);
     }
-
 
     public static double getBrightness() {
         return brightnessEntry.getDouble(brightnessDefault);
