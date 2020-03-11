@@ -4,6 +4,7 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
+import frc.robot.sensors.Limelight;
 import frc.robot.subsystems.Shooter;
 
 // This command activates the shoot mechanism.

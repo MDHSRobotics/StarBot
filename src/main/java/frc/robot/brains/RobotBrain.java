@@ -2,6 +2,7 @@
 package frc.robot.brains;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import frc.robot.sensors.Limelight;
 
 // This class contains all the shared NetworkTableEntries for the Shooter Subsystem,
 // their default values, and methods for retrieving their current values.

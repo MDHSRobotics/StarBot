@@ -11,6 +11,7 @@ import frc.robot.brains.RobotBrain;
 import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.devices.DevTalonSRX;
+import frc.robot.sensors.Limelight;
 import frc.robot.subsystems.utils.EncoderUtils;
 import frc.robot.subsystems.utils.PIDValues;
 import frc.robot.subsystems.utils.TalonUtils;
@@ -180,6 +181,31 @@ public class Shooter extends SubsystemBase {
         // TODO Use a bit more precise value for acceleration due to gravity
         double numerator = 32.2 * Math.pow(distanceFeet, 2);
         double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle) - (fHeight - sHeight) * Math.pow(Math.cos(sAngle), 2));
+        double velocityFPS = Math.sqrt(numerator) / Math.sqrt(denominator);
+
+        // Convert the desired ball velocity (ft/sec) into the required motor speed (Ticks per 100 ms)
+        double nativeVelocity = translateFPSToTicksViaTable(velocityFPS);
+
+        talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
+        talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
+
+        // Update values for Shuffleboard
+        ShooterBrain.setTargetFPS(velocityFPS);
+        ShooterBrain.setTargetTPHMS(nativeVelocity);
+
+    }
+
+    public void shootBasedOnDistanceLimelight() {
+        double sHeight = RobotBrain.shooterHeightFeetDefault;
+        double sAngle = RobotBrain.shooterAngleDegreesDefault;
+        double fHeight = RobotBrain.fieldTargetHeightFeet;
+
+        double distanceFeet = Limelight.calculateDistanceToTarget();
+
+        // TODO Use a bit more precise value for acceleration due to gravity
+        double numerator = 32.2 * Math.pow(distanceFeet, 2);
+        double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle)
+                - (fHeight - sHeight) * Math.pow(Math.cos(sAngle), 2));
         double velocityFPS = Math.sqrt(numerator) / Math.sqrt(denominator);
 
         // Convert the desired ball velocity (ft/sec) into the required motor speed (Ticks per 100 ms)

@@ -2,6 +2,7 @@
 package frc.robot.brains;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import frc.robot.sensors.Limelight;
 
 // This class contains all the shared NetworkTableEntries for the Shooter Subsystem,
 // their default values, and methods for retrieving their current values.
@@ -23,6 +24,9 @@ public class ShooterBrain {
     public static double shootDistanceDefault = 11.38;
     public static double shootTargetFPSDefault = 0.;
     public static double shootTargetTPHMSDefault = 0.;
+
+    // Shooting distance using limelight
+    public static double shootDistanceLimelight = Limelight.calculateDistanceToTarget();
 
     //---------------------//
     // NetworkTableEntries //
