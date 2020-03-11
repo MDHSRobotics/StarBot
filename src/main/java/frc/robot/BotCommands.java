@@ -15,9 +15,11 @@ import frc.robot.commands.rollerarm.*;
 import frc.robot.commands.sensors.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
+
 import frc.robot.subsystems.ClimbBalancer.BalanceDirection;
 import frc.robot.subsystems.ClimbHook.HookPosition;
 import frc.robot.subsystems.Conveyor.ConveyorDirection;
+import frc.robot.subsystems.RollerArm.RollerArmPosition;
 
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
@@ -80,8 +82,8 @@ public class BotCommands {
     public static StopRoller stopRoller;
 
     // RollerArm
-    public static LowerRollerArm lowerRollerArm;
-    public static RaiseRollerArm raiseRollerArm;
+    public static MoveRollerArm raiseRollerArm;
+    public static MoveRollerArm lowerRollerArm;
     public static ToggleRollerArm toggleRollerArm;
 
     // Sensors
@@ -155,8 +157,8 @@ public class BotCommands {
         stopRoller = new StopRoller(BotSubsystems.roller);
 
         // RollerArm
-        lowerRollerArm = new LowerRollerArm(BotSubsystems.rollerArm);
-        raiseRollerArm = new RaiseRollerArm(BotSubsystems.rollerArm);
+        lowerRollerArm = new MoveRollerArm(BotSubsystems.rollerArm, RollerArmPosition.lower);
+        raiseRollerArm = new MoveRollerArm(BotSubsystems.rollerArm, RollerArmPosition.raise);
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
 
         // Sensors

@@ -11,6 +11,9 @@ import static frc.robot.subsystems.Devices.solenoidRollerArm;
 // Arm subsystem for the Roller, for raising and lowering the Roller.
 public class RollerArm extends SubsystemBase {
 
+    public enum RollerArmPosition {
+        lower, raise;
+    }
     // State variables
     public boolean armIsUp = true;
 
@@ -37,14 +40,17 @@ public class RollerArm extends SubsystemBase {
         armIsUp = !armIsUp;
     }
 
-    // Lower the roller arm
-    public void lowerArm() {
-        solenoidRollerArm.set(true);
-    }
+    // Lower or raise the roller arm
+    public void moveArm(RollerArmPosition rollerArmPosition) {
+        switch(rollerArmPosition) {
+            case raise:
+                solenoidRollerArm.set(true);
+                break;
+            case lower:
+                solenoidRollerArm.set(false);
+                break;
+        }
 
-    // Raise the roller arm
-    public void raiseArm() {
-        solenoidRollerArm.set(false);
     }
 
 }
