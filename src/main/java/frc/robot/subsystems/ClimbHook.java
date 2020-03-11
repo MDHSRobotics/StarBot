@@ -16,7 +16,7 @@ import static frc.robot.subsystems.constants.TalonConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxClimbHook;
 import static frc.robot.RobotManager.isReal;
 
-// ClimbHook subsystem, for extending and retracting the climb hook with redline motors.
+// ClimbHook subsystem, for extending and retracting the climb hook.
 public class ClimbHook extends SubsystemBase {
 
     // State variables

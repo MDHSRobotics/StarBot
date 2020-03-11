@@ -9,8 +9,7 @@ public class BotSubsystems {
 
     public static ClimbBalancer climbBalancer;
     public static ClimbHook climbHook;
-    public static ClimbLegsRed climbLegsRed;
-    public static ClimbLegsSpark climbLegsSpark;
+    public static ClimbLegs climbLegs;
     public static Conveyor conveyor;
     public static DiffDriver diffDriver;
     public static DiffDriver diffDriverAlternate;
@@ -25,8 +24,7 @@ public class BotSubsystems {
 
         climbBalancer = new ClimbBalancer();
         climbHook = new ClimbHook();
-        climbLegsRed = new ClimbLegsRed();
-        climbLegsSpark = new ClimbLegsSpark();
+        climbLegs = new ClimbLegs();
         conveyor = new Conveyor();
         diffDriverAlternate = new DiffDriverSpark(); // Swap the diffDrivers if changed on the robot
         diffDriver = new DiffDriverTalon();
@@ -46,13 +44,9 @@ public class BotSubsystems {
         Logger.setup("ClimbHook Default Command -> StopHook...");
         climbHook.setDefaultCommand(BotCommands.stopHook);
 
-        // Climb Legs Red
-        Logger.setup("ClimbLegsRed Default Command -> StopRedLegs...");
-        climbLegsRed.setDefaultCommand(BotCommands.stopRedLegs);
-
-        // Climb Legs Spark
-        Logger.setup("ClimbLegsSpark Default Command -> StopSparkLegs...");
-        climbLegsSpark.setDefaultCommand(BotCommands.stopSparkLegs);
+        // Climb Legs
+        Logger.setup("ClimbLegs Default Command -> StopLegs...");
+        climbLegs.setDefaultCommand(BotCommands.stopLegs);
 
         // Conveyor
         Logger.setup("Conveyor Default Command -> StopConveyor...");
