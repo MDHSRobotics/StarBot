@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbHook;
 
-// This command stops the climb hook.
-public class StopHook extends CommandBase {
+// This command aims the climb hook before fully extending.
+public class AimHook extends CommandBase {
 
     private ClimbHook m_climbHook;
 
-    public StopHook(ClimbHook climbHook) {
-        Logger.setup("Constructing Command: StopHook...");
+    public AimHook(ClimbHook climbHook) {
+        Logger.setup("Constructing Command: AimHook...");
 
         // Add given subsystem requirements
         m_climbHook = climbHook;
@@ -21,12 +21,13 @@ public class StopHook extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: StopHook...");
+        Logger.action("Initializing Command: AimHook...");
+
+        m_climbHook.aimHook();
     }
 
     @Override
     public void execute() {
-        m_climbHook.stop();
     }
 
     // This command continues until interrupted
@@ -39,9 +40,9 @@ public class StopHook extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: StopHook...");
+            Logger.ending("Interrupting Command: AimHook...");
         } else {
-            Logger.ending("Ending Command: StopHook...");
+            Logger.ending("Ending Command: AimHook...");
         }
         m_climbHook.stop();
     }

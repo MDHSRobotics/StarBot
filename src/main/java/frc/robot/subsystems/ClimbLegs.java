@@ -17,8 +17,8 @@ import static frc.robot.subsystems.Devices.talonSrxClimbLegsA;
 import static frc.robot.subsystems.Devices.talonSrxClimbLegsB;
 import static frc.robot.RobotManager.isReal;
 
-// ClimbLegsRed subsystem, for extending and retracting the climb legs with redline motors.
-public class ClimbLegsRed extends SubsystemBase {
+// ClimbLegs subsystem, for extending and retracting the climb legs.
+public class ClimbLegs extends SubsystemBase {
 
     // State variables
     public boolean legsAreRetracted = false;
@@ -35,8 +35,8 @@ public class ClimbLegsRed extends SubsystemBase {
     private final boolean SENSOR_PHASE_B = false;
     private final boolean MOTOR_INVERT_B = false;
 
-    public ClimbLegsRed() {
-        Logger.setup("Constructing Subsystem: ClimbLegsRed...");
+    public ClimbLegs() {
+        Logger.setup("Constructing Subsystem: ClimbLegs...");
 
         if (isReal) {
             // Configure devices

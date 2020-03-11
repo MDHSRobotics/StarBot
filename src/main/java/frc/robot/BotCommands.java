@@ -1,15 +1,12 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.commands.auto.*;
 import frc.robot.commands.climbbalancer.*;
 import frc.robot.commands.climbhook.*;
-//import frc.robot.commands.climblegs.*;
-import frc.robot.commands.climblegsred.*;
-import frc.robot.commands.climblegsspark.*;
+import frc.robot.commands.climblegs.*;
 import frc.robot.commands.conveyor.*;
 import frc.robot.commands.diffdriver.*;
 import frc.robot.commands.lighter.*;
@@ -41,29 +38,23 @@ public class BotCommands {
     public static AutoWait autoWaitS1;
     public static AutoWait autoWaitS2;
 
-
     // Climb Balancer
     public static BalanceLeft balanceLeft;
     public static BalanceRight balanceRight;
     public static StopBalancer stopBalancer;
 
     // Climb Hook
-    public static MoveHookBackward moveHookBackward;
-    public static MoveHookForward moveHookForward;
+    public static AimHook aimHook;
+    public static ExtendHook extendHook;
+    public static RetractHook retractHook;
     public static StopHook stopHook;
     public static ToggleHook toggleHook;
 
-    // Climb Legs Red
-    public static ExtendRedLegs extendRedLegs;
-    public static RetractRedLegs retractRedLegs;
-    public static StopRedLegs stopRedLegs;
-    public static ToggleRedLegs toggleRedLegs;
-
-    // Climb Legs Spark
-    public static ExtendSparkLegs extendSparkLegs;
-    public static RetractSparkLegs retractSparkLegs;
-    public static StopSparkLegs stopSparkLegs;
-    public static ToggleSparkLegs toggleSparkLegs;
+    // Climb Legs
+    public static ExtendLegs extendLegs;
+    public static RetractLegs retractLegs;
+    public static StopLegs stopLegs;
+    public static ToggleLegs toggleLegs;
 
     // Conveyor
     public static ForwardConveyor forwardConveyor;
@@ -149,22 +140,17 @@ public class BotCommands {
         stopBalancer = new StopBalancer(BotSubsystems.climbBalancer);
 
         // Climb Hook
-        moveHookBackward = new MoveHookBackward(BotSubsystems.climbHook);
-        moveHookForward = new MoveHookForward(BotSubsystems.climbHook);
+        aimHook = new AimHook(BotSubsystems.climbHook);
+        extendHook = new ExtendHook(BotSubsystems.climbHook);
+        retractHook = new RetractHook(BotSubsystems.climbHook);
         toggleHook = new ToggleHook(BotSubsystems.climbHook);
         stopHook = new StopHook(BotSubsystems.climbHook);
 
-        // Climb Legs Red
-        extendRedLegs = new ExtendRedLegs(BotSubsystems.climbLegsRed);
-        retractRedLegs = new RetractRedLegs(BotSubsystems.climbLegsRed);
-        stopRedLegs = new StopRedLegs(BotSubsystems.climbLegsRed);
-        toggleRedLegs = new ToggleRedLegs(BotSubsystems.climbLegsRed);
-
-        // Climb Legs Spark
-        extendSparkLegs = new ExtendSparkLegs(BotSubsystems.climbLegsSpark);
-        retractSparkLegs = new RetractSparkLegs(BotSubsystems.climbLegsSpark);
-        stopSparkLegs = new StopSparkLegs(BotSubsystems.climbLegsSpark);
-        toggleSparkLegs = new ToggleSparkLegs(BotSubsystems.climbLegsSpark);
+        // Climb Legs
+        extendLegs = new ExtendLegs(BotSubsystems.climbLegs);
+        retractLegs = new RetractLegs(BotSubsystems.climbLegs);
+        stopLegs = new StopLegs(BotSubsystems.climbLegs);
+        toggleLegs = new ToggleLegs(BotSubsystems.climbLegs);
 
         // Conveyor
         forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);

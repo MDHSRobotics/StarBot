@@ -6,21 +6,21 @@ import frc.robot.consoles.Logger;
 // Configures all the button->command bindings for the robot.
 public class ButtonBindings {
 
-    //Configure xbox buttons
+    // Configure joystick buttons
     public static void configureJoystick() {
         Logger.setup("Configure Buttons -> Joystick Controller...");
 
-    //DiffDriver
+        //DiffDriver
         BotControllers.jstick.jstickBtn1.whileHeld(BotCommands.alignDiffDriveToTarget);
         // BotControllers.jstick.jstickBtn7.whileHeld(BotCommands.alignDiffDriveToGyro);
 
-    //Limelight
+        //Limelight
         BotControllers.jstick.jstickBtn1.whenReleased(BotCommands.turnOffLimelightArray);
 
-    //Climb
+        //Climb
         BotControllers.jstick.jstickBtn9.whileHeld(BotCommands.stopHook);
         BotControllers.jstick.jstickBtn11.whenPressed(BotCommands.toggleHook);
-        BotControllers.jstick.jstickBtn12.whenPressed(BotCommands.toggleRedLegs);
+        BotControllers.jstick.jstickBtn12.whenPressed(BotCommands.toggleLegs);
 
         BotControllers.jstick.jstickBtn3.whileHeld(BotCommands.balanceLeft);
         BotControllers.jstick.jstickBtn4.whileHeld(BotCommands.balanceRight);
@@ -29,11 +29,12 @@ public class ButtonBindings {
     // Configure xbox buttons
     public static void configureXbox() {
         Logger.setup("Configure Buttons -> Xbox Controller...");
+
         // RollerArm
         BotControllers.xbox.btnY.whenPressed(BotCommands.toggleRollerArm);
 
         // Roller
-        //BotControllers.secondary.btnX.whileHeld(BotCommands.reverseRoller);
+        // BotControllers.xbox.btnX.whileHeld(BotCommands.reverseRoller);
         // BotControllers.xbox.btnB.whileHeld(BotCommands.spinRollerAndConveyor);
 
         // Conveyor & Shooter
