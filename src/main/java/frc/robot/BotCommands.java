@@ -75,8 +75,6 @@ public class BotCommands {
     public static CycleLights cycleLights;
 
     // Roller
-    public static SpinRoller spinRoller;
-    public static SpinRollerCG spinRollerCG;
     public static SpinRollerAndConveyor spinRollerAndConveyor;
     public static StopRoller stopRoller;
 
@@ -152,8 +150,6 @@ public class BotCommands {
         cycleLights = new CycleLights(BotSubsystems.lighter);
 
         // Roller
-        spinRoller = new SpinRoller(BotSubsystems.roller);
-        spinRollerCG = new SpinRollerCG(BotSubsystems.roller);
         spinRollerAndConveyor = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
         stopRoller = new StopRoller(BotSubsystems.roller);
 
