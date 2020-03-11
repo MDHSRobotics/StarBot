@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import frc.robot.brains.ConveyorBrain;
 import frc.robot.consoles.Logger;
 import frc.robot.devices.DevTalonSRX;
 
@@ -12,9 +13,6 @@ import static frc.robot.RobotManager.isReal;
 
 // Conveyor subsystem, for delivering the balls to the shoot system.
 public class Conveyor extends SubsystemBase {
-
-    // Motor constants
-    private final double POWER = 0.5;
 
     public Conveyor() {
         Logger.setup("Constructing Subsystem: Conveyor...");
@@ -47,14 +45,16 @@ public class Conveyor extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // Moves the conveyor forward at a pre-defined speed
+    // Moves the conveyor forward
     public void forward() {
-        talonSrxConveyor.set(-POWER);
+        double power = ConveyorBrain.getPower();
+        talonSrxConveyor.set(-power);
     }
 
-    // Moves the conveyor back at a pre-defined speed
+    // Moves the conveyor back
     public void reverse() {
-        talonSrxConveyor.set(POWER);
+        double power = ConveyorBrain.getPower();
+        talonSrxConveyor.set(power);
     }
 
     // Stop the conveyor
