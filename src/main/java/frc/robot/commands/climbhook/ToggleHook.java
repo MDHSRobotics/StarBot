@@ -25,10 +25,10 @@ public class ToggleHook extends InstantCommand {
         Logger.action("Initializing InstantCommand: ToggleHook...");
 
         if (m_climbHook.hookIsAimed) {
-            Logger.action("ClimbHook -> Move Hook Forward...");
+            Logger.action("ClimbHook -> EXTENDING...");
             BotCommands.extendHook.schedule();
         } else {
-            Logger.action("ClimbHook -> Aim Hook...");
+            Logger.action("ClimbHook -> AIMING...");
             BotCommands.aimHook.schedule();
         }
         m_climbHook.toggleHookPosition();

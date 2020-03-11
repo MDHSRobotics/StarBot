@@ -24,10 +24,10 @@ public class ToggleLegs extends InstantCommand {
         Logger.action("Initializing InstantCommand: ToggleLegs...");
 
         if (m_climbLegs.legsAreRetracted) {
-            Logger.action("ToggleLegs -> RETRACTING the climb legs...");
+            Logger.action("ToggleLegs -> RETRACTING...");
             BotCommands.retractLegs.schedule();
         } else {
-            Logger.action("ToggleLegs -> EXTENDING the climb legs...");
+            Logger.action("ToggleLegs -> EXTENDING...");
             BotCommands.extendLegs.schedule();
         }
         m_climbLegs.toggleLegsPosition();
