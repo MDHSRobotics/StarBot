@@ -74,12 +74,12 @@ public class BotCommands {
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
     public static AlignDiffDriveToTarget alignDiffDriveToTarget;
-    public static AssistedClimbToTargetRight assistedClimbToTargetRight;
-    public static AssistedClimbToTargetLeft assistedClimbToTargetLeft;
     public static DriveDiffArcade driveDiffArcade;
     public static DriveDiffTank driveDiffTank;
     public static DriveDiffToWithinRange driveDiffToWithinRangeFront;
     public static DriveDiffToWithinRange driveDiffToWithinRangeTop;
+    public static RotateTowardsLevel rotateTowardsLeftLevel;
+    public static RotateTowardsLevel rotateTowardsRightLevel;
 
     // DiffDriverAlternate
     public static StopDiffDrive stopDiffDrive;
@@ -173,8 +173,8 @@ public class BotCommands {
         // DiffDriver
         // alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.xbox);
         alignDiffDriveToTarget = new AlignDiffDriveToTarget(BotSubsystems.diffDriver);
-        assistedClimbToTargetRight = new AssistedClimbToTargetRight(BotSubsystems.diffDriver);
-        assistedClimbToTargetLeft = new AssistedClimbToTargetLeft(BotSubsystems.diffDriver);
+        rotateTowardsLeftLevel = new RotateTowardsLevel(BotSubsystems.diffDriver, -112.48);
+        rotateTowardsRightLevel = new RotateTowardsLevel(BotSubsystems.diffDriver, 67.52);
         driveDiffArcade = new DriveDiffArcade(BotSubsystems.diffDriver, BotJoystick.joystick);
         driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.xbox);
         driveDiffToWithinRangeFront = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorFront, 2, 3);
