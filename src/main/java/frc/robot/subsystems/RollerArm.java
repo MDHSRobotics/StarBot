@@ -12,8 +12,9 @@ import static frc.robot.subsystems.Devices.solenoidRollerArm;
 public class RollerArm extends SubsystemBase {
 
     public enum RollerArmPosition {
-        lower, raise;
+        raise, lower;
     }
+
     // State variables
     public boolean armIsUp = true;
 
@@ -40,7 +41,7 @@ public class RollerArm extends SubsystemBase {
         armIsUp = !armIsUp;
     }
 
-    // Lower or raise the roller arm
+    // Raise or lower the roller arm
     public void moveArm(RollerArmPosition rollerArmPosition) {
         switch(rollerArmPosition) {
             case raise:
