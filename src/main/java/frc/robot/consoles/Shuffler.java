@@ -19,9 +19,7 @@ public class Shuffler {
     private RollerArmTab m_rollerArmTab;
     private RollerTab m_rollerTab;
     private ShooterTab m_shooterTab;
-    private ClimbHookTab m_climbHookTab;
-    private ClimbLegsSparkTab m_climbLegsSparkTab;
-    private ClimbBalancerTab m_climbBalancerTab;
+    private ClimbTab m_climbTab;
     private DebugTab m_debugTab;
 
     public Shuffler() {
@@ -33,9 +31,7 @@ public class Shuffler {
         m_rollerArmTab = new RollerArmTab();
         m_rollerTab = new RollerTab();
         m_shooterTab = new ShooterTab();
-        m_climbHookTab = new ClimbHookTab();
-        m_climbLegsSparkTab = new ClimbLegsSparkTab();
-        m_climbBalancerTab = new ClimbBalancerTab();
+        m_climbTab = new ClimbTab();
         m_debugTab = new DebugTab();
     }
 
@@ -48,9 +44,7 @@ public class Shuffler {
         m_rollerArmTab.preInitialize();
         m_rollerTab.preInitialize();
         m_shooterTab.preInitialize();
-        m_climbHookTab.preInitialize();
-        m_climbLegsSparkTab.preInitialize();
-        m_climbBalancerTab.preInitialize();
+        m_climbTab.preInitialize();
         m_debugTab.preInitialize();
     }
 
@@ -63,9 +57,7 @@ public class Shuffler {
         m_rollerArmTab.initialize();
         m_rollerTab.initialize();
         m_shooterTab.initialize();
-        m_climbHookTab.initialize();
-        m_climbLegsSparkTab.initialize();
-        m_climbBalancerTab.initialize();
+        m_climbTab.initialize();
         m_debugTab.initialize();
     }
 
@@ -78,9 +70,7 @@ public class Shuffler {
         m_rollerArmTab.configure();
         m_rollerTab.configure();
         m_shooterTab.configure();
-        m_climbHookTab.configure();
-        m_climbLegsSparkTab.configure();
-        m_climbBalancerTab.configure();
+        m_climbTab.configure();
         m_debugTab.configure();
 
         setupSmartdashboard();
@@ -93,9 +83,7 @@ public class Shuffler {
         m_rollerArmTab.update();
         m_rollerTab.update();
         m_shooterTab.update();
-        m_climbHookTab.update();
-        m_climbLegsSparkTab.update();
-        m_climbBalancerTab.update();
+        m_climbTab.update();
         m_debugTab.update();
     }
 

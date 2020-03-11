@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.brains.ClimbBalancerBrain;
+import frc.robot.brains.ClimbBrain;
 import frc.robot.consoles.Logger;
 
 import static frc.robot.subsystems.Devices.talonSrxClimbBalancer;
@@ -27,13 +27,13 @@ public class ClimbBalancer extends SubsystemBase {
 
     // Move the balancer right
     public void moveRight() {
-        double power = ClimbBalancerBrain.getPower();
+        double power = ClimbBrain.getBalancerPower();
         talonSrxClimbBalancer.set(power);
     }
 
     // Move the balancer left
     public void moveLeft() {
-        double power = ClimbBalancerBrain.getPower();
+        double power = ClimbBrain.getBalancerPower();
         talonSrxClimbBalancer.set(-power);
     }
 
