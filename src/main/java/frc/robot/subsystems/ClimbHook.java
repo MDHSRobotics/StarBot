@@ -19,6 +19,12 @@ import static frc.robot.RobotManager.isReal;
 // ClimbHook subsystem, for extending and retracting the climb hook.
 public class ClimbHook extends SubsystemBase {
 
+    public enum HookPosition {
+        aim, extend, retract;
+    }
+
+    private double ticks = 0;
+
     // State variables
     public boolean hookIsAimed = false;
 
@@ -94,21 +100,22 @@ public class ClimbHook extends SubsystemBase {
         talonSrxClimbHook.stopMotor();
     }
 
-    // Aim the hook before extending
-    public void aimHook() {
-        double ticks = EncoderUtils.translateDistanceToTicks(DISTANCE_AIM, SPOOL_DIAMETER, GEAR_RATIO);
-        talonSrxClimbHook.set(ControlMode.MotionMagic, ticks);
-    }
+    public void changeHookPosition(HookPosition hookPosition) {
+        switch(hookPosition) {
+            case aim:
+                ticks = EncoderUtils.translateDistanceToTicks(DISTANCE_AIM, SPOOL_DIAMETER, GEAR_RATIO);
+                talonSrxClimbHook.set(ControlMode.MotionMagic, ticks);
+                break;
 
-    // Fully extend the hook
-    public void extendHook() {
-        double ticks = EncoderUtils.translateDistanceToTicks(DISTANCE_FORWARD, SPOOL_DIAMETER, GEAR_RATIO);
-        talonSrxClimbHook.set(ControlMode.MotionMagic, ticks);
-    }
+            case extend:
+                ticks = EncoderUtils.translateDistanceToTicks(DISTANCE_FORWARD, SPOOL_DIAMETER, GEAR_RATIO);
+                talonSrxClimbHook.set(ControlMode.MotionMagic, ticks);
+                break;
 
-    // Retract the hook back to its starting position
-    public void retractHook() {
-        talonSrxClimbHook.set(ControlMode.MotionMagic, 0);
+            case retract:
+                talonSrxClimbHook.set(ControlMode.MotionMagic, 0);
+                break;
+        }
     }
 
     //---------//

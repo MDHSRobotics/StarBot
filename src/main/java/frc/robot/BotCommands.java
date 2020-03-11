@@ -16,6 +16,7 @@ import frc.robot.commands.sensors.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbBalancer.BalanceDirection;
+import frc.robot.subsystems.ClimbHook.HookPosition;
 import frc.robot.subsystems.Conveyor.ConveyorDirection;
 
 // Contains singleton instances of all the commands on the robot.
@@ -36,9 +37,9 @@ public class BotCommands {
     public static StopBalancer stopBalancer;
 
     // Climb Hook
-    public static AimHook aimHook;
-    public static ExtendHook extendHook;
-    public static RetractHook retractHook;
+    public static ChangeHookPosition extendHook;
+    public static ChangeHookPosition retractHook;
+    public static ChangeHookPosition aimHook;
     public static StopHook stopHook;
     public static ToggleHook toggleHook;
 
@@ -111,9 +112,9 @@ public class BotCommands {
         stopBalancer = new StopBalancer(BotSubsystems.climbBalancer);
 
         // Climb Hook
-        aimHook = new AimHook(BotSubsystems.climbHook);
-        extendHook = new ExtendHook(BotSubsystems.climbHook);
-        retractHook = new RetractHook(BotSubsystems.climbHook);
+        aimHook = new ChangeHookPosition(BotSubsystems.climbHook, HookPosition.aim);
+        extendHook = new ChangeHookPosition(BotSubsystems.climbHook, HookPosition.extend);
+        retractHook = new ChangeHookPosition(BotSubsystems.climbHook, HookPosition.retract);
         toggleHook = new ToggleHook(BotSubsystems.climbHook);
         stopHook = new StopHook(BotSubsystems.climbHook);
 
