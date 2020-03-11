@@ -8,6 +8,7 @@ import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.DiffDriver;
 import frc.robot.subsystems.Roller;
+import frc.robot.subsystems.Conveyor.ConveyorDirection;
 
 // This command starts the Shooter, waits one second, and then moves the Conveyor forward.
 public class AutoDriveAndPickUp extends CommandBase {
@@ -44,7 +45,7 @@ public class AutoDriveAndPickUp extends CommandBase {
         m_timer.start();
 
         m_roller.spin();
-        m_conveyor.forward();
+        m_conveyor.spin(ConveyorDirection.forward);
     }
 
     @Override

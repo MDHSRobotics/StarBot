@@ -21,7 +21,7 @@ public class VirtualButtonBindings {
         Logger.setup("Configure Virtual Buttons -> Secondary Virtual Controller...");
 
         // Conveyor
-        VirtualControllers.secondary.btnBumperLeft.whileActiveContinuous(BotCommands.reverseConveyor);
+        VirtualControllers.secondary.btnBumperLeft.whileActiveContinuous(BotCommands.spinConveyorForward);
     }
 
 }

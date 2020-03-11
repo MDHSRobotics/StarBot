@@ -5,14 +5,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Conveyor.ConveyorDirection;
 
-// This command moves the conveyor belt backward.
-public class ReverseConveyor extends CommandBase {
+// This command moves the conveyor belt either forwards or backwards.
+public class SpinConveyorCG extends CommandBase {
 
     private Conveyor m_conveyor;
+    private ConveyorDirection conveyorDirection;
 
-    public ReverseConveyor(Conveyor conveyor) {
-        Logger.setup("Constructing Command: ReverseConveyor...");
+    public SpinConveyorCG(Conveyor conveyor, ConveyorDirection conveyorDirection) {
+        Logger.setup("Constructing Command: SpinConveyorCG...");
+
+        this.conveyorDirection = conveyorDirection;
 
         // Add given subsystem requirements
         m_conveyor = conveyor;
@@ -21,12 +25,12 @@ public class ReverseConveyor extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: ReverseConveyor...");
+        Logger.action("Initializing Command: SpinConveyorCG...");
     }
 
     @Override
     public void execute() {
-        m_conveyor.reverse();
+        m_conveyor.spin(conveyorDirection);
     }
 
     @Override
@@ -38,9 +42,9 @@ public class ReverseConveyor extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: ReverseConveyor...");
+            Logger.ending("Interrupting Command: SpinConveyorCG...");
         } else {
-            Logger.ending("Ending Command: ReverseConveyor...");
+            Logger.ending("Ending Command: SpinConveyorCG...");
         }
         m_conveyor.stop();
     }

@@ -42,7 +42,7 @@ public class ButtonBindings {
 
         // Conveyor & Shooter
         BotControllers.xbox.btnX.whileHeld(BotCommands.spinRollerAndConveyor);
-        BotControllers.xbox.btnB.whileHeld(BotCommands.reverseConveyor);
+        BotControllers.xbox.btnB.whileHeld(BotCommands.spinConveyorBackward);
 
         // BotControllers.xbox.btnBumperLeft.whileHeld(BotCommands.reverseConveyor);
         BotControllers.xbox.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);

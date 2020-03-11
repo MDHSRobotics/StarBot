@@ -16,6 +16,7 @@ import frc.robot.commands.sensors.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbBalancer.BalanceDirection;
+import frc.robot.subsystems.Conveyor.ConveyorDirection;
 
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
@@ -48,13 +49,14 @@ public class BotCommands {
     public static ToggleLegs toggleLegs;
 
     // Conveyor
-    public static ForwardConveyor forwardConveyor;
-    public static ForwardConveyorCG firstForwardConveyorCGS1;
-    public static ForwardConveyorCG secondForwardConveyorCGS1;
-    public static ReverseConveyor reverseConveyor;
-    public static ReverseConveyor reverseConveyorBurst;
-    public static ReverseConveyorCG firstReverseConveyorCGS1;
+    public static SpinConveyor spinConveyorForward;
+    public static SpinConveyor spinConveyorBackward;
+    public static SpinConveyor reverseConveyorBurst;
     public static StopConveyor stopConveyor;
+    public static SpinConveyorCG firstSpinConveyorForwardCGS1;
+    public static SpinConveyorCG secondSpinConveyorForwardCGS1;
+    public static SpinConveyorCG firstSpinConveyorBackwardCGS1;
+
 
     // DiffDriver
     public static AlignDiffDriveToGyro alignDiffDriveToGyro;
@@ -124,12 +126,12 @@ public class BotCommands {
         toggleLegs = new ToggleLegs(BotSubsystems.climbLegs);
 
         // Conveyor
-        forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
-        firstForwardConveyorCGS1 = new ForwardConveyorCG(BotSubsystems.conveyor);
-        secondForwardConveyorCGS1 = new ForwardConveyorCG(BotSubsystems.conveyor);
-        reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
-        reverseConveyorBurst = new ReverseConveyor(BotSubsystems.conveyor);
-        firstReverseConveyorCGS1 = new ReverseConveyorCG(BotSubsystems.conveyor);
+        spinConveyorForward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.forward);
+        spinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
+        reverseConveyorBurst = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
+        firstSpinConveyorForwardCGS1 = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.forward);
+        secondSpinConveyorForwardCGS1 = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.forward);
+        firstSpinConveyorBackwardCGS1 = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.backward);
 
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
 
