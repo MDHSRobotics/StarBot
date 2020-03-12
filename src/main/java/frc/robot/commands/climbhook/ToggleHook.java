@@ -16,7 +16,6 @@ public class ToggleHook extends InstantCommand {
         Logger.setup("Constructing InstantCommand: ToggleHook...");
 
         m_climbHook = climbHook;
-        addRequirements(m_climbHook);
     }
 
     @Override

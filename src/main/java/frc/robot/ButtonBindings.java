@@ -21,7 +21,7 @@ public class ButtonBindings {
         BotControllers.jstick.jstickBtn1.whenReleased(BotCommands.turnOffLimelightArray);
 
         //Climb
-        BotControllers.jstick.jstickBtn9.whileHeld(BotCommands.stopHook);
+        BotControllers.jstick.jstickBtn9.whenPressed(BotCommands.retractHook);
         BotControllers.jstick.jstickBtn11.whenPressed(BotCommands.toggleHook);
         BotControllers.jstick.jstickBtn12.whenPressed(BotCommands.toggleLegs);
 
