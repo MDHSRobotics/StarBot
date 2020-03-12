@@ -6,6 +6,8 @@ import frc.robot.oi.controllers.VirtualXboxControllerContainer;
 // This class contains virtual controllers for use in simulating button events.
 public class VirtualControllers {
 
+    // TODO: Change these to match the real controllers
+
     // Virtual Controllers
     public static final VirtualXboxControllerContainer primary = new VirtualXboxControllerContainer();
     public static final VirtualXboxControllerContainer secondary = new VirtualXboxControllerContainer();

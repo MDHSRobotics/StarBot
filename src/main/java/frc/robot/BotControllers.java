@@ -14,13 +14,26 @@ public class BotControllers {
 
     // Configure all the controllers
     public static void configure() {
-        configureXbox();
         configureJoystick();
+        configureXbox();
+    }
+
+    public static void configureJoystick() {
+        // Detect whether the joystick has been plugged in after start-up
+        if (!BotControllers.jstick.configured) {
+            boolean isConnected = BotControllers.jstick.isConnected();
+            if (!isConnected) return;
+
+            // Configure button bindings
+            ButtonBindings.configureJoystick();
+            BotControllers.jstick.configured = true;
+            Logger.setup("Joystick detected and configured");
+        }
     }
 
     // Configure the xbox controller
     public static void configureXbox() {
-        // Detect whether the secondary controller has been plugged in after start-up
+        // Detect whether the xbox controller has been plugged in after start-up
         if (!BotControllers.xbox.configured) {
             boolean isConnected = BotControllers.xbox.isConnected();
             if (!isConnected) return;
@@ -32,17 +45,4 @@ public class BotControllers {
         }
     }
 
-    public static void configureJoystick() {
-        // Detect whether the secondary joystick has been plugged in after start-up
-        if (!BotControllers.jstick.configured) {
-            boolean isConnected = BotControllers.jstick.isConnected();
-            if (!isConnected)
-                return;
-
-            // Configure button bindings
-            ButtonBindings.configureJoystick();
-            BotControllers.jstick.configured = true;
-            Logger.setup("Joystick detected and configured");
-        }
-    }
 }

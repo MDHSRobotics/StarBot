@@ -137,7 +137,7 @@ public class BotCommands {
         alignDiffDriveToTarget = new AlignDiffDriveToTarget(BotSubsystems.diffDriver);
         rotateTowardsLeftLevel = new RotateTowardsLevel(BotSubsystems.diffDriver, -112.48);
         rotateTowardsRightLevel = new RotateTowardsLevel(BotSubsystems.diffDriver, 67.52);
-        driveDiffArcade = new DriveDiffArcade(BotSubsystems.diffDriver, BotJoystick.joystick);
+        driveDiffArcade = new DriveDiffArcade(BotSubsystems.diffDriver, BotControllers.jstick);
         driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.xbox);
         driveDiffToWithinRangeFront = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorFront, 2, 3);
         driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);

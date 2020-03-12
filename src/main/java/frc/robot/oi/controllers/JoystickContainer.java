@@ -4,10 +4,10 @@ package frc.robot.oi.controllers;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import frc.robot.oi.positions.JoystickPosition;
 import frc.robot.oi.controllers.ControllerContainer;
+import frc.robot.oi.positions.JoystickPosition;
 
-// This class contains an xbox controller and properties for all its buttons.
+// This class contains an joystick and properties for all its buttons.
 public class JoystickContainer extends ControllerContainer implements JoystickPositionAccessible {
 
     public Joystick jstick;
@@ -41,7 +41,7 @@ public class JoystickContainer extends ControllerContainer implements JoystickPo
         jstickBtn12 = new JoystickButton(jstick, 12);
     }
 
-    // Gets the raw joystick thumbstick positions
+    // Gets the raw joystick positions
     public JoystickPosition getJoystickPosition(boolean isYflipped) {
         double y = jstick.getY(); // Forward & backward, flipped
         double x = jstick.getX(); // Side to side

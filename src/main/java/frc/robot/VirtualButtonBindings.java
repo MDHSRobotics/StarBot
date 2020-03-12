@@ -6,6 +6,8 @@ import frc.robot.consoles.Logger;
 // Configures all the virtual button->command bindings for testing the robot.
 public class VirtualButtonBindings {
 
+    // TODO: Change these to match the real controllers
+
     // Configure "primary" virtual buttons
     public static void configurePrimary() {
         Logger.setup("Configure Virtual Buttons -> Primary Virtual Controller...");

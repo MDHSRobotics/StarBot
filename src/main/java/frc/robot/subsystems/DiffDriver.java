@@ -53,21 +53,21 @@ public class DiffDriver extends SubsystemBase {
         diffDrive.stopMotor();
     }
 
-    // Drive using the tank method
-    public void driveTank(double leftSpeed, double rightSpeed) {
-        // Logger.info("Left Speed: " + leftSpeed + "; Right Speed: " + rightSpeed);
-        diffDrive.tankDrive(leftSpeed, rightSpeed);
-    }
-
     // Drive using the arcade method
     public void driveArcade(double xSpeed, double zRotation) {
-        // Logger.info("xSpeed: " + xSpeed + "; zRotation: " + zRotation);
+        // Logger.info("DiffDriver.driveArcade -> xSpeed: " + xSpeed + "; zRotation: " + zRotation);
         diffDrive.arcadeDrive(xSpeed, zRotation);
+    }
+
+    // Drive using the tank method
+    public void driveTank(double leftSpeed, double rightSpeed) {
+        // Logger.info("DiffDriver.driveTank -> Left Speed: " + leftSpeed + "; Right Speed: " + rightSpeed);
+        diffDrive.tankDrive(leftSpeed, rightSpeed);
     }
 
     // Drive forward at a set speed
     public void moveForwardAuto() {
-        diffDrive.arcadeDrive(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
+        driveArcade(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
     }
 
     // Drive to within the given range based on the given distance sensor
@@ -104,10 +104,6 @@ public class DiffDriver extends SubsystemBase {
             if (0 < zRotation && zRotation < alignZSpeedMinimum) zRotation = alignZSpeedMinimum;
             if (0 > zRotation && zRotation > -alignZSpeedMinimum) zRotation = -alignZSpeedMinimum;
         }
-
-        // TODO: This could end up being greater than 1.
-        // Instead, modify the AlignZSensitivity and AlignZSpeedMinimum values
-        // to get the behavior you're looking for.
 
         Logger.action("DiffDriver -> Drive Tank: " + zRotation);
         diffDrive.arcadeDrive(0, zRotation);

@@ -3,9 +3,10 @@ package frc.robot.oi.controllers;
 
 import frc.robot.oi.positions.JoystickPosition;
 
-// This class contains a virtual xbox controller and properties for all its virtual buttons.
+// This class contains a virtual joystick and properties for all its virtual buttons.
 public class VirtualJoystickControllerContainer implements JoystickPositionAccessible {
 
+    // TODO: We need to create a VirtualJoystick class, and use it here
     public VirtualXboxController jstick;
     public VirtualButton jstickBtn1;
     public VirtualButton jstickBtn2;
@@ -52,7 +53,7 @@ public class VirtualJoystickControllerContainer implements JoystickPositionAcces
         jstickBtn12.active = false;
     }
 
-    // Gets the raw virtual xbox thumbstick positions
+    // Gets the raw virtual joystick positions
     public JoystickPosition getJoystickPosition(boolean isYleftFlipped) {
         double y = jstick.getY(); // Forward & backward, flipped
         double x = jstick.getX(); // Side to Side, flipped

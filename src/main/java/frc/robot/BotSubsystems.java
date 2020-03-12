@@ -26,8 +26,8 @@ public class BotSubsystems {
         climbHook = new ClimbHook();
         climbLegs = new ClimbLegs();
         conveyor = new Conveyor();
-        diffDriverAlternate = new DiffDriverSpark(); // Swap the diffDrivers if changed on the robot
-        diffDriver = new DiffDriverTalon();
+        diffDriver = new DiffDriverTalon(); // Swap the diffDrivers if changed on the robot
+        diffDriverAlternate = new DiffDriverSpark();
         lighter = new Lighter();
         roller = new Roller();
         rollerArm = new RollerArm();
@@ -37,19 +37,19 @@ public class BotSubsystems {
     // Set all the subsystem "teleop" default commands
     public static void setTeleopDefaultCommands() {
         // Climb Balancer
-        Logger.setup("ClimbBalancer Default Command -> StopBalancer...");
+        Logger.setup("ClimbBalancer Teleop Default Command -> StopBalancer...");
         climbBalancer.setDefaultCommand(BotCommands.stopBalancer);
 
         // Climb Hook
-        Logger.setup("ClimbHook Default Command -> StopHook...");
+        Logger.setup("ClimbHook Teleop Default Command -> StopHook...");
         climbHook.setDefaultCommand(BotCommands.stopHook);
 
         // Climb Legs
-        Logger.setup("ClimbLegs Default Command -> StopLegs...");
+        Logger.setup("ClimbLegs Teleop Default Command -> StopLegs...");
         climbLegs.setDefaultCommand(BotCommands.stopLegs);
 
         // Conveyor
-        Logger.setup("Conveyor Default Command -> StopConveyor...");
+        Logger.setup("Conveyor Teleop Default Command -> StopConveyor...");
         conveyor.setDefaultCommand(BotCommands.stopConveyor);
 
         // DiffDriver
@@ -61,11 +61,11 @@ public class BotSubsystems {
         diffDriverAlternate.setDefaultCommand(BotCommands.stopDiffDrive);
 
         // Roller
-        Logger.setup("Roller Default Command -> StopRoller...");
+        Logger.setup("Roller Teleop Default Command -> StopRoller...");
         roller.setDefaultCommand(BotCommands.stopRoller);
 
         // Shooter
-        Logger.setup("Shooter Default Command -> StopShooter");
+        Logger.setup("Shooter Teleop Default Command -> StopShooter...");
         shooter.setDefaultCommand(BotCommands.stopShooter);
     }
 
