@@ -4,26 +4,19 @@ package frc.robot.subsystems;
 import java.util.*;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.RobotBrain;
 import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.Logger;
-import frc.robot.devices.DevTalonSRX;
 import frc.robot.subsystems.utils.*;
 
-import static frc.robot.subsystems.constants.EncoderConstants.*;
 import static frc.robot.subsystems.Devices.talonSrxShooterBottomWheel;
 import static frc.robot.subsystems.Devices.talonSrxShooterTopWheel;
 import static frc.robot.RobotManager.isReal;
 
 // Shooter subsystem, for shooting balls with two flywheels.
 public class Shooter extends SubsystemBase {
-
-    // Mechanical constants
-    private final double GEAR_RATIO = 4.0; // (MS : GS)
-    private final double WHEEL_DIAMETER = 4.0; // In inches
 
     // Encoder constants
     private static final boolean SENSOR_PHASE_BOTTOM = true;
@@ -195,28 +188,10 @@ public class Shooter extends SubsystemBase {
         return velocity;
     }
 
-    // Get the current Shooter BottomWheel motor velocity in feet per second
-    public double getBottomWheelVelocityFPS() {
-        double tpds = getBottomWheelVelocity();
-        double fps = EncoderUtils.translateTicksPerDecisecondToFPS(tpds, WHEEL_DIAMETER, GEAR_RATIO);
-        return fps;
-    }
-
     // Get the current Shooter TopWheel motor velocity
     public int getTopWheelVelocity() {
         int velocity = talonSrxShooterTopWheel.getSelectedSensorVelocity() / 10;
         return velocity;
-    }
-
-    // Get the current Shooter TopWheel motor velocity in feet per second
-    public double getTopWheelVelocityFPS() {
-        double tpds = getTopWheelVelocity();
-        double fps = EncoderUtils.translateTicksPerDecisecondToFPS(tpds, WHEEL_DIAMETER, GEAR_RATIO);
-        return fps;
-    }
-
-    public double getWheelPosition() {
-        return talonSrxShooterTopWheel.getSelectedSensorPosition() / GEAR_RATIO;
     }
 
     //--------------//
@@ -232,12 +207,6 @@ public class Shooter extends SubsystemBase {
         maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
     }
 
-    //-----------------//
-    // Distance Sensor //
-    //-----------------//
-
-
-
     //---------//
     // Testing //
     //---------//
@@ -245,18 +214,6 @@ public class Shooter extends SubsystemBase {
     public void testMotor() {
         talonSrxShooterBottomWheel.set(0.3);
         talonSrxShooterTopWheel.set(0.3);
-    }
-
-    public void testMotorRotation(int rotations) {
-        int nativeRotation = rotations * ENCODER_TPR;
-        talonSrxShooterTopWheel.set(ControlMode.Position, nativeRotation);
-        talonSrxShooterBottomWheel.set(ControlMode.Position, nativeRotation);
-    }
-
-    public void testMotorVelocity(double velocity) {
-        double nativeVelocity = velocity * ENCODER_TPR / 10 * GEAR_RATIO;
-        talonSrxShooterTopWheel.set(ControlMode.Velocity, nativeVelocity);
-        talonSrxShooterBottomWheel.set(ControlMode.Velocity, nativeVelocity);
     }
 
 }

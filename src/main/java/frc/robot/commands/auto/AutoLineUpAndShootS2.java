@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.BotSubsystems;
 import frc.robot.commands.conveyor.SpinConveyor;
 import frc.robot.commands.conveyor.StopConveyor;
-import frc.robot.commands.shooter.Shoot;
+import frc.robot.commands.shooter.ShootWithDistance;
 import frc.robot.commands.shooter.StopShooter;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
@@ -39,7 +39,7 @@ public class AutoLineUpAndShootS2 extends SequentialCommandGroup {
         // TODO The wait duration should be in Shuffleboard
         WaitCommand initialWait = new WaitCommand(2.);
         SpinConveyor spinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
-        Shoot shoot = new Shoot(BotSubsystems.shooter);
+        ShootWithDistance shoot = new ShootWithDistance(BotSubsystems.shooter);
         StopConveyor stopConveyor = new StopConveyor(BotSubsystems.conveyor);
         StopShooter stopShooter = new StopShooter(BotSubsystems.shooter);
         AutoAlign autoAlign = new AutoAlign(BotSubsystems.diffDriver);

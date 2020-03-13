@@ -5,12 +5,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.BotCommands;
 import frc.robot.BotSubsystems;
 import frc.robot.commands.conveyor.SpinConveyor;
 import frc.robot.commands.conveyor.StopConveyor;
 import frc.robot.commands.roller.StopRoller;
-import frc.robot.commands.shooter.Shoot;
+import frc.robot.commands.shooter.ShootWithDistance;
 import frc.robot.commands.shooter.StopShooter;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
@@ -40,7 +39,7 @@ public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
         InstantCommand printScenarioName = new InstantCommand(() -> Logger.info("Starting Auto Scenario #1") );
         // TODO The wait duration should be in Shuffleboard
         WaitCommand initialWait = new WaitCommand(2.);
-        Shoot firstShoot = new Shoot(BotSubsystems.shooter);
+        ShootWithDistance firstShoot = new ShootWithDistance(BotSubsystems.shooter);
         StopShooter firstStopShooter = new StopShooter(BotSubsystems.shooter);
         StopConveyor firstStopConveyor = new StopConveyor(BotSubsystems.conveyor);
         AutoAlign firstAutoAlign = new AutoAlign(BotSubsystems.diffDriver);
@@ -52,7 +51,7 @@ public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
         AutoDriveToShoot autoDriveToShoot = new AutoDriveToShoot(BotSubsystems.diffDriver);
         AutoAlign secondAutoAlign = new AutoAlign(BotSubsystems.diffDriver);
         SpinConveyor secondSpinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
-        Shoot secondShoot = new Shoot(BotSubsystems.shooter);
+        ShootWithDistance secondShoot = new ShootWithDistance(BotSubsystems.shooter);
         StopConveyor secondStopConveyor = new StopConveyor(BotSubsystems.conveyor);
         StopShooter secondStopShooter = new StopShooter(BotSubsystems.shooter);
         AutoDriveForward autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);;
