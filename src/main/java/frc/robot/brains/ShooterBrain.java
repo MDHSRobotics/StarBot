@@ -65,7 +65,7 @@ public class ShooterBrain {
     }
 
     public static void setBottomWheelAverageVelocity(double value) {
-        shootTopWheelAverageVelocityEntry.setDouble(value);
+        shootBottomWheelAverageVelocityEntry.setDouble(value);
     }
 
     public static void setTopWheelMaxVelocity(double value) {
@@ -87,16 +87,16 @@ public class ShooterBrain {
     public static void setTargetTPHMS(double value) {
         shootTargetTPHMSEntry.setDouble(value);
     }
+
+    public static void setShootDistance(double value){
+        shootDistanceEntry.setDouble(value);
+    }
     //---------//
     // Getters //
     //---------//
 
-    public static double getBottomWheelVelocity() {
-        return shootBottomWheelCurrentVelocityEntry.getDouble(shootBottomWheelCurrentVelocityDefault);
-    }
-
-    public static double getTopWheelVelocity() {
-        return shootTopWheelCurrentVelocityEntry.getDouble(shootTopWheelCurrentVelocityDefault);
+    public static double getTargetFPS() {
+        return shootTargetFPSEntry.getDouble(shootTargetFPSDefault);
     }
 
     public static double getShootDistance() {

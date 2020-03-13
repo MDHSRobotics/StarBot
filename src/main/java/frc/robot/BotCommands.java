@@ -89,6 +89,8 @@ public class BotCommands {
     // Shooter
     public static ResetShoot resetShoot;
     public static ReverseConveyorAndShoot reverseConveyorAndShoot;
+    public static ShootWithVelocity shootWithVelocity;
+    public static ShootWithDistance shootWithDistance;
     public static StopConveyorAndShooter stopConveyorAndShooter;
     public static StopShooter stopShooter;
 
@@ -158,6 +160,8 @@ public class BotCommands {
         // Shooter
         resetShoot = new ResetShoot(BotSubsystems.shooter);
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
+        shootWithVelocity = new ShootWithVelocity(BotSubsystems.shooter);
+        shootWithDistance = new ShootWithDistance(BotSubsystems.shooter);
         stopConveyorAndShooter = new StopConveyorAndShooter(BotSubsystems.conveyor, BotSubsystems.shooter);
         stopShooter = new StopShooter(BotSubsystems.shooter);
 

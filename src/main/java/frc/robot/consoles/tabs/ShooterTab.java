@@ -6,6 +6,7 @@ import java.util.Map;
 
 import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.ShuffleLogger;
+import frc.robot.BotCommands;
 
 // The Shuffleboard Shooter tab.
 public class ShooterTab {
@@ -15,6 +16,11 @@ public class ShooterTab {
     private ShuffleboardLayout m_bottomWheelLayout;
     private ShuffleboardLayout m_topWheelLayout;
     private ShuffleboardLayout m_shootTargetLayout;
+
+    // Commands
+    private ComplexWidget m_shooterReset;
+    private ComplexWidget m_shootWithDistance;
+    private ComplexWidget m_shootWithVelocity;
 
     // Widgets
     private SimpleWidget m_shooterTopWheelCurrentVelocity;
@@ -107,27 +113,38 @@ public class ShooterTab {
 
     // Create all other Widgets
     public void initialize() {
+        m_shooterReset = m_tab.add("RESET", BotCommands.resetShoot);
+        m_shooterReset.withWidget(BuiltInWidgets.kCommand);
+
+        m_shootWithDistance = m_shootTargetLayout.add("Shoot With Distance", BotCommands.shootWithDistance);
+        m_shootWithDistance.withWidget(BuiltInWidgets.kCommand);
+
+        m_shootWithVelocity = m_shootTargetLayout.add("Shoot With Velocity", BotCommands.shootWithVelocity);
+        m_shootWithVelocity.withWidget(BuiltInWidgets.kCommand);
     }
 
     // Configure all Widgets
     public void configure() {
         m_bottomWheelLayout.withPosition(0, 0);
-        m_bottomWheelLayout.withSize(2, 4);
+        m_bottomWheelLayout.withSize(3, 4);
         // m_bottomWheelLayout.withProperties(Map.of("Number of columns", 1));
         // m_bottomWheelLayout.withProperties(Map.of("Number of rows", 3));
         m_bottomWheelLayout.withProperties(Map.of("Label position", "TOP"));
 
-        m_topWheelLayout.withPosition(2, 0);
-        m_topWheelLayout.withSize(2, 4);
+        m_topWheelLayout.withPosition(3, 0);
+        m_topWheelLayout.withSize(3, 4);
         // m_topWheelLayout.withProperties(Map.of("Number of columns", 1));
         // m_topWheelLayout.withProperties(Map.of("Number of rows", 3));
         m_topWheelLayout.withProperties(Map.of("Label position", "TOP"));
 
-        m_shootTargetLayout.withPosition(4, 0);
-        m_shootTargetLayout.withSize(2, 2);
+        m_shootTargetLayout.withPosition(6, 0);
+        m_shootTargetLayout.withSize(2, 3);
         // m_shootTargetLayout.withProperties(Map.of("Number of columns", 1));
         // m_shootTargetLayout.withProperties(Map.of("Number of rows", 3));
         m_shootTargetLayout.withProperties(Map.of("Label position", "TOP"));
+
+        m_shooterReset.withPosition(6, 3);
+        m_shooterReset.withSize(2, 1);
     }
 
     // This will be called in the robotPeriodic
