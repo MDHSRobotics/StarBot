@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Roller;
+import frc.robot.subsystems.Conveyor.ConveyorDirection;
 
 // This command spins the Roller and moves the Conveyor forward.
 public class SpinRollerAndConveyor extends CommandBase {
@@ -31,7 +32,7 @@ public class SpinRollerAndConveyor extends CommandBase {
     @Override
     public void execute() {
         m_roller.spin();
-        m_conveyor.forward();
+        m_conveyor.spin(ConveyorDirection.forward);
     }
 
     // This command continues until interrupted

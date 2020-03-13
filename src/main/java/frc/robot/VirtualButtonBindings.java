@@ -13,7 +13,7 @@ public class VirtualButtonBindings {
         Logger.setup("Configure Virtual Buttons -> Primary Virtual Controller...");
 
         // DiffDriver
-        VirtualControllers.primary.btnDpad.whileActiveContinuous(TestCommands.alignDiffDriveToGyro);
+        VirtualControllers.primary.btnDpad.whileActiveContinuous(TestCommands.rotateToDpadDirection);
     }
 
     // Configure "secondary" virtual buttons
@@ -21,7 +21,7 @@ public class VirtualButtonBindings {
         Logger.setup("Configure Virtual Buttons -> Secondary Virtual Controller...");
 
         // Conveyor
-        VirtualControllers.secondary.btnBumperLeft.whileActiveContinuous(BotCommands.reverseConveyor);
+        VirtualControllers.secondary.btnBumperLeft.whileActiveContinuous(BotCommands.spinConveyorForward);
     }
 
 }

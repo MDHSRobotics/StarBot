@@ -11,9 +11,9 @@ public class ButtonBindings {
         Logger.setup("Configure Buttons -> Joystick Controller...");
 
         //DiffDriver
-        BotControllers.jstick.jstickBtn1.whileHeld(BotCommands.alignDiffDriveToTarget);
-        BotControllers.jstick.jstickBtn5.whileHeld(BotCommands.rotateTowardsRightLevel);
-        BotControllers.jstick.jstickBtn6.whileHeld(BotCommands.rotateTowardsLeftLevel);
+        BotControllers.jstick.jstickBtn1.whileHeld(BotCommands.rotateTowardsTarget);
+        BotControllers.jstick.jstickBtn5.whileHeld(BotCommands.rotateTowardsRightRung);
+        BotControllers.jstick.jstickBtn6.whileHeld(BotCommands.rotateTowardsLeftRung);
 
         // BotControllers.jstick.jstickBtn7.whileHeld(BotCommands.alignDiffDriveToGyro);
 
@@ -25,8 +25,8 @@ public class ButtonBindings {
         BotControllers.jstick.jstickBtn11.whenPressed(BotCommands.toggleHook);
         BotControllers.jstick.jstickBtn12.whenPressed(BotCommands.toggleLegs);
 
-        BotControllers.jstick.jstickBtn3.whileHeld(BotCommands.balanceLeft);
-        BotControllers.jstick.jstickBtn4.whileHeld(BotCommands.balanceRight);
+        BotControllers.jstick.jstickBtn3.whileHeld(BotCommands.balanceRight);
+        BotControllers.jstick.jstickBtn4.whileHeld(BotCommands.balanceLeft);
     }
 
     // Configure xbox buttons
@@ -42,7 +42,7 @@ public class ButtonBindings {
 
         // Conveyor & Shooter
         BotControllers.xbox.btnX.whileHeld(BotCommands.spinRollerAndConveyor);
-        BotControllers.xbox.btnB.whileHeld(BotCommands.reverseConveyor);
+        BotControllers.xbox.btnB.whileHeld(BotCommands.spinConveyorBackward);
 
         // BotControllers.xbox.btnBumperLeft.whileHeld(BotCommands.reverseConveyor);
         BotControllers.xbox.btnBumperRight.whenPressed(BotCommands.reverseConveyorAndShoot);

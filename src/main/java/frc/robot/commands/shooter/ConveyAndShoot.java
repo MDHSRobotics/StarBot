@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Conveyor.ConveyorDirection;
 import frc.robot.subsystems.Conveyor;
 
 // This command starts the Shooter, waits one second, and then moves the Conveyor forward.
@@ -38,8 +39,8 @@ public class ConveyAndShoot extends CommandBase {
     @Override
     public void execute() {
         double currentTime = m_timer.get();
-        if  (currentTime > 1) {
-            m_conveyor.forward();
+        if  (currentTime > 0.5) {
+            m_conveyor.spin(ConveyorDirection.forward);
         }
     }
 

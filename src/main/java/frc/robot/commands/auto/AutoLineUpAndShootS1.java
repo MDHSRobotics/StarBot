@@ -7,15 +7,16 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.BotCommands;
 import frc.robot.BotSubsystems;
-import frc.robot.commands.conveyor.ReverseConveyorCG;
-import frc.robot.commands.conveyor.StopConveyorCG;
-import frc.robot.commands.roller.StopRollerCG;
-import frc.robot.commands.shooter.ShootCG;
-import frc.robot.commands.shooter.StopShooterCG;
+import frc.robot.commands.conveyor.SpinConveyor;
+import frc.robot.commands.conveyor.StopConveyor;
+import frc.robot.commands.roller.StopRoller;
+import frc.robot.commands.shooter.Shoot;
+import frc.robot.commands.shooter.StopShooter;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.DiffDriver;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Conveyor.ConveyorDirection;
 
 public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
 
@@ -39,39 +40,39 @@ public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
         InstantCommand printScenarioName = new InstantCommand(() -> Logger.info("Starting Auto Scenario #1") );
         // TODO The wait duration should be in Shuffleboard
         WaitCommand initialWait = new WaitCommand(2.);
-        ShootCG firstShoot = new ShootCG(BotSubsystems.shooter);
-        StopShooterCG firstStopShooter = new StopShooterCG(BotSubsystems.shooter);
-        StopConveyorCG firstStopConveyor = new StopConveyorCG(BotSubsystems.conveyor);
+        Shoot firstShoot = new Shoot(BotSubsystems.shooter);
+        StopShooter firstStopShooter = new StopShooter(BotSubsystems.shooter);
+        StopConveyor firstStopConveyor = new StopConveyor(BotSubsystems.conveyor);
         AutoAlign firstAutoAlign = new AutoAlign(BotSubsystems.diffDriver);
         AutoDriveAndPickUp autoDriveAndPickUp = new AutoDriveAndPickUp(BotSubsystems.conveyor,
                                                     BotSubsystems.diffDriver, BotSubsystems.roller);
-        StopConveyorCG stopConveyorwithRoller = new StopConveyorCG(BotSubsystems.conveyor);
-        StopRollerCG stopRoller = new StopRollerCG(BotSubsystems.roller);
+        StopConveyor stopConveyorwithRoller = new StopConveyor(BotSubsystems.conveyor);
+        StopRoller stopRoller = new StopRoller(BotSubsystems.roller);
         AutoDriveFromPickUp autoDriveFromPickUp = new AutoDriveFromPickUp(BotSubsystems.diffDriver);
         AutoDriveToShoot autoDriveToShoot = new AutoDriveToShoot(BotSubsystems.diffDriver);
         AutoAlign secondAutoAlign = new AutoAlign(BotSubsystems.diffDriver);
-        ReverseConveyorCG secondReverseConveyor = new ReverseConveyorCG(BotSubsystems.conveyor);
-        ShootCG secondShoot = new ShootCG(BotSubsystems.shooter);
-        StopConveyorCG secondStopConveyor = new StopConveyorCG(BotSubsystems.conveyor);
-        StopShooterCG secondStopShooter = new StopShooterCG(BotSubsystems.shooter);
+        SpinConveyor secondSpinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
+        Shoot secondShoot = new Shoot(BotSubsystems.shooter);
+        StopConveyor secondStopConveyor = new StopConveyor(BotSubsystems.conveyor);
+        StopShooter secondStopShooter = new StopShooter(BotSubsystems.shooter);
         AutoDriveForward autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);;
 
         Command cmdSequence[] = {   printScenarioName,
                                     initialWait,
-                                    firstShoot.withTimeout(2),
-                                    firstStopConveyor,
-                                    firstStopShooter,
+                                    firstShoot.withTimeout(2.),
+                                    firstStopConveyor.withTimeout(0.1),
+                                    firstStopShooter.withTimeout(0.1),
                                     firstAutoAlign,
                                     autoDriveAndPickUp,
-                                    stopConveyorwithRoller,
-                                    stopRoller,
+                                    stopConveyorwithRoller.withTimeout(0.1),
+                                    stopRoller.withTimeout(0.1),
                                     autoDriveFromPickUp,
                                     autoDriveToShoot,
                                     secondAutoAlign,
-                                    secondReverseConveyor,
+                                    secondSpinConveyorBackward,
                                     secondShoot.withTimeout(2),
-                                    secondStopConveyor,
-                                    secondStopShooter,
+                                    secondStopConveyor.withTimeout(0.1),
+                                    secondStopShooter.withTimeout(0.1),
                                     autoDriveForward
         };
 

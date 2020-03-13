@@ -5,14 +5,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbBalancer;
+import frc.robot.subsystems.ClimbBalancer.BalanceDirection;
 
-// This command move the ClimbBalancer to the right.
-public class BalanceRight extends CommandBase {
+// This command moves climb balancer
+public class Balance extends CommandBase {
 
     private ClimbBalancer m_climbBalancer;
+    private BalanceDirection balanceDirection;
 
-    public BalanceRight(ClimbBalancer climbBalancer) {
-        Logger.setup("Constructing Command: BalanceRight...");
+    public Balance(ClimbBalancer climbBalancer, BalanceDirection balanceDirection) {
+        Logger.setup("Constructing Command: Balance...");
+
+        this.balanceDirection = balanceDirection;
 
         // Add given subsystem requirements
         m_climbBalancer = climbBalancer;
@@ -21,12 +25,12 @@ public class BalanceRight extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: BalanceRight...");
+        Logger.action("Initializing Command: Balance...");
     }
 
     @Override
     public void execute() {
-        m_climbBalancer.moveRight();
+        m_climbBalancer.move(balanceDirection);
     }
 
     // This command continues until interrupted
@@ -39,9 +43,9 @@ public class BalanceRight extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: BalanceRight...");
+            Logger.ending("Interrupting Command: Balance...");
         } else {
-            Logger.ending("Ending Command: BalanceRight...");
+            Logger.ending("Ending Command: Balance...");
         }
     }
 

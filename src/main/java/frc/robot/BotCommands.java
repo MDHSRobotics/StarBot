@@ -16,6 +16,11 @@ import frc.robot.commands.sensors.*;
 import frc.robot.commands.shooter.*;
 import frc.robot.consoles.Logger;
 
+import frc.robot.subsystems.ClimbBalancer.BalanceDirection;
+import frc.robot.subsystems.ClimbHook.HookPosition;
+import frc.robot.subsystems.Conveyor.ConveyorDirection;
+import frc.robot.subsystems.RollerArm.RollerArmPosition;
+
 // Contains singleton instances of all the commands on the robot.
 public class BotCommands {
 
@@ -29,14 +34,14 @@ public class BotCommands {
     public static AutoRotateRight autoRotateRightS2;
 
     // Climb Balancer
-    public static BalanceLeft balanceLeft;
-    public static BalanceRight balanceRight;
+    public static Balance balanceRight;
+    public static Balance balanceLeft;
     public static StopBalancer stopBalancer;
 
     // Climb Hook
-    public static AimHook aimHook;
-    public static ExtendHook extendHook;
-    public static RetractHook retractHook;
+    public static ChangeHookPosition extendHook;
+    public static ChangeHookPosition retractHook;
+    public static ChangeHookPosition aimHook;
     public static StopHook stopHook;
     public static ToggleHook toggleHook;
 
@@ -47,23 +52,21 @@ public class BotCommands {
     public static ToggleLegs toggleLegs;
 
     // Conveyor
-    public static ForwardConveyor forwardConveyor;
-    public static ForwardConveyorCG firstForwardConveyorCGS1;
-    public static ForwardConveyorCG secondForwardConveyorCGS1;
-    public static ReverseConveyor reverseConveyor;
-    public static ReverseConveyor reverseConveyorBurst;
-    public static ReverseConveyorCG firstReverseConveyorCGS1;
+    public static SpinConveyor spinConveyorForward;
+    public static SpinConveyor spinConveyorBackward;
     public static StopConveyor stopConveyor;
+    public static SpinConveyor firstSpinConveyorForwardCGS1;
+    public static SpinConveyor secondSpinConveyorForwardCGS1;
+    public static SpinConveyor firstSpinConveyorBackwardCGS1;
+
 
     // DiffDriver
-    public static AlignDiffDriveToGyro alignDiffDriveToGyro;
-    public static AlignDiffDriveToTarget alignDiffDriveToTarget;
+    public static RotateToDpadDirection rotateToDpadDirection;
+    public static RotateTowardsTarget rotateTowardsTarget;
     public static DriveDiffArcade driveDiffArcade;
     public static DriveDiffTank driveDiffTank;
-    public static DriveDiffToWithinRange driveDiffToWithinRangeFront;
-    public static DriveDiffToWithinRange driveDiffToWithinRangeTop;
-    public static RotateTowardsLevel rotateTowardsLeftLevel;
-    public static RotateTowardsLevel rotateTowardsRightLevel;
+    public static RotateTowardsRung rotateTowardsLeftRung;
+    public static RotateTowardsRung rotateTowardsRightRung;
 
     // DiffDriverAlternate
     public static StopDiffDrive stopDiffDrive;
@@ -72,24 +75,20 @@ public class BotCommands {
     public static CycleLights cycleLights;
 
     // Roller
-    public static SpinRoller spinRoller;
-    public static SpinRollerCG spinRollerCG;
     public static SpinRollerAndConveyor spinRollerAndConveyor;
     public static StopRoller stopRoller;
 
     // RollerArm
-    public static LowerRollerArm lowerRollerArm;
-    public static RaiseRollerArm raiseRollerArm;
+    public static MoveRollerArm raiseRollerArm;
+    public static MoveRollerArm lowerRollerArm;
     public static ToggleRollerArm toggleRollerArm;
 
     // Sensors
     public static TurnOffLimelightArray turnOffLimelightArray;
 
     // Shooter
-    public static ConveyAndShoot conveyAndShoot;
     public static ResetShoot resetShoot;
     public static ReverseConveyorAndShoot reverseConveyorAndShoot;
-    public static Shoot shoot;
     public static StopConveyorAndShooter stopConveyorAndShooter;
     public static StopShooter stopShooter;
 
@@ -105,14 +104,14 @@ public class BotCommands {
         autoRotateRightS2 = new AutoRotateRight(BotSubsystems.diffDriver);
 
         // Climb Balancer
-        balanceRight = new BalanceRight(BotSubsystems.climbBalancer);
-        balanceLeft = new BalanceLeft(BotSubsystems.climbBalancer);
+        balanceRight = new Balance(BotSubsystems.climbBalancer, BalanceDirection.right);
+        balanceLeft = new Balance(BotSubsystems.climbBalancer, BalanceDirection.left);
         stopBalancer = new StopBalancer(BotSubsystems.climbBalancer);
 
         // Climb Hook
-        aimHook = new AimHook(BotSubsystems.climbHook);
-        extendHook = new ExtendHook(BotSubsystems.climbHook);
-        retractHook = new RetractHook(BotSubsystems.climbHook);
+        aimHook = new ChangeHookPosition(BotSubsystems.climbHook, HookPosition.aim);
+        extendHook = new ChangeHookPosition(BotSubsystems.climbHook, HookPosition.extend);
+        retractHook = new ChangeHookPosition(BotSubsystems.climbHook, HookPosition.retract);
         toggleHook = new ToggleHook(BotSubsystems.climbHook);
         stopHook = new StopHook(BotSubsystems.climbHook);
 
@@ -123,24 +122,20 @@ public class BotCommands {
         toggleLegs = new ToggleLegs(BotSubsystems.climbLegs);
 
         // Conveyor
-        forwardConveyor = new ForwardConveyor(BotSubsystems.conveyor);
-        firstForwardConveyorCGS1 = new ForwardConveyorCG(BotSubsystems.conveyor);
-        secondForwardConveyorCGS1 = new ForwardConveyorCG(BotSubsystems.conveyor);
-        reverseConveyor = new ReverseConveyor(BotSubsystems.conveyor);
-        reverseConveyorBurst = new ReverseConveyor(BotSubsystems.conveyor);
-        firstReverseConveyorCGS1 = new ReverseConveyorCG(BotSubsystems.conveyor);
+        spinConveyorForward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.forward);
+        spinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
+        firstSpinConveyorForwardCGS1 = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.forward);
+        secondSpinConveyorForwardCGS1 = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.forward);
+        firstSpinConveyorBackwardCGS1 = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
 
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
 
         // DiffDriver
-        // alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.xbox);
-        alignDiffDriveToTarget = new AlignDiffDriveToTarget(BotSubsystems.diffDriver);
-        rotateTowardsLeftLevel = new RotateTowardsLevel(BotSubsystems.diffDriver, -112.48);
-        rotateTowardsRightLevel = new RotateTowardsLevel(BotSubsystems.diffDriver, 67.52);
+        rotateTowardsTarget = new RotateTowardsTarget(BotSubsystems.diffDriver);
+        rotateTowardsLeftRung = new RotateTowardsRung(BotSubsystems.diffDriver, -112.48);
+        rotateTowardsRightRung = new RotateTowardsRung(BotSubsystems.diffDriver, 67.52);
         driveDiffArcade = new DriveDiffArcade(BotSubsystems.diffDriver, BotControllers.jstick);
         driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.xbox);
-        driveDiffToWithinRangeFront = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorFront, 2, 3);
-        driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);
 
         // DiffDriverAlternate
         stopDiffDrive = new StopDiffDrive(BotSubsystems.diffDriverAlternate);
@@ -149,24 +144,20 @@ public class BotCommands {
         cycleLights = new CycleLights(BotSubsystems.lighter);
 
         // Roller
-        spinRoller = new SpinRoller(BotSubsystems.roller);
-        spinRollerCG = new SpinRollerCG(BotSubsystems.roller);
         spinRollerAndConveyor = new SpinRollerAndConveyor(BotSubsystems.roller, BotSubsystems.conveyor);
         stopRoller = new StopRoller(BotSubsystems.roller);
 
         // RollerArm
-        lowerRollerArm = new LowerRollerArm(BotSubsystems.rollerArm);
-        raiseRollerArm = new RaiseRollerArm(BotSubsystems.rollerArm);
+        lowerRollerArm = new MoveRollerArm(BotSubsystems.rollerArm, RollerArmPosition.lower);
+        raiseRollerArm = new MoveRollerArm(BotSubsystems.rollerArm, RollerArmPosition.raise);
         toggleRollerArm = new ToggleRollerArm(BotSubsystems.rollerArm);
 
         // Sensors
         turnOffLimelightArray = new TurnOffLimelightArray();
 
         // Shooter
-        conveyAndShoot = new ConveyAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         resetShoot = new ResetShoot(BotSubsystems.shooter);
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
-        shoot = new Shoot(BotSubsystems.shooter);
         stopConveyorAndShooter = new StopConveyorAndShooter(BotSubsystems.conveyor, BotSubsystems.shooter);
         stopShooter = new StopShooter(BotSubsystems.shooter);
 

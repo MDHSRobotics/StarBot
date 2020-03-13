@@ -14,6 +14,10 @@ import static frc.robot.RobotManager.isReal;
 // Conveyor subsystem, for delivering the balls to the shoot system.
 public class Conveyor extends SubsystemBase {
 
+    public enum ConveyorDirection {
+        forward, backward;
+    }
+
     public Conveyor() {
         Logger.setup("Constructing Subsystem: Conveyor...");
 
@@ -45,17 +49,21 @@ public class Conveyor extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    // Moves the conveyor forward
-    public void forward() {
+    // Moves the conveyor forwards or backwards based on enum
+    public void spin(ConveyorDirection conveyorDirection) {
         double power = ConveyorBrain.getPower();
-        talonSrxConveyor.set(-power);
+
+        switch(conveyorDirection) {
+            case forward:
+                talonSrxConveyor.set(-power);
+                break;
+            case backward:
+                talonSrxConveyor.set(power);
+                break;
+        }
+
     }
 
-    // Moves the conveyor back
-    public void reverse() {
-        double power = ConveyorBrain.getPower();
-        talonSrxConveyor.set(power);
-    }
 
     // Stop the conveyor
     public void stop() {

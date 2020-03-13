@@ -11,6 +11,10 @@ import static frc.robot.subsystems.Devices.talonSrxClimbBalancer;
 // ClimbBalancer subsystem, for balancing the robot on the level.
 public class ClimbBalancer extends SubsystemBase {
 
+    public enum BalanceDirection {
+        right, left;
+    }
+
     public ClimbBalancer() {
         Logger.setup("Constructing Subsystem: ClimbBalancer...");
     }
@@ -25,16 +29,18 @@ public class ClimbBalancer extends SubsystemBase {
         talonSrxClimbBalancer.stopMotor();
     }
 
-    // Move the balancer right
-    public void moveRight() {
+    // Move the balancer right or left based on enum
+    public void move(BalanceDirection balanceDirection) {
         double power = ClimbBrain.getBalancerPower();
-        talonSrxClimbBalancer.set(power);
-    }
 
-    // Move the balancer left
-    public void moveLeft() {
-        double power = ClimbBrain.getBalancerPower();
-        talonSrxClimbBalancer.set(-power);
+        switch (balanceDirection) {
+            case right:
+                talonSrxClimbBalancer.set(power);
+                break;
+            case left:
+                talonSrxClimbBalancer.set(-power);
+                break;
+        }
     }
 
 }

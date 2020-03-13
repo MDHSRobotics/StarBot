@@ -5,14 +5,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.ClimbHook;
+import frc.robot.subsystems.ClimbHook.HookPosition;
 
-// This command aims the climb hook before fully extending.
-public class AimHook extends CommandBase {
+// This command can aim, extend, or retract the hook
+public class ChangeHookPosition extends CommandBase {
 
     private ClimbHook m_climbHook;
+    private HookPosition hookPosition;
 
-    public AimHook(ClimbHook climbHook) {
-        Logger.setup("Constructing Command: AimHook...");
+    public ChangeHookPosition(ClimbHook climbHook, HookPosition hookPosition) {
+        Logger.setup("Constructing Command: ChangeHookPosition...");
+
+        this.hookPosition = hookPosition;
 
         // Add given subsystem requirements
         m_climbHook = climbHook;
@@ -21,13 +25,12 @@ public class AimHook extends CommandBase {
 
     @Override
     public void initialize() {
-        Logger.action("Initializing Command: AimHook...");
-
-        m_climbHook.aimHook();
+        Logger.action("Initializing Command: ChangeHookPosition...");
     }
 
     @Override
     public void execute() {
+        m_climbHook.changeHookPosition(hookPosition);
     }
 
     // This command continues until interrupted
@@ -40,9 +43,9 @@ public class AimHook extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: AimHook...");
+            Logger.ending("Interrupting Command: ChangeHookPosition...");
         } else {
-            Logger.ending("Ending Command: AimHook...");
+            Logger.ending("Ending Command: ChangeHookPosition...");
         }
         m_climbHook.stop();
     }

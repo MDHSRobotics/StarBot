@@ -1,30 +1,35 @@
+
 package frc.robot.commands.diffdriver;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.BotSensors;
+
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.DiffDriver;
 
-// Assisted control the DiffDrive to center the robot on the shoot target.
-public class CenterDiffDriveOnTargetCG extends CommandBase {
+// Rotates the differential drive towards the rung on the generator switch.
+public class RotateTowardsRung extends CommandBase {
 
     private DiffDriver m_diffDriver;
+    private double m_targetAngle;
 
-    public CenterDiffDriveOnTargetCG(DiffDriver diffDriver) {
-        Logger.setup("Constructing Command: CenterDiffDriveOnTargetCG...");
+    public RotateTowardsRung(DiffDriver diffDriver, double targetAngle) {
+        Logger.setup("Constructing Command: RotateTowardsRung...");
 
         // Add given subsystem requirements
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
+
+        m_targetAngle = targetAngle;
     }
 
     @Override
     public void initialize() {
+        Logger.setup("Initialize Command: RotateTowardsRung...");
     }
 
     @Override
     public void execute() {
-        m_diffDriver.driveToWithinRange(BotSensors.distanceSensorFront, 1.0, 1.5);
+        m_diffDriver.driveAlign(m_targetAngle);
     }
 
     // This finishes immediately, but is intended to be continually restarted while a button is held
@@ -37,7 +42,7 @@ public class CenterDiffDriveOnTargetCG extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: CenterDiffDriveOnTargetCG...");
+            Logger.ending("Interrupting Command: RotateTowardsRung...");
         }
     }
 

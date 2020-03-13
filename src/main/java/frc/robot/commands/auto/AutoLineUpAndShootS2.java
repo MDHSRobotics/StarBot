@@ -5,16 +5,16 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.BotCommands;
 import frc.robot.BotSubsystems;
-import frc.robot.commands.conveyor.ReverseConveyorCG;
-import frc.robot.commands.conveyor.StopConveyorCG;
-import frc.robot.commands.shooter.ShootCG;
-import frc.robot.commands.shooter.StopShooterCG;
+import frc.robot.commands.conveyor.SpinConveyor;
+import frc.robot.commands.conveyor.StopConveyor;
+import frc.robot.commands.shooter.Shoot;
+import frc.robot.commands.shooter.StopShooter;
 import frc.robot.consoles.Logger;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.DiffDriver;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Conveyor.ConveyorDirection;
 
 public class AutoLineUpAndShootS2 extends SequentialCommandGroup {
 
@@ -38,19 +38,19 @@ public class AutoLineUpAndShootS2 extends SequentialCommandGroup {
         InstantCommand printScenarioName = new InstantCommand(() -> Logger.info("Starting Auto Scenario #2"));
         // TODO The wait duration should be in Shuffleboard
         WaitCommand initialWait = new WaitCommand(2.);
-        ReverseConveyorCG reverseConveyor = new ReverseConveyorCG(BotSubsystems.conveyor);
-        ShootCG shoot = new ShootCG(BotSubsystems.shooter);
-        StopConveyorCG stopConveyor = new StopConveyorCG(BotSubsystems.conveyor);
-        StopShooterCG stopShooter = new StopShooterCG(BotSubsystems.shooter);
+        SpinConveyor spinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
+        Shoot shoot = new Shoot(BotSubsystems.shooter);
+        StopConveyor stopConveyor = new StopConveyor(BotSubsystems.conveyor);
+        StopShooter stopShooter = new StopShooter(BotSubsystems.shooter);
         AutoAlign autoAlign = new AutoAlign(BotSubsystems.diffDriver);
         AutoDriveForward autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
 
         Command cmdSequence[] = {   printScenarioName,
                                     initialWait,
-                                    reverseConveyor,
+                                    spinConveyorBackward.withTimeout(1),
                                     shoot.withTimeout(2),
-                                    stopConveyor,
-                                    stopShooter,
+                                    stopConveyor.withTimeout(0.1),
+                                    stopShooter.withTimeout(0.1),
                                     autoAlign,
                                     autoDriveForward
         };
