@@ -39,7 +39,7 @@ public class ConveyAndShoot extends CommandBase {
     @Override
     public void execute() {
         double currentTime = m_timer.get();
-        if  (currentTime > 1) {
+        if  (currentTime > 0.5) {
             m_conveyor.spin(ConveyorDirection.forward);
         }
     }

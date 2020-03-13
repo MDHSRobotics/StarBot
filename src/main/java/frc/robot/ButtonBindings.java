@@ -11,9 +11,9 @@ public class ButtonBindings {
         Logger.setup("Configure Buttons -> Joystick Controller...");
 
         //DiffDriver
-        BotControllers.jstick.jstickBtn1.whileHeld(BotCommands.alignDiffDriveToTarget);
-        BotControllers.jstick.jstickBtn5.whileHeld(BotCommands.rotateTowardsRightLevel);
-        BotControllers.jstick.jstickBtn6.whileHeld(BotCommands.rotateTowardsLeftLevel);
+        BotControllers.jstick.jstickBtn1.whileHeld(BotCommands.rotateTowardsTarget);
+        BotControllers.jstick.jstickBtn5.whileHeld(BotCommands.rotateTowardsRightRung);
+        BotControllers.jstick.jstickBtn6.whileHeld(BotCommands.rotateTowardsLeftRung);
 
         // BotControllers.jstick.jstickBtn7.whileHeld(BotCommands.alignDiffDriveToGyro);
 

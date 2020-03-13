@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.BotCommands;
 import frc.robot.BotSubsystems;
-import frc.robot.commands.conveyor.SpinConveyorCG;
-import frc.robot.commands.conveyor.StopConveyorCG;
+import frc.robot.commands.conveyor.SpinConveyor;
+import frc.robot.commands.conveyor.StopConveyor;
 import frc.robot.commands.shooter.ShootCG;
 import frc.robot.commands.shooter.StopShooterCG;
 import frc.robot.consoles.Logger;
@@ -39,9 +39,9 @@ public class AutoLineUpAndShootS2 extends SequentialCommandGroup {
         InstantCommand printScenarioName = new InstantCommand(() -> Logger.info("Starting Auto Scenario #2"));
         // TODO The wait duration should be in Shuffleboard
         WaitCommand initialWait = new WaitCommand(2.);
-        SpinConveyorCG spinConveyorBackward = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.backward);
+        SpinConveyor spinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
         ShootCG shoot = new ShootCG(BotSubsystems.shooter);
-        StopConveyorCG stopConveyor = new StopConveyorCG(BotSubsystems.conveyor);
+        StopConveyor stopConveyor = new StopConveyor(BotSubsystems.conveyor);
         StopShooterCG stopShooter = new StopShooterCG(BotSubsystems.shooter);
         AutoAlign autoAlign = new AutoAlign(BotSubsystems.diffDriver);
         AutoDriveForward autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);

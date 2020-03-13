@@ -4,31 +4,38 @@ package frc.robot.commands.diffdriver;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
+import frc.robot.sensors.Limelight;
 import frc.robot.subsystems.DiffDriver;
+import frc.robot.BotSensors;
 
-// Rotates the differential drive towards the level.
-public class RotateTowardsLevel extends CommandBase {
+// DiffDrive uses gyro and limelight to rotate to the target.
+public class RotateTowardsTarget extends CommandBase {
 
     private DiffDriver m_diffDriver;
-    private double m_targetAngle;
+    private double m_targetAngle = 0;
 
-    public RotateTowardsLevel(DiffDriver diffDriver, double targetAngle) {
-        Logger.setup("Constructing Command: RotateTowardsLevel...");
+    public RotateTowardsTarget(DiffDriver diffDriver) {
+        Logger.setup("Constructing Command: RotateTowardsTarget...");
 
         // Add given subsystem requirements
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
-
-        m_targetAngle = targetAngle;
     }
 
     @Override
     public void initialize() {
-        Logger.setup("Initialize Command: RotateTowardsLevel...");
+        // LEDs turned off in TurnOffLimelightArray command
+        Limelight.ledOn();
+
+        float yaw = BotSensors.gyro.getYaw();
+        double xOffset = Limelight.getXOffset();
+        m_targetAngle = yaw + xOffset;
     }
 
     @Override
     public void execute() {
+        Limelight.calculateDistanceToTarget();
+
         m_diffDriver.driveAlign(m_targetAngle);
     }
 
@@ -42,7 +49,7 @@ public class RotateTowardsLevel extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: RotateTowardsLevel...");
+            Logger.ending("Interrupting Command: RotateTowardsTarget...");
         }
     }
 

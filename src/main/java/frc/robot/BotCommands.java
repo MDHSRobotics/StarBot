@@ -54,22 +54,19 @@ public class BotCommands {
     // Conveyor
     public static SpinConveyor spinConveyorForward;
     public static SpinConveyor spinConveyorBackward;
-    public static SpinConveyor spinConveyorBackwardBurst;
     public static StopConveyor stopConveyor;
-    public static SpinConveyorCG firstSpinConveyorForwardCGS1;
-    public static SpinConveyorCG secondSpinConveyorForwardCGS1;
-    public static SpinConveyorCG firstSpinConveyorBackwardCGS1;
+    public static SpinConveyor firstSpinConveyorForwardCGS1;
+    public static SpinConveyor secondSpinConveyorForwardCGS1;
+    public static SpinConveyor firstSpinConveyorBackwardCGS1;
 
 
     // DiffDriver
-    public static AlignDiffDriveToGyro alignDiffDriveToGyro;
-    public static AlignDiffDriveToTarget alignDiffDriveToTarget;
+    public static RotateToDpadDirection rotateToDpadDirection;
+    public static RotateTowardsTarget rotateTowardsTarget;
     public static DriveDiffArcade driveDiffArcade;
     public static DriveDiffTank driveDiffTank;
-    public static DriveDiffToWithinRange driveDiffToWithinRangeFront;
-    public static DriveDiffToWithinRange driveDiffToWithinRangeTop;
-    public static RotateTowardsLevel rotateTowardsLeftLevel;
-    public static RotateTowardsLevel rotateTowardsRightLevel;
+    public static RotateTowardsRung rotateTowardsLeftRung;
+    public static RotateTowardsRung rotateTowardsRightRung;
 
     // DiffDriverAlternate
     public static StopDiffDrive stopDiffDrive;
@@ -90,10 +87,8 @@ public class BotCommands {
     public static TurnOffLimelightArray turnOffLimelightArray;
 
     // Shooter
-    public static ConveyAndShoot conveyAndShoot;
     public static ResetShoot resetShoot;
     public static ReverseConveyorAndShoot reverseConveyorAndShoot;
-    public static Shoot shoot;
     public static StopConveyorAndShooter stopConveyorAndShooter;
     public static StopShooter stopShooter;
 
@@ -129,22 +124,18 @@ public class BotCommands {
         // Conveyor
         spinConveyorForward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.forward);
         spinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
-        spinConveyorBackwardBurst = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
-        firstSpinConveyorForwardCGS1 = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.forward);
-        secondSpinConveyorForwardCGS1 = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.forward);
-        firstSpinConveyorBackwardCGS1 = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.backward);
+        firstSpinConveyorForwardCGS1 = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.forward);
+        secondSpinConveyorForwardCGS1 = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.forward);
+        firstSpinConveyorBackwardCGS1 = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
 
         stopConveyor = new StopConveyor(BotSubsystems.conveyor);
 
         // DiffDriver
-        // alignDiffDriveToGyro = new AlignDiffDriveToGyro(BotSubsystems.diffDriver, BotControllers.xbox);
-        alignDiffDriveToTarget = new AlignDiffDriveToTarget(BotSubsystems.diffDriver);
-        rotateTowardsLeftLevel = new RotateTowardsLevel(BotSubsystems.diffDriver, -112.48);
-        rotateTowardsRightLevel = new RotateTowardsLevel(BotSubsystems.diffDriver, 67.52);
+        rotateTowardsTarget = new RotateTowardsTarget(BotSubsystems.diffDriver);
+        rotateTowardsLeftRung = new RotateTowardsRung(BotSubsystems.diffDriver, -112.48);
+        rotateTowardsRightRung = new RotateTowardsRung(BotSubsystems.diffDriver, 67.52);
         driveDiffArcade = new DriveDiffArcade(BotSubsystems.diffDriver, BotControllers.jstick);
         driveDiffTank = new DriveDiffTank(BotSubsystems.diffDriver, BotControllers.xbox);
-        driveDiffToWithinRangeFront = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorFront, 2, 3);
-        driveDiffToWithinRangeTop = new DriveDiffToWithinRange(BotSubsystems.diffDriver, BotSensors.distanceSensorTop, 2, 3);
 
         // DiffDriverAlternate
         stopDiffDrive = new StopDiffDrive(BotSubsystems.diffDriverAlternate);
@@ -165,10 +156,8 @@ public class BotCommands {
         turnOffLimelightArray = new TurnOffLimelightArray();
 
         // Shooter
-        conveyAndShoot = new ConveyAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         resetShoot = new ResetShoot(BotSubsystems.shooter);
         reverseConveyorAndShoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
-        shoot = new Shoot(BotSubsystems.shooter);
         stopConveyorAndShooter = new StopConveyorAndShooter(BotSubsystems.conveyor, BotSubsystems.shooter);
         stopShooter = new StopShooter(BotSubsystems.shooter);
 

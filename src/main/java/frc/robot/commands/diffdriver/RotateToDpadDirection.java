@@ -1,42 +1,39 @@
 
 package frc.robot.commands.diffdriver;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.sensors.Limelight;
+import frc.robot.oi.controllers.DPadButton;
 import frc.robot.subsystems.DiffDriver;
-import frc.robot.BotSensors;
 
-// DiffDrive uses gyro and limelight to align to the target.
-public class AlignDiffDriveToTarget extends CommandBase {
+// Assisted control of the DiffDrive to rotate the robot to the direction the dpad is pressed
+public class RotateToDpadDirection extends CommandBase {
 
+    public GenericHID controller;
     private DiffDriver m_diffDriver;
-    private double m_targetAngle = 0;
+    private int m_targetAngle = -1;
 
-    public AlignDiffDriveToTarget(DiffDriver diffDriver) {
-        Logger.setup("Constructing Command: AlignDiffDriveToTarget...");
+    public RotateToDpadDirection(DiffDriver diffDriver, GenericHID controller) {
+        Logger.setup("Constructing Command: RotateToDpadDirection...");
 
         // Add given subsystem requirements
+        this.controller = controller;
         m_diffDriver = diffDriver;
         addRequirements(m_diffDriver);
     }
 
     @Override
     public void initialize() {
-        // LEDs turned off in TurnOffLimelightArray command
-        Limelight.ledOn();
-
-        float yaw = BotSensors.gyro.getYaw();
-        double xOffset = Limelight.getXOffset();
-        m_targetAngle = yaw + xOffset;
+        m_targetAngle = DPadButton.getGyroAngleFromDpadAngle(controller);
     }
 
     @Override
     public void execute() {
-        Limelight.calculateDistanceToTarget();
-
-        m_diffDriver.driveAlign(m_targetAngle);
+        if (m_targetAngle != -1) {
+            m_diffDriver.driveAlign(m_targetAngle);
+        }
     }
 
     // This finishes immediately, but is intended to be continually restarted while a button is held
@@ -49,7 +46,7 @@ public class AlignDiffDriveToTarget extends CommandBase {
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: AlignDiffDriveToTarget...");
+            Logger.ending("Interrupting Command: RotateToDpadDirection...");
         }
     }
 

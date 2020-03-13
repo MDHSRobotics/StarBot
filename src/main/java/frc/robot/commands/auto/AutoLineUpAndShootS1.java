@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.BotCommands;
 import frc.robot.BotSubsystems;
-import frc.robot.commands.conveyor.SpinConveyorCG;
-import frc.robot.commands.conveyor.StopConveyorCG;
-import frc.robot.commands.roller.StopRollerCG;
+import frc.robot.commands.conveyor.SpinConveyor;
+import frc.robot.commands.conveyor.StopConveyor;
+import frc.robot.commands.roller.StopRoller;
 import frc.robot.commands.shooter.ShootCG;
 import frc.robot.commands.shooter.StopShooterCG;
 import frc.robot.consoles.Logger;
@@ -42,18 +42,18 @@ public class AutoLineUpAndShootS1 extends SequentialCommandGroup {
         WaitCommand initialWait = new WaitCommand(2.);
         ShootCG firstShoot = new ShootCG(BotSubsystems.shooter);
         StopShooterCG firstStopShooter = new StopShooterCG(BotSubsystems.shooter);
-        StopConveyorCG firstStopConveyor = new StopConveyorCG(BotSubsystems.conveyor);
+        StopConveyor firstStopConveyor = new StopConveyor(BotSubsystems.conveyor);
         AutoAlign firstAutoAlign = new AutoAlign(BotSubsystems.diffDriver);
         AutoDriveAndPickUp autoDriveAndPickUp = new AutoDriveAndPickUp(BotSubsystems.conveyor,
                                                     BotSubsystems.diffDriver, BotSubsystems.roller);
-        StopConveyorCG stopConveyorwithRoller = new StopConveyorCG(BotSubsystems.conveyor);
-        StopRollerCG stopRoller = new StopRollerCG(BotSubsystems.roller);
+        StopConveyor stopConveyorwithRoller = new StopConveyor(BotSubsystems.conveyor);
+        StopRoller stopRoller = new StopRoller(BotSubsystems.roller);
         AutoDriveFromPickUp autoDriveFromPickUp = new AutoDriveFromPickUp(BotSubsystems.diffDriver);
         AutoDriveToShoot autoDriveToShoot = new AutoDriveToShoot(BotSubsystems.diffDriver);
         AutoAlign secondAutoAlign = new AutoAlign(BotSubsystems.diffDriver);
-        SpinConveyorCG secondSpinConveyorBackward = new SpinConveyorCG(BotSubsystems.conveyor, ConveyorDirection.backward);
+        SpinConveyor secondSpinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
         ShootCG secondShoot = new ShootCG(BotSubsystems.shooter);
-        StopConveyorCG secondStopConveyor = new StopConveyorCG(BotSubsystems.conveyor);
+        StopConveyor secondStopConveyor = new StopConveyor(BotSubsystems.conveyor);
         StopShooterCG secondStopShooter = new StopShooterCG(BotSubsystems.shooter);
         AutoDriveForward autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);;
 
