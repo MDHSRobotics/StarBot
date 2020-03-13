@@ -77,6 +77,6 @@ public class AutoDriveAndPickUp extends CommandBase {
         }
         m_diffDriver.stop();
         m_roller.spin();
-        m_conveyor.forward();
+        m_conveyor.spin(ConveyorDirection.forward);
     }
 }

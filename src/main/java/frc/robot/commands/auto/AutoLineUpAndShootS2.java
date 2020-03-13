@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.BotSubsystems;
 import frc.robot.commands.conveyor.SpinConveyor;
 import frc.robot.commands.conveyor.StopConveyor;
+import frc.robot.commands.diffdriver.AlignToAngle;
+import frc.robot.commands.diffdriver.AlignToTarget;
+import frc.robot.commands.shooter.ReverseConveyorAndShoot;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.StopShooter;
 import frc.robot.consoles.Logger;
@@ -38,20 +41,20 @@ public class AutoLineUpAndShootS2 extends SequentialCommandGroup {
         InstantCommand printScenarioName = new InstantCommand(() -> Logger.info("Starting Auto Scenario #2"));
         // TODO The wait duration should be in Shuffleboard
         WaitCommand initialWait = new WaitCommand(2.);
-        SpinConveyor spinConveyorBackward = new SpinConveyor(BotSubsystems.conveyor, ConveyorDirection.backward);
-        Shoot shoot = new Shoot(BotSubsystems.shooter);
+        AlignToTarget alignToTarget = new AlignToTarget(BotSubsystems.diffDriver);
+        ReverseConveyorAndShoot shoot = new ReverseConveyorAndShoot(BotSubsystems.conveyor, BotSubsystems.shooter);
         StopConveyor stopConveyor = new StopConveyor(BotSubsystems.conveyor);
         StopShooter stopShooter = new StopShooter(BotSubsystems.shooter);
-        AutoAlign autoAlign = new AutoAlign(BotSubsystems.diffDriver);
+        AlignToAngle alignToAngle = new AlignToAngle(BotSubsystems.diffDriver, 0);
         AutoDriveForward autoDriveForward = new AutoDriveForward(BotSubsystems.diffDriver);
 
         Command cmdSequence[] = {   printScenarioName,
                                     initialWait,
-                                    spinConveyorBackward.withTimeout(1),
+                                    alignToTarget,
                                     shoot.withTimeout(2),
                                     stopConveyor.withTimeout(0.1),
                                     stopShooter.withTimeout(0.1),
-                                    autoAlign,
+                                    alignToAngle,
                                     autoDriveForward
         };
 

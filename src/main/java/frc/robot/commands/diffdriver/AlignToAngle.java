@@ -5,20 +5,19 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.consoles.Logger;
-import frc.robot.oi.controllers.DPadButton;
 import frc.robot.subsystems.DiffDriver;
 
-// Assisted control of the DiffDrive to rotate the robot to the direction the dpad is pressed
-public class RotateToDpadDirection extends CommandBase {
+// Aligns the robot to an input angle
+public class AlignToAngle extends CommandBase {
 
     public GenericHID controller;
     private DiffDriver m_diffDriver;
     private double m_targetAngle;
+    private boolean m_isAligned = false;
 
-    public RotateToDpadDirection(DiffDriver diffDriver, GenericHID controller, double targetAngle) {
-        Logger.setup("Constructing Command: RotateToDpadDirection...");
+    public AlignToAngle(DiffDriver diffDriver, double targetAngle) {
+        Logger.setup("Constructing Command: AlignToAngle...");
 
-        this.controller = controller;
         m_targetAngle = targetAngle;
 
         // Add given subsystem requirements
@@ -28,27 +27,25 @@ public class RotateToDpadDirection extends CommandBase {
 
     @Override
     public void initialize() {
-        m_targetAngle = DPadButton.getGyroAngleFromDpadAngle(controller);
+        m_isAligned = false;
     }
 
     @Override
     public void execute() {
-        if (m_targetAngle != -1) {
-            m_diffDriver.driveAlign(m_targetAngle);
-        }
+        m_isAligned = m_diffDriver.driveAlign(m_targetAngle);
     }
 
-    // This finishes immediately, but is intended to be continually restarted while a button is held
+    // This finishes once the robot is aligned to the angle
     @Override
     public boolean isFinished() {
-        return true;
+        return m_isAligned;
     }
 
     @Override
     public void end(boolean interrupted) {
         if (interrupted) {
             System.out.println("--");
-            Logger.ending("Interrupting Command: RotateToDpadDirection...");
+            Logger.ending("Interrupting Command: AlignToAngle...");
         }
     }
 
