@@ -37,11 +37,6 @@ public class Devices {
     static DevRelay relayLighter = new DevRelay("relayLighter", 1);
 
     // TalonSRX
-    static DevTalonSRX talonFxDiffWheelFrontLeft = new DevTalonSRX("talonFxDiffWheelFrontLeft", 12);
-    static DevTalonSRX talonFxDiffWheelFrontRight = new DevTalonSRX("talonFxDiffWheelFrontRight", 14);
-    static DevTalonSRX talonFxDiffWheelRearLeft = new DevTalonSRX("talonFxDiffWheelRearLeft", 4);
-    static DevTalonSRX talonFxDiffWheelRearRight = new DevTalonSRX("talonFxDiffWheelRearRight", 13);
-
     static DevTalonSRX talonSrxClimbBalancer = new DevTalonSRX("talonSrxClimbBalancer", 8);
     static DevTalonSRX talonSrxClimbHook = new DevTalonSRX("talonSrxClimbHook", 15);
     static DevTalonSRX talonSrxClimbLegsA = new DevTalonSRX("talonSrxClimbLegsA", 2);
@@ -52,6 +47,13 @@ public class Devices {
 
     static DevTalonSRX talonSrxShooterBottomWheel = new DevTalonSRX("talonSrxShooterBottomWheel", 10);
     static DevTalonSRX talonSrxShooterTopWheel = new DevTalonSRX("talonSrxShooterTopWheel", 7);
+
+    // TalonFX
+
+    static DevTalonFX talonFxDiffWheelFrontLeft = new DevTalonFX("talonFxDiffWheelFrontLeft", 1);
+    static DevTalonFX talonFxDiffWheelFrontRight = new DevTalonFX("talonFxDiffWheelFrontRight", 2);
+    static DevTalonFX talonFxDiffWheelRearLeft = new DevTalonFX("talonFxDiffWheelRearLeft", 3);
+    static DevTalonFX talonFxDiffWheelRearRight = new DevTalonFX("talonFxDiffWheelRearRight", 4);
 
     /////////////////////
     // Drive Instances //

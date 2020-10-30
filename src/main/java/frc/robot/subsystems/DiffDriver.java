@@ -23,7 +23,7 @@ public class DiffDriver extends SubsystemBase {
     // The subsystem devices
     public DifferentialDrive diffDrive;
 
-    public static double distance;
+    public double distance;
 
     // Constructor requires device instances
     public DiffDriver(DifferentialDrive diffDrive) {
