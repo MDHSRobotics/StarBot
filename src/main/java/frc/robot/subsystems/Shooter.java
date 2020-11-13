@@ -172,14 +172,19 @@ public class Shooter extends SubsystemBase {
     // Spin the shooter motors at a velocity to hit the target center based on a given distance
     // Note: the distance is currently manually defined in Shuffleboard
     public void shootBasedOnDistance() {
+        double distanceFeet = ShooterBrain.getShootDistance();
+        shootBasedOnDistance(distanceFeet);
+    }
+
+    public void shootBasedOnDistance(double distanceFeet) {
         double sHeight = RobotBrain.shooterHeightFeetDefault;
         double sAngle = RobotBrain.shooterAngleDegreesDefault;
         double fHeight = RobotBrain.fieldTargetHeightFeet;
 
-        double distanceFeet = ShooterBrain.getShootDistance();
         // TODO Use a bit more precise value for acceleration due to gravity
         double numerator = 32.2 * Math.pow(distanceFeet, 2);
-        double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle) - (fHeight - sHeight) * Math.pow(Math.cos(sAngle), 2));
+        double denominator = 2 * (distanceFeet * Math.sin(sAngle) * Math.cos(sAngle)
+                - (fHeight - sHeight) * Math.pow(Math.cos(sAngle), 2));
         double velocityFPS = Math.sqrt(numerator) / Math.sqrt(denominator);
 
         // Convert the desired ball velocity (ft/sec) into the required motor speed (Ticks per 100 ms)

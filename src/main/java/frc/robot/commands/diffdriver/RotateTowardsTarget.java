@@ -34,8 +34,6 @@ public class RotateTowardsTarget extends CommandBase {
 
     @Override
     public void execute() {
-        Limelight.calculateDistanceToTarget();
-
         m_diffDriver.driveAlign(m_targetAngle);
     }
 

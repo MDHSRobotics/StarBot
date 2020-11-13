@@ -75,6 +75,10 @@ public class ShooterBrain {
     public static void setTargetTPHMS(double value) {
         shootTargetTPHMSEntry.setDouble(value);
     }
+
+    public static void setShootDistance(double value) {
+        shootDistanceEntry.setDouble(value);
+    }
     //---------//
     // Getters //
     //---------//

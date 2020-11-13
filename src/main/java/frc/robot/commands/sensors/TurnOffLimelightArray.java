@@ -16,6 +16,7 @@ public class TurnOffLimelightArray extends InstantCommand {
     @Override
     public void initialize() {
         // LEDs turned on in AlignDiffDriveToTarget command
+        Limelight.calculateDistanceToTarget(); // calculates distance for ShooterBrain
         Limelight.ledOff();
     }
 
