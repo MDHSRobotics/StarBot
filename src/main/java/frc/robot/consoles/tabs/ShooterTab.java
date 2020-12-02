@@ -36,6 +36,7 @@ public class ShooterTab {
     private SimpleWidget m_shooterDistance;
     private SimpleWidget m_shooterTargetFPS;
     private SimpleWidget m_shooterTargetTPHMS;
+    private SimpleWidget m_shooterVelocityTPHMSOffset;
 
     // Constructor
     public ShooterTab() {
@@ -109,6 +110,12 @@ public class ShooterTab {
         m_shooterTargetTPHMS = m_shootTargetLayout.add("Wheel Velocity (TpHMS)", ShooterBrain.shootTargetTPHMSDefault);
         ShooterBrain.shootTargetTPHMSEntry = m_shooterTargetTPHMS.getEntry();
         m_shooterTargetTPHMS.withWidget(BuiltInWidgets.kTextView);
+
+        // Offset velocity
+        m_shooterVelocityTPHMSOffset = m_shootTargetLayout.add("Offset Velocity (TpHMS)", ShooterBrain.shootVelocityTPHMSOffsetDefault);
+        ShooterBrain.shootVelocityTPHMSOffsetEntry = m_shooterVelocityTPHMSOffset.getEntry();
+        m_shooterVelocityTPHMSOffset.withWidget(BuiltInWidgets.kTextView);
+
     }
 
     // Create all other Widgets
