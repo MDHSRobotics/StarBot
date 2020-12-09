@@ -35,11 +35,11 @@ public class Shooter extends SubsystemBase {
     private double minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
     private double maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
 
-    private int sumTopVelocity = 0;
-    private int sumBottomVelocity = 0;
-    private int numberOfSamples = 0;
-    private double averageTopVelocity = 0;
-    private double averageBottomVelocity = 0;
+    private int avgTopVelocity = 0;
+    private int avgBottomVelocity = 0;
+    private int sampleSize = 5;
+    private double[] averageTopVelocity = new double[sampleSize];
+    private double[] averageBottomVelocity = new double[sampleSize];
 
     public Shooter() {
         Logger.setup("Constructing Subsystem: Shooter...");
@@ -77,14 +77,27 @@ public class Shooter extends SubsystemBase {
         ShooterBrain.setTopWheelMaxVelocity(maxTopVelocity);
 
         // Average Velocity
-        sumTopVelocity += topVelocity;
-        sumBottomVelocity += bottomVelocity;
-        numberOfSamples++;
-        averageTopVelocity = sumTopVelocity / numberOfSamples;
-        averageBottomVelocity = sumBottomVelocity / numberOfSamples;
+        for (int i = sampleSize - 1; i > 0; i--){
+            averageTopVelocity[i] = averageTopVelocity[i - 1];
+            averageBottomVelocity[i] = averageBottomVelocity[i - 1];
+        }
 
-        ShooterBrain.setBottomWheelAverageVelocity(averageBottomVelocity);
-        ShooterBrain.setTopWheelAverageVelocity(averageTopVelocity);
+        averageTopVelocity[0] = topVelocity;
+        averageBottomVelocity[0] = bottomVelocity;
+
+        for (double sample : averageTopVelocity) {
+            avgTopVelocity += sample;
+        }
+
+        for (double sample : averageBottomVelocity) {
+            avgBottomVelocity += sample;
+        }
+
+        avgTopVelocity /= sampleSize;
+        avgBottomVelocity /= sampleSize;
+
+        ShooterBrain.setTopWheelAverageVelocity(avgBottomVelocity);
+        ShooterBrain.setBottomWheelAverageVelocity(avgTopVelocity);
     }
 
     // Stop the shooter
