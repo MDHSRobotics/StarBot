@@ -108,10 +108,11 @@ public class Shooter extends SubsystemBase {
 
         // Convert the desired ball velocity (ft/sec) into the required motor speed (Ticks per 100 ms)
         double velocityTPHMS = translateFPSToTicksViaTable(velocityFPS);
-        double velocityTPHMSOffset = ShooterBrain.getShooterVelocityTPHMSOffset();
+        double velocityTPHMSOffsetTop = ShooterBrain.getShooterVelocityTPHMSOffsetTop();
+        double velocityTPHMSOffsetBottom = ShooterBrain.getShooterVelocityTPHMSOffsetBottom();
 
-        talonSrxShooterTopWheel.set(ControlMode.Velocity, velocityTPHMS + velocityTPHMSOffset);
-        talonSrxShooterBottomWheel.set(ControlMode.Velocity, velocityTPHMS);
+        talonSrxShooterTopWheel.set(ControlMode.Velocity, velocityTPHMS + velocityTPHMSOffsetTop);
+        talonSrxShooterBottomWheel.set(ControlMode.Velocity, velocityTPHMS + velocityTPHMSOffsetBottom);
 
         // Update values for Shuffleboard
         ShooterBrain.setTargetFPS(velocityFPS);

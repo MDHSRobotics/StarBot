@@ -36,7 +36,8 @@ public class ShooterTab {
     private SimpleWidget m_shooterDistance;
     private SimpleWidget m_shooterTargetFPS;
     private SimpleWidget m_shooterTargetTPHMS;
-    private SimpleWidget m_shooterVelocityTPHMSOffset;
+    private SimpleWidget m_shooterVelocityTPHMSOffsetTop;
+    private SimpleWidget m_shooterVelocityTPHMSOffsetBottom;
 
     // Constructor
     public ShooterTab() {
@@ -112,9 +113,13 @@ public class ShooterTab {
         m_shooterTargetTPHMS.withWidget(BuiltInWidgets.kTextView);
 
         // Offset velocity
-        m_shooterVelocityTPHMSOffset = m_shootTargetLayout.add("Offset Velocity (TpHMS)", ShooterBrain.shootVelocityTPHMSOffsetDefault);
-        ShooterBrain.shootVelocityTPHMSOffsetEntry = m_shooterVelocityTPHMSOffset.getEntry();
-        m_shooterVelocityTPHMSOffset.withWidget(BuiltInWidgets.kTextView);
+        m_shooterVelocityTPHMSOffsetTop = m_shootTargetLayout.add("Offset Velocity Top (TpHMS)", ShooterBrain.shootVelocityTPHMSOffsetTopDefault);
+        ShooterBrain.shootVelocityTPHMSOffsetTopEntry = m_shooterVelocityTPHMSOffsetTop.getEntry();
+        m_shooterVelocityTPHMSOffsetTop.withWidget(BuiltInWidgets.kTextView);
+
+        m_shooterVelocityTPHMSOffsetBottom = m_shootTargetLayout.add("Offset Velocity Bottom (TpHMS)", ShooterBrain.shootVelocityTPHMSOffsetBottomDefault);
+        ShooterBrain.shootVelocityTPHMSOffsetBottomEntry = m_shooterVelocityTPHMSOffsetBottom.getEntry();
+        m_shooterVelocityTPHMSOffsetBottom.withWidget(BuiltInWidgets.kTextView);
 
     }
 
