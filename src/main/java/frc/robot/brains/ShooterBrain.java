@@ -103,6 +103,10 @@ public class ShooterBrain {
         return shootTargetFPSEntry.getDouble(shootTargetFPSDefault);
     }
 
+    public static double getTargetTPHMS() {
+        return shootTargetTPHMSEntry.getDouble(shootTargetTPHMSDefault);
+    }
+
     public static double getShootDistance() {
         return shootDistanceEntry.getDouble(shootDistanceDefault);
     }

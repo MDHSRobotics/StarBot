@@ -25,6 +25,9 @@ public class Shooter extends SubsystemBase {
     private static final boolean SENSOR_PHASE_TOP = true;
     private static final boolean MOTOR_INVERT_TOP = false;
 
+    // Position constants
+    private static final double GEAR_RATIO = 4.0;
+
     // Shuffleboard
     private double topVelocity = ShooterBrain.shootTopWheelCurrentVelocityDefault;
     private double bottomVelocity = ShooterBrain.shootBottomWheelCurrentVelocityDefault;
@@ -35,8 +38,8 @@ public class Shooter extends SubsystemBase {
     private double minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
     private double maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
 
-    private int avgTopVelocity = 0;
-    private int avgBottomVelocity = 0;
+    private double avgTopVelocity = 0;
+    private double avgBottomVelocity = 0;
     private int sampleSize = 5;
     private double[] averageTopVelocity = new double[sampleSize];
     private double[] averageBottomVelocity = new double[sampleSize];
@@ -141,6 +144,12 @@ public class Shooter extends SubsystemBase {
         ShooterBrain.setTargetTPHMS(velocityTPHMS);
     }
 
+    public void shootBasedOnTPHMS() {
+        double velocityTPHMS = ShooterBrain.getTargetTPHMS() / GEAR_RATIO;
+        talonSrxShooterBottomWheel.set(velocityTPHMS);
+        talonSrxShooterTopWheel.set(velocityTPHMS);
+    }
+
     // Translate a desired target velocity in feet per second to a motor speed in Ticks per 100 ms.
     // The translation is done via a lookup table with values based on shooting experiments.
     // Each entry in the table is the result of testing a particular motor speed (Ticks per 100ms) and
@@ -220,6 +229,9 @@ public class Shooter extends SubsystemBase {
 
         minBottomVelocity = ShooterBrain.shootBottomWheelMinVelocityDefault;
         maxBottomVelocity = ShooterBrain.shootBottomWheelMaxVelocityDefault;
+
+        avgTopVelocity = ShooterBrain.shootTopWheelAverageVelocityDefault;
+        avgBottomVelocity = ShooterBrain.shootBottomWheelAverageVelocityDefault;
     }
 
     //---------//

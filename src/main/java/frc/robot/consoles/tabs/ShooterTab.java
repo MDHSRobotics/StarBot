@@ -102,12 +102,12 @@ public class ShooterTab {
         ShooterBrain.shootDistanceEntry = m_shooterDistance.getEntry();
         m_shooterDistance.withWidget(BuiltInWidgets.kTextView);
 
-        // Target velocity
+        // Target velocity FpS
         m_shooterTargetFPS = m_shootTargetLayout.add("Ball Velocity (FpS)", ShooterBrain.shootTargetFPSDefault);
         ShooterBrain.shootTargetFPSEntry = m_shooterTargetFPS.getEntry();
         m_shooterTargetFPS.withWidget(BuiltInWidgets.kTextView);
 
-        // Target velocity
+        // Target velocity TpHMS
         m_shooterTargetTPHMS = m_shootTargetLayout.add("Wheel Velocity (TpHMS)", ShooterBrain.shootTargetTPHMSDefault);
         ShooterBrain.shootTargetTPHMSEntry = m_shooterTargetTPHMS.getEntry();
         m_shooterTargetTPHMS.withWidget(BuiltInWidgets.kTextView);
