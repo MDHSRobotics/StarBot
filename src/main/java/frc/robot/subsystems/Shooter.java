@@ -77,7 +77,7 @@ public class Shooter extends SubsystemBase {
         ShooterBrain.setTopWheelMaxVelocity(maxTopVelocity);
 
         // Average Velocity
-        for (int i = sampleSize - 1; i > 0; i--){
+        for (int i = sampleSize - 2; i > 0; i--){
             averageTopVelocity[i] = averageTopVelocity[i - 1];
             averageBottomVelocity[i] = averageBottomVelocity[i - 1];
         }
