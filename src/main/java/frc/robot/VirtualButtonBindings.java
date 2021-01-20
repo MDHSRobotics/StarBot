@@ -16,12 +16,4 @@ public class VirtualButtonBindings {
         VirtualControllers.primary.btnDpad.whileActiveContinuous(TestCommands.rotateToDpadDirection);
     }
 
-    // Configure "secondary" virtual buttons
-    public static void configureSecondary() {
-        Logger.setup("Configure Virtual Buttons -> Secondary Virtual Controller...");
-
-        // Conveyor
-        VirtualControllers.secondary.btnBumperLeft.whileActiveContinuous(BotCommands.spinConveyorForward);
-    }
-
 }

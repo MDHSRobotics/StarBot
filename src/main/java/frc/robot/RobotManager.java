@@ -68,10 +68,7 @@ public class RobotManager {
     private static void setupSmartDashboard() {
         Logger.setup("Adding AutoModes to SmartDashboard...");
         autoCommandChooser = new SendableChooser<>();
-        autoCommandChooser.setDefaultOption("Scenario #1", BotCommands.autoLineUpAndShootS1);
-        autoCommandChooser.addOption("Scenario #2", BotCommands.autoLineUpAndShootS2);
         autoCommandChooser.addOption("Lighter - CycleLights", BotCommands.cycleLights);
-
         SmartDashboard.putData("AutoMode", autoCommandChooser);
     }
 

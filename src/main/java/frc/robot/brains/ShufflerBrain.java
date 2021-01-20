@@ -15,8 +15,6 @@ public class ShufflerBrain {
     // Main Tab
     public static double matchTimeDefault = 0;
 
-    // Drive Tab
-    public static double driveTargetDistanceDefault = 2.0;
 
     //---------------------//
     // NetworkTableEntries //
@@ -25,8 +23,6 @@ public class ShufflerBrain {
     // Main Tab
     public static NetworkTableEntry matchTimeEntry;
 
-    // Drive Tab
-    public static NetworkTableEntry driveTargetDistanceEntry;
 
     //---------//
     // Setters //
@@ -46,11 +42,6 @@ public class ShufflerBrain {
     // Main Tab
     public static double getMatchTime() {
         return matchTimeEntry.getDouble(matchTimeDefault);
-    }
-
-    // Drive Tab
-    public static double getTargetDriveDistance() {
-        return driveTargetDistanceEntry.getDouble(driveTargetDistanceDefault);
     }
 
 }

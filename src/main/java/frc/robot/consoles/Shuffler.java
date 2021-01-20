@@ -11,16 +11,13 @@ import frc.robot.consoles.tabs.*;
 
 // The Shuffler class knows about the subsystems, commands, etc. but generally not vice versa.
 public class Shuffler {
-
     // Tabs
     private MainTab m_mainTab;
     private InputsTab m_inputsTab;
     private ConveyorTab m_conveyorTab;
     private DriveTab m_driveTab;
-    private RollerArmTab m_rollerArmTab;
     private RollerTab m_rollerTab;
     private ShooterTab m_shooterTab;
-    private ClimbTab m_climbTab;
     private DebugTab m_debugTab;
 
     public Shuffler() {
@@ -30,10 +27,8 @@ public class Shuffler {
         m_inputsTab = new InputsTab();
         m_conveyorTab = new ConveyorTab();
         m_driveTab = new DriveTab();
-        m_rollerArmTab = new RollerArmTab();
         m_rollerTab = new RollerTab();
         m_shooterTab = new ShooterTab();
-        m_climbTab = new ClimbTab();
         m_debugTab = new DebugTab();
     }
 
@@ -44,10 +39,8 @@ public class Shuffler {
         m_inputsTab.preInitialize();
         m_conveyorTab.preInitialize();
         m_driveTab.preInitialize();
-        m_rollerArmTab.preInitialize();
         m_rollerTab.preInitialize();
         m_shooterTab.preInitialize();
-        m_climbTab.preInitialize();
         m_debugTab.preInitialize();
     }
 
@@ -58,10 +51,10 @@ public class Shuffler {
         m_inputsTab.initialize();
         m_driveTab.initialize();
         m_conveyorTab.initialize();
-        m_rollerArmTab.initialize();
+
         m_rollerTab.initialize();
         m_shooterTab.initialize();
-        m_climbTab.initialize();
+
         m_debugTab.initialize();
     }
 
@@ -72,12 +65,9 @@ public class Shuffler {
         m_inputsTab.configure();
         m_conveyorTab.configure();
         m_driveTab.configure();
-        m_rollerArmTab.configure();
         m_rollerTab.configure();
         m_shooterTab.configure();
-        m_climbTab.configure();
         m_debugTab.configure();
-
         setupSmartdashboard();
     }
 
@@ -86,10 +76,8 @@ public class Shuffler {
         m_inputsTab.update();
         m_conveyorTab.update();
         m_driveTab.update();
-        m_rollerArmTab.update();
         m_rollerTab.update();
         m_shooterTab.update();
-        m_climbTab.update();
         m_debugTab.update();
     }
 

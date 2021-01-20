@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.brains.DiffDriverBrain;
 import frc.robot.consoles.Logger;
-import frc.robot.sensors.DistanceSensor;
 import frc.robot.sensors.Gyro;
 import frc.robot.BotSensors;
 
@@ -68,23 +67,6 @@ public class DiffDriver extends SubsystemBase {
     // Drive forward at a set speed
     public void moveForwardAuto() {
         driveArcade(AUTO_PERIOD_SPEED, AUTO_PERIOD_SPEED); // drive towards heading 0
-    }
-
-    // Drive to within the given range based on the given distance sensor
-    public boolean driveToWithinRange(AnalogInput distanceSensor, double targetMinimum, double targetMaximum) {
-        distance = DistanceSensor.getDistanceInMeters(distanceSensor);
-        if (distance > targetMinimum && distance < targetMaximum) {
-            diffDrive.stopMotor();
-            Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Target Reached!");
-            return true;
-        } else if (distance > targetMaximum) {
-            diffDrive.arcadeDrive(-.4, 0);
-            Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too far from the target!");
-        } else if (distance < targetMinimum) {
-            diffDrive.arcadeDrive(.4, 0);
-            Logger.info("DiffDriver -> DriveToWithinRange -> Distance: " + distance + " -> Too close to the target!");
-        }
-        return false;
     }
 
     // Drive to align the robot to a detected line at the given yaw

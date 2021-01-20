@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.shuffleboard.*;
 import java.util.Map;
 
 import frc.robot.brains.XboxBrain;
-import frc.robot.brains.JoystickBrain;
+
 import frc.robot.consoles.ShuffleLogger;
 
 // The Shuffleboard Inputs tab.
@@ -51,12 +51,6 @@ public class InputsTab {
         m_controllersLayout.withProperties(Map.of("Number of rows", 2));
         m_controllersLayout.withProperties(Map.of("Label position", "LEFT"));
 
-        m_joystickLayout = m_tab.getLayout("Joystick", BuiltInLayouts.kGrid);
-        m_joystickLayout.withPosition(0, 3);
-        m_joystickLayout.withSize(3, 2);
-        m_joystickLayout.withProperties(Map.of("Number of columns", 2));
-        m_joystickLayout.withProperties(Map.of("Number of rows", 3));
-        m_joystickLayout.withProperties(Map.of("Label position", "LEFT"));
 
         m_xboxLeftLayout = m_tab.getLayout("XBOX Left Thumbstick", BuiltInLayouts.kGrid);
         m_xboxLeftLayout.withPosition(0, 1);
@@ -75,30 +69,6 @@ public class InputsTab {
 
     // Create Brain Widgets
     public void preInitialize() {
-        // Joystick
-        m_yDeadZoneWidget = m_joystickLayout.add("Y Dead Zone", JoystickBrain.yDeadZoneDefault);
-        JoystickBrain.yDeadZoneEntry = m_yDeadZoneWidget.getEntry();
-        m_yDeadZoneWidget.withWidget(BuiltInWidgets.kTextView);
-
-        m_xDeadZoneWidget = m_joystickLayout.add("X Dead Zone", JoystickBrain.xDeadZoneDefault);
-        JoystickBrain.xDeadZoneEntry = m_xDeadZoneWidget.getEntry();
-        m_xDeadZoneWidget.withWidget(BuiltInWidgets.kTextView);
-
-        m_zDeadZoneWidget = m_joystickLayout.add("Z Dead Zone", JoystickBrain.zDeadZoneDefault);
-        JoystickBrain.zDeadZoneEntry = m_zDeadZoneWidget.getEntry();
-        m_zDeadZoneWidget.withWidget(BuiltInWidgets.kTextView);
-
-        m_ySensitivityWidget = m_joystickLayout.add("Y Sensitivity", JoystickBrain.ySensitivityDefault);
-        JoystickBrain.ySensitivityEntry = m_ySensitivityWidget.getEntry();
-        m_ySensitivityWidget.withWidget(BuiltInWidgets.kTextView);
-
-        m_xSensitivityWidget = m_joystickLayout.add("X Sensitivity", JoystickBrain.xSensitivityDefault);
-        JoystickBrain.xSensitivityEntry = m_xSensitivityWidget.getEntry();
-        m_xSensitivityWidget.withWidget(BuiltInWidgets.kTextView);
-
-        m_zSensitivityWidget = m_joystickLayout.add("Z Sensitivity", JoystickBrain.zSensitivityDefault);
-        JoystickBrain.zSensitivityEntry = m_zSensitivityWidget.getEntry();
-        m_zSensitivityWidget.withWidget(BuiltInWidgets.kTextView);
 
         // Thumbstick - Left
         m_yLeftDeadZoneWidget = m_xboxLeftLayout.add("Y Left Dead Zone", XboxBrain.yLeftDeadZoneDefault);
