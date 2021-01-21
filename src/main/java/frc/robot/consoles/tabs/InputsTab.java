@@ -14,17 +14,10 @@ public class InputsTab {
     // Tab & Layouts
     private ShuffleboardTab m_tab;
     private ShuffleboardLayout m_controllersLayout;
-    private ShuffleboardLayout m_joystickLayout;
+
     private ShuffleboardLayout m_xboxLeftLayout;
     private ShuffleboardLayout m_xboxRightLayout;
 
-    // Joystick
-    private SimpleWidget m_yDeadZoneWidget;
-    private SimpleWidget m_xDeadZoneWidget;
-    private SimpleWidget m_zDeadZoneWidget;
-    private SimpleWidget m_ySensitivityWidget;
-    private SimpleWidget m_xSensitivityWidget;
-    private SimpleWidget m_zSensitivityWidget;
 
     // Thumbstick Widget - Left
     private SimpleWidget m_yLeftDeadZoneWidget;

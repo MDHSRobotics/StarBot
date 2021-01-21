@@ -2,8 +2,7 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.AnalogInput;
+
 import edu.wpi.first.wpilibj.SPI;
 
 import frc.robot.consoles.Logger;

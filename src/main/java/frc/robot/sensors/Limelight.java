@@ -5,7 +5,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import java.util.Set;
-
+import frc.robot.brains.ShooterBrain;
 import frc.robot.consoles.Logger;
 
 // This class contains methods for retrieving Limelight data.
@@ -55,6 +55,8 @@ public class Limelight {
         double angleInRadians = ((yOffset + CAMERA_ANGLE)/180.) * Math.PI;
 
         double distance = (TARGET_HEIGHT - CAMERA_HEIGHT) / Math.tan(angleInRadians);
+        distance /= 12.0; // converts inches to feet
+        ShooterBrain.setShootDistance(distance);
         // TODO: This method effectively doesn't do anything
     }
 
